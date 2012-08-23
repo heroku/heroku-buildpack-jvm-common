@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+cat <<EOF
+default_process_types:
+  fail: exit 1
+EOF
