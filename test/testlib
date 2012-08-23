@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+TEST_ARTIFACT_ID="buildpack-jvm-utils-test"
+TEST_GROUP_ID="com.heroku.buildpack"
+TEST_ARTIFACT_VERSION="0.1"
+TEST_ARTIFACT_FILE="${TEST_ARTIFACT_ID}-${TEST_ARTIFACT_VERSION}.jar"
+
+_writePomFile() {
+  version=${1:-"1.7"}
+  location=${2:-"${BUILD_DIR}/pom.xml"}
+
+  cat > ${location} <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.heroku.buildpack</groupId>
+  <artifactId>buildpack-jvm-utils-test</artifactId>
+  <version>0.1</version>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <source>${version}</source>
+          <target>${version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+EOF
+}
+
