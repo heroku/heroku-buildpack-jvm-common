@@ -3,6 +3,7 @@
 LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
+JDK_URL_1_8="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk8-lambda-preview.tar.gz"
 JDK_URL_1_7="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk7-u6-heroku-temaki-b23.tar.gz"
 JDK_URL_1_6="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk6-u25-heroku-temaki.tar.gz"
 JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
@@ -67,12 +68,39 @@ _get_os_suffix() {
   echo "${osSuffix}"
 }
 
-get_java_version() {
+is_supported_java_version() {
   javaVersion=$1
   if [ "$(expr "${javaVersion}" : '1.[6-7]')" != 0 ]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+
+get_java_version() {
+  javaVersion=$1
+  if [ "$(is_supported_java_version ${javaVersion})" = "true" ]; then
     echo "${javaVersion}"
   else
     echo "${DEFAULT_JDK_VERSION}"
+  fi
+}
+
+detect_java_version() {
+  baseDir=${1:-"No Dir"}
+  if [ "${baseDir}" = "No Dir" ] || [ ! -d "${baseDir}" ] ; then
+    echo "Invalid directory specified for pom file."
+    return 1
+  fi
+  if [ -f ${baseDir}/javaversion ]; then
+    javaVersion=$(cat ${baseDir}/javaversion)
+    if [ "$(is_supported_java_version ${javaVersion})" = "true" ]; then
+      echo "${javaVersion}"
+    else
+      echo ""
+    fi
+  else
+    echo ""
   fi
 }
 
