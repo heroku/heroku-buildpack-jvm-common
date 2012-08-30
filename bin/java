@@ -92,8 +92,8 @@ detect_java_version() {
     echo "Invalid directory specified for pom file."
     return 1
   fi
-  if [ -f ${baseDir}/app.system ]; then
-    javaVersion=$(get_app_system_value ${baseDir}/app.system "jvm.major.version")
+  if [ -f ${baseDir}/system.properties ]; then
+    javaVersion=$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")
     if [ "$(is_supported_java_version ${javaVersion})" = "true" ]; then
       echo "${javaVersion}"
     else

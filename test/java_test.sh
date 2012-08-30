@@ -5,7 +5,7 @@
 . ${BUILDPACK_HOME}/test/testlib
 
 testDetectJava() {
-  echo "jvm.major.version=1.8" >> ${BUILD_DIR}/app.system
+  echo "java.runtime.version=1.8" >> ${BUILD_DIR}/system.properties
   capture detect_java_version ${BUILD_DIR}
   assertCapturedEquals "1.8"
 }
