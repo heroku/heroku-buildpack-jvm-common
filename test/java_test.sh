@@ -5,10 +5,11 @@
 . ${BUILDPACK_HOME}/test/testlib
 
 testDetectJava() {
-  echo "1.8" >> ${BUILD_DIR}/javaversion
+  echo "jvm.major.version=1.8" >> ${BUILD_DIR}/app.system
   capture detect_java_version ${BUILD_DIR}
   assertCapturedEquals "1.8"
 }
+
 testUserIsFlaggedForDownload() {
   capture is_flagged_for_download 100
   assertCapturedEquals "true"
