@@ -3,7 +3,7 @@
 LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
-if [ $PAAS_VENDOR == "cloudControl" ]; then
+if [ "$PAAS_VENDOR" == "cloudControl" ]; then
   JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk8-lambda-preview.tar.gz"
   JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk7.tar.gz"
   JDK_URL_1_6="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk6.tar.gz"
