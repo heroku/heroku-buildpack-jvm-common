@@ -3,11 +3,23 @@
 LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
-JDK_URL_1_8="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk8-lambda-preview.tar.gz"
-JDK_URL_1_7="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk7-u7-heroku-temaki-b30.tar.gz"
-JDK_URL_1_6="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk6-u25-heroku-temaki.tar.gz"
-JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
-JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
+if [ $PAAS_VENDOR == "cloudControl" ]; then
+  JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk8-lambda-preview.tar.gz"
+  JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk7.tar.gz"
+  JDK_URL_1_6="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk6.tar.gz"
+  JDK_URL_1_6_DARWIN="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk6-darwin.tar.gz"
+  JDK_URL_1_7_DARWIN="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk7-darwin.tar.gz"
+  JVM_UTILS_URL="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-jvm-utils-0.1.jar"
+  JDK_RATE_URL="http://${DOMAIN}.packages.s3.amazonaws.com/download-jdk-6-rate"
+else
+  JDK_URL_1_8="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk8-lambda-preview.tar.gz"
+  JDK_URL_1_7="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk7-u7-heroku-temaki-b30.tar.gz"
+  JDK_URL_1_6="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk6-u25-heroku-temaki.tar.gz"
+  JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
+  JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
+  JVM_UTILS_URL="https://s3.amazonaws.com/heroku-jvm-langpack-java/buildpack-jvm-utils-0.1.jar"
+  JDK_RATE_URL="http://heroku-jvm-langpack-java.s3.amazonaws.com/flags/download-jdk-6-rate"
+fi
 
 install_java() {
   baseDir=$1
@@ -43,7 +55,7 @@ _get_jdk_download_url() {
   jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
   # hacky way of parsing the variable name.
   # bash 4 would solve this with associative arrays, but shunit 
-  # tests don't seem to respect the correct bash version.
+  # tests dont seem to respect the correct bash version.
   minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-8]\)')
   osSuffix="$(_get_os_suffix)"
   jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion}${osSuffix})
@@ -115,7 +127,7 @@ get_jvm_utils_command() {
   mkdir -p "${jvmUtilsDir}"
   
   if [ ! -f "$jvmUtilsDir"/jvm-utils.jar ] ; then
-    jvmUtilsURL="https://s3.amazonaws.com/heroku-jvm-langpack-java/buildpack-jvm-utils-0.1.jar"
+    jvmUtilsURL="${JVM_UTILS_URL}"
     curl --silent --location ${jvmUtilsURL} --output "${jvmUtilsDir}"/jvm-utils.jar 
   fi
 
@@ -123,7 +135,7 @@ get_jvm_utils_command() {
 }
 
 is_flagged_for_download() {
-  randThreshold=${1:-"$(curl --silent http://heroku-jvm-langpack-java.s3.amazonaws.com/flags/download-jdk-6-rate)"}
+  randThreshold=${1:-"$(curl --silent ${JDK_RATE_URL})"}
   rand=$(shuf -i 0-100 -n 1)
   thresholdIsNumber=$(echo "$randThreshold" | grep -E ^[0-9]+$)
   if [ ${#thresholdIsNumber} -gt 0 ] && [ $rand -lt $randThreshold ]; then
