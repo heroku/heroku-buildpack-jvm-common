@@ -55,7 +55,7 @@ _get_jdk_download_url() {
   jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
   # hacky way of parsing the variable name.
   # bash 4 would solve this with associative arrays, but shunit 
-  # tests dont seem to respect the correct bash version.
+  # tests don't seem to respect the correct bash version.
   minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-8]\)')
   osSuffix="$(_get_os_suffix)"
   jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion}${osSuffix})
