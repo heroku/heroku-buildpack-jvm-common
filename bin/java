@@ -4,9 +4,9 @@ LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
 if [ "$PAAS_VENDOR" == "cloudControl" ]; then
-  JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk8-lambda-preview.tar.gz"
-  JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk7.tar.gz"
-  JDK_URL_1_6="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk6.tar.gz"
+  JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk8.tar.gz"
+  JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk7.tar.gz"
+  JDK_URL_1_6="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk6.tar.gz"
   JDK_URL_1_6_DARWIN="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk6-darwin.tar.gz"
   JDK_URL_1_7_DARWIN="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk7-darwin.tar.gz"
   JVM_UTILS_URL="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-jvm-utils-0.1.jar"
