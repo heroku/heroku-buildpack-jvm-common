@@ -32,6 +32,14 @@ install_java() {
   export PATH="${jdkDir}/$(_get_relative_jdk_bin):${PATH}"
 }
 
+jdk_overlay() {
+  baseDir=$1
+  shopt -s dotglob
+  if [ -d ${baseDir}/.jdk ] && [ -d ${baseDir}/.jdk-overlay ]; then
+    cp -r ${baseDir}/.jdk-overlay/* ${baseDir}/.jdk/
+  fi 
+}
+
 is_java_version_change() {
   jdkDir=$1
   javaVersion=${2:-"${DEFAULT_JDK_VERSION}"}

@@ -4,6 +4,17 @@
 . ${BUILDPACK_HOME}/bin/java
 . ${BUILDPACK_HOME}/test/testlib
 
+testOverlayDir() {
+  mkdir -p ${BUILD_DIR}/.jdk/jre/bin
+  touch ${BUILD_DIR}/.jdk/jre/bin/java 
+  mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/lib/security
+  mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/bin
+  touch ${BUILD_DIR}/.jdk-overlay/jre/lib/security/policy.jar
+  capture jdk_overlay ${BUILD_DIR}
+  assertTrue "Files in .jdk-overlay should be copied to .jdk." "[ -f ${BUILD_DIR}/.jdk/jre/lib/security/policy.jar ]"
+  assertTrue "Files in .jdk should not be overwritten." "[ -f ${BUILD_DIR}/.jdk/jre/bin/java ]"
+}
+
 testDetectJava() {
   echo "java.runtime.version=1.8" >> ${BUILD_DIR}/system.properties
   capture detect_java_version ${BUILD_DIR}
