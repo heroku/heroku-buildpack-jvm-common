@@ -30,6 +30,11 @@ install_java() {
   fi
   export JAVA_HOME="${jdkDir}/$(_get_relative_jdk_home)"
   export PATH="${jdkDir}/$(_get_relative_jdk_bin):${PATH}"
+  # patch JVM
+  PROFILE_PATH="$BUILD_DIR/.profile.d/jvmcommon.sh"
+  mkdir -p $(dirname $PROFILE_PATH)
+  # Patch for CVE-2013-1537
+  echo 'export JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"' >> $PROFILE_PATH
 }
 
 jdk_overlay() {
