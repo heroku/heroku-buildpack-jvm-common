@@ -4,7 +4,7 @@ LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
 JDK_URL_1_8="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk8-lambda-preview.tar.gz"
-JDK_URL_1_7="https://s3.amazonaws.com/heroku-jdk/openjdk1.7.0_17.tar.gz"
+JDK_URL_1_7="https://s3.amazonaws.com/heroku-jdk/openjdk1.7.0_21.tar.gz"
 JDK_URL_1_6="https://s3.amazonaws.com/heroku-jdk/openjdk1.6.0_27.tar.gz"
 JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
 JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
