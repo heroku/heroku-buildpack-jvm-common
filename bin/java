@@ -1,25 +1,11 @@
 #!/usr/bin/env bash
 
-LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
-if [ "$PAAS_VENDOR" == "cloudControl" ]; then
-  JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk8.tar.gz"
-  JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk7.tar.gz"
-  JDK_URL_1_6="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk6.tar.gz"
-  JDK_URL_1_6_DARWIN="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk6-darwin.tar.gz"
-  JDK_URL_1_7_DARWIN="http://${DOMAIN}.packages.s3.amazonaws.com/openjdk7-darwin.tar.gz"
-  JVM_UTILS_URL="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-jvm-utils-0.1.jar"
-  JDK_RATE_URL="http://${DOMAIN}.packages.s3.amazonaws.com/download-jdk-6-rate"
-else
-  JDK_URL_1_8="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk8-lambda-preview.tar.gz"
-  JDK_URL_1_7="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk7-u7-heroku-temaki-b30.tar.gz"
-  JDK_URL_1_6="https://s3.amazonaws.com/heroku-jvm-langpack-java/openjdk6-u25-heroku-temaki.tar.gz"
-  JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
-  JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
-  JVM_UTILS_URL="https://s3.amazonaws.com/heroku-jvm-langpack-java/buildpack-jvm-utils-0.1.jar"
-  JDK_RATE_URL="http://heroku-jvm-langpack-java.s3.amazonaws.com/flags/download-jdk-6-rate"
-fi
+JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk8.b100.tar.gz"
+JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk7.b32.tar.gz"
+JDK_URL_1_6="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk6.b27.tar.gz"
+JVM_UTILS_URL="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-jvm-utils-0.1.jar"
 
 install_java() {
   baseDir=$1
@@ -42,6 +28,20 @@ install_java() {
   fi
   export JAVA_HOME="${jdkDir}/$(_get_relative_jdk_home)"
   export PATH="${jdkDir}/$(_get_relative_jdk_bin):${PATH}"
+  # patch JVM
+  PROFILE_PATH="$BUILD_DIR/.profile.d/jvmcommon.sh"
+  mkdir -p $(dirname $PROFILE_PATH)
+  # Patch for CVE-2013-1537
+  echo 'export JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"' >> $PROFILE_PATH
+  echo "${jdkUrl##*/}"
+}
+
+jdk_overlay() {
+  baseDir=$1
+  shopt -s dotglob
+  if [ -d ${baseDir}/.jdk ] && [ -d ${baseDir}/.jdk-overlay ]; then
+    cp -r ${baseDir}/.jdk-overlay/* ${baseDir}/.jdk/
+  fi 
 }
 
 is_java_version_change() {
@@ -132,17 +132,6 @@ get_jvm_utils_command() {
   fi
 
   echo "${jvmUtilsDir}"/jvm-utils.jar
-}
-
-is_flagged_for_download() {
-  randThreshold=${1:-"$(curl --silent ${JDK_RATE_URL})"}
-  rand=$(shuf -i 0-100 -n 1)
-  thresholdIsNumber=$(echo "$randThreshold" | grep -E ^[0-9]+$)
-  if [ ${#thresholdIsNumber} -gt 0 ] && [ $rand -lt $randThreshold ]; then
-    echo "true"
-  else
-    echo "false"
-  fi 
 }
 
 get_app_system_value() {

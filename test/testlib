@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 TEST_ARTIFACT_ID="buildpack-jvm-utils-test"
-TEST_GROUP_ID="com.heroku.buildpack"
+TEST_GROUP_ID="com.cloudcontrol.buildpack"
 TEST_ARTIFACT_VERSION="0.1"
 TEST_ARTIFACT_FILE="${TEST_ARTIFACT_ID}-${TEST_ARTIFACT_VERSION}.jar"
 
@@ -16,7 +16,7 @@ _writePomFile() {
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.heroku.buildpack</groupId>
+  <groupId>com.cloudcontrol.buildpack</groupId>
   <artifactId>buildpack-jvm-utils-test</artifactId>
   <version>0.1</version>
 
