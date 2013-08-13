@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DEFAULT_JDK_VERSION="1.6"
+DEFAULT_JDK_VERSION="1.7"
 
 JDK_URL_1_8="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk8.b100.tar.gz"
 JDK_URL_1_7="http://${DOMAIN}.packages.s3.amazonaws.com/buildpack-java/openjdk7.b32.tar.gz"

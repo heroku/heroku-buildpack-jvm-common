@@ -24,7 +24,7 @@ testDetectJava() {
 test_defaultJdkUrl() {
   capture _get_jdk_download_url "${DEFAULT_JDK_VERSION}"
   assertCapturedSuccess
-  assertTrue "The URL should be for the default JDK, ${DEFAULT_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_6}' ]"
+  assertTrue "The URL should be for the default JDK, ${DEFAULT_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_7}' ]"
 }
 
 test_installJavaWithoutDirectoryFails() {
@@ -90,7 +90,7 @@ test_installJavaWith1_5() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture install_java ${BUILD_DIR} "1.5"
   assertCapturedSuccess
-  assertTrue "Precondition: JDK6 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '${DEFAULT_JDK_VERSION}' ]"
+  assertTrue "Precondition: JDK7 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '${DEFAULT_JDK_VERSION}' ]"
   assertEquals "${BUILD_DIR}/.jdk/$(_get_relative_jdk_bin)/java" "$(which java)"
 }
 
