@@ -3,6 +3,61 @@
 . ${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh
 . ${BUILDPACK_HOME}/bin/util
 
+beforeSetUp() {
+  # clean up after prepareEnvDir
+  unset GIT_DIR
+  unset MAVEN_DIR
+  unset EMPTY
+  unset MULTILINE
+}
+
+prepareEnvDir() {
+  echo -n "/lol"  > $ENV_DIR/GIT_DIR
+  echo -n "/jars" > $ENV_DIR/MAVEN_DIR
+  cat > $ENV_DIR/MULTILINE <<EOF
+i'm a cool
+multiline
+config
+var
+i even have a trailing new line or two!
+
+EOF
+  echo -n ""    > $ENV_DIR/EMPTY
+}
+
+test_export_env_dir_defaults() {
+  prepareEnvDir
+  export_env_dir $ENV_DIR
+
+  assertNull 'GIT_DIR should not be set' "$(env | grep '^GIT_DIR=')"
+  assertNotNull 'MAVEN_DIR should be set' "$(env | grep '^MAVEN_DIR=')"
+  assertEquals 'MAVEN_DIR should be set with value' "/jars" "$MAVEN_DIR"
+  assertNotNull 'EMPTY should but without any value' "$(env | grep '^EMPTY=$')"
+  assertNotNull 'MULTILINE should be set' "$(env | grep '^MULTILINE=')"
+  assertEquals 'MULTILINE should have line breaks without trailing new lines' '4' "$(printf "$MULTILINE" | wc -l)"
+}
+
+test_export_env_dir_whitelist() {
+  prepareEnvDir
+  export_env_dir $ENV_DIR '^MAVEN_DIR$'
+
+  assertNull 'GIT_DIR should not be set' "$(env | grep '^GIT_DIR=')"
+  assertNotNull 'MAVEN_DIR should be set' "$(env | grep '^MAVEN_DIR=')"
+  assertEquals 'MAVEN_DIR should be set with value' "/jars" "$MAVEN_DIR"
+  assertNull 'EMPTY should not be set' "$(env | grep '^EMPTY=$')"
+  assertNull 'MULTILINE should not be set' "$(env | grep '^MULTILINE=')"
+}
+
+test_export_env_dir_blacklist() {
+  prepareEnvDir
+  export_env_dir $ENV_DIR '' '^MAVEN_DIR$'
+
+  assertNotNull 'GIT_DIR should be set' "$(env | grep '^GIT_DIR=')"
+  assertNull 'MAVEN_DIR should not be set' "$(env | grep '^MAVEN_DIR=')"
+  assertNotNull 'EMPTY should be set' "$(env | grep '^EMPTY=$')"
+  assertNotNull 'MULTILINE should be set' "$(env | grep '^MULTILINE=')"
+}
+
 test_copyDirectories() {
   mkdir -p ${CACHE_DIR}/dir1
   mkdir -p ${CACHE_DIR}/dir2
