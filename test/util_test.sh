@@ -25,6 +25,14 @@ EOF
   echo -n ""    > $ENV_DIR/EMPTY
 }
 
+test_export_env_dir_unset() {
+  prepareEnvDir
+  export_env_dir
+
+  assertNull 'GIT_DIR should not be set' "$(env | grep '^GIT_DIR=')"
+  assertNull 'MAVEN_DIR should not be set' "$(env | grep '^MAVEN_DIR=')"
+}
+
 test_export_env_dir_defaults() {
   prepareEnvDir
   export_env_dir $ENV_DIR
