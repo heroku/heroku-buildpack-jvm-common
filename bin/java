@@ -3,8 +3,8 @@
 LATEST_JDK_VERSION="1.7"
 DEFAULT_JDK_VERSION="1.6"
 
-JDK_URL_1_8="http://heroku-jdk.s3.amazonaws.com/openjdk1.8.0_b107.tar.gz"
-JDK_URL_1_7="http://heroku-jdk.s3.amazonaws.com/openjdk1.7.0_45.tar.gz"
+JDK_URL_1_8="http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.8.0_20.tar.gz"
+JDK_URL_1_7="http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_55.tar.gz"
 JDK_URL_1_6="http://heroku-jdk.s3.amazonaws.com/openjdk1.6.0_27.tar.gz"
 JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
 JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
@@ -17,7 +17,7 @@ install_java() {
   jdkTarball="${jdkDir}"/jdk.tar.gz
   javaExe="${jdkDir}/$(_get_relative_jdk_bin)"/java
   mkdir -p "${jdkDir}"
-  if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then 
+  if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then
     jdkUrl=$(_get_jdk_download_url "${javaVersion}")
     curl --silent --location ${jdkUrl} --output ${jdkTarball}
     tar pxzf ${jdkTarball} -C "${jdkDir}"
@@ -42,7 +42,7 @@ jdk_overlay() {
   shopt -s dotglob
   if [ -d ${baseDir}/.jdk ] && [ -d ${baseDir}/.jdk-overlay ]; then
     cp -r ${baseDir}/.jdk-overlay/* ${baseDir}/.jdk/
-  fi 
+  fi
 }
 
 is_java_version_change() {
@@ -55,7 +55,7 @@ is_java_version_change() {
 _get_jdk_download_url() {
   jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
   # hacky way of parsing the variable name.
-  # bash 4 would solve this with associative arrays, but shunit 
+  # bash 4 would solve this with associative arrays, but shunit
   # tests don't seem to respect the correct bash version.
   minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-8]\)')
   osSuffix="$(_get_os_suffix)"
@@ -123,13 +123,13 @@ get_jvm_utils_command() {
     echo "Invalid directory specified for pom file."
     return 1
   fi
-  
+
   jvmUtilsDir="${baseDir}"/.jvm-utils
   mkdir -p "${jvmUtilsDir}"
-  
+
   if [ ! -f "$jvmUtilsDir"/jvm-utils.jar ] ; then
     jvmUtilsURL="https://s3.amazonaws.com/heroku-jvm-langpack-java/buildpack-jvm-utils-0.1.jar"
-    curl --silent --location ${jvmUtilsURL} --output "${jvmUtilsDir}"/jvm-utils.jar 
+    curl --silent --location ${jvmUtilsURL} --output "${jvmUtilsDir}"/jvm-utils.jar
   fi
 
   echo "${jvmUtilsDir}"/jvm-utils.jar
@@ -143,13 +143,13 @@ is_flagged_for_download() {
     echo "true"
   else
     echo "false"
-  fi 
+  fi
 }
 
 get_app_system_value() {
   local file=${1?"No file specified"}
   local key=${2?"No key specified"}
- 
+
   # escape for regex
   local escaped_key=$(echo $key | sed "s/\./\\\./g")
 
