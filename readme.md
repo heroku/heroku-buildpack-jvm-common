@@ -1,4 +1,4 @@
-#Common JVM Buildpack BASH Functions
+#Common JVM Buildpack BASH Functions [![Build Status](https://travis-ci.org/heroku/heroku-buildpack-jvm-common.svg)](https://travis-ci.org/heroku/heroku-buildpack-jvm-common)
 
 This not a buildpack. These are common functions related to
 JVM buildpacks. It is formatted as a buildpack in order to
