@@ -38,7 +38,7 @@ mv ../$RELEASE_FILE .
 echo "---> Uploading to S3..."
 aws s3 cp $RELEASE_FILE s3://lang-jvm --profile lang-jvm --acl public-read
 
-if [ -n "$SNAPSHOT" ]; then
+if [ -z "$SNAPSHOT" ]; then
   popd > /dev/null 2>&1
 
   echo "---> Cleaning up..."
