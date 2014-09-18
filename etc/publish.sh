@@ -16,7 +16,7 @@ else
   git clone git@github.com:heroku/heroku-buildpack-jvm-common.git
   cd heroku-buildpack-jvm-common
   git checkout master
-  find . ! -name 'bin' ! -name 'version.properties' -maxdepth 1 -delete
+  find . ! -name '.' ! -name '..' ! -name 'version.properties' ! -name 'bin' -maxdepth 1 -print0 | xargs -0 rm -rf --
 fi
 
 . version.properties
