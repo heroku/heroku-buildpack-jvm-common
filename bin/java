@@ -20,6 +20,7 @@ install_java() {
   if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then
     jdkUrl=$(_get_jdk_download_url "${javaVersion}")
     curl --silent --location ${jdkUrl} --output ${jdkTarball}
+    rm -rf ${jdkDir} && mkdir -p "${jdkDir}"
     tar pxzf ${jdkTarball} -C "${jdkDir}"
     rm ${jdkTarball}
     echo "${javaVersion}" > "${jdkDir}"/version
