@@ -6,7 +6,7 @@
 
 testOverlayDir() {
   mkdir -p ${BUILD_DIR}/.jdk/jre/bin
-  touch ${BUILD_DIR}/.jdk/jre/bin/java 
+  touch ${BUILD_DIR}/.jdk/jre/bin/java
   mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/lib/security
   mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/bin
   touch ${BUILD_DIR}/.jdk-overlay/jre/lib/security/policy.jar
@@ -45,13 +45,13 @@ testFlagIsDownloaded() {
 test_defaultJdkUrl() {
   capture _get_jdk_download_url "${DEFAULT_JDK_VERSION}"
   assertCapturedSuccess
-  assertTrue "The URL should be for the default JDK, ${DEFAULT_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_6}' ] || [ '$(cat ${STD_OUT})' = '${JDK_URL_1_6_DARWIN}' ]"
+  assertTrue "The URL should be for the default JDK, ${DEFAULT_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_8}' ]"
 }
 
 test_nonDefaultJdkUrl() {
-  capture _get_jdk_download_url "${LATEST_JDK_VERSION}"
+  capture _get_jdk_download_url "1.7"
   assertCapturedSuccess
-  assertTrue "The URL should be for the latest JDK, ${LATEST_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_7}' ] || [ '$(cat ${STD_OUT})' = '${JDK_URL_1_7_DARWIN}' ]"
+  assertTrue "The URL should be for the latest JDK, 1.7." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_7}' ]"
 }
 
 test_installJavaWithoutDirectoryFails() {
