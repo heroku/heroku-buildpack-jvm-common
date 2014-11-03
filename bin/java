@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-LATEST_JDK_VERSION="1.7"
-DEFAULT_JDK_VERSION="1.6"
+LATEST_JDK_VERSION="1.8"
+DEFAULT_JDK_VERSION="1.8"
 
 JDK_URL_1_8=${JDK_URL_1_8:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.8.0_20.tar.gz"}
 JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_55.tar.gz"}
