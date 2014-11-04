@@ -50,3 +50,5 @@ if [ -z "$SNAPSHOT" ]; then
 fi
 
 echo "---> Done."
+
+echo "VERSION=\"$(($VERSION + 1))\"" > version.properties

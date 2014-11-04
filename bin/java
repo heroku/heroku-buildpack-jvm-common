@@ -159,3 +159,18 @@ get_app_system_value() {
   grep -E ^$escaped_key[[:space:]=]+ $file | \
   sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([A-Za-z0-9\.-]*).*/\2/g"
 }
+
+ensure_system_properties() {
+  local ctxDir=$1
+  if [ ! -f ${BUILD_DIR}/system.properties ]; then
+    if [ "$STACK" = "cedar" ]; then
+      defaultJdkVersion="1.6"
+    else
+      defaultJdkVersion="$DEFAULT_JDK_VERSION"
+    fi
+    cat > ${BUILD_DIR}/system.properties <<EOF
+java.runtime.version=${defaultJdkVersion}
+EOF
+  fi
+  return 0
+}
