@@ -15,10 +15,28 @@ testOverlayDir() {
   assertTrue "Files in .jdk should not be overwritten." "[ -f ${BUILD_DIR}/.jdk/jre/bin/java ]"
 }
 
-testDetectJava() {
-  echo "java.runtime.version=1.8" >> ${BUILD_DIR}/system.properties
+testDetectJava_default() {
   capture detect_java_version ${BUILD_DIR}
   assertCapturedEquals "1.8"
+}
+
+testDetectJava_cedar() {
+  export STACK="cedar"
+  capture detect_java_version ${BUILD_DIR}
+  assertCapturedEquals "1.6"
+  unset STACK
+}
+
+testDetectJava_invalid() {
+  echo "java.runtime.version=asd78" >> ${BUILD_DIR}/system.properties
+  capture detect_java_version ${BUILD_DIR}
+  assertCapturedEquals "1.8"
+}
+
+testDetectJava_custom() {
+  echo "java.runtime.version=1.7" >> ${BUILD_DIR}/system.properties
+  capture detect_java_version ${BUILD_DIR}
+  assertCapturedEquals "1.7"
 }
 
 testUserIsFlaggedForDownload() {

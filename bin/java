@@ -49,7 +49,7 @@ jdk_overlay() {
 
 is_java_version_change() {
   jdkDir=$1
-  javaVersion=${2:-"${DEFAULT_JDK_VERSION}"}
+  javaVersion=${2:-${DEFAULT_JDK_VERSION}}
   if [ ! -d "${jdkDir}" ]; then echo "Invalid JDK directory."; return 1; fi
   test -f "${jdkDir}/version" && [ "$(cat ${jdkDir}/version)" != "${javaVersion}" ]
 }
@@ -96,6 +96,8 @@ get_java_version() {
   javaVersion=$1
   if [ "$(is_supported_java_version ${javaVersion})" = "true" ]; then
     echo "${javaVersion}"
+  elif [ "$STACK" = "cedar" ]; then
+    echo "1.6"
   else
     echo "${DEFAULT_JDK_VERSION}"
   fi
@@ -109,14 +111,8 @@ detect_java_version() {
   fi
   if [ -f ${baseDir}/system.properties ]; then
     javaVersion=$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")
-    if [ "$(is_supported_java_version ${javaVersion})" = "true" ]; then
-      echo "${javaVersion}"
-    else
-      echo ""
-    fi
-  else
-    echo ""
   fi
+  echo "$(get_java_version ${javaVersion})"
 }
 
 get_jvm_utils_command() {
