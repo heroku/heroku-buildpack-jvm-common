@@ -78,22 +78,10 @@ test_installJavaWithoutDirectoryFails() {
   assertCapturedEquals " !      Invalid directory to install java."
 }
 
-test_installJavaWithoutVersionSucceeds() {
-  capture install_java ${BUILD_DIR} ${EMPTY_VAR}
-  assertCapturedSuccess
-}
-
 test_installJavaWithInvalidVersionFails() {
   capture install_java ${BUILD_DIR} "1.9"
   assertCapturedError
   assertCapturedEquals " !     Unsupported Java version: 1.9"
-}
-
-test_installJavaWithInvalidSystemVersionFails() {
-  echo "java.runtime.version=asd78" >> ${BUILD_DIR}/system.properties
-  capture install_java ${BUILD_DIR}
-  assertCapturedError
-  assertCapturedEquals " !     Unsupported Java version: asd78"
 }
 
 test_installDefaultJava() {

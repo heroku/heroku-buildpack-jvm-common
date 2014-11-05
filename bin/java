@@ -16,7 +16,7 @@ install_java() {
     return 1
   fi
 
-  javaVersion="${2:-$(detect_java_version ${baseDir})}"
+  javaVersion=${2:-$(get_default_java_version)}
   if [ "$(is_supported_java_version ${javaVersion})" != "true" ]; then
     echo " !     Unsupported Java version: $javaVersion"
     return 1
