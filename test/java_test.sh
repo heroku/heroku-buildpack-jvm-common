@@ -30,7 +30,7 @@ testDetectJava_cedar() {
 testDetectJava_invalid() {
   echo "java.runtime.version=asd78" >> ${BUILD_DIR}/system.properties
   capture detect_java_version ${BUILD_DIR}
-  assertCapturedEquals "1.8"
+  assertCapturedEquals "asd78"
 }
 
 testDetectJava_custom() {
@@ -75,7 +75,25 @@ test_nonDefaultJdkUrl() {
 test_installJavaWithoutDirectoryFails() {
   capture install_java
   assertCapturedError
-  assertCapturedEquals "Invalid directory to install java."
+  assertCapturedEquals " !      Invalid directory to install java."
+}
+
+test_installJavaWithoutVersionSucceeds() {
+  capture install_java ${BUILD_DIR} ${EMPTY_VAR}
+  assertCapturedSuccess
+}
+
+test_installJavaWithInvalidVersionFails() {
+  capture install_java ${BUILD_DIR} "1.9"
+  assertCapturedError
+  assertCapturedEquals " !     Unsupported Java version: 1.9"
+}
+
+test_installJavaWithInvalidSystemVersionFails() {
+  echo "java.runtime.version=asd78" >> ${BUILD_DIR}/system.properties
+  capture install_java ${BUILD_DIR}
+  assertCapturedError
+  assertCapturedEquals " !     Unsupported Java version: asd78"
 }
 
 test_installDefaultJava() {
@@ -129,40 +147,4 @@ test_upgradeFrom1_7To1_6() {
   assertCapturedSuccess
   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.6"
   assertEquals "${BUILD_DIR}/.jdk/$(_get_relative_jdk_bin)/java" "$(which java)"
-}
-
-test_installJavaWith1_5() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture install_java ${BUILD_DIR} "1.5"
-  assertCapturedSuccess
-  assertTrue "Precondition: JDK6 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '${DEFAULT_JDK_VERSION}' ]"
-  assertEquals "${BUILD_DIR}/.jdk/$(_get_relative_jdk_bin)/java" "$(which java)"
-}
-
-test_ensureSystemProperties() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture ensure_system_properties ${BUILD_DIR}
-  assertCapturedSuccess
-  assertTrue "Should create system.properties file" "[ -f ${BUILD_DIR}/system.properties ]"
-  assertEquals "Should use default JDK version" "$(cat ${BUILD_DIR}/system.properties)" "java.runtime.version=${DEFAULT_JDK_VERSION}"
-}
-
-test_ensureSystemProperties_cedar() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  export STACK="cedar"
-  capture ensure_system_properties ${BUILD_DIR}
-  assertCapturedSuccess
-  assertTrue "Should create system.properties file" "[ -f ${BUILD_DIR}/system.properties ]"
-  assertEquals "Should use older JDK version" "$(cat ${BUILD_DIR}/system.properties)" "java.runtime.version=1.6"
-  unset STACK
-}
-
-test_ensureSystemProperties_noop() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  echo "java.runtime.version=1.7" > ${BUILD_DIR}/system.properties
-  assertNotEquals "Precondition" "1.7" "$DEFAULT_JDK_VERSION"
-  capture ensure_system_properties ${BUILD_DIR}
-  assertCapturedSuccess
-  assertTrue "Should create system.properties file" "[ -f ${BUILD_DIR}/system.properties ]"
-  assertEquals "Should use provided JDK version" "$(cat ${BUILD_DIR}/system.properties)" "java.runtime.version=1.7"
 }
