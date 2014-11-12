@@ -97,6 +97,7 @@ test_installDefaultJava() {
   assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "${DEFAULT_JDK_VERSION}"
   assertEquals "${BUILD_DIR}/.jdk/$(_get_relative_jdk_bin)/java" "$(which java)"
+  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }
 
 test_installJavaWithVersion() {
@@ -109,6 +110,7 @@ test_installJavaWithVersion() {
   assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.6"
   assertEquals "${BUILD_DIR}/.jdk/$(_get_relative_jdk_bin)/java" "$(which java)"
+  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }
 
 test_upgradeFrom1_6To1_7() {
@@ -135,4 +137,11 @@ test_upgradeFrom1_7To1_6() {
   assertCapturedSuccess
   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.6"
   assertEquals "${BUILD_DIR}/.jdk/$(_get_relative_jdk_bin)/java" "$(which java)"
+}
+
+test_create_profile_script() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture _create_profile_script ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }

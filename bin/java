@@ -41,11 +41,8 @@ install_java() {
   fi
   export JAVA_HOME="${jdkDir}/$(_get_relative_jdk_home)"
   export PATH="${jdkDir}/$(_get_relative_jdk_bin):${PATH}"
-  # patch JVM
-  PROFILE_PATH="$BUILD_DIR/.profile.d/jvmcommon.sh"
-  mkdir -p $(dirname $PROFILE_PATH)
-  # Patch for CVE-2013-1537
-  echo 'export JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"' >> $PROFILE_PATH
+
+  _create_profile_script ${baseDir}
 }
 
 jdk_overlay() {
@@ -161,4 +158,30 @@ get_app_system_value() {
   [ -f $file ] && \
   grep -E ^$escaped_key[[:space:]=]+ $file | \
   sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([A-Za-z0-9\.-]*).*/\2/g"
+}
+
+_create_profile_script() {
+  local profileScript="${1}/.profile.d/jvmcommon.sh"
+
+  mkdir -p $(dirname $profileScript)
+  cat << EOF > $profileScript
+export PATH="/app/.jdk/bin:\$PATH"
+limit=\$(ulimit -u)
+case \$limit in
+256)   # 1X Dyno
+  heap=384
+  ;;
+512)   # 2X Dyno
+  heap=768
+  ;;
+32768) # PX Dyno
+  heap=6144
+  ;;
+*)
+  heap=384
+  ;;
+esac
+
+export JAVA_TOOL_OPTIONS="-Xmx\${heap}m \$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"
+EOF
 }
