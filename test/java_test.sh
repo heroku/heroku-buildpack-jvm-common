@@ -39,27 +39,6 @@ testDetectJava_custom() {
   assertCapturedEquals "1.7"
 }
 
-testUserIsFlaggedForDownload() {
-  capture is_flagged_for_download 100
-  assertCapturedEquals "true"
-}
-
-testUserIsNotFlaggedForDownload() {
-  capture is_flagged_for_download 0
-  assertCapturedEquals "false"
-}
-
-testInvalidInputForFlag() {
-  capture is_flagged_for_download "<somexmlerror>err</somexmlerr>"
-  assertCapturedEquals "false"
-}
-
-testFlagIsDownloaded() {
-  capture is_flagged_for_download
-  flagged=$(cat $STD_OUT)
-  assertTrue "Response should be true or false." "[ $flagged = 'true' ] || [ $flagged = 'false' ]"
-}
-
 test_defaultJdkUrl() {
   capture _get_jdk_download_url "${DEFAULT_JDK_VERSION}"
   assertCapturedSuccess

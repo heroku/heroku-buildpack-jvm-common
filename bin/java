@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
 LATEST_JDK_VERSION="1.8"
-DEFAULT_JDK_VERSION="1.8"
 
-JDK_URL_1_8=${JDK_URL_1_8:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.8.0_20.tar.gz"}
-JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_55.tar.gz"}
-JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
+if [ ${STACK:-""} = "cedar" ]; then
+  DEFAULT_JDK_VERSION="1.6"
+  JDK_URL_1_8=${JDK_URL_1_8:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.8.0_20.tar.gz"}
+  JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_55.tar.gz"}
+  JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
+else
+  DEFAULT_JDK_VERSION="1.8"
+  JDK_URL_1_8=${JDK_URL_1_8:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.8.0_20-slim-cedar14-v2.tar.gz"}
+  JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_55-cedar14-v2.tar.gz"}
+  JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
+fi
+
 JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
 JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
 
@@ -99,10 +107,10 @@ is_supported_java_version() {
 }
 
 get_default_java_version() {
-  if [ "$STACK" = "cedar" ]; then
+  if [ ${STACK:-""} = "cedar" ]; then
     echo "1.6"
   else
-    echo "${DEFAULT_JDK_VERSION}"
+    echo "$DEFAULT_JDK_VERSION"
   fi
 }
 
@@ -135,17 +143,6 @@ get_jvm_utils_command() {
   fi
 
   echo "${jvmUtilsDir}"/jvm-utils.jar
-}
-
-is_flagged_for_download() {
-  randThreshold=${1:-"$(curl --silent http://heroku-jvm-langpack-java.s3.amazonaws.com/flags/download-jdk-6-rate)"}
-  rand=$(shuf -i 0-100 -n 1)
-  thresholdIsNumber=$(echo "$randThreshold" | grep -E ^[0-9]+$)
-  if [ ${#thresholdIsNumber} -gt 0 ] && [ $rand -lt $randThreshold ]; then
-    echo "true"
-  else
-    echo "false"
-  fi
 }
 
 get_app_system_value() {
