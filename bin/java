@@ -50,6 +50,7 @@ install_java() {
   export JAVA_HOME="${jdkDir}/$(_get_relative_jdk_home)"
   export PATH="${jdkDir}/$(_get_relative_jdk_bin):${PATH}"
 
+  _install_tools ${baseDir}
   _create_profile_script ${baseDir}
 }
 
@@ -162,7 +163,7 @@ _create_profile_script() {
 
   mkdir -p $(dirname $profileScript)
   cat << EOF > $profileScript
-export PATH="/app/.jdk/bin:\$PATH"
+export PATH="/app/.jdk/bin:/app/.startup:\$PATH"
 limit=\$(ulimit -u)
 case \$limit in
 256)   # 1X Dyno
@@ -181,4 +182,52 @@ esac
 
 export JAVA_TOOL_OPTIONS="-Xmx\${heap}m \$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"
 EOF
+}
+
+_install_tools() {
+  local ctxDir=${1:-BUILD_DIR}
+
+  mkdir -p $ctxDir/.startup
+  cat << EOF > $ctxDir/.startup/with_jmap
+#!/usr/bin/env bash
+
+eval "\$@ &"
+pid=\$!
+
+trap "kill -9 \$pid; exit" SIGKILL
+
+sleep 10
+while kill -0 \$pid
+do
+  if [ -z "\$JMAP_INTERVAL" ]; then
+    sleep 10
+  else
+    /app/.jdk/bin/jmap -histo \$pid
+    sleep \${JMAP_INTERVAL}
+  fi
+done
+EOF
+  chmod +x $ctxDir/.startup/with_jmap
+
+  cat << EOF > $ctxDir/.startup/with_jstack
+#!/usr/bin/env bash
+
+eval "\$@ &"
+pid=\$!
+
+trap "kill -3 \$pid; kill \$pid" SIGTERM
+trap "kill -9 \$pid; exit" SIGKILL
+
+sleep 10
+while kill -0 \$pid
+do
+  if [ -z "\$JSTACK_INTERVAL" ]; then
+    sleep 10
+  else
+    kill -3 \$pid
+    sleep \${JSTACK_INTERVAL}
+  fi
+done
+EOF
+  chmod +x $ctxDir/.startup/with_jstack
 }

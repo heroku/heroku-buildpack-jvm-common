@@ -124,3 +124,13 @@ test_create_profile_script() {
   assertCapturedSuccess
   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }
+
+test_install_tools() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture _install_tools ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.startup/with_jmap ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.startup/with_jmap ]"
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.startup/with_jstack ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.startup/with_jstack ]"
+}
