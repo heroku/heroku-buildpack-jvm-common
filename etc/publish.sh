@@ -16,7 +16,7 @@ else
   git clone git@github.com:heroku/heroku-buildpack-jvm-common.git
   cd heroku-buildpack-jvm-common
   git checkout master
-  find . ! -name '.' ! -name '..' ! -name 'version.properties' ! -name 'bin' -maxdepth 1 -print0 | xargs -0 rm -rf --
+  find . ! -name '.' ! -name '..' ! -name 'version.properties' ! -name 'bin' ! -name 'opt' -maxdepth 1 -print0 | xargs -0 rm -rf --
 fi
 
 . version.properties
@@ -47,8 +47,8 @@ if [ -z "$SNAPSHOT" ]; then
   echo "---> Tagging release..."
   git tag v${VERSION}
   git push --tags origin master
+
+  echo "VERSION=\"$(($VERSION + 1))\"" > version.properties
 fi
 
 echo "---> Done."
-
-echo "VERSION=\"$(($VERSION + 1))\"" > version.properties

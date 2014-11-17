@@ -186,48 +186,12 @@ EOF
 
 _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
+  local curDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
   mkdir -p $ctxDir/.startup
-  cat << EOF > $ctxDir/.startup/with_jmap
-#!/usr/bin/env bash
-
-eval "\$@ &"
-pid=\$!
-
-trap "kill -9 \$pid; exit" SIGKILL
-
-sleep 10
-while kill -0 \$pid
-do
-  if [ -z "\$JMAP_INTERVAL" ]; then
-    sleep 10
-  else
-    /app/.jdk/bin/jmap -histo \$pid
-    sleep \${JMAP_INTERVAL}
-  fi
-done
-EOF
+  cp $curDir/../opt/with_jmap $ctxDir/.startup/with_jmap
   chmod +x $ctxDir/.startup/with_jmap
 
-  cat << EOF > $ctxDir/.startup/with_jstack
-#!/usr/bin/env bash
-
-eval "\$@ &"
-pid=\$!
-
-trap "kill -3 \$pid; kill \$pid" SIGTERM
-trap "kill -9 \$pid; exit" SIGKILL
-
-sleep 10
-while kill -0 \$pid
-do
-  if [ -z "\$JSTACK_INTERVAL" ]; then
-    sleep 10
-  else
-    kill -3 \$pid
-    sleep \${JSTACK_INTERVAL}
-  fi
-done
-EOF
+  cp $curDir/../opt/with_jstack $ctxDir/.startup/with_jstack
   chmod +x $ctxDir/.startup/with_jstack
 }
