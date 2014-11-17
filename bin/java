@@ -186,12 +186,12 @@ EOF
 
 _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
-  local curDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
 
   mkdir -p $ctxDir/.startup
-  cp $curDir/../opt/with_jmap $ctxDir/.startup/with_jmap
+  cp $curDir/opt/with_jmap $ctxDir/.startup/with_jmap
   chmod +x $ctxDir/.startup/with_jmap
 
-  cp $curDir/../opt/with_jstack $ctxDir/.startup/with_jstack
+  cp $curDir/opt/with_jstack $ctxDir/.startup/with_jstack
   chmod +x $ctxDir/.startup/with_jstack
 }

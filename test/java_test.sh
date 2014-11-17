@@ -4,6 +4,10 @@
 . ${BUILDPACK_HOME}/bin/java
 . ${BUILDPACK_HOME}/test/testlib
 
+oneTimeSetUp() {
+  export JVM_COMMON_DIR=${BUILDPACK_HOME}
+}
+
 testOverlayDir() {
   mkdir -p ${BUILD_DIR}/.jdk/jre/bin
   touch ${BUILD_DIR}/.jdk/jre/bin/java
