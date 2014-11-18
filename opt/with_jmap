@@ -15,7 +15,7 @@ do
     echo "${jmapOutput}"
     if [[ "$jmapOutput" =~ "Dumping heap to" ]]; then
       dumpFile=`expr "$jmapOutput" : "Dumping heap to \(.*\) \.\.\."`
-      filename="heap-$(date +"%s").hprof"
+      filename="heap-${DYNO}-$(date +"%s").hprof"
       if [ ${AWS_ACCESS_KEY_ID:-""} != "" ]; then
         if [ ${AWS_SECRET_ACCESS_KEY:-""} != "" ]; then
           if [ ${S3_BUCKET_NAME:-""} != "" ]; then
