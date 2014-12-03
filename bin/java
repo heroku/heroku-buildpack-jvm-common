@@ -52,7 +52,7 @@ install_java() {
 
   _install_tools ${baseDir}
   _create_profile_script ${baseDir}
-  _create_export_script ${JAVA_HOME}
+  _create_export_script ${JAVA_HOME} "$(pwd)"
 }
 
 jdk_overlay() {
@@ -200,8 +200,12 @@ _install_tools() {
 
 _create_export_script() {
   local javaHome=${1:-JAVA_HOME}
-  cat << EOF > `pwd`/export
+  local ctxDir=${2:-CWD}
+
+  if [ -w ${ctxDir} ]; then
+    cat << EOF > ${ctxDir}/export
 export JAVA_HOME=$javaHome
-export PATH=$javaHome/bin:\$PATH
+export PATH=\$JAVA_HOME/bin:\$PATH
 EOF
+  fi
 }

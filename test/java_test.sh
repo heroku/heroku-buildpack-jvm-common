@@ -138,3 +138,12 @@ test_install_tools() {
   assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.startup/with_jstack ]"
   assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.startup/with_jstack ]"
 }
+
+test_create_export_script() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture _create_export_script "/path/to/jdk" ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "An export file should be created." "[ -f ${BUILD_DIR}/export ]"
+  assertContains "export JAVA_HOME=/path/to/jdk" "$(cat ${BUILD_DIR}/export)"
+  assertContains "export PATH=\$JAVA_HOME/bin:\$PATH" "$(cat ${BUILD_DIR}/export)"
+}
