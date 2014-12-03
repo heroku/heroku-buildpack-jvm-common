@@ -200,7 +200,7 @@ _install_tools() {
 
 _create_export_script() {
   local javaHome=${1:-JAVA_HOME}
-  cat << EOF > $CWD/export
+  cat << EOF > `pwd`/export
 export JAVA_HOME=$javaHome
 export PATH=$javaHome/bin:\$PATH
 EOF
