@@ -1,2 +1,18 @@
 #!/usr/bin/env bash
-echo "noop"
+
+# fail fast
+set -e
+
+# parse args
+export BUILD_DIR=$1
+
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+. $BIN_DIR/java
+. $BIN_DIR/util
+
+# Install JDK
+javaVersion=$(detect_java_version ${BUILD_DIR})
+echo -n "-----> Installing OpenJDK ${javaVersion}..."
+install_java ${BUILD_DIR} ${javaVersion}
+jdk_overlay ${BUILD_DIR}
+echo "done"
