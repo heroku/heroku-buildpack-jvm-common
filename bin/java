@@ -52,6 +52,7 @@ install_java() {
 
   _install_tools ${baseDir}
   _create_profile_script ${baseDir}
+  _create_export_script ${JAVA_HOME}
 }
 
 jdk_overlay() {
@@ -195,4 +196,12 @@ _install_tools() {
 
   cp $curDir/opt/with_jstack $ctxDir/.startup/with_jstack
   chmod +x $ctxDir/.startup/with_jstack
+}
+
+_create_export_script() {
+  local javaHome=${1:-JAVA_HOME}
+  cat << EOF > $CWD/export
+export JAVA_HOME=$javaHome
+export PATH=$javaHome/bin:\$PATH
+EOF
 }
