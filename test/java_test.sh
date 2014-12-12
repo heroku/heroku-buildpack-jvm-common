@@ -2,6 +2,7 @@
 
 . ${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh
 . ${BUILDPACK_HOME}/bin/java
+. ${BUILDPACK_HOME}/bin/util
 . ${BUILDPACK_HOME}/test/testlib
 
 oneTimeSetUp() {
@@ -57,14 +58,12 @@ test_nonDefaultJdkUrl() {
 
 test_installJavaWithoutDirectoryFails() {
   capture install_java
-  assertCapturedError
-  assertCapturedEquals " !      Invalid directory to install java."
+  assertCapturedError " !     ERROR: Invalid directory to install java."
 }
 
 test_installJavaWithInvalidVersionFails() {
   capture install_java ${BUILD_DIR} "1.9"
-  assertCapturedError
-  assertCapturedEquals " !     Unsupported Java version: 1.9"
+  assertCapturedError " !     ERROR: Unsupported Java version: 1.9"
 }
 
 test_installDefaultJava() {

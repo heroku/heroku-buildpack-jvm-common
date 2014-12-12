@@ -20,13 +20,13 @@ JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4
 install_java() {
   baseDir=$1
   if [ ! -d "${baseDir}" ]; then
-    echo " !      Invalid directory to install java."
+    error "Invalid directory to install java."
     return 1
   fi
 
   javaVersion=${2:-$(get_default_java_version)}
   if [ "$(is_supported_java_version ${javaVersion})" != "true" ]; then
-    echo " !     Unsupported Java version: $javaVersion"
+    error "Unsupported Java version: $javaVersion"
     return 1
   fi
 
@@ -43,7 +43,7 @@ install_java() {
     rm ${jdkTarball}
     echo "${javaVersion}" > "${jdkDir}"/version
     if [ ! -f "${javaExe}" ]; then
-      echo "Unable to retrieve the JDK."
+      error "Unable to retrieve the JDK."
       return 1
     fi
   fi
@@ -119,7 +119,7 @@ get_default_java_version() {
 detect_java_version() {
   baseDir=${1:-"No Dir"}
   if [ "${baseDir}" = "No Dir" ] || [ ! -d "${baseDir}" ] ; then
-    echo "Invalid directory specified for pom file."
+    error "Invalid directory specified for pom file."
     return 1
   fi
   if [ -f ${baseDir}/system.properties ]; then
@@ -132,7 +132,7 @@ detect_java_version() {
 get_jvm_utils_command() {
   baseDir=${1:-"No Dir"}
   if [ "${baseDir}" = "No Dir" ] || [ ! -d "${baseDir}" ] ; then
-    echo "Invalid directory specified for pom file."
+    error "Invalid directory specified for pom file."
     return 1
   fi
 
