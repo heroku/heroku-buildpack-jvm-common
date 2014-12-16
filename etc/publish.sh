@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # fail hard
-set -o pipefail
+#set -o pipefail
+
 # fail harder
-set -eu
+#set -e
 
 if [ "hot" = "${1:-}" ]; then
   echo "---> Preparing repo. Using current directory."
