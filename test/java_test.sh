@@ -62,8 +62,8 @@ test_installJavaWithoutDirectoryFails() {
 }
 
 test_installJavaWithInvalidVersionFails() {
-  capture install_java ${BUILD_DIR} "1.9"
-  assertCapturedError " !     ERROR: Unsupported Java version: 1.9"
+  capture install_java ${BUILD_DIR} "1.5"
+  assertCapturedError " !     ERROR: Unsupported Java version: 1.5"
 }
 
 test_installDefaultJava() {
