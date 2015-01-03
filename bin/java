@@ -20,7 +20,7 @@ JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4
 
 install_java() {
   baseDir=$1
-  if [ ! -d "${baseDir}" ]; then    
+  if [ ! -d "${baseDir}" ]; then
     error_return "Invalid directory to install java."
     return 1
   fi
@@ -165,8 +165,8 @@ _create_profile_script() {
 
   mkdir -p $(dirname $profileScript)
   cat << EOF > $profileScript
-export JAVA_HOME="/app/.jdk"
-export PATH="\$JAVA_HOME/bin:/app/.startup:\$PATH"
+export JAVA_HOME="\$HOME/.jdk"
+export PATH="\$JAVA_HOME/bin:\$HOME/.startup:\$PATH"
 limit=\$(ulimit -u)
 case \$limit in
 256)   # 1X Dyno
