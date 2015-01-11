@@ -183,7 +183,7 @@ case \$limit in
   ;;
 esac
 
-export JAVA_TOOL_OPTIONS="-Xmx\${heap}m \$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"
+export JAVA_TOOL_OPTIONS="-Xmx\${heap}m -Dfile.encoding=UTF-8 \$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"
 EOF
 }
 
