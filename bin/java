@@ -176,14 +176,14 @@ case \$limit in
   heap=768
   ;;
 32768) # PX Dyno
-  heap=6144
+  heap=4096
   ;;
 *)
   heap=384
   ;;
 esac
 
-export JAVA_TOOL_OPTIONS="-Xmx\${heap}m \$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"
+export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"-Xmx\${heap}m -Djava.rmi.server.useCodebaseOnly=true"}
 EOF
 }
 
