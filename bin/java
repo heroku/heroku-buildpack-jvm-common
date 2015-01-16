@@ -11,7 +11,7 @@ else
   DEFAULT_JDK_VERSION="1.8"
   JDK_URL_1_9=${JDK_URL_1_9:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14/openjdk1.9-latest.tar.gz"}
   JDK_URL_1_8=${JDK_URL_1_8:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.8.0_20-slim-cedar14-v2.tar.gz"}
-  JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_55-cedar14-v2.tar.gz"}
+  JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.7.0_71-cedar14.tar.gz"}
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 fi
 
