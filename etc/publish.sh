@@ -6,7 +6,8 @@ BP_NAME="jvm-common"
 
 if [ ! -z "$1" ]; then
   pushd . > /dev/null 2>&1
-  cd /tmp &&
+  cd /tmp
+  rm -rf heroku-buildpack-$BP_NAME
   git clone git@github.com:heroku/heroku-buildpack-$BP_NAME.git
   cd heroku-buildpack-$BP_NAME
   git checkout master
