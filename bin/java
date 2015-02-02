@@ -170,20 +170,20 @@ export PATH="\$JAVA_HOME/bin:\$HOME/.startup:\$PATH"
 limit=\$(ulimit -u)
 case \$limit in
 256)   # 1X Dyno
-  heap=384
+  default_java_opts="-Xmx384m -Xss512k"
   ;;
 512)   # 2X Dyno
-  heap=768
+  default_java_opts="-Xms768m -Xmx768m -Xmn192m"
   ;;
 32768) # PX Dyno
-  heap=4096
+  default_java_opts="-Xmx4g -Xms4g -Xmn2g"
   ;;
 *)
-  heap=384
+  default_java_opts="-Xmx384m -Xss512k"
   ;;
 esac
 
-export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"-Xmx\${heap}m -Djava.rmi.server.useCodebaseOnly=true"}
+export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"\${default_java_opts} -Djava.rmi.server.useCodebaseOnly=true"}
 EOF
 }
 
