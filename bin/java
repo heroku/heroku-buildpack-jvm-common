@@ -183,7 +183,7 @@ case \$limit in
   ;;
 esac
 
-export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"\${default_java_opts} -Djava.rmi.server.useCodebaseOnly=true"}
+export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"\${default_java_opts} -Dfile.encoding=UTF-8 -Djava.rmi.server.useCodebaseOnly=true"}
 EOF
 }
 
