@@ -173,10 +173,10 @@ case \$limit in
   default_java_opts="-Xmx384m -Xss512k"
   ;;
 512)   # 2X Dyno
-  default_java_opts="-Xms768m -Xmx768m -Xmn192m"
+  default_java_opts="-Xmx768m"
   ;;
 32768) # PX Dyno
-  default_java_opts="-Xmx4g -Xms4g -Xmn2g"
+  default_java_opts="-Xmx4g"
   ;;
 *)
   default_java_opts="-Xmx384m -Xss512k"
