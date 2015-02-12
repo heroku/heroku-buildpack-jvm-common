@@ -14,7 +14,7 @@ if [ ! -z "$1" ]; then
   headHash=$(git rev-parse HEAD)
 
   find . ! -name '.' ! -name '..' ! -name 'bin' ! -name 'opt' -maxdepth 1 -print0 | xargs -0 rm -rf --
-  heroku buildpacks:publish $1/$BP_NAME
+  heroku buildkits:publish $1/$BP_NAME
 
   if [ "$1" = "heroku" ]; then
     newTag=$(heroku buildpacks:revisions heroku/$BP_NAME | sed -n 2p | grep -o -e "v\d*")
