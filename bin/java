@@ -162,11 +162,12 @@ get_app_system_value() {
 
 _create_profile_script() {
   local profileScript="${1}/.profile.d/jvmcommon.sh"
+  local javaVersion="${2:-DEFAULT_JDK_VERSION}"
 
   mkdir -p $(dirname $profileScript)
   cat << EOF > $profileScript
 export JAVA_HOME="\$HOME/.jdk"
-export PATH="\$JAVA_HOME/bin:\$HOME/.startup:\$PATH"
+export PATH="\$HOME/.heroku/bin:\$JAVA_HOME/bin:\$PATH"
 limit=\$(ulimit -u)
 case \$limit in
 256)   # 1X Dyno
@@ -183,7 +184,7 @@ case \$limit in
   ;;
 esac
 
-export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"\${default_java_opts} -Dfile.encoding=UTF-8 -Djava.rmi.server.useCodebaseOnly=true"}
+export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"\${default_java_opts} -Dfile.encoding=UTF-8"}
 EOF
 }
 
@@ -191,12 +192,15 @@ _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
   local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
 
-  mkdir -p $ctxDir/.startup
-  cp $curDir/opt/with_jmap $ctxDir/.startup/with_jmap
-  chmod +x $ctxDir/.startup/with_jmap
+  mkdir -p $ctxDir/.heroku/bin
+  cp $curDir/opt/with_jmap $ctxDir/.heroku/bin/with_jmap
+  chmod +x $ctxDir/.heroku/bin/with_jmap
 
-  cp $curDir/opt/with_jstack $ctxDir/.startup/with_jstack
-  chmod +x $ctxDir/.startup/with_jstack
+  cp $curDir/opt/with_jstack $ctxDir/.heroku/bin/with_jstack
+  chmod +x $ctxDir/.heroku/bin/with_jstack
+
+  cp $curDir/opt/java $ctxDir/.heroku/bin/java
+  chmod +x $ctxDir/.heroku/bin/java
 }
 
 _create_export_script() {
