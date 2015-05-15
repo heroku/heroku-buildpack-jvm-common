@@ -1,0 +1,2 @@
+#!/bin/bash
+$JAVA_HOME/bin/java "$@" 2> >(grep -v "^Picked up JAVA_TOOL_OPTIONS:" >&2)
