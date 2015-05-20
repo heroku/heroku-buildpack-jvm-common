@@ -132,10 +132,14 @@ test_install_tools() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture _install_tools ${BUILD_DIR}
   assertCapturedSuccess
-  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.startup/with_jmap ]"
-  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.startup/with_jmap ]"
-  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.startup/with_jstack ]"
-  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.startup/with_jstack ]"
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jmap ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
+  assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
+  assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
+  assertTrue "A java file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/java ]"
+  assertTrue "The java file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/java ]"
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
 }
 
 test_create_export_script() {
