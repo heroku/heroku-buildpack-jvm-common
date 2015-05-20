@@ -193,8 +193,11 @@ _install_tools() {
   local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
 
   mkdir -p $ctxDir/.heroku/bin
+  mkdir -p $ctxDir/.heroku/with_jmap/bin
   cp $curDir/opt/with_jmap $ctxDir/.heroku/bin/with_jmap
+  cp $curDir/opt/with_jmap_java $ctxDir/.heroku/with_jmap/bin/java
   chmod +x $ctxDir/.heroku/bin/with_jmap
+  chmod +x $ctxDir/.heroku/with_jmap/bin/java
 
   cp $curDir/opt/with_jstack $ctxDir/.heroku/bin/with_jstack
   chmod +x $ctxDir/.heroku/bin/with_jstack
