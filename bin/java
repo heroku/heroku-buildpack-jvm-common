@@ -185,6 +185,12 @@ case \$limit in
 esac
 
 export JAVA_TOOL_OPTIONS=\${JAVA_TOOL_OPTIONS:-"\${default_java_opts} -Dfile.encoding=UTF-8"}
+
+if [[ "${JAVA_OPTS}" == *-Xmx* ]]; then
+  export JAVA_OPTS="\$JAVA_OPTS"
+else
+  export JAVA_OPTS="\${default_java_opts} \$JAVA_OPTS"
+fi
 EOF
 }
 
