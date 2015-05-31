@@ -7,3 +7,4 @@ elif [ -d $1/target/universal/stage ]; then
 else
   echo "JVM Common"
 fi
+exit 0
