@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
 
-eval "$@ &"
-pid=$!
+export PATH=$HOME/.heroku/with_jstack/bin:$PATH
 
-trap "kill -3 $pid; kill $pid" SIGTERM
-trap "kill -9 $pid; exit" SIGKILL
+export HEROKU_JAVA_HOME=${JAVA_HOME}
+unset JAVA_HOME
 
-sleep 10
-while kill -0 $pid
-do
-  if [ -z "$JSTACK_INTERVAL" ]; then
-    sleep 10
-  else
-    kill -3 $pid
-    sleep ${JSTACK_INTERVAL}
-  fi
-done
+eval "$@"

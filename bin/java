@@ -205,8 +205,11 @@ _install_tools() {
   chmod +x $ctxDir/.heroku/bin/with_jmap
   chmod +x $ctxDir/.heroku/with_jmap/bin/java
 
+  mkdir -p $ctxDir/.heroku/with_jstack/bin
   cp $curDir/opt/with_jstack $ctxDir/.heroku/bin/with_jstack
+  cp $curDir/opt/with_jstack_java $ctxDir/.heroku/with_jstack/bin/java
   chmod +x $ctxDir/.heroku/bin/with_jstack
+  chmod +x $ctxDir/.heroku/with_jstack/bin/java
 
   cp $curDir/opt/java $ctxDir/.heroku/bin/java
   chmod +x $ctxDir/.heroku/bin/java
