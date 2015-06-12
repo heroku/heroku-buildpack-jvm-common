@@ -2,7 +2,7 @@
 
 This is the official [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks) for [OpenJDK](http://openjdk.java.net/). It only installs the JDK, and does not build an application. It is used by the [Java](https://github.com/heroku/heroku-buildpack-java), [Scala](https://github.com/heroku/heroku-buildpack-scala), and [Clojure](https://github.com/heroku/heroku-buildpack-clojure) buildpacks.
 
-# Example Usage
+# Usage from a Buildpack
 
 This is how the buildpack is used from another buildpack:
 
@@ -18,6 +18,16 @@ curl --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C /tmp/jvm-common --st
 javaVersion=$(detect_java_version ${BUILD_DIR})
 install_java ${BUILD_DIR} ${javaVersion}
 ```
+
+# Standalone Usage
+
+You may use this buildpack to install the JVM into your slug by running:
+
+```
+$ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-jvm-common.git
+```
+
+Then it may be used by itself, or with another buildpack using [multiple buildpacks](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app).
 
 # License
 
