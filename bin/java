@@ -176,6 +176,9 @@ case \$limit in
 512)   # 2X Dyno
   default_java_opts="-Xmx768m"
   ;;
+16384) # IX Dyno
+  default_java_opts="-Xmx2g"
+  ;;
 32768) # PX Dyno
   default_java_opts="-Xmx4g"
   ;;
