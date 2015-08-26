@@ -6,8 +6,8 @@ set_jdbc_url() {
   db_protocol=$(expr "$db_url" : "\(.\+\)://")
   if [ $db_protocol == "postgres" ]; then
     jdbc_protocol="jdbc:postgresql"
-  elif [ $db_protocol == "mysql" ]; then
-    jdbc_protocol="jdbc:mysql"
+  else
+    jdbc_protocol="jdbc:${db_protocol}"
   fi
 
   db_user=$(expr "$db_url" : "${db_protocol}://\(.\+\):\(.\+\)@")
