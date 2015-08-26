@@ -14,7 +14,7 @@ case $limit in
   default_java_opts="-Xmx2g"
   ;;
 32768) # PX Dyno
-  default_java_opts="-Xmx4g"
+  default_java_opts="-Xmx12g"
   ;;
 *)
   default_java_opts="-Xmx384m -Xss512k"
