@@ -9,8 +9,10 @@ before_install:
 - gem install heroku_hatchet -v 1.4.1
 - gem install rspec -v 3.3.0
 - gem install rspec-retry -v 0.4.2
+- sh etc/hatchet_travis_setup.sh
 install: true
 script: eval $TEST_CMD
+after_script: heroku keys:remove $USER@`hostname`
 env:
   global:
   - HATCHET_RETRIES=3
