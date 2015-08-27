@@ -14,7 +14,6 @@ Host github.com
     StrictHostKeyChecking no
 EOF
 
-  curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 --max-time 30 https://toolbelt.heroku.com/install-ubuntu.sh | sh
+curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 --max-time 30 https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-  yes | heroku keys:add
-fi
+yes | heroku keys:add
