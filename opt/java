@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-$JAVA_HOME/bin/java "$@" 2> >(sed -u "/^Picked up JAVA_TOOL_OPTIONS:.*\$/d" >&2)

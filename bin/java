@@ -15,9 +15,6 @@ else
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 fi
 
-JDK_URL_1_6_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk6-u33-heroku-temaki-darwin.tar.gz"
-JDK_URL_1_7_DARWIN="http://heroku-jvm-langpack-java.s3.amazonaws.com/openjdk7-u4-heroku-temaki-darwin.tar.gz"
-
 install_java() {
   baseDir=$1
   if [ ! -d "${baseDir}" ]; then
@@ -33,7 +30,7 @@ install_java() {
 
   jdkDir="${baseDir}"/.jdk
   jdkTarball="${jdkDir}"/jdk.tar.gz
-  javaExe="${jdkDir}/$(_get_relative_jdk_bin)"/java
+  javaExe="${jdkDir}/bin/java"
   mkdir -p "${jdkDir}"
   if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then
     rm -rf "${jdkDir}"
@@ -42,14 +39,14 @@ install_java() {
     curl --silent --location ${jdkUrl} --output ${jdkTarball}
     tar pxzf ${jdkTarball} -C "${jdkDir}"
     rm ${jdkTarball}
-    echo "${javaVersion}" > "${jdkDir}"/version
+    echo "${javaVersion}" > "${jdkDir}/version"
     if [ ! -f "${javaExe}" ]; then
       error_return "Unable to retrieve the JDK."
       return 1
     fi
   fi
-  export JAVA_HOME="${jdkDir}/$(_get_relative_jdk_home)"
-  export PATH="${jdkDir}/$(_get_relative_jdk_bin):${PATH}"
+  export JAVA_HOME=${jdkDir}
+  export PATH="${jdkDir}/bin:${PATH}"
 
   _install_tools ${baseDir}
   _create_profile_script ${baseDir}
@@ -77,27 +74,8 @@ _get_jdk_download_url() {
   # bash 4 would solve this with associative arrays, but shunit
   # tests don't seem to respect the correct bash version.
   minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
-  osSuffix="$(_get_os_suffix)"
-  jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion}${osSuffix})
+  jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
   echo "${jdkUrl}"
-}
-
-_get_relative_jdk_bin() {
-  echo "$(_get_relative_jdk_home)/bin"
-}
-
-_get_relative_jdk_home() {
-  if [ "$(_get_os_suffix)" = "_DARWIN" ]; then
-    echo "Home"
-  else
-    echo ""
-  fi
-}
-
-_get_os_suffix() {
-  osSuffix=""
-  if [ "$(uname)" = "Darwin" ]; then osSuffix="_DARWIN"; fi
-  echo "${osSuffix}"
 }
 
 is_supported_java_version() {
@@ -128,24 +106,6 @@ detect_java_version() {
   else
     echo "$(get_default_java_version)"
   fi
-}
-
-get_jvm_utils_command() {
-  baseDir=${1:-"No Dir"}
-  if [ "${baseDir}" = "No Dir" ] || [ ! -d "${baseDir}" ] ; then
-    error_return "Invalid directory specified for pom file."
-    return 1
-  fi
-
-  jvmUtilsDir="${baseDir}"/.jvm-utils
-  mkdir -p "${jvmUtilsDir}"
-
-  if [ ! -f "$jvmUtilsDir"/jvm-utils.jar ] ; then
-    jvmUtilsURL="https://s3.amazonaws.com/heroku-jvm-langpack-java/buildpack-jvm-utils-0.1.jar"
-    curl --silent --location ${jvmUtilsURL} --output "${jvmUtilsDir}"/jvm-utils.jar
-  fi
-
-  echo "${jvmUtilsDir}"/jvm-utils.jar
 }
 
 get_app_system_value() {
@@ -186,9 +146,6 @@ _install_tools() {
   cp $curDir/opt/with_jstack_java $ctxDir/.heroku/with_jstack/bin/java
   chmod +x $ctxDir/.heroku/bin/with_jstack
   chmod +x $ctxDir/.heroku/with_jstack/bin/java
-
-  cp $curDir/opt/java $ctxDir/.heroku/bin/java
-  chmod +x $ctxDir/.heroku/bin/java
 }
 
 _create_export_script() {
