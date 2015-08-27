@@ -1,9 +1,10 @@
 language: bash
 branches:
   only:
-    - master
+  - master
 before_install:
-- curl --silent https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz | tar xz -C /tmp/
+- curl --silent https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz | tar xz -C
+  /tmp/
 - git clone https://github.com/ryanbrainard/heroku-buildpack-testrunner.git /tmp/testrunner
 - gem install heroku_hatchet -v 1.4.1
 install: true
@@ -14,7 +15,7 @@ env:
   - HATCHET_DEPLOY_STRATEGY=git
   - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm-common.git"
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
-  - secure: AdqzMWy97wo4d1qMaWKpCj7huP8jcKk4sdj43kYnOmB2B9o28c4WLtD0NtvKavfctWmieTzZRGpPzGeeZ8K4Iq099gDoBOnSlziFOVUDxxdX30tgJkK8+cMVqddkO3eT2UHPFapHRLqiu5wg074hebqsdRSxYTpRBQa/J2Q/DmM=
+  - secure: LhhodfArqOltdXN4U2MHYlr8Sb39TevNJ2uDmIFgIomaY2v1i8Hil0/qQyScLToSFIEEMQZrvhCspaT8lZ3F/jKwjiPF2kgw3fxD4x3L9keexk8hlqmpxdeXcK2hcSdAsQXSPn8Q5o0gG1q92I3THM/SAYWJIStanrFdHfa3egg=
   matrix:
   - TEST_CMD='[ "$TRAVIS_PULL_REQUEST" = "false" ] && ./etc/hatchet-test.sh || true'
   - TEST_CMD="/tmp/testrunner/bin/run -c ."
