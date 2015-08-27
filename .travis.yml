@@ -7,6 +7,8 @@ before_install:
   /tmp/
 - git clone https://github.com/ryanbrainard/heroku-buildpack-testrunner.git /tmp/testrunner
 - gem install heroku_hatchet -v 1.4.1
+- gem install rspec -v 3.3.0
+- gem install rspec-retry -v 0.4.2
 install: true
 script: eval $TEST_CMD
 env:
@@ -17,5 +19,5 @@ env:
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   - secure: LhhodfArqOltdXN4U2MHYlr8Sb39TevNJ2uDmIFgIomaY2v1i8Hil0/qQyScLToSFIEEMQZrvhCspaT8lZ3F/jKwjiPF2kgw3fxD4x3L9keexk8hlqmpxdeXcK2hcSdAsQXSPn8Q5o0gG1q92I3THM/SAYWJIStanrFdHfa3egg=
   matrix:
-  - TEST_CMD='[ "$TRAVIS_PULL_REQUEST" = "false" ] && ./etc/hatchet-test.sh || true'
+  - TEST_CMD='[ "$TRAVIS_PULL_REQUEST" = "false" ] && sh etc/hatchet-test.sh || true'
   - TEST_CMD="/tmp/testrunner/bin/run -c ."
