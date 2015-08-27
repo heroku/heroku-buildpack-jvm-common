@@ -136,8 +136,6 @@ test_install_tools() {
   assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
   assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
   assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-  assertTrue "A java file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/java ]"
-  assertTrue "The java file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/java ]"
   assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
   assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
 }
