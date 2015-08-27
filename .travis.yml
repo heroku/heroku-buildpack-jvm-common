@@ -19,5 +19,5 @@ env:
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   - secure: LhhodfArqOltdXN4U2MHYlr8Sb39TevNJ2uDmIFgIomaY2v1i8Hil0/qQyScLToSFIEEMQZrvhCspaT8lZ3F/jKwjiPF2kgw3fxD4x3L9keexk8hlqmpxdeXcK2hcSdAsQXSPn8Q5o0gG1q92I3THM/SAYWJIStanrFdHfa3egg=
   matrix:
-  - TEST_CMD='[ "$TRAVIS_PULL_REQUEST" = "false" ] && sh etc/hatchet-test.sh || true'
+  - TEST_CMD="sh etc/hatchet-test.sh"
   - TEST_CMD="/tmp/testrunner/bin/run -c ."
