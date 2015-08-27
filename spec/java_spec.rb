@@ -5,7 +5,7 @@ describe "Java" do
   before(:each) do
     set_java_version(app.directory, jdk_version)
     app.setup!
-    app.set_config("JVM_COMMON_BUILDPACK" => "https://github.com/heroku/heroku-buildpack-jvm-common/tarball/#{`git rev-parse HEAD`}")
+    app.set_config("JVM_COMMON_BUILDPACK" => "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/master")
   end
 
   ["1.7", "1.8"].each do |version|
@@ -28,12 +28,10 @@ describe "Java" do
       let(:jdk_version) { version }
       it "runs commands" do
         app.deploy do |app|
-          expect_successful_maven(jdk_version)
-
-          expect(successful_body(app)).to eq("/1")
+          expect(app.output).to include("Installing OpenJDK #{jdk_version}")
 
           expect(app.run("echo $JAVA_TOOL_OPTIONS")).
-              to include(%q{-Xmx384m -Xss512k -Dfile.encoding=UTF-8})
+              not_to include(%q{-Xmx384m -Xss512k})
 
           expect(app.run("echo $JAVA_OPTS")).
               to include(%q{-Xmx384m -Xss512k})
