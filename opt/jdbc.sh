@@ -3,28 +3,36 @@
 set_jdbc_url() {
   local db_url=${1}
 
-  db_protocol=$(expr "$db_url" : "\(.\+\)://")
-  if [ "$db_protocol" == "postgres" ]; then
-    jdbc_protocol="jdbc:postgresql"
-  elif [ "$db_protocol" == "mysql" ]; then
-    jdbc_protocol="jdbc:mysql"
-  fi
+  if [ -z "$JDBC_DATABASE_URL" ]; then
+      local db_protocol=$(expr "$db_url" : "\(.\+\)://")
+      if [ "$db_protocol" == "postgres" ]; then
+	  local jdbc_protocol="jdbc:postgresql"
+      elif [ "$db_protocol" == "mysql" ]; then
+	  local jdbc_protocol="jdbc:mysql"
+      fi
 
-  if [ -n "$jdbc_protocol" ]; then
-    db_user=$(expr "$db_url" : "${db_protocol}://\(.\+\):\(.\+\)@")
-    db_prefix="${db_protocol}://${db_user}:"
+      if [ -n "$jdbc_protocol" ]; then
+	  local db_user=$(expr "$db_url" : "${db_protocol}://\(.\+\):\(.\+\)@")
+	  local db_prefix="${db_protocol}://${db_user}:"
 
-    db_pass=$(expr "$db_url" : "${db_prefix}\(.\+\)@")
-    db_prefix="${db_prefix}${db_pass}@"
+	  local db_pass=$(expr "$db_url" : "${db_prefix}\(.\+\)@")
+	  db_prefix="${db_prefix}${db_pass}@"
 
-    db_host_port=$(expr "$db_url" : "${db_prefix}\(.\+\)/")
-    db_prefix="${db_prefix}${db_host_port}/"
+	  local db_host_port=$(expr "$db_url" : "${db_prefix}\(.\+\)/")
+	  db_prefix="${db_prefix}${db_host_port}/"
 
-    db_name=$(expr "$db_url" : "${db_prefix}\(.\+\)")
+	  local db_suffix=$(expr "$db_url" : "${db_prefix}\(.\+\)")
 
-    export JDBC_DATABASE_URL="${jdbc_protocol}://${db_host_port}/${db_name}?user=${db_user}&password=${db_pass}"
-    export JDBC_DATABASE_USERNAME="${db_user}"
-    export JDBC_DATABASE_PASSWORD="${db_pass}"
+          if [[ "$db_suffix" == *\?* ]]; then
+            local db_args="&user=${db_user}&password=${db_pass}"
+	  else
+            local db_args="?user=${db_user}&password=${db_pass}"
+	  fi
+
+	  export JDBC_DATABASE_URL="${jdbc_protocol}://${db_host_port}/${db_suffix}${db_args}"
+	  export JDBC_DATABASE_USERNAME="${db_user}"
+	  export JDBC_DATABASE_PASSWORD="${db_pass}"
+      fi
   fi
 }
 
