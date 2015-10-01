@@ -61,11 +61,6 @@ test_installJavaWithoutDirectoryFails() {
   assertCapturedError " !     ERROR: Invalid directory to install java."
 }
 
-test_installJavaWithInvalidVersionFails() {
-  capture install_java ${BUILD_DIR} "1.5"
-  assertCapturedError " !     ERROR: Unsupported Java version: 1.5"
-}
-
 test_installDefaultJava() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture install_java ${BUILD_DIR}
@@ -147,4 +142,14 @@ test_create_export_script() {
   assertTrue "An export file should be created." "[ -f ${BUILD_DIR}/export ]"
   assertContains "export JAVA_HOME=/path/to/jdk" "$(cat ${BUILD_DIR}/export)"
   assertContains "export PATH=\$JAVA_HOME/bin:\$PATH" "$(cat ${BUILD_DIR}/export)"
+}
+
+test_invalidJdkURL() {
+  capture install_java ${BUILD_DIR} "1.8.0_11"
+  assertContains "Unsupported Java version: 1.8.0_11" "$(cat ${STD_OUT})"
+}
+
+test_customJdk() {
+  capture install_java ${BUILD_DIR} "1.8.0_51"
+  assertCapturedSuccess
 }

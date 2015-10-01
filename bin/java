@@ -9,34 +9,31 @@ if [ ${STACK:-""} = "cedar" ]; then
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 else
   DEFAULT_JDK_VERSION="1.8"
-  JDK_URL_1_9=${JDK_URL_1_9:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14/openjdk1.9-latest.tar.gz"}
-  JDK_URL_1_8=${JDK_URL_1_8:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14/openjdk1.8.0_60.tar.gz"}
-  JDK_URL_1_7=${JDK_URL_1_7:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14/openjdk1.7.0_79.tar.gz"}
+  JDK_BASE_URL=${JDK_BASE_URL:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14"}
+  JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk1.9-latest.tar.gz"}
+  JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_60.tar.gz"}
+  JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_79.tar.gz"}
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 fi
 
 install_java() {
-  baseDir=$1
+  local baseDir=$1
   if [ ! -d "${baseDir}" ]; then
     error_return "Invalid directory to install java."
     return 1
   fi
 
-  javaVersion=${2:-$(get_default_java_version)}
-  if [ "$(is_supported_java_version ${javaVersion})" != "true" ]; then
-    error_return "Unsupported Java version: $javaVersion"
-    return 1
-  fi
-
-  jdkDir="${baseDir}"/.jdk
-  jdkTarball="${jdkDir}"/jdk.tar.gz
-  javaExe="${jdkDir}/bin/java"
+  local javaVersion=${2:-$(get_default_java_version)}
+  local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
+  local jdkDir="${baseDir}"/.jdk
+  local jdkTarball="${jdkDir}"/jdk.tar.gz
+  local javaExe="${jdkDir}/bin/java"
   mkdir -p "${jdkDir}"
   if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then
     rm -rf "${jdkDir}"
     mkdir -p "${jdkDir}"
-    jdkUrl=$(_get_jdk_download_url "${javaVersion}")
-    curl --silent --location ${jdkUrl} --output ${jdkTarball}
+    validate_jdk_url ${jdkUrl} ${jdkVersion}
+    curl --retry 3 --silent --location ${jdkUrl} --output ${jdkTarball}
     tar pxzf ${jdkTarball} -C "${jdkDir}"
     rm ${jdkTarball}
     echo "${javaVersion}" > "${jdkDir}/version"
@@ -51,6 +48,28 @@ install_java() {
   _install_tools ${baseDir}
   _create_profile_script ${baseDir}
   _create_export_script ${JAVA_HOME} "$(pwd)"
+}
+
+validate_jdk_url() {
+  local jdkUrl=${1}
+  local jdkVersion={2}
+  status=$(curl --retry 3 --silent --head -w %{http_code} -L ${jdkUrl} -o /dev/null)
+  if [ "$status" != "200" ]; then
+    echo ""
+    error_return "Unsupported Java version: $javaVersion
+
+Please check your system.properties file to ensure the java.runtime.version
+is among the list of supported version on the Dev Center:
+https://devcenter.heroku.com/articles/java-support#supported-java-versions
+You can also remove the system.properties from your repo to install
+the default ${DEFAULT_JDK_VERSION} version.
+If you continue to have trouble, you can open a support ticket here:
+http://help.heroku.com
+
+Thanks,
+Heroku"
+    return 1
+  fi
 }
 
 jdk_overlay() {
@@ -69,22 +88,20 @@ is_java_version_change() {
 }
 
 _get_jdk_download_url() {
-  jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
-  # hacky way of parsing the variable name.
-  # bash 4 would solve this with associative arrays, but shunit
-  # tests don't seem to respect the correct bash version.
-  minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
-  jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
-  echo "${jdkUrl}"
-}
+  local jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
 
-is_supported_java_version() {
-  javaVersion=$1
-  if [ "$(expr "${javaVersion}" : '1.[6-9]')" != 0 ]; then
-    echo "true"
-  else
-    echo "false"
+  if [ "$(expr "${jdkVersion}" : '1.[6-9]$')" != 0 ]; then
+    # hacky way of parsing the variable name.
+    # bash 4 would solve this with associative arrays, but shunit
+    # tests don't seem to respect the correct bash version.
+    local minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
+    local jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
+  elif [ "$(expr "${jdkVersion}" : '1.[6-9]')" != 0 ]; then
+    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   fi
+
+  # check that it exists with a head request
+  echo "${jdkUrl}"
 }
 
 get_default_java_version() {
@@ -117,7 +134,7 @@ get_app_system_value() {
 
   [ -f $file ] && \
   grep -E ^$escaped_key[[:space:]=]+ $file | \
-  sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([A-Za-z0-9\.-]*).*/\2/g"
+  sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
 }
 
 _create_profile_script() {
