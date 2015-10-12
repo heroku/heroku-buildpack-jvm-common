@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Added support for JDK update versions in system.properties
+
 ## v29
 
 * Added support for MySQL in JDBC_DATABASE_URL
