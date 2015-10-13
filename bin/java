@@ -16,6 +16,20 @@ else
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 fi
 
+install_java_with_overlay() {
+  local buildDir=${1}
+  local javaVersion=$(detect_java_version ${buildDir})
+
+  if [ "$javaVersion" = "stack" ]; then
+    status "Using stack JDK"
+  else
+    status_pending "Installing OpenJDK ${javaVersion}"
+    install_java ${buildDir} ${javaVersion}
+    jdk_overlay ${buildDir}
+    status_done
+  fi
+}
+
 install_java() {
   local baseDir=$1
   if [ ! -d "${baseDir}" ]; then

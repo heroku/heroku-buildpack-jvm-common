@@ -11,8 +11,4 @@ BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 . $BIN_DIR/util
 
 # Install JDK
-javaVersion=$(detect_java_version ${BUILD_DIR})
-status_pending "Installing OpenJDK ${javaVersion}"
-install_java ${BUILD_DIR} ${javaVersion}
-jdk_overlay ${BUILD_DIR}
-status_done
+install_java_with_overlay ${BUILD_DIR}
