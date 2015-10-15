@@ -177,6 +177,13 @@ _install_tools() {
   cp $curDir/opt/with_jstack_java $ctxDir/.heroku/with_jstack/bin/java
   chmod +x $ctxDir/.heroku/bin/with_jstack
   chmod +x $ctxDir/.heroku/with_jstack/bin/java
+
+  mkdir -p $ctxDir/.heroku/with_jmap_and_jstack/bin
+  cp $curDir/opt/with_jmap_and_jstack $ctxDir/.heroku/bin/with_jmap_and_jstack
+  cp $curDir/opt/with_jmap_and_jstack_java $ctxDir/.heroku/with_jmap_and_jstack/bin/java
+  chmod +x $ctxDir/.heroku/bin/with_jmap_and_jstack
+  chmod +x $ctxDir/.heroku/with_jmap_and_jstack/bin/java
+  
 }
 
 _create_export_script() {
