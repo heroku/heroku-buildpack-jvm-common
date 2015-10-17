@@ -1,4 +1,5 @@
 language: bash
+sudo: true
 branches:
   only:
   - master
@@ -19,7 +20,7 @@ env:
   - HATCHET_DEPLOY_STRATEGY=git
   - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm-common.git"
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
-  - secure: ibzNoXL27mp4OF/Mc4gYv3SRNU9wR2K2h3gRsQRhFnak2BT1LrNYgvTNNGA+FDxj+R4G0ZD3LiHXGIyOtDZvWuqMUu9ozFC86uvEeyyAyWgcsX0I0/zqJOnQ+vNpVWmuX5O/Bh8VP2CBe3lMO3E6OQXMeYK0H7U+RRDu6tghmvs=
+  - secure: aQjcB2ELG6KS9SrEuQyqCLZe+ZINGDJ4hmB5dX1M0XapnTRAhWwNzSDc7HSwffKnVTjS14hbwLgyzImhU1WVJqTmAHIFDCOBAPh7KEXSOouSE+y+lVU9gl1KtSSLJmF/gFwZYa/gEj2UlKnZ387SqouPFffv5tGPrXpgpK632Uo=
   matrix:
   - TEST_CMD="sh etc/hatchet-test.sh"
   - TEST_CMD="/tmp/testrunner/bin/run ."
