@@ -3,6 +3,7 @@
 ## master
 
 * Added support for JDK update versions in system.properties
+* Added with_jmap_and_jstack script
 
 ## v29
 
