@@ -1,6 +1,10 @@
 # JVM Common Buildpack Changelog
 
-## master
+## v31
+
+* Upgrade default JDK 8 to 8u66
+
+## v30
 
 * Added support for JDK update versions in system.properties
 * Added with_jmap_and_jstack script
