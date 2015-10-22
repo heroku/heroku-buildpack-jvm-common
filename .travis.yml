@@ -23,4 +23,4 @@ env:
   - secure: V3C87flUuD4qPaOWReIE10UWGhAXQYKEsB8RFtBLr+zHWWWQYY6vCZVB8Eh0EwbWHxQ6TxjRdvqlznIcHWX1TrPjU6OoclBX8hZ6qDaPcd+1Z2VJp2FUTcjy7d9l2o1nGTCjexlGP+4959ymf/YuFgW3M9LvhKld80I9j5Sxlyo=
   matrix:
   - TEST_CMD="sh etc/hatchet-test.sh"
-  - TEST_CMD="/tmp/testrunner/bin/run ."
+  - TEST_CMD="/tmp/testrunner/bin/run -c ."
