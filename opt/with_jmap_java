@@ -28,7 +28,7 @@ do
             stringToSign="PUT\n\n${contentType}\n${dateValue}\n${resource}"
             signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${AWS_SECRET_ACCESS_KEY} -binary | base64`
 
-            curl -s -X PUT -T "${dumpFile}" \
+            curl -s -k -X PUT -T "${dumpFile}" \
             -H "Host: ${S3_BUCKET_NAME}.s3.amazonaws.com" \
             -H "Date: $dateValue" \
             -H "Content-Type: $contentType" \
