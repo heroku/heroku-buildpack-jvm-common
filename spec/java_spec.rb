@@ -31,7 +31,7 @@ describe "Java" do
           expect(app.output).to include("Installing OpenJDK #{jdk_version}")
 
           expect(app.run("echo $JAVA_TOOL_OPTIONS")).
-              not_to include(%q{-Xmx384m -Xss512k})
+              not_to include(%q{-Xmx350m -Xss512k})
 
           expect(app.run("echo $JAVA_OPTS")).
               to include(%q{-Xmx384m -Xss512k})
