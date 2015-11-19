@@ -34,7 +34,7 @@ describe "Java" do
               not_to include(%q{-Xmx350m -Xss512k})
 
           expect(app.run("echo $JAVA_OPTS")).
-              to include(%q{-Xmx384m -Xss512k})
+              to include(%q{-Xmx350m -Xss512k})
 
           expect(app.run("jce")).
               to include(%q{Encrypting, "Test"}).
