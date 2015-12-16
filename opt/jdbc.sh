@@ -6,10 +6,10 @@ set_jdbc_url() {
 
   if [ -z "$(eval echo \$${env_prefix}_URL)" ]; then
       local db_protocol=$(expr "$db_url" : "\(.\+\)://")
-      if [ "$db_protocol" == "postgres" ]; then
+      if [ "$db_protocol" = "postgres" ]; then
         local jdbc_protocol="jdbc:postgresql"
         local db_default_args="&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory"
-      elif [ "$db_protocol" == "mysql" ]; then
+      elif [ "$db_protocol" = "mysql" ]; then
         local jdbc_protocol="jdbc:mysql"
       fi
 
@@ -25,7 +25,7 @@ set_jdbc_url() {
 
         local db_suffix=$(expr "$db_url" : "${db_prefix}\(.\+\)")
 
-        if [[ "$db_suffix" == *\?* ]]; then
+        if echo "$db_suffix" | grep -qi "?"; then
           local db_args="&user=${db_user}&password=${db_pass}"
         else
           local db_args="?user=${db_user}&password=${db_pass}"
