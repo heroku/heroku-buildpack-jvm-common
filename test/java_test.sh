@@ -75,7 +75,7 @@ test_installDefaultJava() {
   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "${DEFAULT_JDK_VERSION}"
   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
-  assertTrue "A pgconfig.jar should exist in the JDK" "[ -d ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
+  assertTrue "A pgconfig.jar should exist in the JDK" "[ -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
 }
 
 test_installJavaWithVersion() {
