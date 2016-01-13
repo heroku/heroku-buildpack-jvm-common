@@ -201,6 +201,8 @@ EOF
 
 _install_pgconfig() {
   local javaHome=${1:-JAVA_HOME}
-
-  curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o ${javaHome}/jre/lib/ext/pgconfig.jar
+  local extDir="${javaHome}/jre/lib/ext"
+  if [ -d "${extDir}" ]; then
+    curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o ${extDir}/pgconfig.jar
+  fi
 }
