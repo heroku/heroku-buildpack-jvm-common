@@ -20,7 +20,7 @@ env:
   - HATCHET_DEPLOY_STRATEGY=git
   - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm-common.git"
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
-  - secure: JRF2PyL5uDFUyfqPcexnH5aYHHcXosRVGWTjU4tLY8HZTdD1WFBkFcNDcFQ64W/XGTDF71VWYbEpQ5fclzKVHFdNVItrHOu1EtCtaS/4V3t4Pu6irN5PMGJWjCnIdcnkAi2lyiTvwOYQymnQhsrPr9ax5XC4CutpOw2r3FJTucc=
+  - secure: G+dqfbGnNuBQ3+5gH/p0XUKeogjrMMcHmPcM/u+26jREiJniU5eCiXbbD8qSgmzGL1W/iHdvwxk4n6XFBDnhBc5n9yX+2uHgVNAecV9nRequlJ2qUypga9eJn91JlXp2XulHvGPUsmA4qbm5HZ4XM2GsA1FVgNYzR/Kc+EkGefM=
   matrix:
   - TEST_CMD="sh etc/hatchet-test.sh"
   - TEST_CMD="/tmp/testrunner/bin/run -c ."
