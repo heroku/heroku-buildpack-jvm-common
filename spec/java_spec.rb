@@ -52,6 +52,11 @@ describe "Java" do
           expect(app.run("https")).
               to include("Successfully invoked HTTPS service.").
               and match(%r{"X-Forwarded-Proto(col)?": "https"})
+
+          sleep 1
+          expect(app.run("pgssl")).
+              to include("Successfully use SSL for Postgres.").
+              and match(%r{sslmode: require})
         end
       end
     end
