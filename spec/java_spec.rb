@@ -55,8 +55,7 @@ describe "Java" do
 
           sleep 1
           expect(app.run("pgssl")).
-              to include("Successfully use SSL for Postgres.").
-              and match(%r{sslmode: require})
+              to match(%r{sslmode: require})
         end
       end
     end
