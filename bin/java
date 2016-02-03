@@ -204,13 +204,17 @@ install_pgconfig_91() {
   local scalaDepsDir="target/resolution-cache/reports"
 
   if [ -f ${javaDeps} ]; then
-    if grep -q "postgresql:postgresql:jar:9.1" ${javaDeps} || grep -q "postgresql:postgresql:jar:9.0" ${javaDeps}; then
+    if grep -q "postgresql:postgresql:jar:8." ${javaDeps} ||
+            grep -q "postgresql:postgresql:jar:9.1" ${javaDeps} ||
+            grep -q "postgresql:postgresql:jar:9.0" ${javaDeps}; then
       _install_pgconfig $JAVA_HOME "-91"
     fi
   fi
 
   if [ -d ${scalaDepsDir} ]; then
-    if grep -q "postgresql-9.1-" ${scalaDepsDir}/*-compile.xml || grep -q "postgresql-9.0-" ${scalaDepsDir}/*-compile.xml; then
+    if grep -q "postgresql-8." ${scalaDepsDir}/*-compile.xml ||
+            grep -q "postgresql-9.1-" ${scalaDepsDir}/*-compile.xml ||
+            grep -q "postgresql-9.0-" ${scalaDepsDir}/*-compile.xml; then
       _install_pgconfig $JAVA_HOME "-91"
     fi
   fi
