@@ -200,19 +200,18 @@ EOF
 }
 
 install_pgconfig_91() {
-  local javaHome=${1:-JAVA_HOME}
   local javaDeps="target/mvn-dependency-list.log"
   local scalaDepsDir="target/resolution-cache/reports"
 
   if [ -f ${javaDeps} ]; then
-    if grep "postgresql:postgresql:jar:9.1" ${javaDeps} || grep "postgresql:postgresql:jar:9.0" ${javaDeps}; then
-      _install_pgconfig ${javaHome} "-91"
+    if grep -q "postgresql:postgresql:jar:9.1" ${javaDeps} || grep -q "postgresql:postgresql:jar:9.0" ${javaDeps}; then
+      _install_pgconfig $JAVA_HOME "-91"
     fi
   fi
 
   if [ -d ${scalaDepsDir} ]; then
-    if grep "postgresql-9.1-" ${scalaDepsDir}/*-compile.xml || grep "postgresql-9.0-" ${scalaDepsDir}/*-compile.xml; then
-      _install_pgconfig ${javaHome} "-91"
+    if grep -q "postgresql-9.1-" ${scalaDepsDir}/*-compile.xml || grep -q "postgresql-9.0-" ${scalaDepsDir}/*-compile.xml; then
+      _install_pgconfig $JAVA_HOME "-91"
     fi
   fi
 }
