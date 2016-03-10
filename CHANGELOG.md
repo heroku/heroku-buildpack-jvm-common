@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## Master
+
+* Upgrade default JDK 8 to 8u74
+
 ## v31
 
 * Upgrade default JDK 8 to 8u66
