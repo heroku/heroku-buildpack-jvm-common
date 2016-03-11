@@ -91,6 +91,10 @@ jdk_overlay() {
   baseDir=$1
   shopt -s dotglob
   if [ -d ${baseDir}/.jdk ] && [ -d ${baseDir}/.jdk-overlay ]; then
+    if [ -f ${baseDir}/.jdk-overlay/jre/lib/security/cacerts ]; then
+      # delete the symlink because a cp will error
+      rm ${baseDir}/.jdk/jre/lib/security/cacerts
+    fi
     cp -r ${baseDir}/.jdk-overlay/* ${baseDir}/.jdk/
   fi
 }
