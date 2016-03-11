@@ -15,6 +15,7 @@ testOverlayDir() {
   mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/lib/security
   mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/bin
   touch ${BUILD_DIR}/.jdk-overlay/jre/lib/security/policy.jar
+  touch ${BUILD_DIR}/.jdk-overlay/jre/lib/security/cacerts
   capture jdk_overlay ${BUILD_DIR}
   assertTrue "Files in .jdk-overlay should be copied to .jdk." "[ -f ${BUILD_DIR}/.jdk/jre/lib/security/policy.jar ]"
   assertTrue "Files in .jdk should not be overwritten." "[ -f ${BUILD_DIR}/.jdk/jre/bin/java ]"
