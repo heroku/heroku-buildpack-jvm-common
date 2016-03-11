@@ -22,6 +22,25 @@ describe "Java" do
       end
     end
 
+    context "jdk-overlay on jdk-#{version}" do
+      let(:app) { Hatchet::Runner.new("java-overlay-test",
+        :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
+      let(:jdk_version) { version }
+      it "should deploy" do
+        app.deploy do |app|
+          expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          expect(app.output).to include("BUILD SUCCESS")
+
+          cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts")
+          sleep 1
+          cacerts_md5_overlay = app.run("md5sum .jdk-overlay/jre/lib/security/cacerts")
+
+          expect(cacerts_md5_jdk.split(" ")[0]).
+            to eq(cacerts_md5_overlay.split(" ")[0])
+        end
+      end
+    end
+
     context "korvan on jdk-#{version}" do
       let(:app) { Hatchet::Runner.new("korvan",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
