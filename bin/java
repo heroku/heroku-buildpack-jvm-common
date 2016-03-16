@@ -50,6 +50,7 @@ install_java() {
     curl --retry 3 --silent --location ${jdkUrl} --output ${jdkTarball}
     tar pxzf ${jdkTarball} -C "${jdkDir}"
     rm ${jdkTarball}
+    install_cacerts ${jdkDir}
     echo "${javaVersion}" > "${jdkDir}/version"
     if [ ! -f "${javaExe}" ]; then
       error_return "Unable to retrieve the JDK."
@@ -63,6 +64,12 @@ install_java() {
   _create_profile_script ${baseDir}
   _create_export_script ${JAVA_HOME} "$(pwd)"
   _install_pgconfig ${JAVA_HOME}
+}
+
+install_cacerts() {
+  local jdkDir=$1
+  mv ${jdkDir}/jre/lib/security/cacerts ${jdkDir}/jre/lib/security/cacerts.old
+  ln -s /etc/ssl/certs/java/cacerts ${jdkDir}/jre/lib/security/cacerts
 }
 
 validate_jdk_url() {
