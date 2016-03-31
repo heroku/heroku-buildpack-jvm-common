@@ -19,7 +19,7 @@ env:
   - HATCHET_RETRIES=3
   - HATCHET_DEPLOY_STRATEGY=git
   - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm-common.git"
-  - HATCHET_APP_LIMIT=5
+  - HATCHET_APP_LIMIT=4
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   - secure: BWfH6W8MSJao9/moIaACdfFOsrbs3cFPl7sK/DHI9GMp5+Lk4cMsAQZgU5g99m4irFbUfaa55QtHzgCDdiV97DKY2gOOTgJsTicLmk2r4sXavlYhen3e5Z2TO+E0WoAJxe9OBWA3Kja/2Ac2dWnwr2SJFtb+s+VyNGc7o+MY/MY=
   matrix:
