@@ -2,6 +2,11 @@
 
 ## Master
 
+* Upgrade default JDK 8 to 8u92
+* Added a guard for cacerts symlink
+
+## v39
+
 * Upgrade default JDK 8 to 8u77
 
 ## v38
