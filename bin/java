@@ -68,7 +68,7 @@ install_java() {
 
 install_cacerts() {
   local jdkDir=$1
-  if [ -f ${jdkDir}/jre/lib/security/cacerts ]; then
+  if [ -f ${jdkDir}/jre/lib/security/cacerts ] && [ -f /etc/ssl/certs/java/cacerts ]; then
     mv ${jdkDir}/jre/lib/security/cacerts ${jdkDir}/jre/lib/security/cacerts.old
     ln -s /etc/ssl/certs/java/cacerts ${jdkDir}/jre/lib/security/cacerts
   fi
