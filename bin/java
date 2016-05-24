@@ -12,7 +12,7 @@ else
   JDK_BASE_URL=${JDK_BASE_URL:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14"}
   JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9-ea-119.tar.gz"}
   JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_92.tar.gz"}
-  JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_95.tar.gz"}
+  JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_101.tar.gz"}
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 fi
 
