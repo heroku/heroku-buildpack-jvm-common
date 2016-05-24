@@ -1,6 +1,10 @@
 # JVM Common Buildpack Changelog
 
-## Master
+## v41
+
+* Upgrade default JDK 7 to 7u101
+
+## v40
 
 * Upgrade default JDK 8 to 8u92
 * Added a guard for cacerts symlink
