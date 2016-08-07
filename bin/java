@@ -64,6 +64,7 @@ install_java() {
   _create_profile_script ${baseDir}
   _create_export_script ${JAVA_HOME} "$(pwd)"
   _install_pgconfig ${JAVA_HOME}
+  _install_default_proc_warn ${baseDir}
 }
 
 install_cacerts() {
@@ -199,7 +200,17 @@ _install_tools() {
   cp $curDir/opt/with_jmap_and_jstack_java $ctxDir/.heroku/with_jmap_and_jstack/bin/java
   chmod +x $ctxDir/.heroku/bin/with_jmap_and_jstack
   chmod +x $ctxDir/.heroku/with_jmap_and_jstack/bin/java
+}
 
+_install_default_proc_warn() {
+  local ctxDir=${1:-BUILD_DIR}
+
+  mkdir -p ${ctxDir}/.profile.d
+  cat << EOF > ${ctxDir}/.profile.d/default-proc-warning.sh
+if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
+  echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
+fi
+EOF
 }
 
 _create_export_script() {
