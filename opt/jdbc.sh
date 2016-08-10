@@ -42,6 +42,8 @@ if [ -n "$DATABASE_URL" ]; then
   set_jdbc_url "$DATABASE_URL"
 elif [ -n "$JAWSDB_URL" ]; then
   set_jdbc_url "$JAWSDB_URL"
+elif [ -n "$JAWSDB_MARIA_URL" ]; then
+  set_jdbc_url "$JAWSDB_MARIA_URL"
 elif [ -n "$CLEARDB_DATABASE_URL" ]; then
   set_jdbc_url "$CLEARDB_DATABASE_URL"
 fi
