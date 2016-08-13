@@ -21,7 +21,7 @@ testDetect_OldMavenPlugin()
 
 testDetect_OldSbtPlugin()
 {
-  touch ${BUILD_DIR}/build.sbt
+  mkdir -p ${BUILD_DIR}/target/universal/stage
 
   detect
 
@@ -40,7 +40,6 @@ testDetect_OldLeinPlugin()
 testDetect_MavenPlugin()
 {
   echo "client=heroku-maven-plugin" > ${BUILD_DIR}/.heroku-deploy
-  touch ${BUILD_DIR}/build.sbt
 
   detect
 
@@ -50,7 +49,6 @@ testDetect_MavenPlugin()
 testDetect_GradlePlugin()
 {
   echo "client=heroku-gradle" > ${BUILD_DIR}/.heroku-deploy
-  mkdir ${BUILD_DIR}/build.sbt
 
   detect
 
@@ -60,7 +58,8 @@ testDetect_GradlePlugin()
 testDetect_GradlePlugin()
 {
   echo "client=heroku-cli-deploy" > ${BUILD_DIR}/.heroku-deploy
-  mkdir ${BUILD_DIR}/pom.xml
+  touch ${BUILD_DIR}/pom.xml
+  mkdir ${BUILD_DIR}/target
 
   detect
 
