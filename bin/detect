@@ -14,7 +14,7 @@ get_client() {
 }
 
 if [ -f $1/.heroku-deploy ]; then
-  echo "$(get_property $1/.heroku-deploy)"
+  echo "$(get_client $1/.heroku-deploy)"
 elif [ -f $1/pom.xml ] && [ -d $1/target ]; then
   echo "heroku-maven-plugin"
 elif [ -d $1/target/universal/stage ]; then
