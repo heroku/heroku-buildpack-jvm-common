@@ -23,14 +23,8 @@ install_java_with_overlay() {
   if [ "$javaVersion" = "stack" ]; then
     status "Using stack JDK"
   else
-    local javaVersion=${2:-$(get_default_java_version)}
-    local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
-    if [[ "${jdkUrl}" == *openjdk* ]]; then
-      status_pending "Installing OpenJDK ${javaVersion}"
-    else
-      status_pending "Installing Custom JDK"
-    fi
-    install_java ${buildDir} ${javaVersion} ${jdkUrl}
+    status_pending "Installing OpenJDK ${javaVersion}"
+    install_java ${buildDir} ${javaVersion}
     jdk_overlay ${buildDir}
     status_done
   fi
@@ -44,7 +38,7 @@ install_java() {
   fi
 
   local javaVersion=${2:-$(get_default_java_version)}
-  local jdkUrl=${3:-$(_get_jdk_download_url "${javaVersion}")}
+  local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
   local jdkDir="${baseDir}"/.jdk
   local jdkTarball="${jdkDir}"/jdk.tar.gz
   local javaExe="${jdkDir}/bin/java"
