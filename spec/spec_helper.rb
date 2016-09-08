@@ -25,9 +25,13 @@ def git_repo
   "https://github.com/heroku/heroku-buildpack-jvm-common.git"
 end
 
+def jvm_common_branch
+  ENV['HATCHET_BUILDPACK_BRANCH'] || 'master'
+end
+
 def add_database(app, heroku)
   Hatchet::RETRIES.times.retry do
-    heroku.post_addon(app.name, 'heroku-postgresql:hobby-dev')
+    heroku.post_addon(app.name, 'heroku-postgresql')
     _, value = heroku.get_config_vars(app.name).body.detect {|key, value| key.match(/HEROKU_POSTGRESQL_[A-Z]+_URL/) }
     heroku.put_config_vars(app.name, 'DATABASE_URL' => value)
   end

@@ -5,7 +5,9 @@ describe "Java" do
   before(:each) do
     set_java_version(app.directory, jdk_version)
     app.setup!
-    app.set_config("JVM_COMMON_BUILDPACK" => "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/master")
+    app.set_config(
+      "JVM_COMMON_BUILDPACK" =>
+      "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}")
   end
 
   ["1.7", "1.8"].each do |version|
