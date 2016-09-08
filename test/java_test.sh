@@ -26,13 +26,6 @@ testDetectJava_default() {
   assertCapturedEquals "1.8"
 }
 
-testDetectJava_cedar() {
-  export STACK="cedar"
-  capture detect_java_version ${BUILD_DIR}
-  assertCapturedEquals "1.6"
-  unset STACK
-}
-
 testDetectJava_invalid() {
   echo "java.runtime.version=asd78" >> ${BUILD_DIR}/system.properties
   capture detect_java_version ${BUILD_DIR}
