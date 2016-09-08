@@ -23,8 +23,13 @@ install_java_with_overlay() {
   if [ "$javaVersion" = "stack" ]; then
     status "Using stack JDK"
   else
-    status_pending "Installing OpenJDK ${javaVersion}"
-    install_java ${buildDir} ${javaVersion}
+    local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
+    if [[ "$jdkUrl" == *openjdk* ]]; then
+      status_pending "Installing OpenJDK ${javaVersion}"
+    else
+      status_pending "Installing custom JDK"
+    fi
+    install_java ${buildDir} ${javaVersion} ${jdkUrl}
     jdk_overlay ${buildDir}
     status_done
   fi
@@ -38,7 +43,7 @@ install_java() {
   fi
 
   local javaVersion=${2:-$(get_default_java_version)}
-  local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
+  local jdkUrl=${3:-$(_get_jdk_download_url "${javaVersion}")}
   local jdkDir="${baseDir}"/.jdk
   local jdkTarball="${jdkDir}"/jdk.tar.gz
   local javaExe="${jdkDir}/bin/java"
@@ -136,11 +141,7 @@ _get_jdk_download_url() {
 }
 
 get_default_java_version() {
-  if [ ${STACK:-""} = "cedar" ]; then
-    echo "1.6"
-  else
-    echo "$DEFAULT_JDK_VERSION"
-  fi
+  echo "$DEFAULT_JDK_VERSION"
 }
 
 detect_java_version() {
