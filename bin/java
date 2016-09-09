@@ -10,7 +10,7 @@ if [ ${STACK:-""} = "cedar" ]; then
 else
   DEFAULT_JDK_VERSION="1.8"
   JDK_BASE_URL=${JDK_BASE_URL:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14"}
-  JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9-ea-119.tar.gz"}
+  JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9-ea-134.tar.gz"}
   JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_102.tar.gz"}
   JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_111.tar.gz"}
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
@@ -130,6 +130,8 @@ _get_jdk_download_url() {
     # tests don't seem to respect the correct bash version.
     local minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
     local jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
+  elif [ "$(expr "${jdkVersion}" : '[6-9]$')" != 0 ]; then
+    local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
   elif [ "$(expr "${jdkVersion}" : '1.[6-9]')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; then
