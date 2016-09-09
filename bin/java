@@ -77,6 +77,9 @@ install_cacerts() {
   if [ -f ${jdkDir}/jre/lib/security/cacerts ] && [ -f /etc/ssl/certs/java/cacerts ]; then
     mv ${jdkDir}/jre/lib/security/cacerts ${jdkDir}/jre/lib/security/cacerts.old
     ln -s /etc/ssl/certs/java/cacerts ${jdkDir}/jre/lib/security/cacerts
+  elif [ -f ${jdkDir}/lib/security/cacerts ] && [ -f /etc/ssl/certs/java/cacerts ]; then
+    mv ${jdkDir}/lib/security/cacerts ${jdkDir}/lib/security/cacerts.old
+    ln -s /etc/ssl/certs/java/cacerts ${jdkDir}/lib/security/cacerts
   fi
 }
 
@@ -105,10 +108,13 @@ Heroku"
 jdk_overlay() {
   baseDir=$1
   shopt -s dotglob
+  cacertPath="lib/security/cacerts"
   if [ -d ${baseDir}/.jdk ] && [ -d ${baseDir}/.jdk-overlay ]; then
-    if [ -f ${baseDir}/.jdk-overlay/jre/lib/security/cacerts ]; then
-      # delete the symlink because a cp will error
-      rm ${baseDir}/.jdk/jre/lib/security/cacerts
+    # delete the symlink because a cp will error
+    if [ -f ${baseDir}/.jdk-overlay/jre/${cacertPath} ] && [ -f ${baseDir}/.jdk/jre/${cacertPath} ]; then
+      rm ${baseDir}/.jdk/jre/${cacertPath}
+    elif [ -f ${baseDir}/.jdk-overlay/${cacertPath} ] && [ -f ${baseDir}/.jdk/${cacertPath} ]; then
+      rm ${baseDir}/.jdk/${cacertPath}
     fi
     cp -r ${baseDir}/.jdk-overlay/* ${baseDir}/.jdk/
   fi
