@@ -25,7 +25,7 @@ describe "Java" do
     end
   end
 
-  ["1.7", "1.8", "9"].each do |version|
+  ["1.7", "1.8"].each do |version|
     context "jdk-overlay on jdk-#{version}" do
       let(:app) { Hatchet::Runner.new("java-overlay-test",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
