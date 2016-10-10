@@ -17,7 +17,11 @@ describe "Java" do
       let(:jdk_version) { version }
       it "should deploy" do
         app.deploy do |app|
-          expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          if jdk_version.start_with?("zulu")
+            expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+          else
+            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          end
           expect(app.output).to include("BUILD SUCCESS")
           expect(successful_body(app)).to eq("Hello from Java!")
         end
@@ -32,7 +36,11 @@ describe "Java" do
       let(:jdk_version) { version }
       it "should deploy" do
         app.deploy do |app|
-          expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          if jdk_version.start_with?("zulu")
+            expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+          else
+            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          end
           expect(app.output).to include("BUILD SUCCESS")
 
           cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts")
@@ -51,7 +59,11 @@ describe "Java" do
       let(:jdk_version) { version }
       it "runs commands" do
         app.deploy do |app|
-          expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          if jdk_version.start_with?("zulu")
+            expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+          else
+            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+          end
 
           sleep 1
           expect(app.run("echo $JAVA_TOOL_OPTIONS")).

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 gem install rspec-retry -v 0.4.0
-gem install heroku_hatchet -v 1.4.1
+#gem install heroku_hatchet -v 1.4.1
 
 hatchet install &&
 HEROKU_APP_LIMIT=9999 \
