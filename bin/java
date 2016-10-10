@@ -255,7 +255,7 @@ _install_pgconfig() {
 }
 
 _get_zulu_version() {
-  local javaVersion=${2}
+  local javaVersion=${1}
   local zuluVersion="$(echo ${javaVersion} | sed -e 's/zulu-//g')"
   if [ "$zuluVersion" = "zulu" ]; then
     echo "$(get_default_zulu_version)"
