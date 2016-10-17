@@ -9,7 +9,11 @@ if [ ${STACK:-""} = "cedar" ]; then
   JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 else
   DEFAULT_JDK_VERSION="1.8"
-  JDK_BASE_URL=${JDK_BASE_URL:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14"}
+  if [ ${STACK:-""} = "cedar-16" ]; then
+    JDK_BASE_URL=${JDK_BASE_URL:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-16"}
+  else
+    JDK_BASE_URL=${JDK_BASE_URL:-"http://lang-jvm.s3.amazonaws.com/jdk/cedar-14"}
+  fi
   JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9-ea-134.tar.gz"}
   JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_102.tar.gz"}
   JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_111.tar.gz"}
