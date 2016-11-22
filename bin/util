@@ -88,3 +88,13 @@ copy_directories() {
     fi
   done
 }
+
+export_whitelisted() {
+  $env_dir=1
+
+  if [ -r $env_dir/BUILD_CONFIG_WHITELIST ]; then
+    for e in $(cat $env_dir/BUILD_CONFIG_WHITELIST); do
+      export "$e=$(cat $env_dir/$e)"
+    done
+  fi
+}
