@@ -4,7 +4,8 @@ branches:
   only:
   - master
 before_install:
-- curl --silent https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz | tar xz -C /tmp/
+- curl --silent https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz
+  | tar xz -C /tmp/
 - git clone https://github.com/heroku/heroku-buildpack-testrunner.git /tmp/testrunner
 - gem install heroku_hatchet -v 1.4.1
 - gem install rspec -v 3.3.0
@@ -20,7 +21,7 @@ env:
   - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm-common.git"
   - HATCHET_APP_LIMIT=2
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
-  - secure: BWfH6W8MSJao9/moIaACdfFOsrbs3cFPl7sK/DHI9GMp5+Lk4cMsAQZgU5g99m4irFbUfaa55QtHzgCDdiV97DKY2gOOTgJsTicLmk2r4sXavlYhen3e5Z2TO+E0WoAJxe9OBWA3Kja/2Ac2dWnwr2SJFtb+s+VyNGc7o+MY/MY=
+  - secure: dQa7D5MDUTzCVLY51T4FklDvNUIuVoTaZIgq0ja+6bRCalTfXG8tmMynCOtyV9SbmCql3HkFInOV60FOfzUubRGCOVadjAKrZYdIgeVnOTbCubeOtWF+fd6QmS7ywybAJoA6n1f1OI5t/pHCvLyumaTMU51huij6f2hoqaev2RA=
   matrix:
   - TEST_CMD="sh etc/hatchet-test.sh"
   - TEST_CMD="/tmp/testrunner/bin/run -c ."
