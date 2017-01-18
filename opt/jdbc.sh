@@ -48,6 +48,15 @@ elif [ -n "$CLEARDB_DATABASE_URL" ]; then
   set_jdbc_url "$CLEARDB_DATABASE_URL"
 fi
 
+if [ -n "$JDBC_DATABASE_URL" ] &&
+   [ -z "$SPRING_DATASOURCE_URL" ] &&
+   [ -z "$SPRING_DATASOURCE_USERNAME" ] &&
+   [ -z "$SPRING_DATASOURCE_PASSWORD" ]; then
+  export SPRING_DATASOURCE_URL="$JDBC_DATABASE_URL"
+  export SPRING_DATASOURCE_USERNAME="$JDBC_DATABASE_USERNAME"
+  export SPRING_DATASOURCE_PASSWORD="$JDBC_DATABASE_PASSWORD"
+fi
+
 for dbUrlVar in $(env | awk -F "=" '{print $1}' | grep "HEROKU_POSTGRESQL_.*_URL"); do
   set_jdbc_url "$(eval echo \$${dbUrlVar})" "$(echo $dbUrlVar | sed -e s/_URL//g)_JDBC"
 done
