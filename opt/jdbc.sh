@@ -48,7 +48,8 @@ elif [ -n "$CLEARDB_DATABASE_URL" ]; then
   set_jdbc_url "$CLEARDB_DATABASE_URL"
 fi
 
-if [ -n "$JDBC_DATABASE_URL" ] &&
+if [ "$DISABLE_SPRING_DATASOURCE_URL" != "true" ] &&
+   [ -n "$JDBC_DATABASE_URL" ] &&
    [ -z "$SPRING_DATASOURCE_URL" ] &&
    [ -z "$SPRING_DATASOURCE_USERNAME" ] &&
    [ -z "$SPRING_DATASOURCE_PASSWORD" ]; then
