@@ -31,9 +31,14 @@ set_jdbc_url() {
           local db_args="?user=${db_user}&password=${db_pass}"
         fi
 
-        eval "export ${env_prefix}_URL=\"${jdbc_protocol}://${db_host_port}/${db_suffix}${db_args}${db_default_args}\""
-        eval "export ${env_prefix}_USERNAME=\"${db_user}\""
-        eval "export ${env_prefix}_PASSWORD=\"${db_pass}\""
+        if [ -n "$db_host_port" ] &&
+             [ -n "$db_suffix" ] &&
+             [ -n "$db_user" ] &&
+             [ -n "$db_pass" ]; then
+          eval "export ${env_prefix}_URL=\"${jdbc_protocol}://${db_host_port}/${db_suffix}${db_args}${db_default_args}\""
+          eval "export ${env_prefix}_USERNAME=\"${db_user}\""
+          eval "export ${env_prefix}_PASSWORD=\"${db_pass}\""
+        fi
       fi
   fi
 }
