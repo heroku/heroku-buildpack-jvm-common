@@ -2,12 +2,12 @@
 
 LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
-DEFAULT_JDK_BASE_URL="http://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"cedar-14"}"
+DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"cedar-14"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
 JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9-ea-134.tar.gz"}
 JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_121.tar.gz"}
 JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_111.tar.gz"}
-JDK_URL_1_6=${JDK_URL_1_6:-"http://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
+JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 
 install_java_with_overlay() {
   local buildDir=${1}
@@ -47,7 +47,7 @@ install_java() {
     rm -rf "${jdkDir}"
     mkdir -p "${jdkDir}"
     validate_jdk_url ${jdkUrl} ${jdkVersion}
-    curl --retry 3 --silent --location ${jdkUrl} --output ${jdkTarball}
+    curl --retry 3 --silent --show-error --location ${jdkUrl} --output ${jdkTarball}
     tar pxzf ${jdkTarball} -C "${jdkDir}"
     rm ${jdkTarball}
     install_cacerts ${jdkDir}
@@ -92,7 +92,7 @@ https://devcenter.heroku.com/articles/java-support#supported-java-versions
 You can also remove the system.properties from your repo to install
 the default ${DEFAULT_JDK_VERSION} version.
 If you continue to have trouble, you can open a support ticket here:
-http://help.heroku.com
+https://help.heroku.com
 
 Thanks,
 Heroku"
