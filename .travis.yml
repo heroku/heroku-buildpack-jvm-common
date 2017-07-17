@@ -1,25 +1,15 @@
 language: bash
+dist: trusty
 sudo: true
 branches:
   only:
   - master
-before_install:
-- curl --silent https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz
-  | tar xz -C /tmp/
-- git clone https://github.com/heroku/heroku-buildpack-testrunner.git /tmp/testrunner
-- gem install heroku_hatchet -v 1.4.1
-- gem install rspec -v 3.3.0
-- gem install rspec-retry -v 0.4.2
-- sh etc/hatchet_travis_setup.sh
+before_install: bash etc/ci-setup.sh
 install: true
-script: eval $TEST_CMD
+script: eval "$TEST_CMD"
 after_script: heroku keys:remove $USER@`hostname`
 env:
   global:
-  - HATCHET_RETRIES=3
-  - HATCHET_DEPLOY_STRATEGY=git
-  - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm-common.git"
-  - HATCHET_APP_LIMIT=2
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   matrix:
   - TEST_CMD="sh etc/hatchet-test.sh"
