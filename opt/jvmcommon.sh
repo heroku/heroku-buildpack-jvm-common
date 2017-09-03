@@ -5,7 +5,7 @@ export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
 limit=$(ulimit -u)
 case $limit in
 256)   # 1X Dyno
-  default_java_mem_opts="-Xmx350m -Xss512k"
+  default_java_mem_opts="-Xmx300m -Xss512k"
   ;;
 512)   # 2X Dyno
   default_java_mem_opts="-Xmx768m"
@@ -17,7 +17,7 @@ case $limit in
   default_java_mem_opts="-Xmx12g"
   ;;
 *)
-  default_java_mem_opts="-Xmx350m -Xss512k"
+  default_java_mem_opts="-Xmx300m -Xss512k"
   ;;
 esac
 
