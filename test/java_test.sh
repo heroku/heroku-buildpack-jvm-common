@@ -145,6 +145,6 @@ test_invalidJdkURL() {
 }
 
 test_customJdk() {
-  capture install_java ${BUILD_DIR} "1.8.0_51"
+  capture install_java ${BUILD_DIR} "1.8.0_121"
   assertCapturedSuccess
 }
