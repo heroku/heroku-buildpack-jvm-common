@@ -67,11 +67,11 @@ describe "Java" do
 
           sleep 1
           expect(app.run("echo $JAVA_TOOL_OPTIONS")).
-              not_to include(%q{-Xmx350m -Xss512k})
+              not_to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
           expect(app.run("echo $JAVA_OPTS")).
-              to include(%q{-Xmx350m -Xss512k})
+              to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
           expect(app.run("jce")).
