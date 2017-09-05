@@ -148,3 +148,13 @@ test_customJdk() {
   capture install_java ${BUILD_DIR} "1.8.0_121"
   assertCapturedSuccess
 }
+
+test_zuluJdk() {
+  capture install_java ${BUILD_DIR} "zulu-1.8.0_144"
+  assertCapturedSuccess
+}
+
+test_openJdk() {
+  capture install_java ${BUILD_DIR} "openjdk-1.8.0_144"
+  assertCapturedSuccess
+}

@@ -18,7 +18,11 @@ install_java_with_overlay() {
   else
     local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
     if [[ "$jdkUrl" == *openjdk* ]]; then
-      status_pending "Installing OpenJDK ${javaVersion}"
+      if [[ "$javaVersion" == *openjdk* ]]; then
+        status_pending "Installing OpenJDK $(_get_openjdk_version ${javaVersion})"
+      else
+        status_pending "Installing OpenJDK ${javaVersion}"
+      fi
     elif [[ "$jdkUrl" == *zulu* ]]; then
       status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${javaVersion})"
     else
@@ -136,6 +140,8 @@ _get_jdk_download_url() {
     local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^zulu-')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
+  elif [ "$(expr "${jdkVersion}" : '^openjdk-')" != 0 ]; then
+    local jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
   fi
 
   echo "${jdkUrl}"
@@ -237,11 +243,9 @@ _install_pgconfig() {
 }
 
 _get_zulu_version() {
-  local javaVersion=${1}
-  local zuluVersion="$(echo ${javaVersion} | sed -e 's/zulu-//g')"
-  if [ "$zuluVersion" = "zulu" ]; then
-    echo "$(get_default_zulu_version)"
-  else
-    echo "$zuluVersion"
-  fi
+  echo "$(echo ${1} | sed -e 's/zulu-//g')"
+}
+
+_get_openjdk_version() {
+  echo "$(echo ${1} | sed -e 's/openjdk-//g')"
 }
