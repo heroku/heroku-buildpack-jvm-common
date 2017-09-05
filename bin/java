@@ -129,19 +129,19 @@ is_java_version_change() {
 _get_jdk_download_url() {
   local jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
 
-  if [ "$(expr "${jdkVersion}" : '1.[6-9]$')" != 0 ]; then
+  if [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
     local minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
     local jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
-  elif [ "$(expr "${jdkVersion}" : '[6-9]$')" != 0 ]; then
+  elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
     local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
-  elif [ "$(expr "${jdkVersion}" : '1.[6-9]')" != 0 ]; then
+  elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^zulu-')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^openjdk-')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
+    local jdkUrl="${JDK_BASE_URL}/$(echo "$jdkVersion" | sed -e 's/k-/k/g').tar.gz"
   fi
 
   echo "${jdkUrl}"
