@@ -8,7 +8,7 @@ case $limit in
   default_java_mem_opts="-Xmx300m -Xss512k"
   ;;
 512)   # 2X Dyno
-  default_java_mem_opts="-Xmx768m"
+  default_java_mem_opts="-Xmx686m"
   ;;
 16384) # IX Dyno
   default_java_mem_opts="-Xmx2g"
