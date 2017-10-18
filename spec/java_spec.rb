@@ -10,7 +10,7 @@ describe "Java" do
       "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}")
   end
 
-  ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "9+181", "zulu-1.8.0_144"].each do |version|
+  ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "zulu-1.8.0_144"].each do |version|
     context "a simple java app on jdk-#{version}" do
       let(:app) { Hatchet::Runner.new("java-servlets-sample",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
