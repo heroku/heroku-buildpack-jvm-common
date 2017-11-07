@@ -10,7 +10,7 @@ describe "Java" do
       "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}")
   end
 
-  ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "zulu-1.8.0_144"].each do |version|
+  ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "zulu-1.8.0_144", "openjdk-1.8.0_151", "openjdk-9.0.1"].each do |version|
     context "a simple java app on jdk-#{version}" do
       let(:app) { Hatchet::Runner.new("java-servlets-sample",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
@@ -19,8 +19,10 @@ describe "Java" do
         app.deploy do |app|
           if jdk_version.start_with?("zulu")
             expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+          elsif jdk_version.start_with?("openjdk")
+            expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
           else
-            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+            expect(app.output).to include("Installing JDK #{jdk_version}")
           end
           expect(app.output).to include("BUILD SUCCESS")
           expect(successful_body(app)).to eq("Hello from Java!")
@@ -29,7 +31,7 @@ describe "Java" do
     end
   end
 
-  ["1.7", "1.8", "zulu-1.8.0_144"].each do |version|
+  ["1.7", "1.8", "openjdk-1.8.0_144", "zulu-1.8.0_144", "openjdk-9.0.1"].each do |version|
     context "jdk-overlay on jdk-#{version}" do
       let(:app) { Hatchet::Runner.new("java-overlay-test",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
@@ -38,8 +40,10 @@ describe "Java" do
         app.deploy do |app|
           if jdk_version.start_with?("zulu")
             expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+          elsif jdk_version.start_with?("openjdk")
+            expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
           else
-            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+            expect(app.output).to include("Installing JDK #{jdk_version}")
           end
           expect(app.output).to include("BUILD SUCCESS")
 
@@ -61,8 +65,10 @@ describe "Java" do
         app.deploy do |app|
           if jdk_version.start_with?("zulu")
             expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+          elsif jdk_version.start_with?("openjdk")
+            expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
           else
-            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
+            expect(app.output).to include("Installing JDK #{jdk_version}")
           end
 
           sleep 1
@@ -88,9 +94,11 @@ describe "Java" do
               to include("Successfully invoked HTTPS service.").
               and match(%r{"X-Forwarded-Proto(col)?": "https"})
 
-          sleep 1
-          expect(app.run("pgssl")).
-              to match(%r{sslmode: require})
+          if !jdk_version.match(/^9/) and !jdk_version.match(/^openjdk-9/) and !jdk_version.match(/^zulu-9/)
+            sleep 1
+            expect(app.run("pgssl")).
+                to match(%r{sslmode: require})
+          end
         end
       end
     end

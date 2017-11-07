@@ -1,6 +1,8 @@
 
 set -e
 
+# We're going to run the Java buildpack in order to fully test this buildapck
+# The individual specs will set the JVM_COMMON_BUILDPACK accordingly
 BUILDPACK_NAME="heroku-buildpack-java"
 
 if [ "$CIRCLECI" == "true" ] && [ -n "$CI_PULL_REQUEST" ]; then
