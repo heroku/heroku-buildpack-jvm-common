@@ -41,13 +41,13 @@ testDetectJava_custom() {
 test_defaultJdkUrl() {
   capture _get_jdk_download_url "${DEFAULT_JDK_VERSION}"
   assertCapturedSuccess
-  assertTrue "The URL should be for the default JDK, ${DEFAULT_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_8}' ]"
+  assertTrue "The URL should be for the default JDK, ${DEFAULT_JDK_VERSION}." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_8}' ]"
 }
 
 test_nonDefaultJdkUrl() {
   capture _get_jdk_download_url "1.7"
   assertCapturedSuccess
-  assertTrue "The URL should be for the latest JDK, 1.7." "[ $(cat ${STD_OUT}) = '${JDK_URL_7}' ]"
+  assertTrue "The URL should be for the latest JDK, 1.7." "[ $(cat ${STD_OUT}) = '${JDK_URL_1_7}' ]"
 }
 
 test_installJavaWithoutDirectoryFails() {

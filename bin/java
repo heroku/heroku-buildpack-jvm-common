@@ -4,10 +4,10 @@ LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-16"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
-JDK_URL_9=${JDK_URL_9:-"$JDK_BASE_URL/zulu-9.0.0.tar.gz"}
-JDK_URL_8=${JDK_URL_8:-"$JDK_BASE_URL/zulu-1.8.0_144.tar.gz"}
-JDK_URL_7=${JDK_URL_7:-"$JDK_BASE_URL/zulu-1.7.0_154.tar.gz"}
-JDK_URL_6=${JDK_URL_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
+JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/zulu-9.0.0.tar.gz"}
+JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/zulu-1.8.0_144.tar.gz"}
+JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/zulu-1.7.0_154.tar.gz"}
+JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 
 install_java_with_overlay() {
   local buildDir=${1}
@@ -120,10 +120,10 @@ _get_jdk_download_url() {
   local jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
 
   if [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
-    local minorJdkVersion=\$JDK_URL_$(expr "${jdkVersion}" : '1.\([6-9]\)')
-    local jdkUrl=$(eval echo \$JDK_URL_${minorJdkVersion})
+    local minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
+    local jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
   elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
-    local jdkUrl=$(eval echo \$JDK_URL_${jdkVersion})
+    local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
     local zuluUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
     if [ "$(_test_status ${zuluUrl})" != 200 ]; then
