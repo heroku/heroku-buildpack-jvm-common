@@ -158,3 +158,20 @@ test_openJdk() {
   capture install_java ${BUILD_DIR} "openjdk-1.8.0_144"
   assertCapturedSuccess
 }
+
+test_get_jdk_download_url() {
+  capture _get_jdk_download_url "9"
+  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/zulu-9.0.0.tar.gz"
+
+  capture _get_jdk_download_url "9.0.0"
+  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/zulu-9.0.0.tar.gz"
+
+  capture _get_jdk_download_url "9+181"
+  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/zulu-9.0.0.tar.gz"
+
+  capture _get_jdk_download_url "1.7.0_101"
+  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk1.7.0_101.tar.gz"
+
+  capture _get_jdk_download_url "1.7.0_141"
+  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/zulu-1.7.0_141.tar.gz"
+}
