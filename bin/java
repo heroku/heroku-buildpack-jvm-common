@@ -76,7 +76,7 @@ install_cacerts() {
 validate_jdk_url() {
   local jdkUrl=${1}
   local jdkVersion={2}
-  if [ "$(_test_status ${jdkUrl})" != "200" ]; then
+  if [ "$(_get_url_status ${jdkUrl})" != "200" ]; then
     echo ""
     error_return "Unsupported Java version: $javaVersion
 
@@ -126,7 +126,7 @@ _get_jdk_download_url() {
     local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
     local zuluUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
-    if [ "$(_test_status ${zuluUrl})" != 200 ]; then
+    if [ "$(_get_url_status ${zuluUrl})" != 200 ]; then
       local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
     else
       local jdkUrl="${zuluUrl}"
@@ -135,7 +135,7 @@ _get_jdk_download_url() {
     local jdkUrl="${JDK_BASE_URL}/zulu-9.0.0.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; then
     local zuluUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
-    if [ "$(_test_status ${zuluUrl})" != 200 ]; then
+    if [ "$(_get_url_status ${zuluUrl})" != 200 ]; then
       local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
     else
       local jdkUrl="${zuluUrl}"
@@ -254,6 +254,6 @@ _get_openjdk_version() {
   echo "$(echo ${1} | sed -e 's/openjdk-//g')"
 }
 
-_test_status() {
+_get_url_status() {
   curl --retry 3 --silent --head -w %{http_code} -L "${1}" -o /dev/null
 }
