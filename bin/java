@@ -13,12 +13,16 @@ install_java_with_overlay() {
   local buildDir=${1}
   local javaVersion=$(detect_java_version ${buildDir})
   local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
+  _jvm_mcount "version.${javaVersion}"
   if [[ "$javaVersion" == *openjdk* ]]; then
     status_pending "Installing OpenJDK $(_get_openjdk_version ${javaVersion})"
+    _jvm_mcount "vendor.openjdk"
   elif [[ "$javaVersion" == *zulu* ]]; then
     status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${javaVersion})"
+    _jvm_mcount "vendor.zulu"
   else
     status_pending "Installing JDK ${javaVersion}"
+    _jvm_mcount "vendor.default"
   fi
   install_java ${buildDir} ${javaVersion} ${jdkUrl}
   jdk_overlay ${buildDir}
@@ -38,6 +42,7 @@ install_java() {
   local jdkTarball="${jdkDir}"/jdk.tar.gz
   local javaExe="${jdkDir}/bin/java"
   mkdir -p "${jdkDir}"
+
   if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then
     rm -rf "${jdkDir}"
     mkdir -p "${jdkDir}"
@@ -256,4 +261,8 @@ _get_openjdk_version() {
 
 _get_url_status() {
   curl --retry 3 --silent --head -w %{http_code} -L "${1}" -o /dev/null
+}
+
+_jvm_mcount() {
+  if type -t mcount > /dev/null; then mcount "jvm.${1}"; fi
 }
