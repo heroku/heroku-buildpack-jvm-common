@@ -4,9 +4,9 @@ LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-16"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
-JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/zulu-9.0.0.tar.gz"}
-JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/zulu-1.8.0_144.tar.gz"}
-JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/zulu-1.7.0_154.tar.gz"}
+JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9-181.tar.gz"}
+JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_144.tar.gz"}
+JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_151.tar.gz"}
 JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 
 install_java_with_overlay() {
@@ -130,26 +130,14 @@ _get_jdk_download_url() {
   elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
     local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
-    local zuluUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
-    if [ "$(_get_url_status ${zuluUrl})" != 200 ]; then
-      local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
-    else
-      local jdkUrl="${zuluUrl}"
-    fi
+    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then
-    local jdkUrl="${JDK_BASE_URL}/zulu-9.0.0.tar.gz"
+    local jdkUrl="${JDK_BASE_URL}/openjdk9-181.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; then
-    local zuluUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
-    if [ "$(_get_url_status ${zuluUrl})" != 200 ]; then
-      local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
-    else
-      local jdkUrl="${zuluUrl}"
-    fi
+    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^zulu-')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^openjdk-')" != 0 ]; then
-    # remove the - after "openjdk". Because of legacy, the openjdk tarballs
-    # don't have a hyphen, but we wanted them in the system.properties value
     local jdkUrl="${JDK_BASE_URL}/$(echo "$jdkVersion" | sed -e 's/k-/k/g').tar.gz"
   fi
 
