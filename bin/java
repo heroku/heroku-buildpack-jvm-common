@@ -65,6 +65,7 @@ install_java() {
   _create_export_script ${JAVA_HOME} "$(pwd)"
   _install_pgconfig ${JAVA_HOME}
   _install_default_proc_warn ${baseDir}
+  _install_metrics_agent ${baseDir}
 }
 
 install_cacerts() {
@@ -253,4 +254,19 @@ _get_url_status() {
 
 _jvm_mcount() {
   if type -t mcount > /dev/null; then mcount "jvm.${1}"; fi
+}
+
+_install_metrics_agent() {
+  local ctxDir=${1:-BUILD_DIR}
+  local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
+  local binDir="${ctxDir}/.heroku/bin/"
+  local agent_jar="${binDir}/heroku-metrics-agent.jar"
+
+  mkdir -p ${binDir}
+  curl --retry 3 -s -o ${agent_jar} \
+      -L ${HEROKU_METRICS_JAR_URL:-"http://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.1/heroku-java-metrics-agent-3.1.jar"}
+  [ ! -f ${agent_jar} ] && warning_inline "failed to install metrics agent!"
+
+  mkdir -p ${ctxDir}/.profile.d
+  cp $curDir/opt/heroku-metrics-daemon.sh $ctxDir/.profile.d/
 }

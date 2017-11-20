@@ -130,6 +130,14 @@ test_install_tools() {
   assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
 }
 
+test_install_metrics_agent() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture _install_metrics_agent ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "The heroku-metrics-agent.jar file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/heroku-metrics-agent.jar ]"
+  assertTrue "The heroku-metrics-daemon script should have been created." "[ -f ${BUILD_DIR}/.profile.d/heroku-metrics-daemon.sh ]"
+}
+
 test_create_export_script() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture _create_export_script "/path/to/jdk" ${BUILD_DIR}
