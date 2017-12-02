@@ -183,3 +183,10 @@ test_get_jdk_download_url() {
   capture _get_jdk_download_url "1.7.0_141"
   assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk1.7.0_141.tar.gz"
 }
+
+test_fail_install_metrics_agent() {
+  export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
+  capture _install_metrics_agent ${BUILD_DIR} ${BUILD_DIR}
+  assertContains "failed to install metrics agent!" "$(cat ${STD_OUT})"
+  unset HEROKU_METRICS_JAR_URL
+}
