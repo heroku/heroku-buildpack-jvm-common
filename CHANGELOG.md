@@ -1,5 +1,10 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Install heroku-java-metrics-agent with all apps
+* Convert .profile.d script to work with Dash and Bash
+
 ## v41
 
 * Upgrade default JDK 7 to 7u101
