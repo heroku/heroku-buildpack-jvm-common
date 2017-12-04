@@ -32,7 +32,7 @@ describe "Java" do
   end
 
   ["1.7", "1.8", "openjdk-1.8.0_144", "zulu-1.8.0_144", "openjdk-9.0.1"].each do |version|
-    context "jdk-overlay on jdk-#{version}" do
+    context "jdk-overlay on #{version}" do
       let(:app) { Hatchet::Runner.new("java-overlay-test",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
@@ -48,7 +48,7 @@ describe "Java" do
           expect(app.output).to include("BUILD SUCCESS")
 
           cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts")
-          sleep 1
+          sleep 5
           cacerts_md5_overlay = app.run("md5sum .jdk-overlay/jre/lib/security/cacerts")
 
           expect(cacerts_md5_jdk.split(" ")[0]).
