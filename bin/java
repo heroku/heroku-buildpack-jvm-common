@@ -81,7 +81,7 @@ install_cacerts() {
 
 validate_jdk_url() {
   local jdkUrl=${1}
-  local jdkVersion={2}
+  local jdkVersion=${2}
   if [ "$(_get_url_status ${jdkUrl})" != "200" ]; then
     echo ""
     error_return "Unsupported Java version: $jdkVersion
