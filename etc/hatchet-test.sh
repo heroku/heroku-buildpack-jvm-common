@@ -41,4 +41,4 @@ export HATCHET_APP_LIMIT=20
 export HATCHET_DEPLOY_STRATEGY=git
 export HATCHET_BUILDPACK_BASE="https://github.com/heroku/$BUILDPACK_NAME"
 
-bundle exec parallel_rspec -n 5 $@
+bundle exec parallel_rspec -n 5 "$@"
