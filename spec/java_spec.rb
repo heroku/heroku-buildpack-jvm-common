@@ -80,9 +80,14 @@ describe "Java" do
               to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
-          expect(app.run("jce")).
-              to include(%q{Encrypting, "Test"}).
-              and include(%q{Decrypted: Test})
+          if jdk_version.start_with?("zulu-1")
+            expect(app.run("jce")).
+                to include(%q{Encrypting, "Test"}).
+                and include(%q{Decrypted: Test})
+          else
+            expect(app.run("jce")).
+                to include("Illegal key size or default parameters")
+          end
 
           sleep 1
           expect(app.run("netpatch")).
