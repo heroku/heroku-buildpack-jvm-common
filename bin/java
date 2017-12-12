@@ -21,7 +21,7 @@ install_java_with_overlay() {
     status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${javaVersion})"
     _jvm_mcount "vendor.zulu"
   else
-    status_pending "Installing OpenJDK ${javaVersion}"
+    status_pending "Installing JDK ${javaVersion}"
     _jvm_mcount "vendor.default"
   fi
   install_java ${buildDir} ${javaVersion} ${jdkUrl}

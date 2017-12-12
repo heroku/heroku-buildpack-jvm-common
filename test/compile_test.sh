@@ -11,7 +11,7 @@ testCompileWithoutSystemProperties() {
 
   assertCapturedSuccess
 
-  assertCaptured "Installing OpenJDK 1.8"
+  assertCaptured "Installing JDK 1.8"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
@@ -23,7 +23,7 @@ testCompileWith_1_8_0_144() {
 
   assertCapturedSuccess
 
-  assertCaptured "Installing OpenJDK 1.8.0_144"
+  assertCaptured "Installing JDK 1.8.0_144"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
@@ -59,7 +59,7 @@ testCompileWith_9_0_1() {
 
   assertCapturedSuccess
 
-  assertCaptured "Installing OpenJDK 9.0.1"
+  assertCaptured "Installing JDK 9.0.1"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
