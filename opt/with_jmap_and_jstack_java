@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export JAVA_HOME=${HEROKU_JAVA_HOME}
-eval "$JAVA_HOME/bin/java $@ &"
+eval "$JAVA_HOME/bin/java $* &"
 pid=$!
 
 trap "kill -9 $pid; exit" SIGKILL
