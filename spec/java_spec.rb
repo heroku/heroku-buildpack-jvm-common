@@ -22,7 +22,7 @@ describe "Java" do
           elsif jdk_version.start_with?("openjdk")
             expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
           else
-            expect(app.output).to include("Installing JDK #{jdk_version}")
+            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
           end
           expect(app.output).to include("BUILD SUCCESS")
           expect(successful_body(app)).to eq("Hello from Java!")
@@ -43,7 +43,7 @@ describe "Java" do
           elsif jdk_version.start_with?("openjdk")
             expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
           else
-            expect(app.output).to include("Installing JDK #{jdk_version}")
+            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
           end
           expect(app.output).to include("BUILD SUCCESS")
 
@@ -68,7 +68,7 @@ describe "Java" do
           elsif jdk_version.start_with?("openjdk")
             expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
           else
-            expect(app.output).to include("Installing JDK #{jdk_version}")
+            expect(app.output).to include("Installing OpenJDK #{jdk_version}")
           end
 
           sleep 1
