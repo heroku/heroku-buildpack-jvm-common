@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export JAVA_HOME="$HOME/.jdk"
+export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
 export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
 limit=$(ulimit -u)
 case $limit in
