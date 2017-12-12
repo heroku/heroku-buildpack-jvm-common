@@ -149,7 +149,7 @@ test_create_export_script() {
 
 test_invalidJdkURL() {
   capture install_java ${BUILD_DIR} "1.8.0_11"
-  assertContains "Unsupported Java version: 1.8.0_11" "$(cat ${STD_OUT})"
+  assertContains "Did not find error message for invalid JDK version" "Unsupported Java version: 1.8.0_11" "$(cat ${STD_OUT})"
 }
 
 test_customJdk() {
