@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 [ "$CI" != "true" ] && echo "Not running on CI!" && exit 1
 
 curl --silent https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz | tar xz -C /tmp/
@@ -25,4 +27,6 @@ sudo apt-get -qq update
 sudo apt-get install software-properties-common -y
 curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 --max-time 30 https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
-yes | heroku keys:add
+if [ -n "$HEROKU_API_KEY" ]; then
+  yes | heroku keys:add
+fi
