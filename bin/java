@@ -11,20 +11,20 @@ JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_2
 
 install_java_with_overlay() {
   local buildDir=${1}
-  local javaVersion=$(detect_java_version ${buildDir})
-  local jdkUrl=$(_get_jdk_download_url "${javaVersion}")
-  _jvm_mcount "version.${javaVersion}"
-  if [[ "$javaVersion" == *openjdk* ]]; then
-    status_pending "Installing OpenJDK $(_get_openjdk_version ${javaVersion})"
+  local jdkVersion=$(detect_java_version ${buildDir})
+  local jdkUrl=$(_get_jdk_download_url "${jdkVersion}")
+  _jvm_mcount "version.${jdkVersion}"
+  if [[ "$jdkVersion" == *openjdk* ]]; then
+    status_pending "Installing OpenJDK $(_get_openjdk_version ${jdkVersion})"
     _jvm_mcount "vendor.openjdk"
-  elif [[ "$javaVersion" == *zulu* ]]; then
-    status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${javaVersion})"
+  elif [[ "$jdkVersion" == *zulu* ]]; then
+    status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${jdkVersion})"
     _jvm_mcount "vendor.zulu"
   else
-    status_pending "Installing JDK ${javaVersion}"
+    status_pending "Installing JDK ${jdkVersion}"
     _jvm_mcount "vendor.default"
   fi
-  install_java ${buildDir} ${javaVersion} ${jdkUrl}
+  install_java ${buildDir} ${jdkVersion} ${jdkUrl}
   jdk_overlay ${buildDir}
   status_done
 }
@@ -36,14 +36,14 @@ install_java() {
     return 1
   fi
 
-  local javaVersion=${2:-$(get_default_java_version)}
-  local jdkUrl=${3:-$(_get_jdk_download_url "${javaVersion}")}
+  local jdkVersion=${2:-$(get_default_java_version)}
+  local jdkUrl=${3:-$(_get_jdk_download_url "${jdkVersion}")}
   local jdkDir="${baseDir}"/.jdk
   local jdkTarball="${jdkDir}"/jdk.tar.gz
   local javaExe="${jdkDir}/bin/java"
   mkdir -p "${jdkDir}"
 
-  if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${javaVersion}"; then
+  if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${jdkVersion}"; then
     rm -rf "${jdkDir}"
     mkdir -p "${jdkDir}"
     validate_jdk_url ${jdkUrl} ${jdkVersion}
@@ -51,7 +51,7 @@ install_java() {
     tar pxzf ${jdkTarball} -C "${jdkDir}"
     rm ${jdkTarball}
     install_cacerts ${jdkDir}
-    echo "${javaVersion}" > "${jdkDir}/version"
+    echo "${jdkVersion}" > "${jdkDir}/version"
     if [ ! -f "${javaExe}" ]; then
       error_return "Unable to retrieve the JDK."
       return 1
@@ -84,7 +84,7 @@ validate_jdk_url() {
   local jdkVersion={2}
   if [ "$(_get_url_status ${jdkUrl})" != "200" ]; then
     echo ""
-    error_return "Unsupported Java version: $javaVersion
+    error_return "Unsupported Java version: $jdkVersion
 
 Please check your system.properties file to ensure the java.runtime.version
 is among the list of supported version on the Dev Center:
@@ -117,16 +117,16 @@ jdk_overlay() {
 
 is_java_version_change() {
   jdkDir=$1
-  javaVersion=${2:-${DEFAULT_JDK_VERSION}}
+  jdkVersion=${2:-${DEFAULT_JDK_VERSION}}
   if [ ! -d "${jdkDir}" ]; then echo "Invalid JDK directory."; return 1; fi
-  test -f "${jdkDir}/version" && [ "$(cat ${jdkDir}/version)" != "${javaVersion}" ]
+  test -f "${jdkDir}/version" && [ "$(cat ${jdkDir}/version)" != "${jdkVersion}" ]
 }
 
 _get_jdk_download_url() {
   local jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
 
   if [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
-    local minorJdkVersion=\$JDK_URL_1_$(expr "${jdkVersion}" : '1.\([6-9]\)')
+    local minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
     local jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
   elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
     local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
