@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO set -eu
-
 # don't do anything if we don't have a metrics url.
 if [[ -z "${HEROKU_METRICS_URL:-}" ]] || [[ "${DYNO}" = run\.* ]]; then
     return 0
