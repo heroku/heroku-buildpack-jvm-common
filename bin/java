@@ -227,6 +227,7 @@ _create_export_script() {
     cat << EOF > ${ctxDir}/export
 export JAVA_HOME=$javaHome
 export PATH=\$JAVA_HOME/bin:\$PATH
+export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\$LD_LIBRARY_PATH"
 EOF
   fi
 }
