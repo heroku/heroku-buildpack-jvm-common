@@ -2,6 +2,7 @@
 
 ## master
 
+* Added LD_LIBRARY_PATH to export and profile.d scripts 
 * Install heroku-java-metrics-agent with all apps
 * Convert .profile.d script to work with Dash and Bash
 
