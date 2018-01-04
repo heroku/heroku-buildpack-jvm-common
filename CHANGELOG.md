@@ -1,6 +1,6 @@
 # JVM Common Buildpack Changelog
 
-## master
+## v60
 
 * Added LD_LIBRARY_PATH to export and profile.d scripts 
 * Install heroku-java-metrics-agent with all apps
