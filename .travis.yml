@@ -12,5 +12,5 @@ env:
   global:
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   matrix:
-  - TEST_CMD="sh etc/hatchet-test.sh spec/"
+  - TEST_CMD="sh etc/hatchet.sh spec/"
   - TEST_CMD="/tmp/testrunner/bin/run -c ."
