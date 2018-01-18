@@ -1,5 +1,12 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Upgrade heroku-java-metrics-agent to 3.7
+* Upgrade default JDK 8 to 8u161
+* Upgrade default JDK 9 to 9.0.4
+* Improved tests and CI support
+
 ## v60
 
 * Added LD_LIBRARY_PATH to export and profile.d scripts 
