@@ -168,6 +168,9 @@ test_openJdk() {
 }
 
 test_get_jdk_download_url() {
+  capture _get_jdk_download_url "10"
+  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk10-ea-44.tar.gz"
+
   capture _get_jdk_download_url "9"
   assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk9.0.4.tar.gz"
 
