@@ -75,3 +75,15 @@ testCompileWith_zulu_9_0_0() {
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
+
+testCompileWith_10() {
+  echo "java.runtime.version=10" > ${BUILD_DIR}/system.properties
+
+  compile
+
+  assertCapturedSuccess
+
+  assertCaptured "Installing JDK 10"
+  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
+}
