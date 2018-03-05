@@ -1,6 +1,10 @@
 # JVM Common Buildpack Changelog
 
-## master
+## v62
+
+* Added JDK 10 early access
+
+## v61
 
 * Upgrade heroku-java-metrics-agent to 3.7
 * Upgrade default JDK 8 to 8u161
