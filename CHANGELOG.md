@@ -1,6 +1,6 @@
 # JVM Common Buildpack Changelog
 
-## master
+## v63
 
 * Added JDK 10 GA
 
