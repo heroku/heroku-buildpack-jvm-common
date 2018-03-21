@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Added JDK 10 GA
+
 ## v62
 
 * Added JDK 10 early access
