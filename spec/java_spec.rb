@@ -99,7 +99,7 @@ describe "Java" do
           sleep 1
           expect(app.run("https")).
               to include("Successfully invoked HTTPS service.").
-              and match(%r{"X-Forwarded-Proto(col)?": "https"})
+              and match(%r{"X-Forwarded-Proto(col)?":\s?"https"})
 
           if !jdk_version.match(/^9/) and
             !jdk_version.match(/^openjdk-9/) and
