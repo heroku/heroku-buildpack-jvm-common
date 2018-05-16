@@ -1,0 +1,16 @@
+[buildpack]
+name = "JVM"
+
+  [publish.Ignore]
+  files = [
+    "etc/",
+    "spec/",
+    "test/",
+    ".gitignore",
+    ".github/",
+    ".travis.yml",
+    "circle.yml",
+    "hatchet.json",
+    "Gemfile",
+    "Gemfile.lock"
+  ]
