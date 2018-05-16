@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## v64
+
+* Upgrade default JDKs to 8u171 and 10.0.1
+
 ## v63
 
 * Added JDK 10 GA
@@ -17,7 +21,7 @@
 
 ## v60
 
-* Added LD_LIBRARY_PATH to export and profile.d scripts 
+* Added LD_LIBRARY_PATH to export and profile.d scripts
 * Install heroku-java-metrics-agent with all apps
 * Convert .profile.d script to work with Dash and Bash
 
