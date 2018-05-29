@@ -135,7 +135,7 @@ test_install_metrics_agent() {
   capture _install_metrics_agent ${BUILD_DIR}
   assertCapturedSuccess
   assertTrue "The heroku-metrics-agent.jar file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/heroku-metrics-agent.jar ]"
-  assertTrue "The heroku-metrics-daemon script should have been created." "[ -f ${BUILD_DIR}/.profile.d/heroku-metrics-daemon.sh ]"
+  assertTrue "The heroku-jvm-metrics script should have been created." "[ -f ${BUILD_DIR}/.profile.d/heroku-jvm-metrics.sh ]"
 }
 
 test_create_export_script() {
