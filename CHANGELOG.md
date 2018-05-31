@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## v65
+
+* Renamed the files used to attach Heroku JVM Metrics
+
 ## v64
 
 * Upgrade default JDKs to 8u171 and 10.0.1
