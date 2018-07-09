@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## v66
+
+* Upgrade default JDK 7 to 7u181
+
 ## v65
 
 * Renamed the files used to attach Heroku JVM Metrics
