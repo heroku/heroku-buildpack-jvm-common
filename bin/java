@@ -4,6 +4,7 @@ LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-16"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
+JDK_URL_1_11=${JDK_URL_1_11:-"$JDK_BASE_URL/openjdk11-ea-24.tar.gz"}
 JDK_URL_1_10=${JDK_URL_1_10:-"$JDK_BASE_URL/openjdk10.0.1.tar.gz"}
 JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9.0.4.tar.gz"}
 JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_171.tar.gz"}
@@ -128,7 +129,9 @@ _get_jdk_download_url() {
 
   if [ "${jdkVersion}" = "10" ]; then
     local jdkUrl="${JDK_URL_1_10}"
-  elif [ "$(expr "${jdkVersion}" : '^10')" != 0 ]; then
+  elif [ "${jdkVersion}" = "11" ]; then
+    local jdkUrl="${JDK_URL_1_11}"
+  elif [ "$(expr "${jdkVersion}" : '^1[0-1]')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
     local minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
