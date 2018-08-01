@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Added support for JDK 11 EA
+
 ## v66
 
 * Upgrade default JDK 7 to 7u181
