@@ -87,3 +87,15 @@ testCompileWith_10() {
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
+
+test_skip_install_if_java_exists() {
+  mkdir -p ${BUILD_DIR}/.jdk/bin
+  touch ${BUILD_DIR}/.jdk/bin/java
+
+  compile
+
+  assertCapturedSuccess
+  assertCaptured "Using provided JDK"
+  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+  assertTrue "Java files should not have been installed." "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/amd64/server/libjvm.so ]"
+}

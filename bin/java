@@ -13,22 +13,27 @@ JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_2
 
 install_java_with_overlay() {
   local buildDir=${1}
-  local jdkVersion=$(detect_java_version ${buildDir})
-  local jdkUrl=$(_get_jdk_download_url "${jdkVersion}")
-  _jvm_mcount "version.${jdkVersion}"
-  if [[ "$jdkVersion" == *openjdk* ]]; then
-    status_pending "Installing OpenJDK $(_get_openjdk_version ${jdkVersion})"
-    _jvm_mcount "vendor.openjdk"
-  elif [[ "$jdkVersion" == *zulu* ]]; then
-    status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${jdkVersion})"
-    _jvm_mcount "vendor.zulu"
+  if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
+    local jdkVersion=$(detect_java_version ${buildDir})
+    local jdkUrl=$(_get_jdk_download_url "${jdkVersion}")
+    _jvm_mcount "version.${jdkVersion}"
+    if [[ "$jdkVersion" == *openjdk* ]]; then
+      status_pending "Installing OpenJDK $(_get_openjdk_version ${jdkVersion})"
+      _jvm_mcount "vendor.openjdk"
+    elif [[ "$jdkVersion" == *zulu* ]]; then
+      status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${jdkVersion})"
+      _jvm_mcount "vendor.zulu"
+    else
+      status_pending "Installing JDK ${jdkVersion}"
+      _jvm_mcount "vendor.default"
+    fi
+    install_java ${buildDir} ${jdkVersion} ${jdkUrl}
+    jdk_overlay ${buildDir}
+    status_done
   else
-    status_pending "Installing JDK ${jdkVersion}"
-    _jvm_mcount "vendor.default"
+    status "Using provided JDK"
+    _jvm_mcount "vendor.provided"
   fi
-  install_java ${buildDir} ${jdkVersion} ${jdkUrl}
-  jdk_overlay ${buildDir}
-  status_done
 }
 
 install_java() {

@@ -3,6 +3,7 @@
 ## master
 
 * Added support for JDK 11 EA
+* Improve logging when using a provided JDK
 
 ## v66
 
