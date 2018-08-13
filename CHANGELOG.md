@@ -2,6 +2,10 @@
 
 ## master
 
+* Upgrade default JDK to 8u181
+
+## v67
+
 * Added support for JDK 11 EA
 * Improve logging when using a provided JDK
 
