@@ -19,7 +19,7 @@ elif [ -f $1/pom.xml ] && [ -d $1/target ]; then
   echo "heroku-maven-plugin"
 elif [ -d $1/target/universal/stage ]; then
   echo "sbt-heroku"
-elif [ -f $1/project.clj ]; then
+elif [ -f $1/project.clj ] && [ -d $1/target ]; then
   echo "lein-heroku"
 else
   echo "JVM Common"

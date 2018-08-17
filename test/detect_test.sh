@@ -31,6 +31,7 @@ testDetect_OldSbtPlugin()
 testDetect_OldLeinPlugin()
 {
   touch ${BUILD_DIR}/project.clj
+  mkdir ${BUILD_DIR}/target
 
   detect
 
