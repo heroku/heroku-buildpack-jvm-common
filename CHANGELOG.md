@@ -2,6 +2,11 @@
 
 ## master
 
+* Improve detection for clojure
+* Add support for JDBC pgbouncer pool connection
+
+## v68
+
 * Upgrade default JDK to 8u181
 
 ## v67
