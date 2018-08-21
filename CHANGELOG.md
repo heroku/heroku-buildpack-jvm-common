@@ -2,6 +2,10 @@
 
 ## master
 
+* Upgrade default JDK 10 to 10.0.2
+
+## v69
+
 * Improve detection for clojure
 * Add support for JDBC pgbouncer pool connection
 
