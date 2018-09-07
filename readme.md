@@ -32,3 +32,5 @@ Then it may be used by itself, or with another buildpack using [multiple buildpa
 # License
 
 Licensed under the MIT License. See LICENSE file.
+
+test
