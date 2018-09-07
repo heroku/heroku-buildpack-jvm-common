@@ -2,6 +2,10 @@
 
 ## master
 
+* Upgrade default JDK 11 to RC build 28
+
+## 70
+
 * Upgrade default JDK 10 to 10.0.2
 
 ## v69
