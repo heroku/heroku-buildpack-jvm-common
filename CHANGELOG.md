@@ -1,10 +1,10 @@
 # JVM Common Buildpack Changelog
 
-## master
+## v71
 
 * Upgrade default JDK 11 to RC build 28
 
-## 70
+## v70
 
 * Upgrade default JDK 10 to 10.0.2
 
