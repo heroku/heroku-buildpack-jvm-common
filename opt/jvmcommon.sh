@@ -4,8 +4,10 @@ export JAVA_HOME="$HOME/.jdk"
 export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
 export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
 
-if cat "$HOME/.jdk/release" | grep -q '^JAVA_VERSION="1[0-1]'; then
-  default_java_mem_opts="-XX:+UseContainerSupport"
+if cat "$HOME/.jdk/release" | grep -q '^JAVA_VERSION="1[0-1]' && \
+  [[ -n "$HEROKU_PRIVATE_IP" ]] # Private Space
+then
+  default_java_mem_opts="" # -XX:+UseContainerSupport is on by default
 else
   limit=$(ulimit -u)
   case $limit in
