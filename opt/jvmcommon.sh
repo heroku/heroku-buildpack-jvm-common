@@ -15,7 +15,7 @@ calculate_java_memory_opts() {
     echo "$opts -Xms1g -Xmx12g"
     ;;
   *) # Free, Hobby, 1X: memory.limit_in_bytes=536870912
-    echo "$opts -Xmx300m -Xss512 -XX:CICompilerCount=2"
+    echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
     ;;
   esac
 }
