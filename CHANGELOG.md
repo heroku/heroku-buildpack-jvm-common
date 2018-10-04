@@ -1,5 +1,10 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Changed default JDK 11 to GA
+* Improved default JVM options in JAVA_OPTS and JAVA_TOOL_OPTIONS
+
 ## v71
 
 * Upgrade default JDK 11 to RC build 28
