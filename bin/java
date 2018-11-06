@@ -278,7 +278,7 @@ _install_metrics_agent() {
 
   mkdir -p ${binDir}
   curl --retry 3 -s -o ${agent_jar} \
-      -L ${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.7/heroku-java-metrics-agent-3.7.jar"}
+      -L ${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.8/heroku-java-metrics-agent-3.8.jar"}
   [ ! -f ${agent_jar} ] && warning_inline "failed to install metrics agent!"
 
   mkdir -p ${ctxDir}/.profile.d

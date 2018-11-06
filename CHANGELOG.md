@@ -2,6 +2,10 @@
 
 ## master
 
+* Update metrics agent to version 3.8
+
+## v72
+
 * Changed default JDK 11 to GA
 * Improved default JVM options in JAVA_OPTS and JAVA_TOOL_OPTIONS
 
