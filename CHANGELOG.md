@@ -1,8 +1,8 @@
 # JVM Common Buildpack Changelog
 
-## master
+## 73
 
-* Update metrics agent to version 3.8
+* Update metrics agent to version 3.9
 
 ## v72
 
