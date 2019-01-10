@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Changed default JDK 7 to 7u201
+
 ## 73
 
 * Update metrics agent to version 3.9
