@@ -3,6 +3,7 @@
 ## master
 
 * Cache last JVM version installed
+* Changed default JDK 7 to 7u201
 
 ## 73
 
