@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Cache last JVM version installed
+
 ## 73
 
 * Update metrics agent to version 3.9
