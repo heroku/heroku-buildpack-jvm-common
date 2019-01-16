@@ -4,6 +4,7 @@
 
 * Changed default JDK 7 to 7u201
 * Changed default JDK 11 to 11.0.2
+* Changed default JDK 8 to 8u201
 
 ## 73
 
