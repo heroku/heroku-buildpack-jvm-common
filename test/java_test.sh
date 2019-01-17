@@ -198,11 +198,3 @@ test_fail_install_metrics_agent() {
   assertContains "failed to install metrics agent!" "$(cat ${STD_OUT})"
   unset HEROKU_METRICS_JAR_URL
 }
-
-test_cache_java_version() {
-  cacheDir="$(mktemp -d)"
-  capture _cache_version "1.8.0_192" ${cacheDir}
-  assertCapturedSuccess
-  assertTrue "An system.properties file should be created." "[ -f ${cacheDir}/system.properties ]"
-  assertContains "1.8.0_192" "$(cat ${cacheDir}/system.properties)"
-}
