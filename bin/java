@@ -13,7 +13,6 @@ JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_2
 
 install_java_with_overlay() {
   local buildDir=${1}
-  local cacheDir=${2:-$(mktemp -d)}
   if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
     local jdkVersion=$(detect_java_version ${buildDir})
     local jdkUrl=$(_get_jdk_download_url "${jdkVersion}")
@@ -30,7 +29,6 @@ install_java_with_overlay() {
     fi
     install_java ${buildDir} ${jdkVersion} ${jdkUrl}
     jdk_overlay ${buildDir}
-    _cache_version ${jdkVersion} ${cacheDir}
     status_done
   else
     status "Using provided JDK"
@@ -40,7 +38,6 @@ install_java_with_overlay() {
 
 install_java() {
   local baseDir=$1
-
   if [ ! -d "${baseDir}" ]; then
     error_return "Invalid directory to install java."
     return 1
@@ -286,11 +283,4 @@ _install_metrics_agent() {
 
   mkdir -p ${ctxDir}/.profile.d
   cp $curDir/opt/heroku-jvm-metrics.sh $ctxDir/.profile.d/
-}
-
-_cache_version() {
-  local jdkVersion="${1}"
-  local cacheDir="${2}"
-
-  echo "java.runtime.version=${jdkVersion}" > ${cacheDir}/system.properties
 }
