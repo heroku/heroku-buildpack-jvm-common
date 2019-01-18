@@ -32,6 +32,30 @@ describe "Java" do
     end
   end
 
+  context "a system.properties file with no java.runtime-version" do
+    let(:app) { Hatchet::Runner.new("java-servlets-sample",
+      :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
+    let(:jdk_version) { "8" }
+    it "should deploy" do
+      File.delete('system.properties')
+      File.open('system.properties', 'w') do |f|
+        f.puts "maven.version=3.3.9"
+      end
+      `git add system.properties && git commit -m "unsetting jdk version"`
+      app.deploy do |app|
+        if jdk_version.start_with?("zulu")
+          expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+        elsif jdk_version.start_with?("openjdk")
+          expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+        else
+          expect(app.output).to include("Installing JDK #{jdk_version}")
+        end
+        expect(app.output).to include("BUILD SUCCESS")
+        expect(successful_body(app)).to eq("Hello from Java!")
+      end
+    end
+  end
+
   ["1.7", "1.8", "openjdk-1.8.0_162", "10", "11",
     "zulu-1.8.0_144", "openjdk-9.0.4"].each do |version|
     context "jdk-overlay on #{version}" do
