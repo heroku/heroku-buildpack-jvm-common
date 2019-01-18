@@ -7,21 +7,25 @@ This is the official [Heroku buildpack](https://devcenter.heroku.com/articles/bu
 This is how the buildpack is used from another buildpack:
 
 ```bash
-# download the buildpack
-JVM_COMMON_BUILDPACK=${JVM_COMMON_BUILDPACK:-https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/jvm-common.tgz}
+JVM_BUILDPACK_URL="https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/jvm.tgz"
 mkdir -p /tmp/jvm-common
-curl --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C /tmp/jvm-common --strip-components=1
-. /tmp/jvm-common/bin/util
-. /tmp/jvm-common/bin/java
+curl --silent --location $JVM_BUILDPACK_URL | tar xzm -C /tmp/jvm-common --strip-components=1
+source /tmp/jvm-common/bin/util
+source /tmp/jvm-common/bin/java
 
-# install JDK
-javaVersion=$(detect_java_version ${BUILD_DIR})
-install_java ${BUILD_DIR} ${javaVersion}
+install_java_with_overlay ${BUILD_DIR}
 ```
 
 # Standalone Usage
 
-You may use this buildpack to install the JVM into your slug by running:
+You may install the JVM buildpack into your app by running:
+
+
+```
+$ heroku buildpacks:set heroku/jvm
+```
+
+If you want to use the edge version (the code in this repo), run this instead:
 
 ```
 $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-jvm-common.git
