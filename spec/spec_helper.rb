@@ -50,9 +50,14 @@ def create_file_with_size_in(size, dir)
 end
 
 def set_java_version(d, v)
+  write_sys_props d, "java.runtime.version=#{v}"
+end
+
+def write_sys_props(d, props)
   Dir.chdir(d) do
+    `rm -f system.properties`
     File.open('system.properties', 'w') do |f|
-      f.puts "java.runtime.version=#{v}"
+      f.puts props
     end
     `git add system.properties && git commit -m "setting jdk version"`
   end

@@ -32,24 +32,14 @@ describe "Java" do
     end
   end
 
-  context "a system.properties file with no java.runtime-version" do
+  context "a system.properties file with no java.runtime.version" do
     let(:app) { Hatchet::Runner.new("java-servlets-sample",
       :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
-    let(:jdk_version) { "8" }
+    let(:jdk_version) { "1.8" }
     it "should deploy" do
-      File.delete('system.properties')
-      File.open('system.properties', 'w') do |f|
-        f.puts "maven.version=3.3.9"
-      end
-      `git add system.properties && git commit -m "unsetting jdk version"`
+      write_sys_props app.directory, "maven.version=3.3.9"
       app.deploy do |app|
-        if jdk_version.start_with?("zulu")
-          expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
-        elsif jdk_version.start_with?("openjdk")
-          expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
-        else
-          expect(app.output).to include("Installing JDK #{jdk_version}")
-        end
+        expect(app.output).to include("Installing JDK #{jdk_version}")
         expect(app.output).to include("BUILD SUCCESS")
         expect(successful_body(app)).to eq("Hello from Java!")
       end
