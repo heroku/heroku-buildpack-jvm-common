@@ -292,6 +292,10 @@ _install_metrics_agent() {
   cp $curDir/opt/heroku-jvm-metrics.sh $ctxDir/.profile.d/
 }
 
+# Caching the JVM version will allow us to pin previous used defaults when
+# upgrading the default JDK. That is, if an app has JDK 8 installed now
+# because it's the default, it will continue to have JDK 8 installed when the
+# default is upgraded to JDK 11.
 _cache_version() {
   local jdkVersion="${1}"
   local cacheDir="${2}"
