@@ -45,7 +45,7 @@ install_java() {
     return 1
   fi
 
-  local jdkVersion=${2:-$(get_default_java_version)}
+  local jdkVersion="${2:-$DEFAULT_JDK_VERSION}"
   local jdkUrl=${3:-$(_get_jdk_download_url "${jdkVersion}")}
   local jdkDir="${baseDir}"/.jdk
   local jdkTarball="${jdkDir}"/jdk.tar.gz
@@ -160,10 +160,6 @@ _get_jdk_download_url() {
   echo "${jdkUrl}"
 }
 
-get_default_java_version() {
-  echo "$DEFAULT_JDK_VERSION"
-}
-
 detect_java_version() {
   baseDir=${1:-"No Dir"}
   if [ "${baseDir}" = "No Dir" ] || [ ! -d "${baseDir}" ] ; then
@@ -172,13 +168,13 @@ detect_java_version() {
   fi
   if [ -f ${baseDir}/system.properties ]; then
     detectedVersion="$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")"
-    if [ -z "$detectedVersion" ]; then
-      echo "$DEFAULT_JDK_VERSION"
+    if [ -n "$detectedVersion" ]; then
+      echo "$detectedVersion"
     else
-      echo "$(get_default_java_version)"
+      echo "$DEFAULT_JDK_VERSION"
     fi
   else
-    echo "$(get_default_java_version)"
+    echo "$DEFAULT_JDK_VERSION"
   fi
 }
 
