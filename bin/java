@@ -30,7 +30,7 @@ install_java_with_overlay() {
     fi
     install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
     jdk_overlay "${buildDir}"
-    _cache_version "${jdkVersion:-default}" "${cacheDir}"
+    _cache_version "${jdkVersion}" "${cacheDir}"
     status_done
   else
     status "Using provided JDK"
