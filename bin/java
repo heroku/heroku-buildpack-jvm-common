@@ -172,7 +172,12 @@ detect_java_version() {
     return 1
   fi
   if [ -f ${baseDir}/system.properties ]; then
-    echo "$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")"
+    detectedVersion="$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")"
+    if [ -z "$detectedVersion" ]; then
+      echo "$DEFAULT_JDK_VERSION"
+    else
+      echo "$(get_default_java_version)"
+    fi
   else
     echo "$(get_default_java_version)"
   fi
