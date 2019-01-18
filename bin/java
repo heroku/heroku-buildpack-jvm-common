@@ -40,7 +40,6 @@ install_java_with_overlay() {
 
 install_java() {
   local baseDir=$1
-
   if [ ! -d "${baseDir}" ]; then
     error_return "Invalid directory to install java."
     return 1
