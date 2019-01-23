@@ -12,7 +12,8 @@ JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_201.tar.gz"}
 JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
 
 install_java_with_overlay() {
-  local buildDir=${1}
+  local buildDir="${1}"
+  local cacheDir="${2:-$(mktemp -d)}"
   if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
     local jdkVersion=$(detect_java_version ${buildDir})
     local jdkUrl=$(_get_jdk_download_url "${jdkVersion}")
@@ -27,8 +28,9 @@ install_java_with_overlay() {
       status_pending "Installing JDK ${jdkVersion}"
       _jvm_mcount "vendor.default"
     fi
-    install_java ${buildDir} ${jdkVersion} ${jdkUrl}
-    jdk_overlay ${buildDir}
+    install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
+    jdk_overlay "${buildDir}"
+    _cache_version "${jdkVersion}" "${cacheDir}"
     status_done
   else
     status "Using provided JDK"
@@ -43,7 +45,7 @@ install_java() {
     return 1
   fi
 
-  local jdkVersion=${2:-$(get_default_java_version)}
+  local jdkVersion="${2:-$DEFAULT_JDK_VERSION}"
   local jdkUrl=${3:-$(_get_jdk_download_url "${jdkVersion}")}
   local jdkDir="${baseDir}"/.jdk
   local jdkTarball="${jdkDir}"/jdk.tar.gz
@@ -158,10 +160,6 @@ _get_jdk_download_url() {
   echo "${jdkUrl}"
 }
 
-get_default_java_version() {
-  echo "$DEFAULT_JDK_VERSION"
-}
-
 detect_java_version() {
   baseDir=${1:-"No Dir"}
   if [ "${baseDir}" = "No Dir" ] || [ ! -d "${baseDir}" ] ; then
@@ -169,9 +167,14 @@ detect_java_version() {
     return 1
   fi
   if [ -f ${baseDir}/system.properties ]; then
-    echo "$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")"
+    detectedVersion="$(get_app_system_value ${baseDir}/system.properties "java.runtime.version")"
+    if [ -n "$detectedVersion" ]; then
+      echo "$detectedVersion"
+    else
+      echo "$DEFAULT_JDK_VERSION"
+    fi
   else
-    echo "$(get_default_java_version)"
+    echo "$DEFAULT_JDK_VERSION"
   fi
 }
 
@@ -283,4 +286,15 @@ _install_metrics_agent() {
 
   mkdir -p ${ctxDir}/.profile.d
   cp $curDir/opt/heroku-jvm-metrics.sh $ctxDir/.profile.d/
+}
+
+# Caching the JVM version will allow us to pin previous used defaults when
+# upgrading the default JDK. That is, if an app has JDK 8 installed now
+# because it's the default, it will continue to have JDK 8 installed when the
+# default is upgraded to JDK 11.
+_cache_version() {
+  local jdkVersion="${1}"
+  local cacheDir="${2}"
+
+  echo "java.runtime.version=${jdkVersion}" > "${cacheDir}/system.properties"
 }

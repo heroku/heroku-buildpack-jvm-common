@@ -38,6 +38,12 @@ testDetectJava_custom() {
   assertCapturedEquals "1.7"
 }
 
+testDetectJava_default() {
+  echo "maven.version=3.3.9" >> ${BUILD_DIR}/system.properties
+  capture detect_java_version ${BUILD_DIR}
+  assertCapturedEquals "1.8"
+}
+
 test_defaultJdkUrl() {
   capture _get_jdk_download_url "${DEFAULT_JDK_VERSION}"
   assertCapturedSuccess
