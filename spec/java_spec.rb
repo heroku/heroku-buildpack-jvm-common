@@ -72,7 +72,9 @@ describe "Java" do
         end
       end
     end
+  end
 
+  ["1.8", "10", "11"].each do |version|
     context "korvan on jdk-#{version}" do
       let(:app) { Hatchet::Runner.new("korvan",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
