@@ -2,6 +2,10 @@
 
 ## master
 
+* Update heroku-java-metrics-agent to 3.11
+
+## v80
+
 * Changed default JDK 7 to 7u201
 * Changed default JDK 11 to 11.0.2
 * Changed default JDK 8 to 8u201
