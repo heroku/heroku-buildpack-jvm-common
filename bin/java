@@ -299,5 +299,7 @@ _cache_version() {
   local jdkVersion="${1}"
   local cacheDir="${2}"
 
-  echo "java.runtime.version=${jdkVersion}" > "${cacheDir}/system.properties"
+  if [ -d "${cacheDir}" ]; then
+    echo "java.runtime.version=${jdkVersion}" > "${cacheDir}/system.properties"
+  fi
 }

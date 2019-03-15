@@ -204,3 +204,10 @@ test_fail_install_metrics_agent() {
   assertContains "failed to install metrics agent!" "$(cat ${STD_OUT})"
   unset HEROKU_METRICS_JAR_URL
 }
+
+test_skip_version_cache() {
+  assertTrue "Fake dir should not exist." "[ ! -d fake_dir ]"
+  capture _cache_version "1.8" "fake_dir"
+  assertCapturedSuccess
+  assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
+}
