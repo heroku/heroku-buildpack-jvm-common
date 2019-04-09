@@ -26,3 +26,13 @@ testMySqlEnvVar() {
                  "$JDBC_DATABASE_URL"
     unset JDBC_DATABASE_URL
 }
+
+testInDynoPostgres() {
+    export CI="true"
+    set_jdbc_url "postgres://foo:bar@ec2-0-0-0-0:5432/abc123"
+    assertEquals "Wrong JDBC_DATABASE_URL" \
+                 "jdbc:postgresql://ec2-0-0-0-0:5432/abc123?user=foo&password=bar" \
+                 "$JDBC_DATABASE_URL"
+    unset JDBC_DATABASE_URL
+    unset CI
+}
