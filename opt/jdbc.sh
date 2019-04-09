@@ -8,7 +8,12 @@ set_jdbc_url() {
       local db_protocol=$(expr "$db_url" : "\(.\+\)://")
       if [ "$db_protocol" = "postgres" ]; then
         local jdbc_protocol="jdbc:postgresql"
-        local db_default_args="&sslmode=require"
+
+        if [ "${CI:-false}" != "true" ]; then
+          local db_default_args="&sslmode=require"
+        else
+          local db_default_args=""
+        fi
       elif [ "$db_protocol" = "mysql" ]; then
         local jdbc_protocol="jdbc:mysql"
       fi
