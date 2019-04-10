@@ -2,6 +2,14 @@
 
 ## master
 
+* Prevent pgconfig jar from installing in CI
+
+## v83
+
+* Disable postgres sslmode when running in CI
+
+## v82
+
 * Update heroku-java-metrics-agent to 3.11
 
 ## v80

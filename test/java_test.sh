@@ -62,6 +62,7 @@ test_installJavaWithoutDirectoryFails() {
 }
 
 test_installDefaultJava() {
+  unset CI
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture install_java ${BUILD_DIR}
   assertCapturedSuccess
@@ -76,6 +77,15 @@ test_installDefaultJava() {
   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
   assertTrue "A pgconfig.jar should exist in the JDK" "[ -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
+}
+
+test_installJavaCI() {
+  export CI="true"
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture install_java ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "A pgconfig.jar should exist in the JDK" "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
+  unset CI
 }
 
 test_installJavaWithVersion() {
