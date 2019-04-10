@@ -255,7 +255,7 @@ _install_pgconfig() {
   local javaHome=${1:-JAVA_HOME}
   local extDir="${javaHome}/jre/lib/ext"
 
-  if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}"  ]; then
+  if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}"  ] && [ "${CI:-}" != "true" ]; then
     curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o ${extDir}/pgconfig.jar
   fi
 }
