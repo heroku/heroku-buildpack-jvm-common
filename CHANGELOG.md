@@ -1,7 +1,8 @@
 # JVM Common Buildpack Changelog
 
-## master
+## v84
 
+* Update default JDK 7, 8, 11, and 12
 * Prevent pgconfig jar from installing in CI
 
 ## v83
