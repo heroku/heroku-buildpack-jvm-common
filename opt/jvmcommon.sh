@@ -21,8 +21,13 @@ calculate_java_memory_opts() {
 }
 
 export JAVA_HOME="$HOME/.jdk"
-export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
 export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
+
+if [[ -d "$JAVA_HOME/jre/lib/amd64/server" ]]; then
+  export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
+elif [[ -d "$JAVA_HOME/lib/server" ]]; then
+  export LD_LIBRARY_PATH="$JAVA_HOME/lib/server:$LD_LIBRARY_PATH"
+fi
 
 if cat "$HOME/.jdk/release" | grep -q '^JAVA_VERSION="1[0-1]'; then
   default_java_mem_opts="$(calculate_java_memory_opts "-XX:+UseContainerSupport")"
