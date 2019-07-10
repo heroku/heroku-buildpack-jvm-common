@@ -2,3 +2,4 @@
 spec/fixtures/
 spec/fixtures/repos/*
 .DS_Store
+jvm-common.tar.xz
