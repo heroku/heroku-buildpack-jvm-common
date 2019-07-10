@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
-# This script uploads the JVM common to S3.
+# This script uploads the JVM common to S3. This script uses the `stoml` tool to
+# parse a TOML file in bash. You can get it here:
+# https://github.com/freshautomations/stoml.
 #
 # You should define two environment variable for the S3 upload to work:
 #   - S3_ACCESS_KEY
@@ -27,10 +29,15 @@ archive_name="jvm-common.tar.xz"
 echo "---> Creating the archive $archive_name"
 
 jvm_common_dir=$(mktemp --tmpdir=/tmp --directory jvm-common-XXXX)
-cp -R ./bin ./opt ./CHANGELOG.md ./LICENSE ./buildpack.toml ./README.md \
-  ./version.properties $jvm_common_dir
+ignore_files=$(./tools/stoml ./buildpack.toml publish.Ignore.files)
+exclude_opts="--exclude=tools"
+for f in $(echo  $ignore_files); do
+  exclude_opts="${exclude_opts} --exclude=$f"
+done
+# We use rsync instead of cp to copy files excluding some other files
+rsync --recursive --perms --times --group --owner ${exclude_opts} ./* $jvm_common_dir
 if [[ $? -ne 0 ]]; then
-  echo "Fail to copy the files in the temporary directory ($jvm_common_dir)" >&2
+  echo "Fail to copy the files to the temporary directory ($jvm_common_dir)" >&2
   exit -1
 fi
 
@@ -43,7 +50,7 @@ fi
 echo "---> Archive created"
 
 which s3cmd > /dev/null || echo "s3cmd is not available in your PATH" >&2 || echo "Archive not uploaded to S3" >&2 || exit -1
-s3_bucket="/jvm-common-buildpack/${stack}/"
+s3_bucket="/jvm-common-buildpack/"
 s3cmd_cmd="s3cmd --access_key=$S3_ACCESS_KEY --secret_key=$S3_SECRET_KEY"
 if [[ -z "$S3_ACCESS_KEY" ]] || [[ -z "$S3_SECRET_KEY" ]]; then
   s3cmd_cmd="s3cmd --config ${HOME}/.s3cfg"
