@@ -2,7 +2,7 @@
 
 LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
-DEFAULT_JDK_BASE_URL="https://jvm-common-buildpack.s3.eu-central-1.amazonaws.com/${STACK:-"scalingo"}"
+DEFAULT_JDK_BASE_URL="https://java-binaries.scalingo.com/jdk/${STACK:-"scalingo"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
 JDK_URL_12=${JDK_URL_12:-"$JDK_BASE_URL/openjdk12.0.1.tar.gz"}
 JDK_URL_11=${JDK_URL_11:-"$JDK_BASE_URL/openjdk11.0.3.tar.gz"}
@@ -10,7 +10,7 @@ JDK_URL_10=${JDK_URL_10:-"$JDK_BASE_URL/openjdk10.0.2.tar.gz"}
 JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9.0.4.tar.gz"}
 JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_212.tar.gz"}
 JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_222.tar.gz"}
-JDK_URL_1_6=${JDK_URL_1_6:-"https://lang-jvm.s3.amazonaws.com/jdk/openjdk1.6.0_27.tar.gz"}
+JDK_URL_1_6=${JDK_URL_1_6:-"https://java-binaries.scalingo.com/jdk/openjdk1.6.0_27.tar.gz"}
 
 install_java_with_overlay() {
   local buildDir="${1}"
