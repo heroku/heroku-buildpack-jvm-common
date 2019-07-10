@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-export PATH=$HOME/.heroku/with_jstack/bin:$PATH
+export PATH=$HOME/.scalingo/with_jstack/bin:$PATH
 
-export HEROKU_JAVA_HOME=${JAVA_HOME}
+export SCALINGO_JAVA_HOME=${JAVA_HOME}
 unset JAVA_HOME
 
 eval "$@"

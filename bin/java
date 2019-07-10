@@ -2,7 +2,7 @@
 
 LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
-DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-16"}"
+DEFAULT_JDK_BASE_URL="https://jvm-common-buildpack.s3.eu-central-1.amazonaws.com/${STACK:-"scalingo"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
 JDK_URL_12=${JDK_URL_12:-"$JDK_BASE_URL/openjdk12.0.1.tar.gz"}
 JDK_URL_11=${JDK_URL_11:-"$JDK_BASE_URL/openjdk11.0.3.tar.gz"}
@@ -97,15 +97,14 @@ validate_jdk_url() {
     error_return "Unsupported Java version: $jdkVersion
 
 Please check your system.properties file to ensure the java.runtime.version
-is among the list of supported version on the Dev Center:
-https://devcenter.heroku.com/articles/java-support#supported-java-versions
+is among the list of supported version on the documentation:
+https://doc.scalingo.com/languages/java/start#versions
 You can also remove the system.properties from your repo to install
 the default ${DEFAULT_JDK_VERSION} version.
-If you continue to have trouble, you can open a support ticket here:
-https://help.heroku.com
+If you continue to have trouble, you can open a support ticket.
 
 Thanks,
-Heroku"
+Scalingo"
     return 1
   fi
 }
@@ -207,24 +206,24 @@ _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
   local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
 
-  mkdir -p $ctxDir/.heroku/bin
-  mkdir -p $ctxDir/.heroku/with_jmap/bin
-  cp $curDir/opt/with_jmap $ctxDir/.heroku/bin/with_jmap
-  cp $curDir/opt/with_jmap_java $ctxDir/.heroku/with_jmap/bin/java
-  chmod +x $ctxDir/.heroku/bin/with_jmap
-  chmod +x $ctxDir/.heroku/with_jmap/bin/java
+  mkdir -p $ctxDir/.scalingo/bin
+  mkdir -p $ctxDir/.scalingo/with_jmap/bin
+  cp $curDir/opt/with_jmap $ctxDir/.scalingo/bin/with_jmap
+  cp $curDir/opt/with_jmap_java $ctxDir/.scalingo/with_jmap/bin/java
+  chmod +x $ctxDir/.scalingo/bin/with_jmap
+  chmod +x $ctxDir/.scalingo/with_jmap/bin/java
 
-  mkdir -p $ctxDir/.heroku/with_jstack/bin
-  cp $curDir/opt/with_jstack $ctxDir/.heroku/bin/with_jstack
-  cp $curDir/opt/with_jstack_java $ctxDir/.heroku/with_jstack/bin/java
-  chmod +x $ctxDir/.heroku/bin/with_jstack
-  chmod +x $ctxDir/.heroku/with_jstack/bin/java
+  mkdir -p $ctxDir/.scalingo/with_jstack/bin
+  cp $curDir/opt/with_jstack $ctxDir/.scalingo/bin/with_jstack
+  cp $curDir/opt/with_jstack_java $ctxDir/.scalingo/with_jstack/bin/java
+  chmod +x $ctxDir/.scalingo/bin/with_jstack
+  chmod +x $ctxDir/.scalingo/with_jstack/bin/java
 
-  mkdir -p $ctxDir/.heroku/with_jmap_and_jstack/bin
-  cp $curDir/opt/with_jmap_and_jstack $ctxDir/.heroku/bin/with_jmap_and_jstack
-  cp $curDir/opt/with_jmap_and_jstack_java $ctxDir/.heroku/with_jmap_and_jstack/bin/java
-  chmod +x $ctxDir/.heroku/bin/with_jmap_and_jstack
-  chmod +x $ctxDir/.heroku/with_jmap_and_jstack/bin/java
+  mkdir -p $ctxDir/.scalingo/with_jmap_and_jstack/bin
+  cp $curDir/opt/with_jmap_and_jstack $ctxDir/.scalingo/bin/with_jmap_and_jstack
+  cp $curDir/opt/with_jmap_and_jstack_java $ctxDir/.scalingo/with_jmap_and_jstack/bin/java
+  chmod +x $ctxDir/.scalingo/bin/with_jmap_and_jstack
+  chmod +x $ctxDir/.scalingo/with_jmap_and_jstack/bin/java
 }
 
 _install_default_proc_warn() {
@@ -233,7 +232,7 @@ _install_default_proc_warn() {
   mkdir -p ${ctxDir}/.profile.d
   cat << EOF > ${ctxDir}/.profile.d/default-proc-warning.sh
 if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
-  echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
+  echo "Create a Procfile to customize the command used to run this process: https://doc.scalingo.com/platform/app/procfile"
 fi
 EOF
 }
@@ -279,7 +278,7 @@ _jvm_mcount() {
 _install_metrics_agent() {
   local ctxDir=${1:-BUILD_DIR}
   local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
-  local binDir="${ctxDir}/.heroku/bin/"
+  local binDir="${ctxDir}/.scalingo/bin/"
   local agent_jar="${binDir}/heroku-metrics-agent.jar"
 
   mkdir -p ${binDir}

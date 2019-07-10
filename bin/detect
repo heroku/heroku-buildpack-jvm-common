@@ -13,14 +13,14 @@ get_client() {
   fi
 }
 
-if [ -f $1/.heroku-deploy ]; then
-  echo "$(get_client $1/.heroku-deploy)"
+if [ -f $1/.scalingo-deploy ]; then
+  echo "$(get_client $1/.scalingo-deploy)"
 elif [ -f $1/pom.xml ] && [ -d $1/target ]; then
-  echo "heroku-maven-plugin"
+  echo "scalingo-maven-plugin"
 elif [ -d $1/target/universal/stage ]; then
-  echo "sbt-heroku"
+  echo "sbt-scalingo"
 elif [ -f $1/project.clj ] && [ -d $1/target ]; then
-  echo "lein-heroku"
+  echo "lein-scalingo"
 else
   echo "JVM Common"
 fi

@@ -21,7 +21,7 @@ calculate_java_memory_opts() {
 }
 
 export JAVA_HOME="$HOME/.jdk"
-export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
+export PATH="$HOME/.scalingo/bin:$JAVA_HOME/bin:$PATH"
 
 if [[ -d "$JAVA_HOME/jre/lib/amd64/server" ]]; then
   export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"

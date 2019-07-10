@@ -16,7 +16,7 @@ testDetect_OldMavenPlugin()
 
   detect
 
-  assertAppDetected "heroku-maven-plugin"
+  assertAppDetected "scalingo-maven-plugin"
 }
 
 testDetect_OldSbtPlugin()
@@ -25,7 +25,7 @@ testDetect_OldSbtPlugin()
 
   detect
 
-  assertAppDetected "sbt-heroku"
+  assertAppDetected "sbt-scalingo"
 }
 
 testDetect_OldLeinPlugin()
@@ -35,30 +35,30 @@ testDetect_OldLeinPlugin()
 
   detect
 
-  assertAppDetected "lein-heroku"
+  assertAppDetected "lein-scalingo"
 }
 
 testDetect_MavenPlugin()
 {
-  echo "client=heroku-maven-plugin" > ${BUILD_DIR}/.heroku-deploy
+  echo "client=heroku-maven-plugin" > ${BUILD_DIR}/.scalingo-deploy
 
   detect
 
-  assertAppDetected "heroku-maven-plugin"
+  assertAppDetected "scalingo-maven-plugin"
 }
 
 testDetect_GradlePlugin()
 {
-  echo "client=heroku-gradle" > ${BUILD_DIR}/.heroku-deploy
+  echo "client=heroku-gradle" > ${BUILD_DIR}/.scalingo-deploy
 
   detect
 
-  assertAppDetected "heroku-gradle"
+  assertAppDetected "scalingo-gradle"
 }
 
 testDetect_GradlePlugin()
 {
-  echo "client=heroku-cli-deploy" > ${BUILD_DIR}/.heroku-deploy
+  echo "client=heroku-cli-deploy" > ${BUILD_DIR}/.scalingo-deploy
   touch ${BUILD_DIR}/pom.xml
   mkdir ${BUILD_DIR}/target
 

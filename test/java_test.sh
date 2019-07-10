@@ -138,19 +138,19 @@ test_install_tools() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture _install_tools ${BUILD_DIR}
   assertCapturedSuccess
-  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jmap ]"
-  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
-  assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-  assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
-  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.scalingo/bin/with_jmap ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.scalingo/bin/with_jmap ]"
+  assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.scalingo/with_jmap/bin/java ]"
+  assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.scalingo/with_jmap/bin/java ]"
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.scalingo/bin/with_jstack ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.scalingo/bin/with_jstack ]"
 }
 
 test_install_metrics_agent() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
   capture _install_metrics_agent ${BUILD_DIR}
   assertCapturedSuccess
-  assertTrue "The heroku-metrics-agent.jar file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/heroku-metrics-agent.jar ]"
+  assertTrue "The heroku-metrics-agent.jar file should have been created." "[ -f ${BUILD_DIR}/.scalingo/bin/heroku-metrics-agent.jar ]"
   assertTrue "The heroku-jvm-metrics script should have been created." "[ -f ${BUILD_DIR}/.profile.d/heroku-jvm-metrics.sh ]"
 }
 
@@ -185,22 +185,22 @@ test_openJdk() {
 
 test_get_jdk_download_url() {
   capture _get_jdk_download_url "10"
-  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk10.0.2.tar.gz"
+  assertCapturedEquals "https://java-binaries.com/jdk/scalingo-18/openjdk10.0.2.tar.gz"
 
   capture _get_jdk_download_url "9"
-  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk9.0.4.tar.gz"
+  assertCapturedEquals "https://java-binaries.com/jdk/scalingo-18/openjdk9.0.4.tar.gz"
 
   capture _get_jdk_download_url "9.0.0"
-  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk9-181.tar.gz"
+  assertCapturedEquals "https://java-binaries.com/jdk/scalingo-18/openjdk9-181.tar.gz"
 
   capture _get_jdk_download_url "9+181"
-  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk9-181.tar.gz"
+  assertCapturedEquals "https://java-binaries.com/jdk/scalingo-18/openjdk9-181.tar.gz"
 
   capture _get_jdk_download_url "1.7.0_101"
-  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk1.7.0_101.tar.gz"
+  assertCapturedEquals "https://java-binaries.com/jdk/scalingo-18/openjdk1.7.0_101.tar.gz"
 
   capture _get_jdk_download_url "1.7.0_141"
-  assertCapturedEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-16/openjdk1.7.0_141.tar.gz"
+  assertCapturedEquals "https://java-binaries.com/jdk/scalingo-18/openjdk1.7.0_141.tar.gz"
 }
 
 test_install_metrics_agent() {

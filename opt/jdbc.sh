@@ -71,6 +71,6 @@ if [ "${DISABLE_SPRING_DATASOURCE_URL:-}" != "true" ] &&
   export SPRING_DATASOURCE_PASSWORD="${JDBC_DATABASE_PASSWORD:-}"
 fi
 
-for dbUrlVar in $(env | awk -F "=" '{print $1}' | grep "HEROKU_POSTGRESQL_.*_URL"); do
+for dbUrlVar in $(env | awk -F "=" '{print $1}' | grep "SCALINGO_POSTGRESQL_.*_URL"); do
   set_jdbc_url "$(eval echo \$${dbUrlVar})" "$(echo $dbUrlVar | sed -e s/_URL//g)_JDBC"
 done
