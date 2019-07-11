@@ -12,14 +12,20 @@
 # https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
 #
 # For the authorization, you need to click "Attach existing policies directly"
-# and chose `jvm-common-buildpack`.
+# and chose `put-buildpacks-repository`.
 
 set -e
 # set -x
 
 print_usage() {
+  echo "Synopsis:" >&2
   echo "$0" >&2
 }
+
+if [[ $# -gt 0 ]] ; then
+  print_usage
+  exit 1
+fi
 
 cur_dir=$(cd $(dirname $0) && pwd)
 cd $cur_dir
@@ -50,7 +56,7 @@ fi
 echo "---> Archive created"
 
 which s3cmd > /dev/null || echo "s3cmd is not available in your PATH" >&2 || echo "Archive not uploaded to S3" >&2 || exit -1
-s3_bucket="/jvm-common-buildpack/"
+s3_bucket="/buildpacks-repository"
 s3cmd_cmd="s3cmd --access_key=$S3_ACCESS_KEY --secret_key=$S3_SECRET_KEY"
 if [[ -z "$S3_ACCESS_KEY" ]] || [[ -z "$S3_SECRET_KEY" ]]; then
   s3cmd_cmd="s3cmd --config ${HOME}/.s3cfg"
@@ -59,7 +65,7 @@ fi
 echo "---> Uploading $archive_name to S3 ($s3_bucket)"
 echo ""
 
-${s3cmd_cmd} --quiet --acl-public put ${archive_name} s3://$s3_bucket
+${s3cmd_cmd} --quiet --acl-public put ${archive_name} s3://${s3_bucket}/
 if [[ $? -ne 0 ]]; then
   echo "Error uploading the archive to S3" >&2
   exit -1
