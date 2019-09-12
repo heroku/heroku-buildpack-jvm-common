@@ -40,7 +40,7 @@ else
   jdkLayerToml="$(bp_layer_metadata_create "false" "true" "true" "${jdkMetadata}")"
   jdkLayer="$(bp_layer_init "${layersDir}" "jdk" "${jdkLayerToml}")"
 
-  install_jdk "${jdkVersion}" "${jdkUrl}" "${jdkLayer}"
+  install_jdk "${jdkUrl}" "${jdkLayer}" "${bpDir}"
   install_certs "${jdkLayer}"
   install_profile "${bpDir}" "${jdkLayer}/profile.d"
   install_jdk_overlay "${jdkVersion}" "${jdkLayer}" "${appDir}"

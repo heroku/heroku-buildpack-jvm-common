@@ -76,15 +76,33 @@ get_jdk_cache_id() {
 }
 
 install_jdk() {
-  local version="${1:?}"
-  local url="${2:?}"
-  local dir="${3:?}"
+  local url="${1:?}"
+  local dir="${2:?}"
+  local bpDir="${3:?}"
+  local key="${4:-${bpDir}/.gnupg/lang-jvm.gpg}"
   local tarball="/tmp/jdk.tgz"
 
-  curl --retry 3 --silent --show-error --location "${url}" --output ${tarball}
-  # todo verify
-  tar pxzf ${tarball} -C "${dir}"
-  rm ${tarball}
+  curl --retry 3 --silent --show-error --location "${url}" --output "${tarball}"
+
+  if [ "${HEROKU_GPG_VALIDATION:-0}" != "1" ]; then
+    _jvm_mcount "gpg.verify.skip"
+  else
+    curl --retry 3 --silent --show-error --location "${url}.gpg" --output "${tarball}.gpg"
+
+    gpg --no-tty --batch --import "${key}" > /dev/null 2>&1
+
+    if gpg --no-tty --batch --verify "${tarball}.gpg" "${tarball}" > /dev/null 2>&1
+    then
+      _jvm_mcount "gpg.verify.success"
+    else
+      _jvm_mcount "gpg.verify.failed"
+      (>&2 echo " !     ERROR: Invalid GPG signature!")
+      return 1
+    fi
+  fi
+
+  tar pxzf "${tarball}" -C "${dir}"
+  rm "${tarball}"
 }
 
 install_certs() {

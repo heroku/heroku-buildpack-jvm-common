@@ -211,6 +211,23 @@ test_skip_version_cache() {
   assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
 }
 
+test_install_jdk_valid() {
+  export HEROKU_GPG_VALIDATION=1
+  capture install_jdk "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk11.0.4.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}"
+  assertCapturedSuccess
+  unset HEROKU_GPG_VALIDATION
+}
+
+test_install_jdk_invalid() {
+  rm -f ~/.gnupg/pubring.kbx
+  local key="$(mktemp)"
+  curl -sf -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
+  export HEROKU_GPG_VALIDATION=1
+  capture install_jdk "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk11.0.4.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
+  assertCapturedError " !     ERROR: Invalid GPG signature!"
+  unset HEROKU_GPG_VALIDATION
+}
+
 # the modules to be tested
 source "${BUILDPACK_HOME}/bin/java"
 
