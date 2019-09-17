@@ -1,5 +1,9 @@
 # JVM Common Buildpack Changelog
 
+## master
+
+* Add support for JDK 13
+
 ## v84
 
 * Update default JDK 7, 8, 11, and 12
