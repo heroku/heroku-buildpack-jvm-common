@@ -79,7 +79,7 @@ install_jdk() {
   local url="${1:?}"
   local dir="${2:?}"
   local bpDir="${3:?}"
-  local key="${4:-${bpDir}/.gnupg/lang-jvm.gpg}"
+  local key="${4:-${bpDir}/.gnupg/lang-jvm.asc}"
   local tarball="/tmp/jdk.tgz"
 
   curl --retry 3 --silent --show-error --location "${url}" --output "${tarball}"
