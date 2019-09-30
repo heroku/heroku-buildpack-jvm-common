@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export JVM_COMMON_DIR="${BUILDPACK_HOME}"
+export JVM_COMMON_DIR="${BUILDPACK_HOME:-$(pwd)}"
 
 . ${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh
 . ${BUILDPACK_HOME}/bin/java
