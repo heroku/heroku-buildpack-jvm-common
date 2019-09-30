@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
+
+test_install_metrics_agent() {
+  local install_dir="$(mktemp -d)"
+  local profile_dir="$(mktemp -d)"
+  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+  assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
+  assertFileExists "${install_dir}/heroku-metrics-agent.jar"
+}
+
+test_install_metrics_agent_fail() {
+  local install_dir="$(mktemp -d)"
+  local profile_dir="$(mktemp -d)"
+  export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
+  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+  assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
+  assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
+  unset HEROKU_METRICS_JAR_URL
+}
+
+test_get_jdk_cache_id() {
+  assertEquals "$(get_jdk_cache_id "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.8.0_222.tar.gz")" "6791478b25aa569027e4b4e200b94271"
+}
+
+test_get_jdk_cache_id_date() {
+  assertContains "$(get_jdk_cache_id "https://example.org")" "UTC 20"
+}
+
+# test_build() {
+#   build
+#   assertCapturedSuccess
+#   assertCaptured "Installing JDK 1.8"
+#   assertCaptured "Installing JRE 1.8"
+# }
+
+# test_build_jdk_7() {
+#   local build_dir="$(mktemp -d)"
+#   echo "java.runtime.version=1.7.0_222" > ${build_dir}/system.properties
+#   build
+#   assertCapturedSuccess
+#   assertCaptured "Installing JDK 1.7.0_222"
+#   assertCaptured "Installing JRE 1.7.0_222"
+# }
+
+# test_build_jdk_11() {
+#   local build_dir="$(mktemp -d)"
+#   echo "java.runtime.version=11" > ${build_dir}/system.properties
+#   build
+#   assertCapturedSuccess
+#   assertCaptured "Installing JDK 11"
+#   assertCaptured "Installing JRE 11"
+# }
+
+# the modules to be tested
+source "${BUILDPACK_HOME}/lib/jvm.sh"
+
+# testing utils
+source "${BUILDPACK_HOME}/test/utils"
+
+# import the testing framework
+source "${BUILDPACK_HOME}/test/shunit2"
