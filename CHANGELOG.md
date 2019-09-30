@@ -2,6 +2,10 @@
 
 ## master
 
+* Add support for Cloud Native Buildpack API
+
+## v85
+
 * Add support for JDK 13
 
 ## v84
