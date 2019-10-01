@@ -23,6 +23,9 @@ test_build() {
   assertCapturedSuccess
   assertCaptured "Installing JDK 1.8"
   assertCaptured "Installing JRE 1.8"
+  assertFileExists "${LAYERS_DIR}/jdk/bin/java"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
 }
 
 test_build_jdk_7() {
@@ -31,6 +34,9 @@ test_build_jdk_7() {
   assertCapturedSuccess
   assertCaptured "Installing JDK 1.7.0_222"
   assertCaptured "Installing JRE 1.7.0_222"
+  assertFileExists "${LAYERS_DIR}/jdk/bin/java"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
 }
 
 test_build_jdk_11() {
@@ -39,6 +45,9 @@ test_build_jdk_11() {
   assertCapturedSuccess
   assertCaptured "Installing JDK 11"
   assertCaptured "Installing JRE 11"
+  assertFileExists "${LAYERS_DIR}/jdk/bin/java"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
 }
 
 # the modules to be tested
