@@ -2,24 +2,6 @@
 
 BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
-test_install_metrics_agent() {
-  local install_dir="$(mktemp -d)"
-  local profile_dir="$(mktemp -d)"
-  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
-  assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
-  assertFileExists "${install_dir}/heroku-metrics-agent.jar"
-}
-
-test_install_metrics_agent_fail() {
-  local install_dir="$(mktemp -d)"
-  local profile_dir="$(mktemp -d)"
-  export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
-  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
-  assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
-  assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
-  unset HEROKU_METRICS_JAR_URL
-}
-
 test_get_jdk_cache_id() {
   assertEquals "$(get_jdk_cache_id "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.8.0_222.tar.gz")" "6791478b25aa569027e4b4e200b94271"
 }

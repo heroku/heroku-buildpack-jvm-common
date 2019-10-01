@@ -2,6 +2,24 @@
 
 BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
+test_install_metrics_agent() {
+  local install_dir="$(mktemp -d)"
+  local profile_dir="$(mktemp -d)"
+  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+  assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
+  assertFileExists "${install_dir}/heroku-metrics-agent.jar"
+}
+
+test_install_metrics_agent_fail() {
+  local install_dir="$(mktemp -d)"
+  local profile_dir="$(mktemp -d)"
+  export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
+  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+  assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
+  assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
+  unset HEROKU_METRICS_JAR_URL
+}
+
 test_installDefaultJava() {
   unset CI
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
