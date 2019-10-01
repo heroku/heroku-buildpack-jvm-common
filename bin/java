@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# This script is a utility for v2 buildpacks that manually download this buildpack to use as a library
+# The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
+# be invoked.
+
 JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}"
 if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then source "${JVM_COMMON_DIR}/lib/jvm.sh"; fi
 

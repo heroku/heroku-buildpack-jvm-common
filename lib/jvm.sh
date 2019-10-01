@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script provides common utilities for installing the JDK and JRE. It is used
+# by both the v2 and v3 buildpacks.
+
 DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-18"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
