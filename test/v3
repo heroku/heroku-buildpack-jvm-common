@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
+export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
+export CNB_STACK_ID="heroku"
+
+testDetect()
+{
+  detect
+
+  assertAppDetected "JVM"
+}
 
 test_get_jdk_cache_id() {
   assertEquals "$(get_jdk_cache_id "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.8.0_222.tar.gz")" "6791478b25aa569027e4b4e200b94271"

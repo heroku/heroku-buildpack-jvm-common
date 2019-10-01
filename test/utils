@@ -66,7 +66,11 @@ fixture() {
 detect()
 {
   cd ${BUILD_DIR}
-  capture ${BUILDPACK_HOME}/bin/detect
+  if [ -n "${CNB_STACK_ID:-}" ]; then
+    capture ${BUILDPACK_HOME}/bin/detect # todo: add platform dir and build plan
+  else
+    capture ${BUILDPACK_HOME}/bin/detect "${BUILD_DIR}"
+  fi
 }
 
 build()
@@ -120,6 +124,21 @@ assertCapturedError()
   if [ "${expectedErrorMsg}" != "" ]; then
     assertFileContains "Expected STD_ERR to contain error <${expectedErrorMsg}>" "${expectedErrorMsg}" "${STD_ERR}"
   fi
+}
+
+assertAppDetected()
+{
+  expectedAppType=${1?"Must provide app type"}
+
+  assertCapturedSuccess
+  assertEquals "${expectedAppType}" "$(cat ${STD_OUT})"
+}
+
+assertNoAppDetected()
+{
+  assertEquals "1" "${RETURN}"
+  assertEquals "no" "$(cat ${STD_OUT})"
+  assertEquals "" "$(cat ${STD_ERR})"
 }
 
 _assertContains()

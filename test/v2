@@ -2,6 +2,83 @@
 
 BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
+testDetect()
+{
+  detect "${BUILD_DIR}"
+
+  assertAppDetected "JVM Common"
+}
+
+testDetect_OldMavenPlugin()
+{
+  touch ${BUILD_DIR}/pom.xml
+  mkdir ${BUILD_DIR}/target
+
+  detect
+
+  assertAppDetected "heroku-maven-plugin"
+
+  rm -f ${BUILD_DIR}/pom.xml
+  rm -rf ${BUILD_DIR}/target
+}
+
+testDetect_OldSbtPlugin()
+{
+  mkdir -p ${BUILD_DIR}/target/universal/stage
+
+  detect
+
+  assertAppDetected "sbt-heroku"
+
+  rm -rf ${BUILD_DIR}/target/universal/stage
+}
+
+testDetect_OldLeinPlugin()
+{
+  touch ${BUILD_DIR}/project.clj
+  mkdir ${BUILD_DIR}/target
+
+  detect
+
+  assertAppDetected "lein-heroku"
+
+  rm -f ${BUILD_DIR}/project.clj
+  rm -rf ${BUILD_DIR}/target
+}
+
+testDetect_MavenPlugin()
+{
+  echo "client=heroku-maven-plugin" > ${BUILD_DIR}/.heroku-deploy
+
+  detect
+
+  assertAppDetected "heroku-maven-plugin"
+
+  rm -f ${BUILD_DIR}/.heroku-deploy
+}
+
+testDetect_GradlePlugin()
+{
+  echo "client=heroku-gradle" > ${BUILD_DIR}/.heroku-deploy
+
+  detect
+
+  assertAppDetected "heroku-gradle"
+
+  rm -f ${BUILD_DIR}/.heroku-deploy
+}
+
+testDetect_GradlePlugin()
+{
+  echo "client=heroku-cli-deploy" > ${BUILD_DIR}/.heroku-deploy
+  touch ${BUILD_DIR}/pom.xml
+  mkdir ${BUILD_DIR}/target
+
+  detect
+
+  assertAppDetected "heroku-cli-deploy"
+}
+
 test_install_metrics_agent() {
   local install_dir="$(mktemp -d)"
   local profile_dir="$(mktemp -d)"

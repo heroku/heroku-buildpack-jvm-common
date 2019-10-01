@@ -53,10 +53,10 @@ test_get_jdk_url() {
   assertEquals "${JDK_URL_1_8:?}" "$(get_jdk_url "1.8")"
   assertEquals "${JDK_URL_1_9:?}" "$(get_jdk_url "9")"
   assertEquals "${JDK_URL_11:?}" "$(get_jdk_url "11")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.7.0_192.tar.gz" "$(get_jdk_url "1.7.0_192")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.8.0_222.tar.gz" "$(get_jdk_url "1.8.0_222")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.8.0_191.tar.gz" "$(get_jdk_url "1.8.0_191")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk11.0.0.tar.gz" "$(get_jdk_url "11.0.0")"
+  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk1.7.0_192.tar.gz" "$(get_jdk_url "1.7.0_192")"
+  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk1.8.0_222.tar.gz" "$(get_jdk_url "1.8.0_222")"
+  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk1.8.0_191.tar.gz" "$(get_jdk_url "1.8.0_191")"
+  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk11.0.0.tar.gz" "$(get_jdk_url "11.0.0")"
 }
 
 test_install_jdk_overlay() {
