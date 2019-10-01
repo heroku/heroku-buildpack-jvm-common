@@ -11,5 +11,6 @@ env:
   - IS_RUNNING_ON_TRAVIS=true
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   matrix:
+  - HEROKU_TEST_STACK="cedar-14"
   - HEROKU_TEST_STACK="heroku-16"
   - HEROKU_TEST_STACK="heroku-18"
