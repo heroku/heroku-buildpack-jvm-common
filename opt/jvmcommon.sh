@@ -4,7 +4,7 @@ calculate_java_memory_opts() {
   local opts=${1:-""}
 
   container_size=$(echo $CONTAINER_SIZE)
-  case $container in
+  case $container_size in
   S)
     echo "$opts -Xmx160m -Xss512k -XX:CICompilerCount=2"
     ;;
