@@ -3,48 +3,41 @@
 BUILDPACK_DIR="${BUILDPACK_DIR:-$(pwd)}"
 
 test_get_jdk_version() {
-  local build_dir="$(mktemp -d)"
-  echo "java.runtime.version=1.8" > "${build_dir}/system.properties"
-  assertEquals "1.8" "$(get_jdk_version "$build_dir")"
+  echo "java.runtime.version=1.8" > "${BUILD_DIR}/system.properties"
+  assertEquals "1.8" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_spaces() {
-  local build_dir="$(mktemp -d)"
-  echo "java.runtime.version = 11  " > "${build_dir}/system.properties"
-  assertEquals "11" "$(get_jdk_version "$build_dir")"
+  echo "java.runtime.version = 11  " > "${BUILD_DIR}/system.properties"
+  assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_newline() {
-  local build_dir="$(mktemp -d)"
-  cat <<EOF > "${build_dir}/system.properties"
+  cat <<EOF > "${BUILD_DIR}/system.properties"
 java.runtime.version=11
 maven.version=3.5.4
 EOF
-  assertEquals "11" "$(get_jdk_version "$build_dir")"
+  assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_8_222() {
-  local build_dir="$(mktemp -d)"
-  echo "java.runtime.version=1.8.0_222" > "${build_dir}/system.properties"
-  assertEquals "1.8.0_222" "$(get_jdk_version "$build_dir")"
+  echo "java.runtime.version=1.8.0_222" > "${BUILD_DIR}/system.properties"
+  assertEquals "1.8.0_222" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_11() {
-  local build_dir="$(mktemp -d)"
-  echo "java.runtime.version=11" > "${build_dir}/system.properties"
-  assertEquals "11" "$(get_jdk_version "$build_dir")"
+  echo "java.runtime.version=11" > "${BUILD_DIR}/system.properties"
+  assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_11_0_4() {
-  local build_dir="$(mktemp -d)"
-  echo "java.runtime.version=11.0.4" > "${build_dir}/system.properties"
-  assertEquals "11.0.4" "$(get_jdk_version "$build_dir")"
+  echo "java.runtime.version=11.0.4" > "${BUILD_DIR}/system.properties"
+  assertEquals "11.0.4" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_zulu() {
-  local build_dir="$(mktemp -d)"
-  echo "java.runtime.version=zulu-1.8.0_212" > "${build_dir}/system.properties"
-  assertEquals "zulu-1.8.0_212" "$(get_jdk_version "$build_dir")"
+  echo "java.runtime.version=zulu-1.8.0_212" > "${BUILD_DIR}/system.properties"
+  assertEquals "zulu-1.8.0_212" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_url() {
@@ -61,14 +54,13 @@ test_get_jdk_url() {
 
 test_install_jdk_overlay() {
   local jdk_dir="$(mktemp -d)"
-  local build_dir="$(mktemp -d)"
   mkdir -p ${jdk_dir}/jre/bin
   touch ${jdk_dir}/jre/bin/java
-  mkdir -p ${build_dir}/.jdk-overlay/jre/lib/security
-  mkdir -p ${build_dir}/.jdk-overlay/jre/bin
-  touch ${build_dir}/.jdk-overlay/jre/lib/security/policy.jar
-  echo "." > ${build_dir}/.jdk-overlay/jre/lib/security/cacerts
-  capture install_jdk_overlay "${jdk_dir}" "${build_dir}"
+  mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/lib/security
+  mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/bin
+  touch ${BUILD_DIR}/.jdk-overlay/jre/lib/security/policy.jar
+  echo "." > ${BUILD_DIR}/.jdk-overlay/jre/lib/security/cacerts
+  capture install_jdk_overlay "${jdk_dir}" "${BUILD_DIR}"
   assertTrue "Files in .jdk-overlay should be copied to .jdk." "[ -f ${jdk_dir}/jre/lib/security/policy.jar ]"
   assertTrue "Files in .jdk should not be overwritten." "[ -f ${jdk_dir}/jre/bin/java ]"
 }
@@ -82,30 +74,27 @@ test_install_profile() {
 }
 
 testGetAppSystemProperty() {
-  local buildDir="$(mktemp -d)"
-  cat > ${buildDir}/app.system <<EOF
+  cat > ${BUILD_DIR}/app.system <<EOF
 jvm.major.version=1.8
 EOF
-  assertEquals "1.8" "$(_get_system_property ${buildDir}/app.system "jvm.major.version")"
+  assertEquals "1.8" "$(_get_system_property ${BUILD_DIR}/app.system "jvm.major.version")"
 }
 
 test_get_system_property_with_whitespace() {
-  local buildDir="$(mktemp -d)"
-  cat > ${buildDir}/app.system <<EOF
+  cat > ${BUILD_DIR}/app.system <<EOF
 
 jvm.major.version    =        1.8
 
 
 EOF
-  assertEquals "1.8" "$(_get_system_property ${buildDir}/app.system "jvm.major.version")"
+  assertEquals "1.8" "$(_get_system_property ${BUILD_DIR}/app.system "jvm.major.version")"
 }
 
 testGetAppSystemPropertyWithSimilarName() {
-  local buildDir="$(mktemp -d)"
-  cat > ${buildDir}/app.system <<EOF
+  cat > ${BUILD_DIR}/app.system <<EOF
 jvm.major.versions=1.8
 EOF
-  assertEquals "" "$(_get_system_property ${buildDir}/app.system "jvm.major.version")"
+  assertEquals "" "$(_get_system_property ${BUILD_DIR}/app.system "jvm.major.version")"
 
 }
 
