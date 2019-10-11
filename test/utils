@@ -3,6 +3,13 @@
 # taken from
 # https://github.com/ryanbrainard/heroku-buildpack-testrunner/blob/master/lib/test_utils.sh
 
+installToolbox() {
+  curl -o "/usr/local/bin/jq" -Ls "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64" \
+    && chmod +x "/usr/local/bin/jq"
+  curl -o "/usr/local/bin/yj" -Ls "https://github.com/sclevine/yj/releases/download/v2.0/yj-linux" \
+    && chmod +x "/usr/local/bin/yj"
+}
+
 oneTimeSetUp()
 {
    TEST_SUITE_CACHE="$(mktemp -d ${SHUNIT_TMPDIR}/test_suite_cache.XXXX)"

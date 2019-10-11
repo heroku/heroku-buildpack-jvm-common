@@ -8,7 +8,7 @@ source "${bpDir}/lib/v3/common.sh"
 source "${bpDir}/lib/v3/buildpack.sh"
 source "${bpDir}/lib/jvm.sh"
 
-status "JVM buildpack"
+status "Installing Java"
 
 # fail hard
 set -o pipefail
@@ -17,8 +17,9 @@ set -eu
 
 # TODO check the build plan to see if another JDK has already been installed?
 
+bp_install_or_reuse_toolbox "${layersDir}/utils"
+
 jdkVersion="$(get_jdk_version "${appDir}")"
-info "Installing JDK ${jdkVersion}"
 
 jdkUrl="$(get_jdk_url "${jdkVersion}")"
 
@@ -30,9 +31,11 @@ cache_id = "${jdkCacheId}"
 EOF
 )
 
-jdkLayerToml="$(bp_layer_metadata_create "false" "true" "true" "${jdkMetadata}")"
-
-if bp_layer_rebuild? "${layersDir}" "jdk" "${jdkLayerToml}"; then
+if bp_layer_has_key? "${layersDir}/jdk" ".metadata.cache_id" "${jdkCacheId}"; then
+  info "Reusing Java ${jdkVersion}"
+else
+  info "Installing JDK ${jdkVersion}"
+  jdkLayerToml="$(bp_layer_metadata_create "false" "true" "true" "${jdkMetadata}")"
   jdkLayer="$(bp_layer_init "${layersDir}" "jdk" "${jdkLayerToml}")"
 
   install_jdk "${jdkVersion}" "${jdkUrl}" "${jdkLayer}"
@@ -40,10 +43,8 @@ if bp_layer_rebuild? "${layersDir}" "jdk" "${jdkLayerToml}"; then
   install_profile "${bpDir}" "${jdkLayer}/profile.d"
   install_jdk_overlay "${jdkVersion}" "${jdkLayer}" "${appDir}"
 
+  info "Installing JRE ${jdkVersion}"
   jreLayerToml="$(bp_layer_metadata_create "true" "false" "false" "${jdkMetadata}")"
-  if bp_layer_rebuild? "${layersDir}" "jre" "${jreLayerToml}"; then
-    info "Installing JRE ${jdkVersion}"
-    jreLayer="$(bp_layer_init "${layersDir}" "jre" "${jreLayerToml}")"
-    install_jre "${jdkLayer}" "${jreLayer}"
-  fi
+  jreLayer="$(bp_layer_init "${layersDir}" "jre" "${jreLayerToml}")"
+  install_jre "${jdkLayer}" "${jreLayer}"
 fi

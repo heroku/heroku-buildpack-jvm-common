@@ -109,11 +109,46 @@ EOF
 
 }
 
+test_bp_layer_has_key_no() {
+  local mockLayer="${LAYERS_DIR}/test"
+  mkdir -p "${mockLayer}"
+  touch "${mockLayer}.toml"
+  echo "[metadata]" >> "${mockLayer}.toml"
+  echo "version = \"1.8.0_202\"" >> "${mockLayer}.toml"
+  echo "cache_id = \"foobar\"" >> "${mockLayer}.toml"
+
+  bp_layer_has_key? "$mockLayer" ".metadata.cache_id" "quack"
+  assertEquals 1 "$?"
+}
+
+test_bp_layer_has_key_no_file() {
+  local mockLayersDir="$(mktemp -d)"
+  local expectedCacheId="foobar123"
+
+  bp_layer_has_key? "${mockLayersDir}/test" ".metadata.cache_id" "$expectedCacheId"
+  assertEquals 1 "$?"
+}
+
+test_bp_layer_has_key_yes() {
+  local mockLayer="${LAYERS_DIR}/test"
+  local expectedCacheId="foobar123"
+  mkdir -p "${mockLayer}"
+  touch "${mockLayer}.toml"
+  echo "[metadata]" >> "${mockLayer}.toml"
+  echo "version = \"1.8.0_202\"" >> "${mockLayer}.toml"
+  echo "cache_id = \"${expectedCacheId}\"" >> "${mockLayer}.toml"
+
+  bp_layer_has_key? "$mockLayer" ".metadata.cache_id" "$expectedCacheId"
+  assertEquals 0 "$?"
+}
+
 # the modules to be tested
 source "${BUILDPACK_DIR}/lib/jvm.sh"
+source "${BUILDPACK_DIR}/lib/v3/buildpack.sh"
 
 # testing utils
 source "${BUILDPACK_DIR}/test/utils"
+installToolbox
 
 # import the testing framework
 source "${BUILDPACK_DIR}/test/shunit2"
