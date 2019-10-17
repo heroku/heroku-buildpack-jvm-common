@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
-export CNB_STACK_ID="heroku"
 
 testDetect()
 {

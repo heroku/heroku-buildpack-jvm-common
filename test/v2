@@ -104,12 +104,12 @@ test_installDefaultJava() {
   assertCapturedSuccess
   assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
-  # make sure there's no tarball left in the slug
-  assertEquals "$(find ${BUILD_DIR} -name jdk.tar.gz | wc -l | sed 's/ //g')" "0"
+  assertEquals "$(find ${BUILD_DIR} -name jdk.tar.gz | wc -l | sed 's/ //g')" "0" # make sure there's no tarball left in the slug
   assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
   assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
   assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "${DEFAULT_JDK_VERSION}"
+  cd # unsure why, but this fixes `sh: 0: getcwd() failed: No such file or directory` because $BUILD_DIR get deleted out from under us
   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
   assertTrue "A pgconfig.jar should exist in the JDK" "[ -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
