@@ -4,7 +4,11 @@
 
 * Add support for Cloud Native Buildpack API
 
-## v85
+## v91
+
+* Upgrade default JDKs to 13.0.1, 11.0.5, 8u232, and 7u242
+
+## v90
 
 * Add support for JDK 13
 
