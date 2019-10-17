@@ -2,6 +2,10 @@
 
 ## master
 
+* Upgrade default JDKs to 13.0.1, 11.0.5, 8u232, and 7u242
+
+## 85
+
 * Add support for JDK 13
 
 ## v84
