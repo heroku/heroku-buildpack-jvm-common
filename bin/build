@@ -18,6 +18,7 @@ set -eu
 # TODO check the build plan to see if another JDK has already been installed?
 
 bp_install_or_reuse_toolbox "${layersDir}/utils"
+export PATH="$PATH:${layersDir}/utils/bin"
 
 jdkVersion="$(get_jdk_version "${appDir}")"
 
@@ -32,7 +33,8 @@ EOF
 )
 
 if bp_layer_has_key? "${layersDir}/jdk" ".metadata.cache_id" "${jdkCacheId}"; then
-  info "Reusing Java ${jdkVersion}"
+  info "Reusing JDK ${jdkVersion}"
+  info "Reusing JRE ${jdkVersion}"
 else
   info "Installing JDK ${jdkVersion}"
   jdkLayerToml="$(bp_layer_metadata_create "false" "true" "true" "${jdkMetadata}")"
