@@ -28,3 +28,6 @@ cedar-14:
 	@echo ""
 	@docker run -v $(shell pwd):/buildpack:ro --rm -it -e "STACK=cedar-14" -e "BUILDPACK_HOME=/buildpack" heroku/cedar:14 bash -c 'cp -r /buildpack /buildpack_test; cd /buildpack_test/; test/v2;'
 	@echo ""
+
+package:
+	@tar czvf heroku-buildpack-jvm-common.tgz bin/ buildpack.toml etc/ lib/ opt/ readme.md LICENSE
