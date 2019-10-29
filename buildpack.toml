@@ -1,4 +1,8 @@
+api = "0.2"
+
 [buildpack]
+id = "heroku/jvm"
+version = "0.1"
 name = "JVM"
 
   [publish.Ignore]
@@ -14,3 +18,6 @@ name = "JVM"
     "Gemfile",
     "Gemfile.lock"
   ]
+
+[[stacks]]
+id = "heroku-18"

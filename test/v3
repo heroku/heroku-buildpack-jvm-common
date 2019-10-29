@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
+
+testDetect()
+{
+  detect
+
+  assertAppDetected "JVM"
+}
+
+test_get_jdk_cache_id() {
+  assertEquals "$(get_jdk_cache_id "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk1.8.0_222.tar.gz")" "6791478b25aa569027e4b4e200b94271"
+}
+
+test_get_jdk_cache_id_date() {
+  assertContains "$(get_jdk_cache_id "https://example.org")" "UTC 20"
+}
+
+test_build() {
+  build
+  assertCapturedSuccess
+  assertCaptured "Installing JDK 1.8"
+  assertCaptured "Installing JRE 1.8"
+  assertFileExists "${LAYERS_DIR}/jdk/bin/java"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
+}
+
+test_build_jdk_7() {
+  echo "java.runtime.version=1.7.0_222" > ${BUILD_DIR}/system.properties
+  build
+  assertCapturedSuccess
+  assertCaptured "Installing JDK 1.7.0_222"
+  assertCaptured "Installing JRE 1.7.0_222"
+  assertFileExists "${LAYERS_DIR}/jdk/bin/java"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
+}
+
+test_build_jdk_11() {
+  echo "java.runtime.version=11" > ${BUILD_DIR}/system.properties
+  build
+  assertCapturedSuccess
+  assertCaptured "Installing JDK 11"
+  assertCaptured "Installing JRE 11"
+  assertFileExists "${LAYERS_DIR}/jdk/bin/java"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
+  assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
+}
+
+# the modules to be tested
+source "${BUILDPACK_HOME}/lib/jvm.sh"
+
+# testing utils
+source "${BUILDPACK_HOME}/test/utils"
+
+# import the testing framework
+source "${BUILDPACK_HOME}/test/shunit2"
