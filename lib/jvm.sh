@@ -5,15 +5,15 @@
 
 STACK="${STACK:-$CNB_STACK_ID}"
 DEFAULT_JDK_VERSION="1.8"
+DEFAULT_JDK_1_7_VERSION="1.7.0_242"
+DEFAULT_JDK_1_8_VERSION="1.8.0_232"
+DEFAULT_JDK_1_9_VERSION="9.0.4"
+DEFAULT_JDK_10_VERSION="10.0.2"
+DEFAULT_JDK_11_VERSION="11.0.5"
+DEFAULT_JDK_12_VERSION="12.0.2"
+DEFAULT_JDK_13_VERSION="13.0.1"
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-18"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
-JDK_URL_13=${JDK_URL_13:-"$JDK_BASE_URL/openjdk13.0.1.tar.gz"}
-JDK_URL_12=${JDK_URL_12:-"$JDK_BASE_URL/openjdk12.0.2.tar.gz"}
-JDK_URL_11=${JDK_URL_11:-"$JDK_BASE_URL/openjdk11.0.5.tar.gz"}
-JDK_URL_10=${JDK_URL_10:-"$JDK_BASE_URL/openjdk10.0.2.tar.gz"}
-JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9.0.4.tar.gz"}
-JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_232.tar.gz"}
-JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_242.tar.gz"}
 
 get_jdk_version() {
   local appDir="${1:?}"
@@ -29,24 +29,35 @@ get_jdk_version() {
   fi
 }
 
-get_jdk_url() {
-  local jdkVersion=${1:-${DEFAULT_JDK_VERSION}}
+get_full_jdk_version() {
+  local jdkVersion="${1:?}"
 
   if [ "${jdkVersion}" = "10" ]; then
-    local jdkUrl="${JDK_URL_10}"
+    echo "$DEFAULT_JDK_10_VERSION"
   elif [ "${jdkVersion}" = "11" ]; then
-    local jdkUrl="${JDK_URL_11}"
+    echo "$DEFAULT_JDK_11_VERSION"
   elif [ "${jdkVersion}" = "12" ]; then
-    local jdkUrl="${JDK_URL_12}"
+    echo "$DEFAULT_JDK_12_VERSION"
   elif [ "${jdkVersion}" = "13" ]; then
-    local jdkUrl="${JDK_URL_13}"
-  elif [ "$(expr "${jdkVersion}" : '^1[0-3]')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    echo "$DEFAULT_JDK_13_VERSION"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
     local minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
-    local jdkUrl=$(eval echo \$JDK_URL_1_${minorJdkVersion})
+    echo "$(eval echo \$DEFAULT_JDK_1_${minorJdkVersion}_VERSION)"
   elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
-    local jdkUrl=$(eval echo \$JDK_URL_1_${jdkVersion})
+    echo "$(eval echo \$DEFAULT_JDK_1_${jdkVersion}_VERSION)"
+  elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then
+    echo "9-181" # the naming convention for the first JDK 9 release was poor
+  else
+    echo "$jdkVersion"
+  fi
+}
+
+get_jdk_url() {
+  local shortJdkVersion=${1:-${DEFAULT_JDK_VERSION}}
+  local jdkVersion="$(get_full_jdk_version "${shortJdkVersion}")"
+
+  if [ "$(expr "${jdkVersion}" : '^1[0-3]')" != 0 ]; then
+    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
     local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then

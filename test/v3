@@ -4,9 +4,34 @@ export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
 testDetect()
 {
-  detect
+  local buildPlan="$(mktemp)"
+  detect "${PLATFORM_DIR}" "${buildPlan}"
 
   assertAppDetected "JVM"
+  assertFileExists "${buildPlan}"
+  assertFileContains "version = \"${DEFAULT_JDK_1_8_VERSION}\"" "${buildPlan}"
+}
+
+testDetect_jdk11()
+{
+  echo "java.runtime.version=11" > ${BUILD_DIR}/system.properties
+  local buildPlan="$(mktemp)"
+  detect "${PLATFORM_DIR}" "${buildPlan}"
+
+  assertAppDetected "JVM"
+  assertFileExists "${buildPlan}"
+  assertFileContains "version = \"${DEFAULT_JDK_11_VERSION}\"" "${buildPlan}"
+}
+
+testDetect_jdk11_0_4()
+{
+  echo "java.runtime.version=11.0.4" > ${BUILD_DIR}/system.properties
+  local buildPlan="$(mktemp)"
+  detect "${PLATFORM_DIR}" "${buildPlan}"
+
+  assertAppDetected "JVM"
+  assertFileExists "${buildPlan}"
+  assertFileContains "version = \"11.0.4\"" "${buildPlan}"
 }
 
 test_get_jdk_cache_id() {

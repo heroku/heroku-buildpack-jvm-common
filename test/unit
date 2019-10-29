@@ -20,6 +20,20 @@ EOF
   assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
 }
 
+test_get_full_jdk_version() {
+  assertEquals "${DEFAULT_JDK_1_7_VERSION}" "$(get_full_jdk_version "1.7")"
+  assertEquals "${DEFAULT_JDK_1_8_VERSION}" "$(get_full_jdk_version "1.8")"
+  assertEquals "${DEFAULT_JDK_1_9_VERSION}" "$(get_full_jdk_version "1.9")"
+  assertEquals "${DEFAULT_JDK_1_9_VERSION}" "$(get_full_jdk_version "9")"
+  assertEquals "${DEFAULT_JDK_10_VERSION}" "$(get_full_jdk_version "10")"
+  assertEquals "${DEFAULT_JDK_11_VERSION}" "$(get_full_jdk_version "11")"
+  assertEquals "${DEFAULT_JDK_12_VERSION}" "$(get_full_jdk_version "12")"
+  assertEquals "${DEFAULT_JDK_13_VERSION}" "$(get_full_jdk_version "13")"
+  assertEquals "1.8.0_212" "$(get_full_jdk_version "1.8.0_212")"
+  assertEquals "11.0.5" "$(get_full_jdk_version "11.0.5")"
+  assertEquals "zulu-11.0.5" "$(get_full_jdk_version "zulu-11.0.5")"
+}
+
 test_get_jdk_version_8_222() {
   echo "java.runtime.version=1.8.0_222" > "${BUILD_DIR}/system.properties"
   assertEquals "1.8.0_222" "$(get_jdk_version "$BUILD_DIR")"
@@ -41,15 +55,21 @@ test_get_jdk_version_zulu() {
 }
 
 test_get_jdk_url() {
-  assertEquals "${JDK_URL_1_8:?}" "$(get_jdk_url "")"
-  assertEquals "${JDK_URL_1_7:?}" "$(get_jdk_url "1.7")"
-  assertEquals "${JDK_URL_1_8:?}" "$(get_jdk_url "1.8")"
-  assertEquals "${JDK_URL_1_9:?}" "$(get_jdk_url "9")"
-  assertEquals "${JDK_URL_11:?}" "$(get_jdk_url "11")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk1.7.0_192.tar.gz" "$(get_jdk_url "1.7.0_192")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk1.8.0_222.tar.gz" "$(get_jdk_url "1.8.0_222")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk1.8.0_191.tar.gz" "$(get_jdk_url "1.8.0_191")"
-  assertEquals "https://lang-jvm.s3.amazonaws.com/jdk/${STACK}/openjdk11.0.0.tar.gz" "$(get_jdk_url "11.0.0")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_1_8_VERSION:?}.tar.gz" "$(get_jdk_url "")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_1_7_VERSION:?}.tar.gz" "$(get_jdk_url "1.7")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_1_8_VERSION:?}.tar.gz" "$(get_jdk_url "1.8")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_1_9_VERSION:?}.tar.gz" "$(get_jdk_url "9")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_10_VERSION:?}.tar.gz" "$(get_jdk_url "10")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_11_VERSION:?}.tar.gz" "$(get_jdk_url "11")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_12_VERSION:?}.tar.gz" "$(get_jdk_url "12")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_13_VERSION:?}.tar.gz" "$(get_jdk_url "13")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.7.0_192.tar.gz" "$(get_jdk_url "1.7.0_192")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_222.tar.gz" "$(get_jdk_url "1.8.0_222")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_191.tar.gz" "$(get_jdk_url "1.8.0_191")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk11.0.0.tar.gz" "$(get_jdk_url "11.0.0")"
+  assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_212.tar.gz" "$(get_jdk_url "zulu-1.8.0_212")"
+  assertEquals "${JDK_BASE_URL:?}/zulu-11.0.5.tar.gz" "$(get_jdk_url "zulu-11.0.5")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_212.tar.gz" "$(get_jdk_url "openjdk-1.8.0_212")"
 }
 
 test_install_jdk_overlay() {

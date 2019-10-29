@@ -20,7 +20,7 @@ set -eu
 bp_install_or_reuse_toolbox "${layersDir}/utils"
 export PATH="$PATH:${layersDir}/utils/bin"
 
-jdkVersion="$(get_jdk_version "${appDir}")"
+jdkVersion="$(get_jdk_version "${appDir}")" # TODO read from build-plan instead
 
 jdkUrl="$(get_jdk_url "${jdkVersion}")"
 
