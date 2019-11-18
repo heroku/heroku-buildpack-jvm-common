@@ -29,8 +29,9 @@ name = "jdk"
 [[requires]]
 name = "jdk"
 version = "$fullJdkVersion"
-[[requires.metadata]]
+[requires.metadata]
 launch = false
+vendor = "OpenJDK"
 
 [[provides]]
 name = "jre"
@@ -38,8 +39,9 @@ name = "jre"
 [[requires]]
 name = "jre"
 version = "$fullJdkVersion"
-[[requires.metadata]]
+[requires.metadata]
 launch = true
+vendor = "OpenJDK"
 TOML
 }
 
