@@ -13,7 +13,34 @@ get_client() {
   fi
 }
 
+write_build_plan() {
+  local plan=${1:?}
+  local appDir="$(pwd)"
+  local bpDir="$(cd $(dirname $0)/..; pwd)" # absolute path
+  source "${bpDir}/lib/jvm.sh"
+
+  local jdkVersion="$(get_jdk_version "${appDir}")"
+  local fullJdkVersion="$(get_full_jdk_version "${jdkVersion}")"
+
+  cat <<TOML > $plan
+[[provides]]
+name = "jdk"
+
+[[requires]]
+name = "jdk"
+version = "$fullJdkVersion"
+
+[[provides]]
+name = "jre"
+
+[[requires]]
+name = "jre"
+version = "$fullJdkVersion"
+TOML
+}
+
 if [ -n "${CNB_STACK_ID:-}" ]; then
+  write_build_plan "$2"
   echo "JVM"
 else
   if [ -f $1/.heroku-deploy ]; then

@@ -211,6 +211,27 @@ test_skip_version_cache() {
   assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
 }
 
+test_get_jdk_url_with_default() {
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_232.tar.gz" "$(_get_jdk_url_with_default "1.8.0_232")"
+
+  export JDK_URL_1_8="https://example.com/java8"
+  assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_232")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.7.0_232.tar.gz" "$(_get_jdk_url_with_default "1.7.0_232")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk11.0.5.tar.gz" "$(_get_jdk_url_with_default "11.0.5")"
+  assertEquals "${JDK_BASE_URL:?}/zulu-11.0.5.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.5")"
+  unset JDK_URL_1_8
+
+  export JDK_URL_1_7="https://example.com/java7"
+  assertEquals "${JDK_URL_1_7}" "$(_get_jdk_url_with_default "1.7.0_232")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_232.tar.gz" "$(_get_jdk_url_with_default "1.8.0_232")"
+  unset JDK_URL_1_7
+
+  export JDK_URL_11="https://example.com/java11"
+  assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.5")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_232.tar.gz" "$(_get_jdk_url_with_default "1.8.0_232")"
+  unset JDK_URL_11
+}
+
 # the modules to be tested
 source "${BUILDPACK_HOME}/bin/java"
 

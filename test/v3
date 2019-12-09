@@ -4,9 +4,34 @@ export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
 testDetect()
 {
-  detect
+  local buildPlan="$(mktemp)"
+  detect "${PLATFORM_DIR}" "${buildPlan}"
 
   assertAppDetected "JVM"
+  assertFileExists "${buildPlan}"
+  assertFileContains "version = \"${DEFAULT_JDK_1_8_VERSION}\"" "${buildPlan}"
+}
+
+testDetect_jdk11()
+{
+  echo "java.runtime.version=11" > ${BUILD_DIR}/system.properties
+  local buildPlan="$(mktemp)"
+  detect "${PLATFORM_DIR}" "${buildPlan}"
+
+  assertAppDetected "JVM"
+  assertFileExists "${buildPlan}"
+  assertFileContains "version = \"${DEFAULT_JDK_11_VERSION}\"" "${buildPlan}"
+}
+
+testDetect_jdk11_0_4()
+{
+  echo "java.runtime.version=11.0.4" > ${BUILD_DIR}/system.properties
+  local buildPlan="$(mktemp)"
+  detect "${PLATFORM_DIR}" "${buildPlan}"
+
+  assertAppDetected "JVM"
+  assertFileExists "${buildPlan}"
+  assertFileContains "version = \"11.0.4\"" "${buildPlan}"
 }
 
 test_get_jdk_cache_id() {
@@ -20,8 +45,8 @@ test_get_jdk_cache_id_date() {
 test_build() {
   build
   assertCapturedSuccess
-  assertCaptured "Installing JDK 1.8"
-  assertCaptured "Installing JRE 1.8"
+  assertCaptured "JDK 1.8 installed"
+  assertCaptured "JRE 1.8 installed"
   assertFileExists "${LAYERS_DIR}/jdk/bin/java"
   assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
   assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
@@ -31,8 +56,8 @@ test_build_jdk_7() {
   echo "java.runtime.version=1.7.0_222" > ${BUILD_DIR}/system.properties
   build
   assertCapturedSuccess
-  assertCaptured "Installing JDK 1.7.0_222"
-  assertCaptured "Installing JRE 1.7.0_222"
+  assertCaptured "JDK 1.7.0_222 installed"
+  assertCaptured "JRE 1.7.0_222 installed"
   assertFileExists "${LAYERS_DIR}/jdk/bin/java"
   assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
   assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"
@@ -42,8 +67,7 @@ test_build_jdk_11() {
   echo "java.runtime.version=11" > ${BUILD_DIR}/system.properties
   build
   assertCapturedSuccess
-  assertCaptured "Installing JDK 11"
-  assertCaptured "Installing JRE 11"
+  assertCaptured "JDK 11 installed"
   assertFileExists "${LAYERS_DIR}/jdk/bin/java"
   assertFileExists "${LAYERS_DIR}/jdk/profile.d/jvmcommon.sh"
   assertFileExists "${LAYERS_DIR}/jdk/profile.d/jdbc.sh"

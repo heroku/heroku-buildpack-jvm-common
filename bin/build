@@ -20,7 +20,7 @@ set -eu
 bp_install_or_reuse_toolbox "${layersDir}/utils"
 export PATH="$PATH:${layersDir}/utils/bin"
 
-jdkVersion="$(get_jdk_version "${appDir}")"
+jdkVersion="$(get_jdk_version "${appDir}")" # TODO read from build-plan instead
 
 jdkUrl="$(get_jdk_url "${jdkVersion}")"
 
@@ -33,10 +33,9 @@ EOF
 )
 
 if bp_layer_has_key? "${layersDir}/jdk" ".metadata.cache_id" "${jdkCacheId}"; then
-  info "Reusing JDK ${jdkVersion}"
-  info "Reusing JRE ${jdkVersion}"
+  info "JDK ${jdkVersion} installed from cache"
+  info "JRE ${jdkVersion} installed from cache"
 else
-  info "Installing JDK ${jdkVersion}"
   jdkLayerToml="$(bp_layer_metadata_create "false" "true" "true" "${jdkMetadata}")"
   jdkLayer="$(bp_layer_init "${layersDir}" "jdk" "${jdkLayerToml}")"
 
@@ -44,9 +43,10 @@ else
   install_certs "${jdkLayer}"
   install_profile "${bpDir}" "${jdkLayer}/profile.d"
   install_jdk_overlay "${jdkVersion}" "${jdkLayer}" "${appDir}"
+  info "JDK ${jdkVersion} installed"
 
-  info "Installing JRE ${jdkVersion}"
   jreLayerToml="$(bp_layer_metadata_create "true" "false" "false" "${jdkMetadata}")"
   jreLayer="$(bp_layer_init "${layersDir}" "jre" "${jreLayerToml}")"
   install_jre "${jdkLayer}" "${jreLayer}"
+  info "JRE ${jdkVersion} installed"
 fi

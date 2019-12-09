@@ -12,7 +12,7 @@ install_java_with_overlay() {
   local cacheDir="${2:-$(mktemp -d)}"
   if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
     local jdkVersion=$(get_jdk_version ${buildDir})
-    local jdkUrl=$(get_jdk_url "${jdkVersion}")
+    local jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
     _jvm_mcount "version.${jdkVersion}"
     if [[ "$jdkVersion" == *openjdk* ]]; then
       status_pending "Installing OpenJDK $(_get_openjdk_version ${jdkVersion})"
@@ -38,7 +38,7 @@ install_java() {
   local baseDir=${1?"Invalid directory to install java."}
 
   local jdkVersion="${2:-$DEFAULT_JDK_VERSION}"
-  local jdkUrl=${3:-$(get_jdk_url "${jdkVersion}")}
+  local jdkUrl=${3:-$(_get_jdk_url_with_default "${jdkVersion}")}
   local jdkDir="${baseDir}"/.jdk
   local jdkTarball="${jdkDir}"/jdk.tar.gz
   local javaExe="${jdkDir}/bin/java"
@@ -151,6 +151,30 @@ _install_pgconfig() {
 
   if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}"  ] && [ "${CI:-}" != "true" ]; then
     curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o ${extDir}/pgconfig.jar
+  fi
+}
+
+# This function implements a legacy behavior in which the JDK_URL_1_8 or similar config var
+# could be used to override the URL to the JDK binary for a specific version. It's
+# not supported in the v3 implementation of the buildpack.
+_get_jdk_url_with_default() {
+  local jdkVersion="${1:?}"
+  if [ -n "${JDK_URL_1_7:-}" ] && ([ "$(expr "${jdkVersion}" : '^1.7')" != 0 ] || [ "$(expr "${jdkVersion}" : '^7')" != 0 ]); then
+    echo "$JDK_URL_1_7"
+  elif [ -n "${JDK_URL_1_8:-}" ] && ([ "$(expr "${jdkVersion}" : '^1.8')" != 0 ] || [ "$(expr "${jdkVersion}" : '^8')" != 0 ]); then
+    echo "$JDK_URL_1_8"
+  elif [ -n "${JDK_URL_1_9:-}" ] && ([ "$(expr "${jdkVersion}" : '^1.9')" != 0 ] || [ "$(expr "${jdkVersion}" : '^9')" != 0 ]); then
+    echo "$JDK_URL_1_9"
+  elif [ -n "${JDK_URL_10:-}" ] && [ "$(expr "${jdkVersion}" : '^10')" != 0 ]; then
+    echo "$JDK_URL_10"
+  elif [ -n "${JDK_URL_11:-}" ] && [ "$(expr "${jdkVersion}" : '^11')" != 0 ]; then
+    echo "$JDK_URL_11"
+  elif [ -n "${JDK_URL_12:-}" ] && [ "$(expr "${jdkVersion}" : '^12')" != 0 ]; then
+    echo "$JDK_URL_12"
+  elif [ -n "${JDK_URL_13:-}" ] && [ "$(expr "${jdkVersion}" : '^13')" != 0 ]; then
+    echo "$JDK_URL_13"
+  else
+    echo "$(get_jdk_url "$jdkVersion")"
   fi
 }
 
