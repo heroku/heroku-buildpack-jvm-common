@@ -23,3 +23,8 @@ curl_retry_on_18() {
 	done
 	return $ec
 }
+
+_jvm_mcount() {
+	# placeholder for v3 stdlib
+	return 0
+}

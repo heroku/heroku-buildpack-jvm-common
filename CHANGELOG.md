@@ -3,6 +3,7 @@
 ## master
 
 * Add support for Cloud Native Buildpack API
+* GPG verify JDK binaries before installing
 
 ## v91
 

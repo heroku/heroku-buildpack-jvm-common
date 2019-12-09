@@ -40,17 +40,14 @@ install_java() {
   local jdkVersion="${2:-$DEFAULT_JDK_VERSION}"
   local jdkUrl=${3:-$(_get_jdk_url_with_default "${jdkVersion}")}
   local jdkDir="${baseDir}"/.jdk
-  local jdkTarball="${jdkDir}"/jdk.tar.gz
   local javaExe="${jdkDir}/bin/java"
   mkdir -p "${jdkDir}"
 
-  if [ ! -f "${jdkTarball}" ] && [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${jdkVersion}"; then
+  if [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${jdkVersion}"; then
     rm -rf "${jdkDir}"
     mkdir -p "${jdkDir}"
-    validate_jdk_url ${jdkUrl} ${jdkVersion}
-    curl --retry 3 --silent --show-error --location ${jdkUrl} --output ${jdkTarball}
-    tar pxzf ${jdkTarball} -C "${jdkDir}"
-    rm ${jdkTarball}
+    validate_jdk_url "${jdkUrl}" "${jdkVersion}"
+    install_jdk "${jdkUrl}" "${jdkDir}" "${JVM_COMMON_DIR}"
     install_certs "${jdkDir}"
     echo "${jdkVersion}" > "${jdkDir}/version"
     if [ ! -f "${javaExe}" ]; then
