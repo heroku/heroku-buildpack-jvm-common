@@ -4,6 +4,7 @@
 
 * Add support for Cloud Native Buildpack API
 * GPG verify JDK binaries before installing
+* Update heroku-java-metrics-agent to 3.14
 
 ## v91
 

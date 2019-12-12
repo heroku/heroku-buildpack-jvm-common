@@ -160,7 +160,7 @@ install_metrics_agent() {
 
   mkdir -p ${installDir}
   curl --retry 3 -s -o ${agentJar} \
-      -L ${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.11/heroku-java-metrics-agent-3.11.jar"}
+      -L ${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.14/heroku-java-metrics-agent-3.14.jar"}
   if [ -f ${agentJar} ]; then
     mkdir -p ${profileDir}
     cp "${bpDir}/opt/heroku-jvm-metrics.sh" "${profileDir}"
