@@ -9,207 +9,207 @@ testDetect()
   assertAppDetected "JVM Common"
 }
 
-# testDetect_OldMavenPlugin()
-# {
-#   touch ${BUILD_DIR}/pom.xml
-#   mkdir ${BUILD_DIR}/target
+testDetect_OldMavenPlugin()
+{
+  touch ${BUILD_DIR}/pom.xml
+  mkdir ${BUILD_DIR}/target
 
-#   detect
+  detect
 
-#   assertAppDetected "heroku-maven-plugin"
+  assertAppDetected "heroku-maven-plugin"
 
-#   rm -f ${BUILD_DIR}/pom.xml
-#   rm -rf ${BUILD_DIR}/target
-# }
+  rm -f ${BUILD_DIR}/pom.xml
+  rm -rf ${BUILD_DIR}/target
+}
 
-# testDetect_OldSbtPlugin()
-# {
-#   mkdir -p ${BUILD_DIR}/target/universal/stage
+testDetect_OldSbtPlugin()
+{
+  mkdir -p ${BUILD_DIR}/target/universal/stage
 
-#   detect
+  detect
 
-#   assertAppDetected "sbt-heroku"
+  assertAppDetected "sbt-heroku"
 
-#   rm -rf ${BUILD_DIR}/target/universal/stage
-# }
+  rm -rf ${BUILD_DIR}/target/universal/stage
+}
 
-# testDetect_OldLeinPlugin()
-# {
-#   touch ${BUILD_DIR}/project.clj
-#   mkdir ${BUILD_DIR}/target
+testDetect_OldLeinPlugin()
+{
+  touch ${BUILD_DIR}/project.clj
+  mkdir ${BUILD_DIR}/target
 
-#   detect
+  detect
 
-#   assertAppDetected "lein-heroku"
+  assertAppDetected "lein-heroku"
 
-#   rm -f ${BUILD_DIR}/project.clj
-#   rm -rf ${BUILD_DIR}/target
-# }
+  rm -f ${BUILD_DIR}/project.clj
+  rm -rf ${BUILD_DIR}/target
+}
 
-# testDetect_MavenPlugin()
-# {
-#   echo "client=heroku-maven-plugin" > ${BUILD_DIR}/.heroku-deploy
+testDetect_MavenPlugin()
+{
+  echo "client=heroku-maven-plugin" > ${BUILD_DIR}/.heroku-deploy
 
-#   detect
+  detect
 
-#   assertAppDetected "heroku-maven-plugin"
+  assertAppDetected "heroku-maven-plugin"
 
-#   rm -f ${BUILD_DIR}/.heroku-deploy
-# }
+  rm -f ${BUILD_DIR}/.heroku-deploy
+}
 
-# testDetect_GradlePlugin()
-# {
-#   echo "client=heroku-gradle" > ${BUILD_DIR}/.heroku-deploy
+testDetect_GradlePlugin()
+{
+  echo "client=heroku-gradle" > ${BUILD_DIR}/.heroku-deploy
 
-#   detect
+  detect
 
-#   assertAppDetected "heroku-gradle"
+  assertAppDetected "heroku-gradle"
 
-#   rm -f ${BUILD_DIR}/.heroku-deploy
-# }
+  rm -f ${BUILD_DIR}/.heroku-deploy
+}
 
-# testDetect_GradlePlugin()
-# {
-#   echo "client=heroku-cli-deploy" > ${BUILD_DIR}/.heroku-deploy
-#   touch ${BUILD_DIR}/pom.xml
-#   mkdir ${BUILD_DIR}/target
+testDetect_GradlePlugin()
+{
+  echo "client=heroku-cli-deploy" > ${BUILD_DIR}/.heroku-deploy
+  touch ${BUILD_DIR}/pom.xml
+  mkdir ${BUILD_DIR}/target
 
-#   detect
+  detect
 
-#   assertAppDetected "heroku-cli-deploy"
-# }
+  assertAppDetected "heroku-cli-deploy"
+}
 
-# test_install_metrics_agent() {
-#   local install_dir="$(mktemp -d)"
-#   local profile_dir="$(mktemp -d)"
-#   install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
-#   assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
-#   assertFileExists "${install_dir}/heroku-metrics-agent.jar"
-# }
+test_install_metrics_agent() {
+  local install_dir="$(mktemp -d)"
+  local profile_dir="$(mktemp -d)"
+  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+  assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
+  assertFileExists "${install_dir}/heroku-metrics-agent.jar"
+}
 
-# test_install_metrics_agent_fail() {
-#   local install_dir="$(mktemp -d)"
-#   local profile_dir="$(mktemp -d)"
-#   export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
-#   install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
-#   assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
-#   assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
-#   unset HEROKU_METRICS_JAR_URL
-# }
+test_install_metrics_agent_fail() {
+  local install_dir="$(mktemp -d)"
+  local profile_dir="$(mktemp -d)"
+  export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
+  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+  assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
+  assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
+  unset HEROKU_METRICS_JAR_URL
+}
 
-# test_installDefaultJava() {
-#   unset CI
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture install_java ${BUILD_DIR}
-#   assertCapturedSuccess
-#   assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
-#   assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
-#   assertEquals "$(find ${BUILD_DIR} -name jdk.tar.gz | wc -l | sed 's/ //g')" "0" # make sure there's no tarball left in the slug
-#   assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
-#   assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
-#   assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
-#   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "${DEFAULT_JDK_VERSION}"
-#   cd # unsure why, but this fixes `sh: 0: getcwd() failed: No such file or directory` because $BUILD_DIR get deleted out from under us
-#   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
-#   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
-#   assertTrue "A pgconfig.jar should exist in the JDK" "[ -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
-# }
+test_installDefaultJava() {
+  unset CI
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture install_java ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
+  assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
+  assertEquals "$(find ${BUILD_DIR} -name jdk.tar.gz | wc -l | sed 's/ //g')" "0" # make sure there's no tarball left in the slug
+  assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
+  assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
+  assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
+  assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "${DEFAULT_JDK_VERSION}"
+  cd # unsure why, but this fixes `sh: 0: getcwd() failed: No such file or directory` because $BUILD_DIR get deleted out from under us
+  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
+  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
+  assertTrue "A pgconfig.jar should exist in the JDK" "[ -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
+}
 
-# test_installJavaCI() {
-#   export CI="true"
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture install_java ${BUILD_DIR}
-#   assertCapturedSuccess
-#   assertTrue "A pgconfig.jar should exist in the JDK" "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
-#   unset CI
-# }
+test_installJavaCI() {
+  export CI="true"
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture install_java ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "A pgconfig.jar should exist in the JDK" "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
+  unset CI
+}
 
-# test_installJavaWithVersion() {
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture install_java "${BUILD_DIR}" "1.8.0_212"
-#   assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
-#   assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
-#   assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
-#   assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
-#   assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
-#   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.8.0_212"
-#   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
-#   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
-# }
+test_installJavaWithVersion() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture install_java "${BUILD_DIR}" "1.8.0_212"
+  assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
+  assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
+  assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
+  assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
+  assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
+  assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.8.0_212"
+  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
+  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
+}
 
-# test_upgradeFrom1_7To1_8() {
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture install_java ${BUILD_DIR} "1.7"
-#   assertCapturedSuccess
-#   assertTrue "Precondition: JDK 7 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '1.7' ]"
-#   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
+test_upgradeFrom1_7To1_8() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture install_java ${BUILD_DIR} "1.7"
+  assertCapturedSuccess
+  assertTrue "Precondition: JDK 7 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '1.7' ]"
+  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
 
-#   capture install_java ${BUILD_DIR} "1.8"
-#   assertCapturedSuccess
-#   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.8"
-#   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
-# }
+  capture install_java ${BUILD_DIR} "1.8"
+  assertCapturedSuccess
+  assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.8"
+  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
+}
 
-# test_upgradeFrom1_8To1_7() {
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture install_java ${BUILD_DIR} "1.8"
-#   assertCapturedSuccess
-#   assertTrue "Precondition: JDK 8 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '1.8' ]"
-#   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
+test_upgradeFrom1_8To1_7() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture install_java ${BUILD_DIR} "1.8"
+  assertCapturedSuccess
+  assertTrue "Precondition: JDK 8 should have been installed." "[ $(cat ${BUILD_DIR}/.jdk/version) = '1.8' ]"
+  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
 
-#   capture install_java ${BUILD_DIR} "1.7"
-#   assertCapturedSuccess
-#   assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.7"
-#   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
-# }
+  capture install_java ${BUILD_DIR} "1.7"
+  assertCapturedSuccess
+  assertEquals "$(cat ${BUILD_DIR}/.jdk/version)" "1.7"
+  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(which java)"
+}
 
-# test_install_tools() {
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture _install_tools ${BUILD_DIR}
-#   assertCapturedSuccess
-#   assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jmap ]"
-#   assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
-#   assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-#   assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-#   assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
-#   assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
-# }
+test_install_tools() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture _install_tools ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jmap ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
+  assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
+  assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
+  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
+  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
+}
 
-# test_create_export_script() {
-#   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-#   capture _create_export_script "/path/to/jdk" ${BUILD_DIR}
-#   assertCapturedSuccess
-#   assertTrue "An export file should be created." "[ -f ${BUILD_DIR}/export ]"
-#   assertContains "export JAVA_HOME=/path/to/jdk" "$(cat ${BUILD_DIR}/export)"
-#   assertContains "export PATH=\$JAVA_HOME/bin:\$PATH" "$(cat ${BUILD_DIR}/export)"
-# }
+test_create_export_script() {
+  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+  capture _create_export_script "/path/to/jdk" ${BUILD_DIR}
+  assertCapturedSuccess
+  assertTrue "An export file should be created." "[ -f ${BUILD_DIR}/export ]"
+  assertContains "export JAVA_HOME=/path/to/jdk" "$(cat ${BUILD_DIR}/export)"
+  assertContains "export PATH=\$JAVA_HOME/bin:\$PATH" "$(cat ${BUILD_DIR}/export)"
+}
 
-# test_invalidJdkURL() {
-#   capture install_java ${BUILD_DIR} "1.8.0_11"
-#   assertContains "Did not find error message for invalid JDK version" "Unsupported Java version: 1.8.0_11" "$(cat ${STD_OUT})"
-# }
+test_invalidJdkURL() {
+  capture install_java ${BUILD_DIR} "1.8.0_11"
+  assertContains "Did not find error message for invalid JDK version" "Unsupported Java version: 1.8.0_11" "$(cat ${STD_OUT})"
+}
 
-# test_customJdk() {
-#   capture install_java ${BUILD_DIR} "1.8.0_121"
-#   assertCapturedSuccess
-# }
+test_customJdk() {
+  capture install_java ${BUILD_DIR} "1.8.0_121"
+  assertCapturedSuccess
+}
 
-# test_zuluJdk() {
-#   capture install_java ${BUILD_DIR} "zulu-1.8.0_144"
-#   assertCapturedSuccess
-# }
+test_zuluJdk() {
+  capture install_java ${BUILD_DIR} "zulu-1.8.0_144"
+  assertCapturedSuccess
+}
 
-# test_openJdk() {
-#   capture install_java ${BUILD_DIR} "openjdk-1.8.0_144"
-#   assertCapturedSuccess
-# }
+test_openJdk() {
+  capture install_java ${BUILD_DIR} "openjdk-1.8.0_144"
+  assertCapturedSuccess
+}
 
-# test_skip_version_cache() {
-#   assertTrue "Fake dir should not exist." "[ ! -d fake_dir ]"
-#   capture _cache_version "1.8" "fake_dir"
-#   assertCapturedSuccess
-#   assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
-# }
+test_skip_version_cache() {
+  assertTrue "Fake dir should not exist." "[ ! -d fake_dir ]"
+  capture _cache_version "1.8" "fake_dir"
+  assertCapturedSuccess
+  assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
+}
 
 test_install_jdk_valid() {
   export HEROKU_GPG_VALIDATION=1
