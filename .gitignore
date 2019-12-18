@@ -1,3 +1,4 @@
+.idea
 *.swp
 spec/fixtures/
 spec/fixtures/repos/*

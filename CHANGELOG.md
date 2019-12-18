@@ -2,6 +2,10 @@
 
 ## master
 
+* SPRING_REDIS_URL is now automatically set if REDIS_URL is available 
+
+## v92
+
 * Add support for Cloud Native Buildpack API
 * GPG verify JDK binaries before installing
 * Update heroku-java-metrics-agent to 3.14
