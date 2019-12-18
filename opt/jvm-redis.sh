@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
-
 # Support for Spring Data Redis
 if [ "${DISABLE_SPRING_REDIS_URL:-}" != "true" ] &&
    [ -z "${SPRING_REDIS_URL:-}" ] &&
