@@ -134,7 +134,7 @@ install_profile() {
   mkdir -p "$profileDir"
   cp "${bpDir}/opt/jvmcommon.sh" "${profileDir}"
   cp "${bpDir}/opt/jdbc.sh" "${profileDir}"
-  cp "${bpDir}/opt/redis.sh" "${profileDir}"
+  cp "${bpDir}/opt/jvm-redis.sh" "${profileDir}"
 }
 
 install_jdk_overlay() {
