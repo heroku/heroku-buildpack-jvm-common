@@ -94,6 +94,18 @@ is_java_version_change() {
   test -f "${jdkDir}/version" && [ "$(cat ${jdkDir}/version)" != "${jdkVersion}" ]
 }
 
+# Legacy functions for backwards compatability
+detect_java_version() {
+  get_jdk_version "$1"
+}
+
+jdk_overlay() {
+  local buildDir=$1
+  install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
+}
+
+# Internal functions
+
 _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
   local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
