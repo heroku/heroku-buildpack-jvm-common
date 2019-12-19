@@ -2,7 +2,8 @@
 
 ## master
 
-* SPRING_REDIS_URL is now automatically set if REDIS_URL is available 
+* SPRING_REDIS_URL is now automatically set if REDIS_URL is available
+* Fix backwards compatibility for users of this buildpack as a library
 
 ## v92
 
