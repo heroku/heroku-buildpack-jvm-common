@@ -21,3 +21,6 @@ name = "JVM"
 
 [[stacks]]
 id = "heroku-18"
+
+[[stacks]]
+id = "io.buildpacks.stacks.bionic"
