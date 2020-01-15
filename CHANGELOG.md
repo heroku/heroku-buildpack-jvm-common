@@ -4,6 +4,7 @@
 
 * SPRING_REDIS_URL is now automatically set if REDIS_URL is available
 * Fix backwards compatibility for users of this buildpack as a library
+* Add support for `io.buildpacks.stacks.bionic` stack
 
 ## v92
 
