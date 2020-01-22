@@ -2,6 +2,7 @@ language: bash
 branches:
   only:
   - master
+  - /^cnb-.*$/
 before_install: bash etc/ci-setup.sh
 install: true
 script:
@@ -19,7 +20,8 @@ deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   file:
-    - "heroku-buildpack-jvm-common.tgz"
+    - "heroku-jvm-cnb.tgz"
   skip_cleanup: true
   on:
     tags: true
+    condition: $HEROKU_TEST_STACK = heroku-18
