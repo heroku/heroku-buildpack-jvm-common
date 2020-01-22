@@ -2,7 +2,7 @@ language: bash
 branches:
   only:
   - master
-  - /^cnb-.*$/
+  - /^v[0-9]+$/
 before_install: bash etc/ci-setup.sh
 install: true
 script:
