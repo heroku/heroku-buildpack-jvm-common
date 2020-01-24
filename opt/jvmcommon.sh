@@ -20,7 +20,7 @@ calculate_java_memory_opts() {
   esac
 }
 
-if [[ -f $HOME/.jdk ]]; then
+if [[ -d $HOME/.jdk ]]; then
   export JAVA_HOME="$HOME/.jdk"
   export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
 else
