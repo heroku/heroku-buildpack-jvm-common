@@ -2,6 +2,7 @@
 
 ## master
 
+* CNB: Fixed a bug that was cause JRE 11 to be installed incorrectly
 * SPRING_REDIS_URL is now automatically set if REDIS_URL is available
 * Fix backwards compatibility for users of this buildpack as a library
 
