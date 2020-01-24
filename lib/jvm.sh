@@ -90,7 +90,7 @@ install_jdk() {
   local url="${1:?}"
   local dir="${2:?}"
   local bpDir="${3:?}"
-  local key="${4:-${bpDir}/.gnupg/lang-jvm.asc}"
+  local key="${4:-}"
   local tarball="/tmp/jdk.tgz"
 
   curl --retry 3 --silent --show-error --location "${url}" --output "${tarball}"
@@ -100,7 +100,13 @@ install_jdk() {
   else
     curl --retry 3 --silent --show-error --location "${url}.gpg" --output "${tarball}.gpg"
 
-    gpg --no-tty --batch --import "${key}" > /dev/null 2>&1
+    if [[ -n $key ]]; then
+      gpg --no-tty --batch --import "${key}" > /dev/null 2>&1
+    else
+      for key in "${bpDir}"/.gnupg/*.asc; do
+        gpg --no-tty --batch --import "${key}" > /dev/null 2>&1
+      done
+    fi
 
     if gpg --no-tty --batch --verify "${tarball}.gpg" "${tarball}" > /dev/null 2>&1
     then
