@@ -5,10 +5,14 @@ set -e
 
 # parse args
 export BUILD_DIR=$1
+export ENV_DIR=$3
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 . $BIN_DIR/java
 . $BIN_DIR/util
+
+# TODO: Replace with buildpack stdlib
+export_env_dir "$ENV_DIR" "."
 
 # Install JDK
 install_java_with_overlay "${BUILD_DIR}" "${CACHE_DIR}"

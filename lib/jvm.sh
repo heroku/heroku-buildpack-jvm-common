@@ -13,7 +13,7 @@ DEFAULT_JDK_11_VERSION="11.0.5"
 DEFAULT_JDK_12_VERSION="12.0.2"
 DEFAULT_JDK_13_VERSION="13.0.1"
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-18"}"
-JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
+JDK_BASE_URL="${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}"
 
 get_jdk_version() {
   local appDir="${1:?}"
