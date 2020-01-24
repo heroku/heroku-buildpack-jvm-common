@@ -13,6 +13,10 @@ install_java_with_overlay() {
   if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
     local jdkVersion=$(get_jdk_version ${buildDir})
     local jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
+
+     echo "=================="
+     echo $jdkUrl
+
     _jvm_mcount "version.${jdkVersion}"
     if [[ "$jdkVersion" == *openjdk* ]]; then
       status_pending "Installing OpenJDK $(_get_openjdk_version ${jdkVersion})"
