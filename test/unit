@@ -151,6 +151,18 @@ test_bp_layer_has_key_yes() {
   assertEquals 0 "$?"
 }
 
+test_install_jre() {
+  jdk_dir="${LAYERS_DIR}/jdk"
+  jre_dir="${LAYERS_DIR}/jre"
+  mkdir -p "${jdk_dir}/bin"
+  touch "${jdk_dir}/bin/java"
+  mkdir -p "${jre_dir}"
+  touch "${jre_dir}.toml"
+  install_jre "${jdk_dir}" "${jre_dir}"
+  assertFileExists "${jre_dir}/bin/java"
+  assertFileExists "${jre_dir}.toml"
+}
+
 # the modules to be tested
 source "${BUILDPACK_DIR}/lib/jvm.sh"
 source "${BUILDPACK_DIR}/lib/v3/buildpack.sh"

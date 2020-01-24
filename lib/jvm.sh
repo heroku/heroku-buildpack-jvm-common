@@ -174,9 +174,9 @@ install_jre() {
 
   if [ -d "${jdkDir}/jre" ]; then
     rm -rf "${jreDir}"
-    cp -R "${jdkDir}/jre" "${jreDir}"
+    cp -TR "${jdkDir}/jre" "${jreDir}"
   else
-    cp -R "${jdkDir}" "${jreDir}"
+    cp -TR "${jdkDir}" "${jreDir}"
   fi
 }
 
