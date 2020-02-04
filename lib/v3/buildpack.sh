@@ -70,6 +70,7 @@ bp_layer_init() {
   local layer_dir="${layers_dir}/${name}"
   local layer_metadata="${layer_dir}.toml"
 
+  rm -rf "${layer_dir}"
   mkdir -p "${layer_dir}"
   echo "${metadata}" > "${layer_metadata}"
 
