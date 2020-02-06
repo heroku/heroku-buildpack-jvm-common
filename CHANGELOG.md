@@ -1,6 +1,10 @@
 # JVM Common Buildpack Changelog
 
-## master
+## Master
+
+* Upgrade default JDKs to 13.0.2, 11.0.6, 8u242, and 7u252
+
+## v95
 
 * CNB: Fixed a bug that was cause JRE 11 to be installed incorrectly
 * SPRING_REDIS_URL is now automatically set if REDIS_URL is available
