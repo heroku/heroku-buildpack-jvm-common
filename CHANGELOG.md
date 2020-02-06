@@ -2,6 +2,8 @@
 
 ## Master
 
+## v96
+
 * Upgrade default JDKs to 13.0.2, 11.0.6, 8u242, and 7u252
 
 ## v95
