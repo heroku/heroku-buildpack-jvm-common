@@ -1,5 +1,34 @@
 # JVM Common Buildpack Changelog
 
+## Master
+
+* Enable -XX:+UseContainerSupport on JDK versions > 11
+
+## v96
+
+* Upgrade default JDKs to 13.0.2, 11.0.6, 8u242, and 7u252
+
+## v95
+
+* CNB: Fixed a bug that was cause JRE 11 to be installed incorrectly
+* SPRING_REDIS_URL is now automatically set if REDIS_URL is available
+* Fix backwards compatibility for users of this buildpack as a library
+* CNB: Fix JRE/JDK caching
+
+## v92
+
+* Add support for Cloud Native Buildpack API
+* GPG verify JDK binaries before installing
+* Update heroku-java-metrics-agent to 3.14
+
+## v91
+
+* Upgrade default JDKs to 13.0.1, 11.0.5, 8u232, and 7u242
+
+## v90
+
+* Add support for JDK 13
+
 ## v84
 
 * Update default JDK 7, 8, 11, and 12

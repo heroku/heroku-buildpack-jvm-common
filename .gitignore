@@ -1,5 +1,7 @@
+.idea
 *.swp
 spec/fixtures/
 spec/fixtures/repos/*
 .DS_Store
 jvm-common.tar.xz
+heroku-buildpack-jvm-common.tgz

@@ -11,4 +11,4 @@ BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 . $BIN_DIR/util
 
 # Install JDK
-install_java_with_overlay ${BUILD_DIR}
+install_java_with_overlay "${BUILD_DIR}" "${CACHE_DIR}"

@@ -1,16 +1,27 @@
 language: bash
-dist: trusty
-sudo: true
 branches:
   only:
   - master
+  - /^v[0-9]+$/
 before_install: bash etc/ci-setup.sh
 install: true
-script: eval "$TEST_CMD"
-after_script: heroku keys:remove $USER@`hostname`
+script:
+   - make $HEROKU_TEST_STACK && /tmp/testrunner/bin/run -c . && bash etc/hatchet.sh spec/ && make package
+after_script: if [ -n "$HEROKU_API_KEY" ]; then heroku keys:remove $USER@`hostname`; fi
 env:
   global:
+  - IS_RUNNING_ON_TRAVIS=true
   - SHUNIT_HOME="/tmp/shunit2-2.1.6"
   matrix:
-  - TEST_CMD="sh etc/hatchet.sh spec/"
-  - TEST_CMD="/tmp/testrunner/bin/run -c ."
+  - HEROKU_TEST_STACK="cedar-14"
+  - HEROKU_TEST_STACK="heroku-16"
+  - HEROKU_TEST_STACK="heroku-18"
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file:
+    - "heroku-jvm-cnb.tgz"
+  skip_cleanup: true
+  on:
+    tags: true
+    condition: $HEROKU_TEST_STACK = heroku-18
