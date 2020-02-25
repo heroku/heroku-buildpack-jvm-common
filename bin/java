@@ -4,7 +4,6 @@
 # The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
 # be invoked.
 
-LATEST_JDK_VERSION="1.8"
 DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_BASE_URL="https://java-binaries.scalingo.com/jdk/${STACK:-"scalingo"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
@@ -14,7 +13,6 @@ JDK_URL_10=${JDK_URL_10:-"$JDK_BASE_URL/openjdk10.0.2.tar.gz"}
 JDK_URL_1_9=${JDK_URL_1_9:-"$JDK_BASE_URL/openjdk9.0.4.tar.gz"}
 JDK_URL_1_8=${JDK_URL_1_8:-"$JDK_BASE_URL/openjdk1.8.0_212.tar.gz"}
 JDK_URL_1_7=${JDK_URL_1_7:-"$JDK_BASE_URL/openjdk1.7.0_222.tar.gz"}
-JDK_URL_1_6=${JDK_URL_1_6:-"https://java-binaries.scalingo.com/jdk/openjdk1.6.0_27.tar.gz"}
 
 JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}"
 if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then source "${JVM_COMMON_DIR}/lib/jvm.sh"; fi
