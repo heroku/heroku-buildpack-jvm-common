@@ -29,8 +29,12 @@ calculate_java_memory_opts() {
   esac
 }
 
-export JAVA_HOME="$HOME/.jdk"
-export PATH="$HOME/.scalingo/bin:$JAVA_HOME/bin:$PATH"
+if [[ -d $HOME/.jdk ]]; then
+  export JAVA_HOME="$HOME/.jdk"
+  export PATH="$HOME/.scalingo/bin:$JAVA_HOME/bin:$PATH"
+else
+  export JAVA_HOME="$(realpath $(dirname $(which java))/..)"
+fi
 
 if [[ -d "$JAVA_HOME/jre/lib/amd64/server" ]]; then
   export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
@@ -38,7 +42,7 @@ elif [[ -d "$JAVA_HOME/lib/server" ]]; then
   export LD_LIBRARY_PATH="$JAVA_HOME/lib/server:$LD_LIBRARY_PATH"
 fi
 
-if cat "$HOME/.jdk/release" | grep -q '^JAVA_VERSION="1[0-1]'; then
+if cat "$JAVA_HOME/release" | grep -q '^JAVA_VERSION="1[0-9]'; then
   default_java_mem_opts="$(calculate_java_memory_opts "-XX:+UseContainerSupport")"
 else
   default_java_mem_opts="$(calculate_java_memory_opts | sed 's/^ //')"
