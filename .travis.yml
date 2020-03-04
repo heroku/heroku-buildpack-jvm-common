@@ -5,6 +5,7 @@ branches:
   only:
     - master
     - /^v[0-9]+$/
+    - .* # Temporarily allow all for testing
 before_install:
   - gem install bundler
 install:
