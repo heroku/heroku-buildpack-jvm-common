@@ -30,20 +30,22 @@ env:
     - HATCHET_APP_PREFIX="htcht-${TRAVIS_JOB_ID}-"
 jobs:
   include:
-    - env: HEROKU_TEST_STACK=cedar-14
-    - env: HEROKU_TEST_STACK=heroku-16
-    - env: HEROKU_TEST_STACK=heroku-18
-
-# Cloud Native Buildpack (CNB) Releases
-deploy:
-  provider: releases
-  edge: true
-  name: "Cloud Native Buildpack (CNB) $TRAVIS_TAG"
-  release_notes: "Cloud Native Buildpack (CNB) release. Automatically built after $TRAVIS_TAG of heroku/jvm was released."
-  token: $GITHUB_OAUTH_TOKEN
-  before_deploy: make package
-  file:
-    - "heroku-jvm-cnb.tgz"
-  on:
-    tags: true
-    condition: $HEROKU_TEST_STACK = heroku-18
+    - name: "cedar-14"
+      env: HEROKU_TEST_STACK=cedar-14
+    - name: "heroku-16"
+      env: HEROKU_TEST_STACK=heroku-16
+    - name: "heroku-18"
+      env: HEROKU_TEST_STACK=heroku-18
+    - stage: deploy
+      script: skip
+      deploy:
+        provider: releases
+        edge: true
+        name: "Cloud Native Buildpack (CNB) $TRAVIS_TAG"
+        release_notes: "Cloud Native Buildpack (CNB) release. Automatically built after $TRAVIS_TAG of heroku/jvm was released."
+        token: $GITHUB_OAUTH_TOKEN
+        before_deploy: make package
+        file:
+          - "heroku-jvm-cnb.tgz"
+        on:
+          tags: true
