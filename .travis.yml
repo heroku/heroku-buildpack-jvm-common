@@ -36,7 +36,8 @@ jobs:
       env: HEROKU_TEST_STACK=heroku-16
     - name: "heroku-18"
       env: HEROKU_TEST_STACK=heroku-18
-    - stage: deploy
+    - name: "Deploy CNB release tarball on GitHub if the current run is a tag"
+      stage: deploy
       script: skip
       deploy:
         provider: releases
