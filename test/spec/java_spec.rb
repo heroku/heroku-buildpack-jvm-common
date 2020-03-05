@@ -13,7 +13,7 @@ describe "Java" do
   ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "10", "11", "12",
     "zulu-1.8.0_144", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |version|
     context "a simple java app on jdk-#{version}" do
-      let(:app) { Hatchet::Runner.new("java-servlets-sample",
+      let(:app) { new_app_with_defaults("java-servlets-sample",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "should deploy" do
@@ -33,7 +33,7 @@ describe "Java" do
   end
 
   context "a system.properties file with no java.runtime.version" do
-    let(:app) { Hatchet::Runner.new("java-servlets-sample",
+    let(:app) { new_app_with_defaults("java-servlets-sample",
       :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
     let(:jdk_version) { "1.8" }
     it "should deploy" do
@@ -49,7 +49,7 @@ describe "Java" do
   ["1.7", "1.8", "openjdk-1.8.0_162", "10", "11", "12",
     "zulu-1.8.0_144", "openjdk-9.0.4"].each do |version|
     context "jdk-overlay on #{version}" do
-      let(:app) { Hatchet::Runner.new("java-overlay-test",
+      let(:app) { new_app_with_defaults("java-overlay-test",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "should deploy" do
@@ -76,7 +76,7 @@ describe "Java" do
 
   ["1.8", "10", "11", "12"].each do |version|
     context "korvan on jdk-#{version}" do
-      let(:app) { Hatchet::Runner.new("korvan",
+      let(:app) { new_app_with_defaults("korvan",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "runs commands" do
