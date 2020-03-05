@@ -21,9 +21,9 @@ after_script:
   - bundle exec hatchet destroy --all
 env:
   global:
+    - IS_RUNNING_ON_CI=true
     - SHUNIT_HOME="/tmp/shunit2-2.1.6" # OLD, REQUIRED?
     - HATCHET_RETRIES=3
-    - IS_RUNNING_ON_CI=true
     - HATCHET_APP_LIMIT=80
     - HEROKU_APP_LIMIT=9999
     - HATCHET_DEPLOY_STRATEGY=git
