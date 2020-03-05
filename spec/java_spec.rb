@@ -99,21 +99,21 @@ describe "Java" do
 
           sleep 1
           if jdk_version.start_with?("zulu-1.")
-            expect(app.run("jce")).
+            expect(app.run("java -cp target/app.jar JCE")).
                 to include("Illegal key size or default parameters")
           else
-            expect(app.run("jce")).
+            expect(app.run("java -cp target/app.jar JCE")).
                 to include(%q{Encrypting, "Test"}).
                 and include(%q{Decrypted: Test})
           end
 
           sleep 1
-          expect(app.run("netpatch")).
+          expect(app.run("java -cp target/app.jar NetPatch")).
               to include(%q{name:eth0 (eth0)}).
               and include(%q{name:lo (lo)})
 
           sleep 1
-          expect(app.run("https")).
+          expect(app.run("java -cp target/app.jar Https")).
               to include("Successfully invoked HTTPS service.").
               and match(%r{"X-Forwarded-Proto(col)?":\s?"https"})
 
@@ -123,7 +123,7 @@ describe "Java" do
             !jdk_version.match(/^1[0-9]/) and
             !jdk_version.match(/^openjdk-1[0-9]/)
             sleep 1
-            expect(app.run("pgssl")).
+            expect(app.run("java -cp target/app.jar PostgresSSLTest")).
                 to match(%r{sslmode: require})
           end
         end
