@@ -46,8 +46,9 @@ jobs:
 # Cloud Native Buildpack (CNB) Releases
 deploy:
   provider: releases
+  edge: true
   name: "Cloud Native Buildpack (CNB) $TRAVIS_TAG"
-  body: "Cloud Native Buildpack (CNB) release. Automatically built after $TRAVIS_TAG of heroku/jvm was released."
+  release_notes: "Cloud Native Buildpack (CNB) release. Automatically built after $TRAVIS_TAG of heroku/jvm was released."
   token: $GITHUB_OAUTH_TOKEN
   before_deploy: make package
   file:
