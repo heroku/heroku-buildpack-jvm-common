@@ -21,7 +21,7 @@ after_script:
 env:
   global:
     - IS_RUNNING_ON_CI=true
-    - SHUNIT_HOME="/tmp/shunit2-2.1.6" # OLD, REQUIRED?
+    - SHUNIT_HOME="/tmp/shunit2-2.1.6"
     - HATCHET_RETRIES=3
     - HATCHET_APP_LIMIT=80
     - HEROKU_APP_LIMIT=9999
@@ -31,17 +31,8 @@ env:
 jobs:
   include:
     - env: HEROKU_TEST_STACK=cedar-14
-      if: branch = master OR tag IS present
     - env: HEROKU_TEST_STACK=heroku-16
-      if: branch = master OR tag IS present
     - env: HEROKU_TEST_STACK=heroku-18
-      if: branch = master OR tag IS present
-    - env: HEROKU_TEST_STACK=cedar-14 JDK_BASE_URL="- https://lang-jvm.s3.amazonaws.com/jdk/cedar-14" # TODO: Replace with staging bucket
-      if: branch != master AND tag IS blank
-    - env: HEROKU_TEST_STACK=heroku-16 JDK_BASE_URL="- https://lang-jvm.s3.amazonaws.com/jdk/heroku-16" # TODO: Replace with staging bucket
-      if: branch != master AND tag IS blank
-    - env: HEROKU_TEST_STACK=heroku-18 JDK_BASE_URL="- https://lang-jvm.s3.amazonaws.com/jdk/heroku-18" # TODO: Replace with staging bucket
-      if: branch != master AND tag IS blank
 
 # Cloud Native Buildpack (CNB) Releases
 deploy:
