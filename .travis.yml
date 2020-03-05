@@ -16,7 +16,7 @@ before_script:
   - curl https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz | tar xz -C /tmp/
   - git clone https://github.com/heroku/heroku-buildpack-testrunner.git /tmp/testrunner
 script:
-  - make $HEROKU_TEST_STACK && /tmp/testrunner/bin/run -c . && bundle exec parallel_rspec -n 5 spec/ && make package
+  - make $HEROKU_TEST_STACK && /tmp/testrunner/bin/run -c . && bundle exec parallel_rspec -n 5 spec/
 after_script:
   - bundle exec hatchet destroy --all
 env:
@@ -47,10 +47,12 @@ jobs:
 # Cloud Native Buildpack (CNB) Releases
 deploy:
   provider: releases
+  name: "Cloud Native Buildpack (CNB) $TRAVIS_TAG"
+  body: "Cloud Native Buildpack (CNB) release. Automatically built after $TRAVIS_TAG of heroku/jvm was released."
   token: $GITHUB_OAUTH_TOKEN
+  before_deploy: make package
   file:
     - "heroku-jvm-cnb.tgz"
-  skip_cleanup: true
   on:
     tags: true
     condition: $HEROKU_TEST_STACK = heroku-18
