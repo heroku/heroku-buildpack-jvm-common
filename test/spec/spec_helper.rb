@@ -18,15 +18,14 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-  #config.mock_with :none
-end
-
-def git_repo
-  "https://github.com/heroku/heroku-buildpack-jvm-common.git"
 end
 
 def jvm_common_branch
-  ENV['HATCHET_BUILDPACK_BRANCH'] || 'master'
+  return ENV['HATCHET_BUILDPACK_BRANCH'] if ENV['HATCHET_BUILDPACK_BRANCH']
+  return ENV['TRAVIS_PULL_REQUEST_BRANCH'] if ENV['TRAVIS_PULL_REQUEST_BRANCH'] && !ENV['TRAVIS_PULL_REQUEST_BRANCH'].empty?
+  return ENV['TRAVIS_BRANCH'] if ENV['TRAVIS_BRANCH']
+
+  raise 'Could not determine buildpack branch!'
 end
 
 def new_app_with_defaults(*args, **kwargs)
