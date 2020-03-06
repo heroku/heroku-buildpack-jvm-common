@@ -13,7 +13,7 @@ describe "Java" do
   ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "10", "11", "12",
     "zulu-1.8.0_144", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |version|
     context "a simple java app on jdk-#{version}" do
-      let(:app) { Hatchet::Runner.new("java-servlets-sample",
+      let(:app) { new_app_with_defaults("java-servlets-sample",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "should deploy" do
@@ -33,7 +33,7 @@ describe "Java" do
   end
 
   context "a system.properties file with no java.runtime.version" do
-    let(:app) { Hatchet::Runner.new("java-servlets-sample",
+    let(:app) { new_app_with_defaults("java-servlets-sample",
       :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
     let(:jdk_version) { "1.8" }
     it "should deploy" do
@@ -49,7 +49,7 @@ describe "Java" do
   ["1.7", "1.8", "openjdk-1.8.0_162", "10", "11", "12",
     "zulu-1.8.0_144", "openjdk-9.0.4"].each do |version|
     context "jdk-overlay on #{version}" do
-      let(:app) { Hatchet::Runner.new("java-overlay-test",
+      let(:app) { new_app_with_defaults("java-overlay-test",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "should deploy" do
@@ -76,7 +76,7 @@ describe "Java" do
 
   ["1.8", "10", "11", "12"].each do |version|
     context "korvan on jdk-#{version}" do
-      let(:app) { Hatchet::Runner.new("korvan",
+      let(:app) { new_app_with_defaults("korvan",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "runs commands" do
@@ -90,30 +90,34 @@ describe "Java" do
           end
 
           sleep 1
-          expect(app.run("echo $JAVA_TOOL_OPTIONS")).
+          expect(app.run("echo \\$JAVA_TOOL_OPTIONS")).
               not_to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
-          expect(app.run("echo $JAVA_OPTS")).
+          expect(app.run("echo \\$JAVA_OPTS")).
               to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
           if jdk_version.start_with?("zulu-1.")
-            expect(app.run("jce")).
+            # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
+            expect(app.run("jce", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                 to include("Illegal key size or default parameters")
           else
-            expect(app.run("jce")).
+            # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
+            expect(app.run("jce", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                 to include(%q{Encrypting, "Test"}).
                 and include(%q{Decrypted: Test})
           end
 
           sleep 1
-          expect(app.run("netpatch")).
+          # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
+          expect(app.run("netpatch", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
               to include(%q{name:eth0 (eth0)}).
               and include(%q{name:lo (lo)})
 
           sleep 1
-          expect(app.run("https")).
+          # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
+          expect(app.run("https", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
               to include("Successfully invoked HTTPS service.").
               and match(%r{"X-Forwarded-Proto(col)?":\s?"https"})
 
@@ -122,8 +126,10 @@ describe "Java" do
             !jdk_version.match(/^zulu-9/) and
             !jdk_version.match(/^1[0-9]/) and
             !jdk_version.match(/^openjdk-1[0-9]/)
+
             sleep 1
-            expect(app.run("pgssl")).
+            # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
+            expect(app.run("pgssl", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                 to match(%r{sslmode: require})
           end
         end

@@ -3,6 +3,7 @@
 ## Master
 
 * Enable -XX:+UseContainerSupport on JDK versions > 11
+* Improve CI and testing setup
 
 ## v96
 

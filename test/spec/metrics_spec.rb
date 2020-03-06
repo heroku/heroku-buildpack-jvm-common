@@ -13,7 +13,7 @@ describe "JVM Metrics" do
 
   ["1.7", "1.8", "11"].each do |version|
     context "a simple java app on jdk-#{version}" do
-      let(:app) { Hatchet::Runner.new("java-servlets-sample",
+      let(:app) { new_app_with_defaults("java-servlets-sample",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
       let(:jdk_version) { version }
       it "should deploy" do
