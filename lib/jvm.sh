@@ -156,7 +156,7 @@ install_jdk_overlay() {
     elif [ -f "${appDir}/.jdk-overlay/${cacertPath}" ] && [ -f "${jdkDir}/${cacertPath}" ]; then
       rm "${jdkDir}/${cacertPath}"
     fi
-    cp -r "${appDir}/.jdk-overlay/*" "${jdkDir}"
+    cp -r "${appDir}/.jdk-overlay/"* "${jdkDir}"
   fi
 }
 
