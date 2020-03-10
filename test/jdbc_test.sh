@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck source=/dev/null
-source "${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh"
+. "${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh"
 # shellcheck source=opt/jdbc.sh
-source "${BUILDPACK_HOME}/opt/jdbc.sh"
+. "${BUILDPACK_HOME}/opt/jdbc.sh"
 
 testDefaultEnvVar() {
     local old_ci="$CI"
