@@ -26,6 +26,12 @@ env:
     - HATCHET_APP_PREFIX="htcht-${TRAVIS_JOB_ID}-"
 jobs:
   include:
+    - name: "shellcheck"
+      before_install: skip
+      install: skip
+      before_script: skip
+      script: shellcheck bin/* lib/jvm.sh lib/v3/* etc/* opt/* test/*.sh
+      after_script: skip
     - name: "cedar-14"
       env: HEROKU_TEST_STACK=cedar-14
     - name: "heroku-16"
