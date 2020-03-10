@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-. ${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh
+# shellcheck source=/dev/null
+source "${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh"
 
 # Tests
 
@@ -17,7 +18,7 @@ testCompileWithoutSystemProperties() {
 }
 
 testCompileWith_1_8_0_144() {
-  echo "java.runtime.version=1.8.0_144" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=1.8.0_144" > "${BUILD_DIR}/system.properties"
 
   compile
 
@@ -29,7 +30,7 @@ testCompileWith_1_8_0_144() {
 }
 
 testCompileWith_zulu_1_8_0_144() {
-  echo "java.runtime.version=zulu-1.8.0_144" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=zulu-1.8.0_144" > "${BUILD_DIR}/system.properties"
 
   compile
 
@@ -41,7 +42,7 @@ testCompileWith_zulu_1_8_0_144() {
 }
 
 testCompileWith_openjdk_1_8_0_144() {
-  echo "java.runtime.version=openjdk-1.8.0_144" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=openjdk-1.8.0_144" > "${BUILD_DIR}/system.properties"
 
   compile
 
@@ -53,7 +54,7 @@ testCompileWith_openjdk_1_8_0_144() {
 }
 
 testCompileWith_9_0_1() {
-  echo "java.runtime.version=9.0.1" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=9.0.1" > "${BUILD_DIR}/system.properties"
 
   compile
 
@@ -65,7 +66,7 @@ testCompileWith_9_0_1() {
 }
 
 testCompileWith_zulu_9_0_0() {
-  echo "java.runtime.version=zulu-11.0.4" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=zulu-11.0.4" > "${BUILD_DIR}/system.properties"
 
   compile
 
@@ -77,7 +78,7 @@ testCompileWith_zulu_9_0_0() {
 }
 
 testCompileWith_10() {
-  echo "java.runtime.version=10" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=10" > "${BUILD_DIR}/system.properties"
 
   compile
 
@@ -89,8 +90,8 @@ testCompileWith_10() {
 }
 
 test_skip_install_if_java_exists() {
-  mkdir -p ${BUILD_DIR}/.jdk/bin
-  touch ${BUILD_DIR}/.jdk/bin/java
+  mkdir -p "${BUILD_DIR}/.jdk/bin"
+  touch "${BUILD_DIR}/.jdk/bin/java"
 
   compile
 

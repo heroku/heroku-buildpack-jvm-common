@@ -5,8 +5,10 @@ get_client() {
   local propName="client"
   local propDefault="JVM Common"
 
-  if [ -f ${propFile} ]; then
-    local propValue=$(sed '/^\#/d' ${propFile} | grep "${propName}"  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+  if [ -f "${propFile}" ]; then
+    local propValue
+    propValue=$(sed '/^\#/d' "${propFile}" | grep "${propName}"  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
     echo "${propValue:-$propDefault}"
   else
     echo "$propDefault"
@@ -15,14 +17,23 @@ get_client() {
 
 write_build_plan() {
   local plan=${1:?}
-  local appDir="$(pwd)"
-  local bpDir="$(cd $(dirname $0)/..; pwd)" # absolute path
+  local appDir
+  appDir="$(pwd)"
+
+  local bpDir
+  # shellcheck disable=SC2164
+  bpDir="$(cd "$(dirname "$0")/.."; pwd)" # absolute path
+
+  # shellcheck source=lib/jvm.sh
   source "${bpDir}/lib/jvm.sh"
 
-  local jdkVersion="$(get_jdk_version "${appDir}")"
-  local fullJdkVersion="$(get_full_jdk_version "${jdkVersion}")"
+  local jdkVersion
+  jdkVersion="$(get_jdk_version "${appDir}")"
 
-  cat <<TOML > $plan
+  local fullJdkVersion
+  fullJdkVersion="$(get_full_jdk_version "${jdkVersion}")"
+
+  cat <<TOML > "$plan"
 [[provides]]
 name = "jdk"
 
@@ -43,13 +54,13 @@ if [ -n "${CNB_STACK_ID:-}" ]; then
   write_build_plan "$2"
   echo "JVM"
 else
-  if [ -f $1/.heroku-deploy ]; then
-    echo "$(get_client $1/.heroku-deploy)"
-  elif [ -f $1/pom.xml ] && [ -d $1/target ]; then
+  if [ -f "$1/.heroku-deploy" ]; then
+    get_client "$1/.heroku-deploy"
+  elif [ -f "$1/pom.xml" ] && [ -d "$1/target" ]; then
     echo "heroku-maven-plugin"
-  elif [ -d $1/target/universal/stage ]; then
+  elif [ -d "$1/target/universal/stage" ]; then
     echo "sbt-heroku"
-  elif [ -f $1/project.clj ] && [ -d $1/target ]; then
+  elif [ -f "$1/project.clj" ] && [ -d "$1/target" ]; then
     echo "lein-heroku"
   else
     echo "JVM Common"

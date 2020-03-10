@@ -5,8 +5,11 @@
 
 STACK="${STACK:-$CNB_STACK_ID}"
 DEFAULT_JDK_VERSION="1.8"
+# shellcheck disable=SC2034
 DEFAULT_JDK_1_7_VERSION="1.7.0_252"
+# shellcheck disable=SC2034
 DEFAULT_JDK_1_8_VERSION="1.8.0_242"
+# shellcheck disable=SC2034
 DEFAULT_JDK_1_9_VERSION="9.0.4"
 DEFAULT_JDK_10_VERSION="10.0.2"
 DEFAULT_JDK_11_VERSION="11.0.6"
@@ -17,7 +20,7 @@ JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
 
 get_jdk_version() {
   local appDir="${1:?}"
-  if [ -f ${appDir}/system.properties ]; then
+  if [ -f "${appDir}/system.properties" ]; then
     detectedVersion="$(_get_system_property "${appDir}/system.properties" "java.runtime.version")"
     if [ -n "$detectedVersion" ]; then
       echo "$detectedVersion"
@@ -41,10 +44,11 @@ get_full_jdk_version() {
   elif [ "${jdkVersion}" = "13" ]; then
     echo "$DEFAULT_JDK_13_VERSION"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
-    local minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
-    echo "$(eval echo \$DEFAULT_JDK_1_${minorJdkVersion}_VERSION)"
+    local minorJdkVersion
+    minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
+    eval "echo \$DEFAULT_JDK_1_${minorJdkVersion}_VERSION"
   elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
-    echo "$(eval echo \$DEFAULT_JDK_1_${jdkVersion}_VERSION)"
+    eval "echo \$DEFAULT_JDK_1_${jdkVersion}_VERSION"
   elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then
     echo "9-181" # the naming convention for the first JDK 9 release was poor
   else
@@ -54,20 +58,23 @@ get_full_jdk_version() {
 
 get_jdk_url() {
   local shortJdkVersion=${1:-${DEFAULT_JDK_VERSION}}
-  local jdkVersion="$(get_full_jdk_version "${shortJdkVersion}")"
 
+  local jdkVersion
+  jdkVersion="$(get_full_jdk_version "${shortJdkVersion}")"
+
+  local jdkUrl
   if [ "$(expr "${jdkVersion}" : '^1[0-3]')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then
-    local jdkUrl="${JDK_BASE_URL}/openjdk9-181.tar.gz"
+    jdkUrl="${JDK_BASE_URL}/openjdk9-181.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^zulu-')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
+    jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^openjdk-')" != 0 ]; then
-    local jdkUrl="${JDK_BASE_URL}/$(echo "$jdkVersion" | sed -e 's/k-/k/g').tar.gz"
+    jdkUrl="${JDK_BASE_URL}/${jdkVersion//k-/k}.tar.gz"
   fi
 
   echo "${jdkUrl}"
@@ -82,7 +89,7 @@ get_jdk_cache_id() {
   if [ -n "$etag" ]; then
     echo "$etag"
   else
-    echo "$(date -u)"
+    date -u
   fi
 }
 
@@ -118,12 +125,12 @@ install_jdk() {
 
 install_certs() {
   local jdkDir="${1:?}"
-  if [ -f ${jdkDir}/jre/lib/security/cacerts ] && [ -f /etc/ssl/certs/java/cacerts ]; then
-    mv ${jdkDir}/jre/lib/security/cacerts ${jdkDir}/jre/lib/security/cacerts.old
-    ln -s /etc/ssl/certs/java/cacerts ${jdkDir}/jre/lib/security/cacerts
-  elif [ -f ${jdkDir}/lib/security/cacerts ] && [ -f /etc/ssl/certs/java/cacerts ]; then
-    mv ${jdkDir}/lib/security/cacerts ${jdkDir}/lib/security/cacerts.old
-    ln -s /etc/ssl/certs/java/cacerts ${jdkDir}/lib/security/cacerts
+  if [ -f "${jdkDir}/jre/lib/security/cacerts" ] && [ -f /etc/ssl/certs/java/cacerts ]; then
+    mv "${jdkDir}/jre/lib/security/cacerts" "${jdkDir}/jre/lib/security/cacerts.old"
+    ln -s /etc/ssl/certs/java/cacerts "${jdkDir}/jre/lib/security/cacerts"
+  elif [ -f "${jdkDir}/lib/security/cacerts" ] && [ -f /etc/ssl/certs/java/cacerts ]; then
+    mv "${jdkDir}/lib/security/cacerts" "${jdkDir}/lib/security/cacerts.old"
+    ln -s /etc/ssl/certs/java/cacerts "${jdkDir}/lib/security/cacerts"
   fi
 }
 
@@ -142,14 +149,14 @@ install_jdk_overlay() {
   local appDir="${2:?}"
   local cacertPath="lib/security/cacerts"
   shopt -s dotglob
-  if [ -d ${jdkDir} ] && [ -d ${appDir}/.jdk-overlay ]; then
+  if [ -d "${jdkDir}" ] && [ -d "${appDir}/.jdk-overlay" ]; then
     # delete the symlink because a cp will error
-    if [ -f ${appDir}/.jdk-overlay/jre/${cacertPath} ] && [ -f ${jdkDir}/jre/${cacertPath} ]; then
-      rm ${jdkDir}/jre/${cacertPath}
-    elif [ -f ${appDir}/.jdk-overlay/${cacertPath} ] && [ -f ${jdkDir}/${cacertPath} ]; then
-      rm ${jdkDir}/${cacertPath}
+    if [ -f "${appDir}/.jdk-overlay/jre/${cacertPath}" ] && [ -f "${jdkDir}/jre/${cacertPath}" ]; then
+      rm "${jdkDir}/jre/${cacertPath}"
+    elif [ -f "${appDir}/.jdk-overlay/${cacertPath}" ] && [ -f "${jdkDir}/${cacertPath}" ]; then
+      rm "${jdkDir}/${cacertPath}"
     fi
-    cp -r ${appDir}/.jdk-overlay/* ${jdkDir}
+    cp -r "${appDir}/.jdk-overlay/*" "${jdkDir}"
   fi
 }
 
@@ -159,11 +166,11 @@ install_metrics_agent() {
   local profileDir="${3:?}"
   local agentJar="${installDir}/heroku-metrics-agent.jar"
 
-  mkdir -p ${installDir}
-  curl --retry 3 -s -o ${agentJar} \
-      -L ${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.14/heroku-java-metrics-agent-3.14.jar"}
-  if [ -f ${agentJar} ]; then
-    mkdir -p ${profileDir}
+  mkdir -p "${installDir}"
+  curl --retry 3 -s -o "${agentJar}" \
+      -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.14/heroku-java-metrics-agent-3.14.jar"}"
+  if [ -f "${agentJar}" ]; then
+    mkdir -p "${profileDir}"
     cp "${bpDir}/opt/heroku-jvm-metrics.sh" "${profileDir}"
   fi
 }
@@ -185,9 +192,10 @@ _get_system_property() {
   local key=${2:?}
 
   # escape for regex
-  local escaped_key=$(echo $key | sed "s/\./\\\./g")
+  local escaped_key
+  escaped_key="${key//\./\\.}"
 
-  [ -f $file ] && \
-  grep -E ^$escaped_key[[:space:]=]+ $file | \
+  [ -f "$file" ] && \
+  grep -E "^${escaped_key}[[:space:]=]+" "$file" | \
   sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
 }
