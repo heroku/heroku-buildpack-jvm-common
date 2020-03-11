@@ -41,13 +41,13 @@ jobs:
     - name: "Deploy CNB release tarball on GitHub if the current run is a tag"
       stage: deploy
       script: skip
+      before_deploy: make package
       deploy:
         provider: releases
         edge: true
         name: "Cloud Native Buildpack (CNB) $TRAVIS_TAG"
         release_notes: "Cloud Native Buildpack (CNB) release. Automatically built after $TRAVIS_TAG of heroku/jvm was released."
         token: $GITHUB_OAUTH_TOKEN
-        before_deploy: make package
         file:
           - "heroku-jvm-cnb.tgz"
         on:
