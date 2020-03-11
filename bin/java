@@ -4,21 +4,28 @@
 # The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
 # be invoked.
 
-JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}"
-if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then source "${JVM_COMMON_DIR}/lib/jvm.sh"; fi
+JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd )}"
+if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then
+  # shellcheck source=lib/jvm.sh
+  source "${JVM_COMMON_DIR}/lib/jvm.sh";
+fi
 
 install_java_with_overlay() {
   local buildDir="${1}"
   local cacheDir="${2:-$(mktemp -d)}"
   if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
-    local jdkVersion=$(get_jdk_version ${buildDir})
-    local jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
+    local jdkVersion
+    jdkVersion=$(get_jdk_version "${buildDir}")
+
+    local jdkUrl
+    jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
+
     _jvm_mcount "version.${jdkVersion}"
     if [[ "$jdkVersion" == *openjdk* ]]; then
-      status_pending "Installing OpenJDK $(_get_openjdk_version ${jdkVersion})"
+      status_pending "Installing OpenJDK $(_get_openjdk_version "${jdkVersion}")"
       _jvm_mcount "vendor.openjdk"
     elif [[ "$jdkVersion" == *zulu* ]]; then
-      status_pending "Installing Azul Zulu JDK $(_get_zulu_version ${jdkVersion})"
+      status_pending "Installing Azul Zulu JDK $(_get_zulu_version "${jdkVersion}")"
       _jvm_mcount "vendor.zulu"
     else
       status_pending "Installing JDK ${jdkVersion}"
@@ -59,17 +66,17 @@ install_java() {
   export PATH="${jdkDir}/bin:${PATH}"
 
   install_profile "${JVM_COMMON_DIR}" "${baseDir}/.profile.d"
-  _install_tools ${baseDir}
-  _create_export_script ${JAVA_HOME} "$(pwd)"
-  _install_pgconfig ${JAVA_HOME}
-  _install_default_proc_warn ${baseDir}
+  _install_tools "${baseDir}"
+  _create_export_script "${JAVA_HOME}" "$(pwd)"
+  _install_pgconfig "${JAVA_HOME}"
+  _install_default_proc_warn "${baseDir}"
   install_metrics_agent "${JVM_COMMON_DIR}" "${baseDir}/.heroku/bin" "${baseDir}/.profile.d"
 }
 
 validate_jdk_url() {
   local jdkUrl=${1}
   local jdkVersion=${2}
-  if [ "$(_get_url_status ${jdkUrl})" != "200" ]; then
+  if [ "$(_get_url_status "${jdkUrl}")" != "200" ]; then
     echo ""
     error_return "Unsupported Java version: $jdkVersion
 
@@ -91,7 +98,7 @@ is_java_version_change() {
   jdkDir=$1
   jdkVersion=${2:-${DEFAULT_JDK_VERSION}}
   if [ ! -d "${jdkDir}" ]; then echo "Invalid JDK directory."; return 1; fi
-  test -f "${jdkDir}/version" && [ "$(cat ${jdkDir}/version)" != "${jdkVersion}" ]
+  test -f "${jdkDir}/version" && [ "$(cat "${jdkDir}/version")" != "${jdkVersion}" ]
 }
 
 # Legacy functions for backwards compatability
@@ -108,33 +115,33 @@ jdk_overlay() {
 
 _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
-  local curDir=${JVM_COMMON_DIR:-$(cd $(dirname ${BASH_SOURCE[0]}) && cd .. && pwd )}
+  local curDir=${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd )}
 
-  mkdir -p $ctxDir/.heroku/bin
-  mkdir -p $ctxDir/.heroku/with_jmap/bin
-  cp $curDir/opt/with_jmap $ctxDir/.heroku/bin/with_jmap
-  cp $curDir/opt/with_jmap_java $ctxDir/.heroku/with_jmap/bin/java
-  chmod +x $ctxDir/.heroku/bin/with_jmap
-  chmod +x $ctxDir/.heroku/with_jmap/bin/java
+  mkdir -p "$ctxDir/.heroku/bin"
+  mkdir -p "$ctxDir/.heroku/with_jmap/bin"
+  cp "$curDir/opt/with_jmap" "$ctxDir/.heroku/bin/with_jmap"
+  cp "$curDir/opt/with_jmap_java" "$ctxDir/.heroku/with_jmap/bin/java"
+  chmod +x "$ctxDir/.heroku/bin/with_jmap"
+  chmod +x "$ctxDir/.heroku/with_jmap/bin/java"
 
-  mkdir -p $ctxDir/.heroku/with_jstack/bin
-  cp $curDir/opt/with_jstack $ctxDir/.heroku/bin/with_jstack
-  cp $curDir/opt/with_jstack_java $ctxDir/.heroku/with_jstack/bin/java
-  chmod +x $ctxDir/.heroku/bin/with_jstack
-  chmod +x $ctxDir/.heroku/with_jstack/bin/java
+  mkdir -p "$ctxDir/.heroku/with_jstack/bin"
+  cp "$curDir/opt/with_jstack" "$ctxDir/.heroku/bin/with_jstack"
+  cp "$curDir/opt/with_jstack_java" "$ctxDir/.heroku/with_jstack/bin/java"
+  chmod +x "$ctxDir/.heroku/bin/with_jstack"
+  chmod +x "$ctxDir/.heroku/with_jstack/bin/java"
 
-  mkdir -p $ctxDir/.heroku/with_jmap_and_jstack/bin
-  cp $curDir/opt/with_jmap_and_jstack $ctxDir/.heroku/bin/with_jmap_and_jstack
-  cp $curDir/opt/with_jmap_and_jstack_java $ctxDir/.heroku/with_jmap_and_jstack/bin/java
-  chmod +x $ctxDir/.heroku/bin/with_jmap_and_jstack
-  chmod +x $ctxDir/.heroku/with_jmap_and_jstack/bin/java
+  mkdir -p "$ctxDir/.heroku/with_jmap_and_jstack/bin"
+  cp "$curDir/opt/with_jmap_and_jstack" "$ctxDir/.heroku/bin/with_jmap_and_jstack"
+  cp "$curDir/opt/with_jmap_and_jstack_java" "$ctxDir/.heroku/with_jmap_and_jstack/bin/java"
+  chmod +x "$ctxDir/.heroku/bin/with_jmap_and_jstack"
+  chmod +x "$ctxDir/.heroku/with_jmap_and_jstack/bin/java"
 }
 
 _install_default_proc_warn() {
   local ctxDir=${1:-BUILD_DIR}
 
-  mkdir -p ${ctxDir}/.profile.d
-  cat << EOF > ${ctxDir}/.profile.d/default-proc-warning.sh
+  mkdir -p "${ctxDir}/.profile.d"
+  cat << EOF > "${ctxDir}/.profile.d/default-proc-warning.sh"
 if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
   echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
 fi
@@ -145,8 +152,8 @@ _create_export_script() {
   local javaHome=${1:-JAVA_HOME}
   local ctxDir=${2:-CWD}
 
-  if [ -w ${ctxDir} ]; then
-    cat << EOF > ${ctxDir}/export
+  if [ -w "${ctxDir}" ]; then
+    cat << EOF > "${ctxDir}/export"
 export JAVA_HOME=$javaHome
 export PATH=\$JAVA_HOME/bin:\$PATH
 export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\$LD_LIBRARY_PATH"
@@ -159,7 +166,7 @@ _install_pgconfig() {
   local extDir="${javaHome}/jre/lib/ext"
 
   if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}"  ] && [ "${CI:-}" != "true" ]; then
-    curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o ${extDir}/pgconfig.jar
+    curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
   fi
 }
 
@@ -168,11 +175,11 @@ _install_pgconfig() {
 # not supported in the v3 implementation of the buildpack.
 _get_jdk_url_with_default() {
   local jdkVersion="${1:?}"
-  if [ -n "${JDK_URL_1_7:-}" ] && ([ "$(expr "${jdkVersion}" : '^1.7')" != 0 ] || [ "$(expr "${jdkVersion}" : '^7')" != 0 ]); then
+  if [ -n "${JDK_URL_1_7:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.7')" != 0 ] || [ "$(expr "${jdkVersion}" : '^7')" != 0 ]; }; then
     echo "$JDK_URL_1_7"
-  elif [ -n "${JDK_URL_1_8:-}" ] && ([ "$(expr "${jdkVersion}" : '^1.8')" != 0 ] || [ "$(expr "${jdkVersion}" : '^8')" != 0 ]); then
+  elif [ -n "${JDK_URL_1_8:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.8')" != 0 ] || [ "$(expr "${jdkVersion}" : '^8')" != 0 ]; }; then
     echo "$JDK_URL_1_8"
-  elif [ -n "${JDK_URL_1_9:-}" ] && ([ "$(expr "${jdkVersion}" : '^1.9')" != 0 ] || [ "$(expr "${jdkVersion}" : '^9')" != 0 ]); then
+  elif [ -n "${JDK_URL_1_9:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.9')" != 0 ] || [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; }; then
     echo "$JDK_URL_1_9"
   elif [ -n "${JDK_URL_10:-}" ] && [ "$(expr "${jdkVersion}" : '^10')" != 0 ]; then
     echo "$JDK_URL_10"
@@ -183,20 +190,20 @@ _get_jdk_url_with_default() {
   elif [ -n "${JDK_URL_13:-}" ] && [ "$(expr "${jdkVersion}" : '^13')" != 0 ]; then
     echo "$JDK_URL_13"
   else
-    echo "$(get_jdk_url "$jdkVersion")"
+    get_jdk_url "$jdkVersion"
   fi
 }
 
 _get_zulu_version() {
-  echo "$(echo ${1} | sed -e 's/zulu-//g')"
+  echo "${1//zulu-/}"
 }
 
 _get_openjdk_version() {
-  echo "$(echo ${1} | sed -e 's/openjdk-//g')"
+  echo "${1//openjdk-/}"
 }
 
 _get_url_status() {
-  curl --retry 3 --silent --head -w %{http_code} -L "${1}" -o /dev/null
+  curl --retry 3 --silent --head -w "%{http_code}" -L "${1}" -o /dev/null
 }
 
 _jvm_mcount() {

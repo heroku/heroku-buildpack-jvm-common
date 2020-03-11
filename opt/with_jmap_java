@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2173,SC2145,SC2004,SC2006,SC2086,SC2064
+
 export JAVA_HOME=${HEROKU_JAVA_HOME}
 eval "$JAVA_HOME/bin/java $@ &"
 pid=$!

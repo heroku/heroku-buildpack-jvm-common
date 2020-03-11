@@ -4,8 +4,10 @@ set_jdbc_url() {
   local db_url=${1}
   local env_prefix=${2:-"JDBC_DATABASE"}
 
-  if [ -z "$(eval echo \${${env_prefix}_URL:-})" ]; then
-      local db_protocol=$(expr "$db_url" : "\(.\+\)://")
+  if [ -z "$(eval echo "\${${env_prefix}_URL:-}")" ]; then
+      local db_protocol
+      db_protocol=$(expr "$db_url" : "\(.\+\)://")
+
       if [ "$db_protocol" = "postgres" ]; then
         local jdbc_protocol="jdbc:postgresql"
 
@@ -19,16 +21,21 @@ set_jdbc_url() {
       fi
 
       if [ -n "$jdbc_protocol" ]; then
-        local db_user=$(expr "$db_url" : "${db_protocol}://\(.\+\):\(.\+\)@")
+        local db_user
+        db_user=$(expr "$db_url" : "${db_protocol}://\(.\+\):\(.\+\)@")
+
         local db_prefix="${db_protocol}://${db_user}:"
 
-        local db_pass=$(expr "$db_url" : "${db_prefix}\(.\+\)@")
+        local db_pass
+        db_pass=$(expr "$db_url" : "${db_prefix}\(.\+\)@")
         db_prefix="${db_prefix}${db_pass}@"
 
-        local db_host_port=$(expr "$db_url" : "${db_prefix}\(.\+\)/")
+        local db_host_port
+        db_host_port=$(expr "$db_url" : "${db_prefix}\(.\+\)/")
         db_prefix="${db_prefix}${db_host_port}/"
 
-        local db_suffix=$(expr "$db_url" : "${db_prefix}\(.\+\)")
+        local db_suffix
+        db_suffix=$(expr "$db_url" : "${db_prefix}\(.\+\)")
 
         if echo "$db_suffix" | grep -qi "?"; then
           local db_args="&user=${db_user}&password=${db_pass}"
@@ -72,5 +79,5 @@ if [ "${DISABLE_SPRING_DATASOURCE_URL:-}" != "true" ] &&
 fi
 
 for dbUrlVar in $(env | awk -F "=" '{print $1}' | grep "HEROKU_POSTGRESQL_.*_URL"); do
-  set_jdbc_url "$(eval echo \$${dbUrlVar})" "$(echo $dbUrlVar | sed -e s/_URL//g)_JDBC"
+  set_jdbc_url "$(eval echo "\$${dbUrlVar}")" "${dbUrlVar//_URL/}_JDBC"
 done
