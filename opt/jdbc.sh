@@ -58,7 +58,7 @@ set_jdbc_url() {
 if [ -n "${DATABASE_URL:-}" ]; then
   set_jdbc_url "$DATABASE_URL"
   if [ -n "${DATABASE_CONNECTION_POOL_URL:-}" ]; then
-    set_jdbc_url "$DATABASE_CONNECTION_POOL_URL"
+    set_jdbc_url "$DATABASE_CONNECTION_POOL_URL" "JDBC_DATABASE_CONNECTION_POOL"
   fi
 elif [ -n "${JAWSDB_URL:-}" ]; then
   set_jdbc_url "$JAWSDB_URL"
