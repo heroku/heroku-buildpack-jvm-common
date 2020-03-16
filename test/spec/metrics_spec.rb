@@ -11,7 +11,7 @@ describe "JVM Metrics" do
     `heroku features:enable runtime-heroku-metrics --app #{app.name}`
   end
 
-  ["1.7", "1.8", "11"].each do |version|
+  ["1.7", "1.8", "11", "14"].each do |version|
     context "a simple java app on jdk-#{version}" do
       let(:app) { new_app_with_defaults("java-servlets-sample",
         :buildpack_url => "https://github.com/heroku/heroku-buildpack-java") }
