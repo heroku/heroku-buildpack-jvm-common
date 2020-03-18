@@ -31,4 +31,4 @@ cedar-14:
 
 package:
 	@rm -f heroku-jvm-cnb.tgz
-	@tar czvf heroku-jvm-cnb.tgz bin/ buildpack.toml etc/ lib/ opt/ readme.md LICENSE
+	@tar czvf heroku-jvm-cnb.tgz bin/ buildpack.toml etc/ lib/ opt/ README.md LICENSE
