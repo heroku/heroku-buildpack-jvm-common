@@ -2,6 +2,8 @@
 
 ## Master
 
+* Fix CNB packaging
+
 ## v99
 
 * Add support for JDK 14
