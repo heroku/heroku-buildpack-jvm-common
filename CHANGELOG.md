@@ -2,9 +2,17 @@
 
 ## Master
 
-* Enable -XX:+UseContainerSupport on JDK versions > 11
-* Improve CI and testing setup
+## v99
+
 * Add support for JDK 14
+
+## v98
+
+* Improve CI and testing setup
+
+## v97
+
+* Enable -XX:+UseContainerSupport on JDK versions > 11
 
 ## v96
 
