@@ -1,6 +1,6 @@
 unit:
 	@echo "Running unit tests in docker (heroku-18)..."
-	@docker run -v $(shell pwd):/buildpack:ro --rm -it -e "CNB_STACK_ID=heroku-18" -e "BUILDPACK_HOME=/buildpack" heroku/heroku:18 bash -c 'cp -r /buildpack /buildpack_test; cd /buildpack_test/; test/unit; test/jdbc.sh'
+	@docker run -v $(shell pwd):/buildpack:ro --rm -it -e "CNB_STACK_ID=heroku-18" -e "BUILDPACK_HOME=/buildpack" heroku/heroku:18 bash -c 'cp -r /buildpack /buildpack_test; cd /buildpack_test/; test/unit && test/jdbc.sh'
 	@echo ""
 
 v3:
