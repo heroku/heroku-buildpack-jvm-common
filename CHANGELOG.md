@@ -3,6 +3,7 @@
 ## Master
 
 * Fix CNB packaging
+* Fix DATABASE_CONNECTION_POOL_URL handling
 
 ## v99
 
