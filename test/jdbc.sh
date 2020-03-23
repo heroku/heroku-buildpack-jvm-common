@@ -184,4 +184,4 @@ testSpringDataSourceSupportImplicitlyDisabled() {
 }
 
 # shellcheck disable=SC1091
-source test/shunit2
+source test/vendor/shunit2

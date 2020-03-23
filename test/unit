@@ -188,5 +188,5 @@ source "${BUILDPACK_DIR}/test/utils"
 installToolbox
 
 # import the testing framework
-# shellcheck source=test/shunit2
-source "${BUILDPACK_DIR}/test/shunit2"
+# shellcheck source=test/vendor/shunit2
+source "${BUILDPACK_DIR}/test/vendor/shunit2"

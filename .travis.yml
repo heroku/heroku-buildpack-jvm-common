@@ -30,7 +30,13 @@ jobs:
       before_install: skip
       install: skip
       before_script: skip
-      script: shellcheck bin/* lib/jvm.sh lib/v3/* etc/* opt/* test/*.sh
+      script: make shellcheck
+      after_script: skip
+    - name: "shfmt"
+      before_install: skip
+      install: skip
+      before_script: skip
+      script: make shfmt
       after_script: skip
     - name: "cedar-14"
       env: HEROKU_TEST_STACK=cedar-14
