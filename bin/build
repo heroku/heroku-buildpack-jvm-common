@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 appDir="$(pwd)"
-bpDir="$(cd "$(dirname "$0")/.."; pwd)" # absolute path
+bpDir="$(
+  cd "$(dirname "$0")/.."
+  pwd
+)" # absolute path
 layersDir="${1:?}"
 
 # shellcheck source=lib/v3/common.sh
@@ -29,7 +32,8 @@ jdkUrl="$(get_jdk_url "${jdkVersion}")"
 
 jdkCacheId="$(get_jdk_cache_id "${jdkUrl}")"
 
-jdkMetadata=$(cat <<EOF
+jdkMetadata=$(
+  cat <<EOF
 version = "${jdkVersion}"
 cache_id = "${jdkCacheId}"
 EOF

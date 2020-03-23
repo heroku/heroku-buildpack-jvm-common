@@ -3,6 +3,15 @@ unit:
 	@docker run -v $(shell pwd):/buildpack:ro --rm -it -e "CNB_STACK_ID=heroku-18" -e "BUILDPACK_HOME=/buildpack" heroku/heroku:18 bash -c 'cp -r /buildpack /buildpack_test; cd /buildpack_test/; test/unit && test/jdbc.sh'
 	@echo ""
 
+shellcheck:
+	@shellcheck bin/* lib/jvm.sh lib/v3/* etc/* opt/* test/*.sh
+
+shfmt:
+	@shfmt -f . | grep -v "/vendor/" | xargs shfmt -i 2 -d
+
+shfmt-fix:
+	@shfmt -f . | grep -v "/vendor/" | xargs shfmt -i 2 -w
+
 v3:
 	@echo "Running v3 integration tests in docker (heroku-18)..."
 	@docker run -v $(shell pwd):/buildpack:ro --rm -it -e "CNB_STACK_ID=heroku-18" -e "BUILDPACK_HOME=/buildpack" heroku/heroku:18 bash -c 'cp -r /buildpack /buildpack_test; cd /buildpack_test/; test/v3;'

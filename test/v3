@@ -2,8 +2,7 @@
 
 export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
-testDetect()
-{
+testDetect() {
   local buildPlan
   buildPlan="$(mktemp)"
   detect "${PLATFORM_DIR}" "${buildPlan}"
@@ -13,9 +12,8 @@ testDetect()
   assertFileContains "version = \"${DEFAULT_JDK_1_8_VERSION}\"" "${buildPlan}"
 }
 
-testDetect_jdk11()
-{
-  echo "java.runtime.version=11" > "${BUILD_DIR}/system.properties"
+testDetect_jdk11() {
+  echo "java.runtime.version=11" >"${BUILD_DIR}/system.properties"
   local buildPlan
   buildPlan="$(mktemp)"
   detect "${PLATFORM_DIR}" "${buildPlan}"
@@ -25,9 +23,8 @@ testDetect_jdk11()
   assertFileContains "version = \"${DEFAULT_JDK_11_VERSION}\"" "${buildPlan}"
 }
 
-testDetect_jdk11_0_4()
-{
-  echo "java.runtime.version=11.0.4" > "${BUILD_DIR}/system.properties"
+testDetect_jdk11_0_4() {
+  echo "java.runtime.version=11.0.4" >"${BUILD_DIR}/system.properties"
   local buildPlan
   buildPlan="$(mktemp)"
   detect "${PLATFORM_DIR}" "${buildPlan}"
@@ -56,7 +53,7 @@ test_build() {
 }
 
 test_build_jdk_7() {
-  echo "java.runtime.version=1.7.0_222" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=1.7.0_222" >"${BUILD_DIR}/system.properties"
   build
   assertCapturedSuccess
   assertCaptured "JDK 1.7.0_222 installed"
@@ -67,7 +64,7 @@ test_build_jdk_7() {
 }
 
 test_build_jdk_11() {
-  echo "java.runtime.version=11" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=11" >"${BUILD_DIR}/system.properties"
   build
   assertCapturedSuccess
   assertCaptured "JDK 11 installed"
@@ -105,5 +102,5 @@ source "${BUILDPACK_HOME}/lib/jvm.sh"
 source "${BUILDPACK_HOME}/test/utils"
 
 # import the testing framework
-# shellcheck source=/test/shunit2
-source "${BUILDPACK_HOME}/test/shunit2"
+# shellcheck source=/test/vendor/shunit2
+source "${BUILDPACK_HOME}/test/vendor/shunit2"

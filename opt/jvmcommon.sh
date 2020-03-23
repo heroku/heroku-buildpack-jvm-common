@@ -5,7 +5,7 @@ calculate_java_memory_opts() {
 
   limit=$(ulimit -u)
   case $limit in
-  512)   # 2X, private-s: memory.limit_in_bytes=1073741824
+  512) # 2X, private-s: memory.limit_in_bytes=1073741824
     echo "$opts -Xmx671m -XX:CICompilerCount=2"
     ;;
   16384) # perf-m, private-m: memory.limit_in_bytes=2684354560

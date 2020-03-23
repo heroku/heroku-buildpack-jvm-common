@@ -4,10 +4,10 @@
 # The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
 # be invoked.
 
-JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd )}"
+JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
 if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then
   # shellcheck source=lib/jvm.sh
-  source "${JVM_COMMON_DIR}/lib/jvm.sh";
+  source "${JVM_COMMON_DIR}/lib/jvm.sh"
 fi
 
 install_java_with_overlay() {
@@ -56,7 +56,7 @@ install_java() {
     validate_jdk_url "${jdkUrl}" "${jdkVersion}"
     install_jdk "${jdkUrl}" "${jdkDir}" "${JVM_COMMON_DIR}"
     install_certs "${jdkDir}"
-    echo "${jdkVersion}" > "${jdkDir}/version"
+    echo "${jdkVersion}" >"${jdkDir}/version"
     if [ ! -f "${javaExe}" ]; then
       error_return "Unable to retrieve the JDK."
       return 1
@@ -97,7 +97,10 @@ Heroku"
 is_java_version_change() {
   jdkDir=$1
   jdkVersion=${2:-${DEFAULT_JDK_VERSION}}
-  if [ ! -d "${jdkDir}" ]; then echo "Invalid JDK directory."; return 1; fi
+  if [ ! -d "${jdkDir}" ]; then
+    echo "Invalid JDK directory."
+    return 1
+  fi
   test -f "${jdkDir}/version" && [ "$(cat "${jdkDir}/version")" != "${jdkVersion}" ]
 }
 
@@ -115,7 +118,7 @@ jdk_overlay() {
 
 _install_tools() {
   local ctxDir=${1:-BUILD_DIR}
-  local curDir=${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd )}
+  local curDir=${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}
 
   mkdir -p "$ctxDir/.heroku/bin"
   mkdir -p "$ctxDir/.heroku/with_jmap/bin"
@@ -141,7 +144,7 @@ _install_default_proc_warn() {
   local ctxDir=${1:-BUILD_DIR}
 
   mkdir -p "${ctxDir}/.profile.d"
-  cat << EOF > "${ctxDir}/.profile.d/default-proc-warning.sh"
+  cat <<EOF >"${ctxDir}/.profile.d/default-proc-warning.sh"
 if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
   echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
 fi
@@ -153,7 +156,7 @@ _create_export_script() {
   local ctxDir=${2:-CWD}
 
   if [ -w "${ctxDir}" ]; then
-    cat << EOF > "${ctxDir}/export"
+    cat <<EOF >"${ctxDir}/export"
 export JAVA_HOME=$javaHome
 export PATH=\$JAVA_HOME/bin:\$PATH
 export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\$LD_LIBRARY_PATH"
@@ -165,7 +168,7 @@ _install_pgconfig() {
   local javaHome=${1:-JAVA_HOME}
   local extDir="${javaHome}/jre/lib/ext"
 
-  if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}"  ] && [ "${CI:-}" != "true" ]; then
+  if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}" ] && [ "${CI:-}" != "true" ]; then
     curl --retry 3 -s -L "https://lang-jvm.s3.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
   fi
 }
@@ -207,7 +210,7 @@ _get_url_status() {
 }
 
 _jvm_mcount() {
-  if type -t mcount > /dev/null; then mcount "jvm.${1}"; fi
+  if type -t mcount >/dev/null; then mcount "jvm.${1}"; fi
 }
 
 # Caching the JVM version will allow us to pin previous used defaults when
@@ -219,6 +222,6 @@ _cache_version() {
   local cacheDir="${2}"
 
   if [ -d "${cacheDir}" ]; then
-    echo "java.runtime.version=${jdkVersion}" > "${cacheDir}/system.properties"
+    echo "java.runtime.version=${jdkVersion}" >"${cacheDir}/system.properties"
   fi
 }
