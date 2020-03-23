@@ -14,9 +14,9 @@ beforeSetUp() {
 }
 
 prepareEnvDir() {
-  echo -n "/lol"  > "$ENV_DIR/GIT_DIR"
-  echo -n "/jars" > "$ENV_DIR/MAVEN_DIR"
-  cat > "$ENV_DIR/MULTILINE" <<EOF
+  echo -n "/lol" >"$ENV_DIR/GIT_DIR"
+  echo -n "/jars" >"$ENV_DIR/MAVEN_DIR"
+  cat >"$ENV_DIR/MULTILINE" <<EOF
 i'm a cool
 multiline
 config
@@ -24,7 +24,7 @@ var
 i even have a trailing new line or two!
 
 EOF
-  echo -n ""    > "$ENV_DIR/EMPTY"
+  echo -n "" >"$ENV_DIR/EMPTY"
 }
 
 test_export_env_dir_unset() {
@@ -89,7 +89,7 @@ test_noDirectories() {
   copy_directories "" "${CACHE_DIR}" "${BUILD_DIR}"
   # shellcheck disable=SC2012
   countDirectories=$(ls -l | wc -l | sed -E -e 's/\s*//')
-  assertEquals "${initialDirectoryCount}" "${countDirectories}" 
+  assertEquals "${initialDirectoryCount}" "${countDirectories}"
 }
 
 test_invalidBaseDir() {

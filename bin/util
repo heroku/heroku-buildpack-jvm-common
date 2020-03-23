@@ -53,8 +53,8 @@ indent() {
   # if an arg is given it's a flag indicating we shouldn't indent the first line, so use :+ to tell SED accordingly if that parameter is set, otherwise null string for no range selector prefix (it selects from line 2 onwards and then every 1st line, meaning all lines)
   c="${1:+"2,999"} s/^/       /"
   case $(uname) in
-    Darwin) sed -l "$c";; # mac/bsd sed: -l buffers on line boundaries
-    *)      sed -u "$c";; # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
+  Darwin) sed -l "$c" ;; # mac/bsd sed: -l buffers on line boundaries
+  *) sed -u "$c" ;; # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
   esac
 }
 
@@ -65,7 +65,7 @@ export_env_dir() {
   if [ -d "$env_dir" ]; then
     for env_var_path in "$env_dir"/*; do
       basename "$env_var_path" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-      export "$(basename "$env_var_path")=$(cat "$env_var_path")"
+        export "$(basename "$env_var_path")=$(cat "$env_var_path")"
       :
     done
   fi
@@ -76,13 +76,19 @@ copy_directories() {
   sourceDir=$2
   destDir=$3
 
-  if [ ! -d "${sourceDir}" ] ; then echo "Invalid source directory to copy from. ${sourceDir}" ; return 1 ; fi
-  if [ ! -d "${destDir}" ] ; then echo "Invalid destination directory to copy to. ${destDir}" ; return 1 ; fi
+  if [ ! -d "${sourceDir}" ]; then
+    echo "Invalid source directory to copy from. ${sourceDir}"
+    return 1
+  fi
+  if [ ! -d "${destDir}" ]; then
+    echo "Invalid destination directory to copy to. ${destDir}"
+    return 1
+  fi
 
-  for dir in ${dirList} ; do
+  for dir in ${dirList}; do
     rm -rf "${destDir:?}/${dir:?}"
 
-    if [ -d "${sourceDir}/${dir}" ] ; then
+    if [ -d "${sourceDir}/${dir}" ]; then
       mkdir -p "${destDir}/${dir}"
       cp -r "${sourceDir}/${dir}/." "${destDir}/${dir}"
     fi

@@ -2,15 +2,13 @@
 
 BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
-testDetect()
-{
+testDetect() {
   detect "${BUILD_DIR}"
 
   assertAppDetected "JVM Common"
 }
 
-testDetect_OldMavenPlugin()
-{
+testDetect_OldMavenPlugin() {
   touch "${BUILD_DIR}/pom.xml"
   mkdir "${BUILD_DIR}/target"
 
@@ -22,8 +20,7 @@ testDetect_OldMavenPlugin()
   rm -rf "${BUILD_DIR}/target"
 }
 
-testDetect_OldSbtPlugin()
-{
+testDetect_OldSbtPlugin() {
   mkdir -p "${BUILD_DIR}/target/universal/stage"
 
   detect
@@ -33,8 +30,7 @@ testDetect_OldSbtPlugin()
   rm -rf "${BUILD_DIR}/target/universal/stage"
 }
 
-testDetect_OldLeinPlugin()
-{
+testDetect_OldLeinPlugin() {
   touch "${BUILD_DIR}/project.clj"
   mkdir "${BUILD_DIR}/target"
 
@@ -46,9 +42,8 @@ testDetect_OldLeinPlugin()
   rm -rf "${BUILD_DIR}/target"
 }
 
-testDetect_MavenPlugin()
-{
-  echo "client=heroku-maven-plugin" > "${BUILD_DIR}/.heroku-deploy"
+testDetect_MavenPlugin() {
+  echo "client=heroku-maven-plugin" >"${BUILD_DIR}/.heroku-deploy"
 
   detect
 
@@ -57,9 +52,8 @@ testDetect_MavenPlugin()
   rm -f "${BUILD_DIR}/.heroku-deploy"
 }
 
-testDetect_GradlePlugin()
-{
-  echo "client=heroku-gradle" > "${BUILD_DIR}/.heroku-deploy"
+testDetect_GradlePlugin() {
+  echo "client=heroku-gradle" >"${BUILD_DIR}/.heroku-deploy"
 
   detect
 
@@ -68,9 +62,8 @@ testDetect_GradlePlugin()
   rm -f "${BUILD_DIR}/.heroku-deploy"
 }
 
-testDetect_GradlePlugin()
-{
-  echo "client=heroku-cli-deploy" > "${BUILD_DIR}/.heroku-deploy"
+testDetect_GradlePlugin() {
+  echo "client=heroku-cli-deploy" >"${BUILD_DIR}/.heroku-deploy"
   touch "${BUILD_DIR}/pom.xml"
   mkdir "${BUILD_DIR}/target"
 
@@ -272,5 +265,5 @@ source "${BUILDPACK_HOME}/bin/java"
 source "${BUILDPACK_HOME}/test/utils"
 
 # import the testing framework
-# shellcheck source=test/shunit2
-source "${BUILDPACK_HOME}/test/shunit2"
+# shellcheck source=test/vendor/shunit2
+source "${BUILDPACK_HOME}/test/vendor/shunit2"

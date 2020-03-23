@@ -6,7 +6,10 @@ set -e
 # parse args
 export BUILD_DIR=$1
 
-BIN_DIR=$(cd "$(dirname "$0")"; pwd) # absolute path
+BIN_DIR=$(
+  cd "$(dirname "$0")"
+  pwd
+) # absolute path
 
 # shellcheck source=bin/java
 source "$BIN_DIR/java"

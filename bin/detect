@@ -7,7 +7,7 @@ get_client() {
 
   if [ -f "${propFile}" ]; then
     local propValue
-    propValue=$(sed '/^\#/d' "${propFile}" | grep "${propName}"  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+    propValue=$(sed '/^\#/d' "${propFile}" | grep "${propName}" | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
     echo "${propValue:-$propDefault}"
   else
@@ -22,7 +22,10 @@ write_build_plan() {
 
   local bpDir
   # shellcheck disable=SC2164
-  bpDir="$(cd "$(dirname "$0")/.."; pwd)" # absolute path
+  bpDir="$(
+    cd "$(dirname "$0")/.."
+    pwd
+  )" # absolute path
 
   # shellcheck source=lib/jvm.sh
   source "${bpDir}/lib/jvm.sh"
@@ -33,7 +36,7 @@ write_build_plan() {
   local fullJdkVersion
   fullJdkVersion="$(get_full_jdk_version "${jdkVersion}")"
 
-  cat <<TOML > "$plan"
+  cat <<TOML >"$plan"
 [[provides]]
 name = "jdk"
 

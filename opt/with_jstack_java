@@ -10,8 +10,7 @@ trap "kill -3 $pid; kill $pid" SIGTERM
 trap "kill -9 $pid; exit" SIGKILL
 
 sleep 10
-while kill -0 $pid
-do
+while kill -0 $pid; do
   if [ -z "$JSTACK_INTERVAL" ]; then
     sleep 10
   else

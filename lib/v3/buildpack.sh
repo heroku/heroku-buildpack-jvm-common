@@ -35,9 +35,9 @@ bp_install_or_reuse_toolbox() {
     fi
   fi
 
-  echo "cache = true" > "${layer_dir}.toml"
-  echo "build = true" >> "${layer_dir}.toml"
-  echo "launch = false" >> "${layer_dir}.toml"
+  echo "cache = true" >"${layer_dir}.toml"
+  echo "build = true" >>"${layer_dir}.toml"
+  echo "launch = false" >>"${layer_dir}.toml"
 }
 
 bp_layer_has_key() {
@@ -79,7 +79,7 @@ bp_layer_init() {
 
   rm -rf "${layer_dir}"
   mkdir -p "${layer_dir}"
-  echo "${metadata}" > "${layer_metadata}"
+  echo "${metadata}" >"${layer_metadata}"
 
   echo "${layer_dir}"
 }

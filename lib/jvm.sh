@@ -110,14 +110,13 @@ install_jdk() {
   else
     curl --retry 3 --silent --show-error --location "${url}.gpg" --output "${tarball}.gpg"
 
-    gpg --no-tty --batch --import "${key}" > /dev/null 2>&1
+    gpg --no-tty --batch --import "${key}" >/dev/null 2>&1
 
-    if gpg --no-tty --batch --verify "${tarball}.gpg" "${tarball}" > /dev/null 2>&1
-    then
+    if gpg --no-tty --batch --verify "${tarball}.gpg" "${tarball}" >/dev/null 2>&1; then
       _jvm_mcount "gpg.verify.success"
     else
       _jvm_mcount "gpg.verify.failed"
-      (>&2 echo " !     ERROR: Invalid GPG signature!")
+      (echo >&2 " !     ERROR: Invalid GPG signature!")
       return 1
     fi
   fi
@@ -171,7 +170,7 @@ install_metrics_agent() {
 
   mkdir -p "${installDir}"
   curl --retry 3 -s -o "${agentJar}" \
-      -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.14/heroku-java-metrics-agent-3.14.jar"}"
+    -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.14/heroku-java-metrics-agent-3.14.jar"}"
   if [ -f "${agentJar}" ]; then
     mkdir -p "${profileDir}"
     cp "${bpDir}/opt/heroku-jvm-metrics.sh" "${profileDir}"
@@ -198,7 +197,7 @@ _get_system_property() {
   local escaped_key
   escaped_key="${key//\./\\.}"
 
-  [ -f "$file" ] && \
-  grep -E "^${escaped_key}[[:space:]=]+" "$file" | \
-  sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
+  [ -f "$file" ] &&
+    grep -E "^${escaped_key}[[:space:]=]+" "$file" |
+    sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
 }

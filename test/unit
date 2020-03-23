@@ -3,17 +3,17 @@
 BUILDPACK_DIR="${BUILDPACK_DIR:-$(pwd)}"
 
 test_get_jdk_version() {
-  echo "java.runtime.version=1.8" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=1.8" >"${BUILD_DIR}/system.properties"
   assertEquals "1.8" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_spaces() {
-  echo "java.runtime.version = 11  " > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version = 11  " >"${BUILD_DIR}/system.properties"
   assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_newline() {
-  cat <<EOF > "${BUILD_DIR}/system.properties"
+  cat <<EOF >"${BUILD_DIR}/system.properties"
 java.runtime.version=11
 maven.version=3.5.4
 EOF
@@ -35,22 +35,22 @@ test_get_full_jdk_version() {
 }
 
 test_get_jdk_version_8_222() {
-  echo "java.runtime.version=1.8.0_222" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=1.8.0_222" >"${BUILD_DIR}/system.properties"
   assertEquals "1.8.0_222" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_11() {
-  echo "java.runtime.version=11" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=11" >"${BUILD_DIR}/system.properties"
   assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_11_0_4() {
-  echo "java.runtime.version=11.0.4" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=11.0.4" >"${BUILD_DIR}/system.properties"
   assertEquals "11.0.4" "$(get_jdk_version "$BUILD_DIR")"
 }
 
 test_get_jdk_version_zulu() {
-  echo "java.runtime.version=zulu-1.8.0_212" > "${BUILD_DIR}/system.properties"
+  echo "java.runtime.version=zulu-1.8.0_212" >"${BUILD_DIR}/system.properties"
   assertEquals "zulu-1.8.0_212" "$(get_jdk_version "$BUILD_DIR")"
 }
 
@@ -81,7 +81,7 @@ test_install_jdk_overlay() {
   mkdir -p "${BUILD_DIR}/.jdk-overlay/jre/lib/security"
   mkdir -p "${BUILD_DIR}/.jdk-overlay/jre/bin"
   touch "${BUILD_DIR}/.jdk-overlay/jre/lib/security/policy.jar"
-  echo "." > "${BUILD_DIR}/.jdk-overlay/jre/lib/security/cacerts"
+  echo "." >"${BUILD_DIR}/.jdk-overlay/jre/lib/security/cacerts"
   capture install_jdk_overlay "${jdk_dir}" "${BUILD_DIR}"
   assertTrue "Files in .jdk-overlay should be copied to .jdk." "[ -f ${jdk_dir}/jre/lib/security/policy.jar ]"
   assertTrue "Files in .jdk should not be overwritten." "[ -f ${jdk_dir}/jre/bin/java ]"
@@ -99,14 +99,14 @@ test_install_profile() {
 }
 
 testGetAppSystemProperty() {
-  cat > "${BUILD_DIR}/app.system" <<EOF
+  cat >"${BUILD_DIR}/app.system" <<EOF
 jvm.major.version=1.8
 EOF
   assertEquals "1.8" "$(_get_system_property "${BUILD_DIR}/app.system" "jvm.major.version")"
 }
 
 test_get_system_property_with_whitespace() {
-  cat > "${BUILD_DIR}/app.system" <<EOF
+  cat >"${BUILD_DIR}/app.system" <<EOF
 
 jvm.major.version    =        1.8
 
@@ -116,7 +116,7 @@ EOF
 }
 
 testGetAppSystemPropertyWithSimilarName() {
-  cat > "${BUILD_DIR}/app.system" <<EOF
+  cat >"${BUILD_DIR}/app.system" <<EOF
 jvm.major.versions=1.8
 EOF
   assertEquals "" "$(_get_system_property "${BUILD_DIR}/app.system" "jvm.major.version")"
@@ -132,7 +132,7 @@ test_bp_layer_has_key_no() {
     echo "[metadata]"
     echo "version = \"1.8.0_202\""
     echo "cache_id = \"foobar\""
-  } >> "${mockLayer}.toml"
+  } >>"${mockLayer}.toml"
 
   bp_layer_has_key "$mockLayer" ".metadata.cache_id" "quack"
   assertEquals 1 "$?"
@@ -155,10 +155,10 @@ test_bp_layer_has_key_yes() {
   touch "${mockLayer}.toml"
 
   {
-  echo "[metadata]"
-  echo "version = \"1.8.0_202\""
-  echo "cache_id = \"${expectedCacheId}\""
-  } >> "${mockLayer}.toml"
+    echo "[metadata]"
+    echo "version = \"1.8.0_202\""
+    echo "cache_id = \"${expectedCacheId}\""
+  } >>"${mockLayer}.toml"
 
   bp_layer_has_key "$mockLayer" ".metadata.cache_id" "$expectedCacheId"
   assertEquals 0 "$?"
