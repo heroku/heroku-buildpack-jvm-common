@@ -4,6 +4,7 @@
 
 * Fix CNB packaging
 * Fix DATABASE_CONNECTION_POOL_URL handling
+* JDBC URL transformation no longer crashes silently on unexpected URLs
 
 ## v99
 
