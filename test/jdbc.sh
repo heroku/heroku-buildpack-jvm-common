@@ -58,7 +58,7 @@ testMySQLDatabaseEnvVar() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/abc123?reconnect=true&user=foo&password=bar" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/abc123?user=foo&password=bar&reconnect=true" "$JDBC_DATABASE_URL"
   )
 }
 
@@ -70,7 +70,7 @@ testThirdPartyDatabaseUrls() {
       # shellcheck disable=SC1090
       source "$JDBC_SCRIPT_LOCATION"
 
-      assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/$item?reconnect=true&user=foo&password=bar" "$JDBC_DATABASE_URL"
+      assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/$item?user=foo&password=bar&reconnect=true" "$JDBC_DATABASE_URL"
       assertEquals "foo" "$JDBC_DATABASE_USERNAME"
       assertEquals "bar" "$JDBC_DATABASE_PASSWORD"
     )
@@ -180,6 +180,49 @@ testSpringDataSourceSupportImplicitlyDisabled() {
     assertEquals "$originalSpringDatasourceUrl" "$SPRING_DATASOURCE_URL"
     assertEquals "" "$SPRING_DATASOURCE_USERNAME"
     assertEquals "" "$SPRING_DATASOURCE_PASSWORD"
+  )
+}
+
+testCustomDatabaseUrlWithoutPasswordAndPath() {
+  (
+    # We want to test that the script does not fail hard when executed in a stricter
+    # environment such as heroku/java's bin/compile step.
+    set -e
+
+    export DATABASE_URL="postgres://test123@ec2-52-13-12"
+
+    # shellcheck disable=SC1090
+    source "$JDBC_SCRIPT_LOCATION"
+
+    assertEquals "" "$JDBC_DATABASE_URL"
+    assertEquals "" "$JDBC_DATABASE_USERNAME"
+    assertEquals "" "$JDBC_DATABASE_PASSWORD"
+  )
+}
+
+testCustomDatabaseUrlWithFragmentAndQueryParameters() {
+  (
+    export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb?foo=bar&e=mc^2#fragment"
+
+    # shellcheck disable=SC1090
+    source "$JDBC_SCRIPT_LOCATION"
+
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?foo=bar&user=AzureDiamond&password=hunter2&sslmode=require&e=mc^2#fragment" "$JDBC_DATABASE_URL"
+    assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
+    assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
+  )
+}
+
+testCustomDatabaseUrlWithoutPath() {
+  (
+    export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432"
+
+    # shellcheck disable=SC1090
+    source "$JDBC_SCRIPT_LOCATION"
+
+    assertEquals "jdbc:postgresql://db.example.com:5432?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
+    assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
   )
 }
 
