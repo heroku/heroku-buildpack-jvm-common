@@ -2,7 +2,16 @@
 
 ## Master
 
+## v102
+
+* Upgrade default JDKs to 14.0.1, 11.0.7, 8u252 and 7u262
+
+## v101
+
 * Fix CNB packaging
+
+## v100
+
 * Fix DATABASE_CONNECTION_POOL_URL handling
 * JDBC URL transformation no longer crashes silently on unexpected URLs
 
