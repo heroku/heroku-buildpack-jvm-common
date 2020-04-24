@@ -2,6 +2,10 @@
 
 ## Master
 
+## v103
+
+Upgrade default JDK 13 to 13.0.3
+
 ## v102
 
 * Upgrade default JDKs to 14.0.1, 11.0.7, 8u252 and 7u262
