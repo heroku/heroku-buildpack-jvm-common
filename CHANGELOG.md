@@ -2,6 +2,8 @@
 
 ## Master
 
+* Add support for BP_JVM_VERSION
+
 ## v103
 
 Upgrade default JDK 13 to 13.0.3
