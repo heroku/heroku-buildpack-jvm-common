@@ -54,6 +54,19 @@ test_get_jdk_version_zulu() {
   assertEquals "zulu-1.8.0_212" "$(get_jdk_version "$BUILD_DIR")"
 }
 
+test_bp_jvm_version() {
+  rm -f "${BUILD_DIR}/system.properties"
+  export BP_JVM_VERSION="8.*"
+  assertEquals "8" "$(get_jdk_version "$BUILD_DIR")"
+  export BP_JVM_VERSION="8.0.252"
+  assertEquals "1.8.0_252" "$(get_jdk_version "$BUILD_DIR")"
+  export BP_JVM_VERSION="11.*"
+  assertEquals "11" "$(get_jdk_version "$BUILD_DIR")"
+  export BP_JVM_VERSION="11.0.7"
+  assertEquals "11.0.7" "$(get_jdk_version "$BUILD_DIR")"
+  unset BP_JVM_VERSION
+}
+
 test_get_jdk_url() {
   assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_1_8_VERSION:?}.tar.gz" "$(get_jdk_url "")"
   assertEquals "${JDK_BASE_URL:?}/openjdk${DEFAULT_JDK_1_7_VERSION:?}.tar.gz" "$(get_jdk_url "1.7")"
