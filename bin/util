@@ -64,8 +64,10 @@ export_env_dir() {
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH|JAVA_OPTS|JAVA_TOOL_OPTIONS)$'}
   if [ -d "$env_dir" ]; then
     for env_var_path in "$env_dir"/*; do
-      basename "$env_var_path" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-        export "$(basename "$env_var_path")=$(cat "$env_var_path")"
+      if [ -f "$env_var_path" ]; then
+        basename "$env_var_path" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+          export "$(basename "$env_var_path")=$(cat "$env_var_path")"
+      fi
       :
     done
   fi
