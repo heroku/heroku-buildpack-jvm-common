@@ -90,11 +90,11 @@ describe "Java" do
           end
 
           sleep 1
-          expect(app.run("echo \\$JAVA_TOOL_OPTIONS")).
+          expect(app.run("echo $JAVA_TOOL_OPTIONS")).
               not_to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
-          expect(app.run("echo \\$JAVA_OPTS")).
+          expect(app.run("echo $JAVA_OPTS")).
               to include(%q{-Xmx300m -Xss512k})
 
           sleep 1
