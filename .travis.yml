@@ -11,7 +11,7 @@ before_script:
   - curl https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz | tar xz -C /tmp/
   - git clone https://github.com/heroku/heroku-buildpack-testrunner.git /tmp/testrunner
 script:
-  - make $HEROKU_TEST_STACK && /tmp/testrunner/bin/run -c . && bundle exec parallel_rspec -n 5 test/spec/
+  - make $HEROKU_TEST_STACK && /tmp/testrunner/bin/run -c . && bundle exec parallel_split_test test/spec/
 after_script:
   - bundle exec hatchet destroy --all
 env:
@@ -24,6 +24,7 @@ env:
     - HATCHET_DEPLOY_STRATEGY=git
     - HATCHET_BUILDPACK_BASE="https://github.com/heroku/heroku-buildpack-jvm"
     - HATCHET_APP_PREFIX="htcht-${TRAVIS_JOB_ID}-"
+    - PARALLEL_SPLIT_TEST_PROCESSES=8
 jobs:
   include:
     - name: "shellcheck"

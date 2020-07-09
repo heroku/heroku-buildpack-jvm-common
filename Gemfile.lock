@@ -28,9 +28,10 @@ GEM
     minitest (5.14.1)
     moneta (1.0.0)
     multi_json (1.14.1)
-    parallel (1.19.1)
-    parallel_tests (2.31.0)
-      parallel
+    parallel (1.19.2)
+    parallel_split_test (0.7.0)
+      parallel (>= 0.5.13)
+      rspec (>= 3.1.0)
     platform-api (3.0.0.pre.1)
       heroics (~> 0.1.1)
       moneta (~> 1.0.0)
@@ -39,9 +40,16 @@ GEM
     repl_runner (0.0.3)
       activesupport
     rrrretry (1.0.0)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-retry (0.6.2)
@@ -59,7 +67,7 @@ PLATFORMS
 
 DEPENDENCIES
   heroku_hatchet
-  parallel_tests
+  parallel_split_test
   rspec-expectations
   rspec-retry
 
