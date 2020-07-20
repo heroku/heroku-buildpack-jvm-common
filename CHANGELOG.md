@@ -2,6 +2,12 @@
 
 ## Master
 
+## v105
+
+* Upgrade default JDKs to 14.0.2, 13.0.4, 11.0.8, 8u262 and 7u272
+
+## v104
+
 * Add support for BP_JVM_VERSION
 
 ## v103
