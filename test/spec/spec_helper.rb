@@ -28,13 +28,6 @@ def jvm_common_branch
   raise 'Could not determine buildpack branch!'
 end
 
-def new_app_with_defaults(*args, **kwargs)
-  kwargs[:stack] ||= ENV["HEROKU_TEST_STACK"]
-  kwargs[:config] ||= {}
-  kwargs[:config].compact!
-  Hatchet::Runner.new(*args, **kwargs)
-end
-
 def add_database(app, heroku)
   Hatchet::RETRIES.times.retry do
     heroku.post_addon(app.name, 'heroku-postgresql')
