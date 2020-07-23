@@ -126,24 +126,24 @@ describe "Java" do
             sleep 1
             if jdk_version.start_with?("zulu-1.")
               # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
-              expect(app.run("jce", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
+              expect(app.run("jce", { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                   to include("Illegal key size or default parameters")
             else
               # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
-              expect(app.run("jce", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
+              expect(app.run("jce", { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                   to include(%q{Encrypting, "Test"}).
                   and include(%q{Decrypted: Test})
             end
 
             sleep 1
             # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
-            expect(app.run("netpatch", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
+            expect(app.run("netpatch", { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                 to include(%q{name:eth0 (eth0)}).
                 and include(%q{name:lo (lo)})
 
             sleep 1
             # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
-            expect(app.run("https", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
+            expect(app.run("https", { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                 to include("Successfully invoked HTTPS service.").
                 and match(%r{"X-Forwarded-Proto(col)?":\s?"https"})
 
@@ -155,7 +155,7 @@ describe "Java" do
 
               sleep 1
               # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
-              expect(app.run("pgssl", nil, { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
+              expect(app.run("pgssl", { :heroku => { "exit-code" => Hatchet::App::SkipDefaultOption }})).
                   to match(%r{sslmode: require})
             end
           end
