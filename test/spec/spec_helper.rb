@@ -28,13 +28,6 @@ def jvm_common_branch
   raise 'Could not determine buildpack branch!'
 end
 
-def new_app_with_defaults(*args, **kwargs)
-  kwargs[:stack] ||= ENV["HEROKU_TEST_STACK"]
-  kwargs[:config] ||= {}
-  kwargs[:config].compact!
-  Hatchet::Runner.new(*args, **kwargs)
-end
-
 def add_database(app, heroku)
   Hatchet::RETRIES.times.retry do
     heroku.post_addon(app.name, 'heroku-postgresql')
@@ -67,11 +60,4 @@ def write_sys_props(d, props)
     end
     `git add system.properties && git commit -m "setting jdk version"`
   end
-end
-
-ReplRunner.register_commands(:console)  do |config|
-  config.terminate_command "exit"          # the command you use to end the 'rails console'
-  config.startup_timeout 60                # seconds to boot
-  config.return_char "\n"                  # the character that submits the command
-  config.sync_stdout "STDOUT.sync = true"  # force REPL to not buffer standard out
 end
