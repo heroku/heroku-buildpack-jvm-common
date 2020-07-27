@@ -1,4 +1,4 @@
-# Heroku Buildpack for the JDK [![Build Status](https://travis-ci.org/heroku/heroku-buildpack-jvm-common.svg?branch=master)](https://travis-ci.org/heroku/heroku-buildpack-jvm-common)
+# Heroku Buildpack for the JDK [![Build Status](https://travis-ci.com/heroku/heroku-buildpack-jvm-common.svg?branch=main)](https://travis-ci.com/heroku/heroku-buildpack-jvm-common)
 
 This is the official [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks) for [OpenJDK](http://openjdk.java.net/). It only installs the JDK, and does not build an application. It is used by the [Java](https://github.com/heroku/heroku-buildpack-java), [Scala](https://github.com/heroku/heroku-buildpack-scala), and [Clojure](https://github.com/heroku/heroku-buildpack-clojure) buildpacks.
 

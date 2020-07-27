@@ -1,6 +1,6 @@
 # JVM Common Buildpack Changelog
 
-## Master
+## Main
 
 ## v105
 
