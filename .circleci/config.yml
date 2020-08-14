@@ -79,12 +79,8 @@ jobs:
       name: << parameters.heroku-stack >>
     steps:
       - checkout
-      - run:
-          name: v2
-          command: test/v2
-      - run:
-          name: jdbc
-          command: test/jdbc.sh
+      - run: test/v2
+      - run: test/jdbc.sh
 
   unit-tests-cloud-native-buildpack:
     parameters:
@@ -98,16 +94,14 @@ jobs:
       name: << parameters.heroku-stack >>
     steps:
       - checkout
-      - run:
-          name: unit
-          command: test/unit
-      - run:
-          name: v3
-          command: test/v3
-      - run:
-          name: jdbc
-          command: test/jdbc.sh
-
+      - run: test/unit
+      - run: test/jdbc.sh
+      # test/v3 is currently only compatible with the heroku-18 stack.
+      - when:
+          condition:
+              equal: [<< parameters.heroku-stack >>, heroku-18]
+          steps:
+              - run: test/v3
 
   # There is an official circle ci orb for shellcheck. However, in its current version, it is really made to just check
   # files that follow a certain pattern. For this buildpack, we have multiple patterns we need to check so we're
