@@ -29,6 +29,7 @@ jobs:
       HEROKU_TEST_STACK: << parameters.heroku-stack >>
       HATCHET_BUILDPACK_BASE: https://github.com/heroku/heroku-buildpack-jvm-common
       HATCHET_APP_LIMIT: 100
+      PARALLEL_SPLIT_TEST_PROCESSES: 8
     steps:
       - checkout
       - heroku/install
