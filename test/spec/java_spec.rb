@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Java" do
+
   ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "10", "11", "12", "13", "14",
     "zulu-1.8.0_144", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
@@ -80,12 +81,14 @@ describe "Java" do
             end
             expect(app.output).to include("BUILD SUCCESS")
 
-            cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts")
+            # Workaround (August 2020):
+            # When running on CircleCI (and only there), the first app.run command of the test suite will have two null
+            # bytes prepended to the result string.
+            cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts").split(" ")[0].delete("\000")
             sleep 5
-            cacerts_md5_overlay = app.run("md5sum .jdk-overlay/jre/lib/security/cacerts")
+            cacerts_md5_overlay = app.run("md5sum .jdk-overlay/jre/lib/security/cacerts").split(" ")[0].delete("\000")
 
-            expect(cacerts_md5_jdk.split(" ")[0]).
-              to eq(cacerts_md5_overlay.split(" ")[0])
+            expect(cacerts_md5_jdk).to eq(cacerts_md5_overlay)
           end
         end
       end
