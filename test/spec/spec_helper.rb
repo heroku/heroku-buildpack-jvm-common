@@ -18,6 +18,18 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  # Workaround (August 2020):
+  # When running on CircleCI, the first app.run command of the suite will have two null bytes prepended to the result
+  # string. By running a bogus command before the actual suite runs, all subsequent app.run commands from the suite will
+  # behave as expected.
+  config.before(:suite) {
+    Hatchet::Runner.new("java-servlets-sample", buildpacks: ["heroku/jvm"], stack: "heroku-18").tap do |app|
+      app.deploy do
+        app.run("echo 'I'm a workaround.")
+      end
+    end
+  }
 end
 
 def jvm_common_branch
