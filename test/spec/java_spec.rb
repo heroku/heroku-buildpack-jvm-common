@@ -82,11 +82,12 @@ describe "Java" do
             expect(app.output).to include("BUILD SUCCESS")
 
             # Workaround (August 2020):
-            # When running on CircleCI (and only there), the first app.run command of the test suite will have two null
-            # bytes prepended to the result string.
-            cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts").split(" ")[0].delete("\000")
+            # When running on CircleCI (and only there), the first app.run command of the test suite will have ^@^@
+            # prepended to the result string. It looks like caret encoding for two null bytes and the cause is still
+            # unknown.
+            cacerts_md5_jdk = app.run("md5sum .jdk/jre/lib/security/cacerts").split(" ")[0].delete("^@^@")
             sleep 5
-            cacerts_md5_overlay = app.run("md5sum .jdk-overlay/jre/lib/security/cacerts").split(" ")[0].delete("\000")
+            cacerts_md5_overlay = app.run("md5sum .jdk-overlay/jre/lib/security/cacerts").split(" ")[0].delete("^@^@")
 
             expect(cacerts_md5_jdk).to eq(cacerts_md5_overlay)
           end
