@@ -133,6 +133,22 @@ jobs:
           name: "Run shfmt (excluding vendor directory)"
           command: shfmt -f . | grep -v "/vendor/" | xargs shfmt -i 2 -d
 
+  publish-cnb-release:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - checkout
+      - run:
+          name: "Package CNB release"
+          command: tar -czvf heroku-jvm-common-cnb-${CIRCLE_TAG}.tgz bin/ buildpack.toml etc/ lib/ opt/ README.md LICENSE
+      - run:
+          name: "Publish release on GitHub"
+          command: |
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} \
+              -n "CNB ${CIRCLE_TAG}" \
+              -b "Cloud Native Buildpack (CNB) release. Automatically built after ${CIRCLE_TAG} of heroku/jvm was released." \
+              -recreate ${CIRCLE_TAG} heroku-jvm-common-cnb-${CIRCLE_TAG}.tgz
+
 workflows:
   version: 2.1
   default-ci-workflow:
@@ -168,3 +184,20 @@ workflows:
           matrix:
             parameters:
               heroku-stack: ["cedar-14", "heroku-16", "heroku-18"]
+      - publish-cnb-release:
+          requires:
+            - hatchet-cedar-14
+            - hatchet-heroku-16
+            - hatchet-heroku-18
+            - unit-tests-cloud-native-buildpack-cedar-14
+            - unit-tests-cloud-native-buildpack-heroku-16
+            - unit-tests-cloud-native-buildpack-heroku-18
+            - unit-tests-heroku-buildpack-cedar-14
+            - unit-tests-heroku-buildpack-heroku-16
+            - unit-tests-heroku-buildpack-heroku-18
+            - buildpack-testrunner
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+$/
