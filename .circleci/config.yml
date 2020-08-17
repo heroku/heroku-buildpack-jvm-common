@@ -144,10 +144,10 @@ jobs:
       - run:
           name: "Publish release on GitHub"
           command: |
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} \
+            ghr -t "${GITHUB_TOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" \
               -n "CNB ${CIRCLE_TAG}" \
               -b "Cloud Native Buildpack (CNB) release. Automatically built after ${CIRCLE_TAG} of heroku/jvm was released." \
-              -recreate ${CIRCLE_TAG} heroku-jvm-common-cnb-${CIRCLE_TAG}.tgz
+              -recreate "${CIRCLE_TAG}" "heroku-jvm-common-cnb-${CIRCLE_TAG}.tgz"
 
 workflows:
   version: 2.1
