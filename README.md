@@ -2,7 +2,7 @@
 
 This is the official [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks) for [OpenJDK](http://openjdk.java.net/). It only installs the JDK, and does not build an application. It is used by the [Java](https://github.com/heroku/heroku-buildpack-java), [Scala](https://github.com/heroku/heroku-buildpack-scala), and [Clojure](https://github.com/heroku/heroku-buildpack-clojure) buildpacks.
 
-# Usage from a Buildpack
+## Usage from a Buildpack
 
 This is how the buildpack is used from another buildpack:
 
@@ -16,7 +16,7 @@ source /tmp/jvm-common/bin/java
 install_java_with_overlay ${BUILD_DIR}
 ```
 
-# Standalone Usage
+## Standalone Usage
 
 You may install the JVM buildpack into your app by running:
 
@@ -33,6 +33,25 @@ $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-jvm-common.gi
 
 Then it may be used by itself, or with another buildpack using [multiple buildpacks](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app).
 
-# License
+## Run Tests Locally
+
+Tests can be run and debugged locally by using the [Circle CI CLI](https://circleci.com/docs/2.0/local-cli/).
+
+For example, to run [Hatchet](https://github.com/heroku/hatchet) tests on `heroku-18` run:
+
+```
+$ circleci local execute --job hatchet-heroku-18 \
+    --env HEROKU_API_USER=$(heroku whoami) \
+    --env HEROKU_API_KEY=$(heroku auth:token)
+```
+
+Available jobs are defined in [.circleci/config.yml](.circleci/config.yml).
+
+### Costs
+
+This command uses the credentials from your local `heroku` configuration. This means your account will be billed for any
+cost these tests incur. Proceed with caution.
+
+## License
 
 Licensed under the MIT License. See LICENSE file.
