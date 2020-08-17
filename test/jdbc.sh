@@ -6,6 +6,8 @@ JDBC_SCRIPT_LOCATION="opt/jdbc.sh"
 
 testDefaultDatabaseEnvVar() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -23,6 +25,8 @@ testDefaultDatabaseEnvVar() {
 
 testSSLModeDisabledOnCI() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb"
     export CI="true"
 
@@ -37,6 +41,8 @@ testSSLModeDisabledOnCI() {
 
 testColorDatabaseEnvVar() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -61,6 +67,8 @@ testColorDatabaseEnvVar() {
 
 testMySQLDatabaseEnvVar() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -75,27 +83,33 @@ testMySQLDatabaseEnvVar() {
 }
 
 testThirdPartyDatabaseUrls() {
-  for item in JAWSDB_URL JAWSDB_MARIA_URL CLEARDB_DATABASE_URL; do
-    (
-      # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
-      # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
-      unset CI
+  (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
 
-      export "$item="mysql://foo:bar@ec2-0-0-0-0:5432/$item?reconnect=true""
+    for item in JAWSDB_URL JAWSDB_MARIA_URL CLEARDB_DATABASE_URL; do
+      (
+        # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+        # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+        unset CI
 
-      # shellcheck disable=SC1090
-      source "$JDBC_SCRIPT_LOCATION"
+        export "$item="mysql://foo:bar@ec2-0-0-0-0:5432/$item?reconnect=true""
 
-      assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/$item?user=foo&password=bar&reconnect=true" "$JDBC_DATABASE_URL"
-      assertEquals "foo" "$JDBC_DATABASE_USERNAME"
-      assertEquals "bar" "$JDBC_DATABASE_PASSWORD"
-    )
-  done
+        # shellcheck disable=SC1090
+        source "$JDBC_SCRIPT_LOCATION"
+
+        assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/$item?user=foo&password=bar&reconnect=true" "$JDBC_DATABASE_URL"
+        assertEquals "foo" "$JDBC_DATABASE_USERNAME"
+        assertEquals "bar" "$JDBC_DATABASE_PASSWORD"
+      )
+    done
+  )
 }
 
 testThirdPartyDatabaseUrlsPriority() {
   for item in JAWSDB_URL JAWSDB_MARIA_URL CLEARDB_DATABASE_URL; do
     (
+      set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
       # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
       # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
       unset CI
@@ -115,6 +129,8 @@ testThirdPartyDatabaseUrlsPriority() {
 
 testDatabaseConnectionPool() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -137,6 +153,8 @@ testDatabaseConnectionPool() {
 
 testDatabaseConnectionPoolWithoutDatabaseUrl() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -158,6 +176,8 @@ testDatabaseConnectionPoolWithoutDatabaseUrl() {
 
 testSpringDataSourceSupport() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -179,6 +199,8 @@ testSpringDataSourceSupport() {
 
 testSpringDataSourceSupportExplicitlyDisabled() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -203,6 +225,8 @@ testSpringDataSourceSupportImplicitlyDisabled() {
   local originalSpringDatasourceUrl="jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamondSpring&password=hunter2&sslmode=require"
 
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -225,6 +249,8 @@ testSpringDataSourceSupportImplicitlyDisabled() {
 
 testCustomDatabaseUrlWithoutPasswordAndPath() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -246,6 +272,8 @@ testCustomDatabaseUrlWithoutPasswordAndPath() {
 
 testCustomDatabaseUrlWithFragmentAndQueryParameters() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
@@ -263,6 +291,8 @@ testCustomDatabaseUrlWithFragmentAndQueryParameters() {
 
 testCustomDatabaseUrlWithoutPath() {
   (
+    set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
     # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
     # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
     unset CI
