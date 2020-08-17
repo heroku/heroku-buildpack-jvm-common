@@ -6,6 +6,10 @@ JDBC_SCRIPT_LOCATION="opt/jdbc.sh"
 
 testDefaultDatabaseEnvVar() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb"
 
     # shellcheck disable=SC1090
@@ -33,6 +37,10 @@ testSSLModeDisabledOnCI() {
 
 testColorDatabaseEnvVar() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export HEROKU_POSTGRESQL_RED_URL="postgres://red:charmander@db.example.com:5432/fire-pokemon"
     export HEROKU_POSTGRESQL_BLUE_URL="postgres://blue:squirtle@db.example.com:5432/water-pokemon"
 
@@ -53,6 +61,10 @@ testColorDatabaseEnvVar() {
 
 testMySQLDatabaseEnvVar() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="mysql://foo:bar@ec2-0-0-0-0:5432/abc123?reconnect=true"
 
     # shellcheck disable=SC1090
@@ -65,6 +77,10 @@ testMySQLDatabaseEnvVar() {
 testThirdPartyDatabaseUrls() {
   for item in JAWSDB_URL JAWSDB_MARIA_URL CLEARDB_DATABASE_URL; do
     (
+      # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+      # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+      unset CI
+
       export "$item="mysql://foo:bar@ec2-0-0-0-0:5432/$item?reconnect=true""
 
       # shellcheck disable=SC1090
@@ -80,6 +96,10 @@ testThirdPartyDatabaseUrls() {
 testThirdPartyDatabaseUrlsPriority() {
   for item in JAWSDB_URL JAWSDB_MARIA_URL CLEARDB_DATABASE_URL; do
     (
+      # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+      # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+      unset CI
+
       export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/regular-database"
       export "$item="mysql://foo:bar@ec2-0-0-0-0:5432/$item?reconnect=true""
 
@@ -95,6 +115,10 @@ testThirdPartyDatabaseUrlsPriority() {
 
 testDatabaseConnectionPool() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb"
     export DATABASE_CONNECTION_POOL_URL="postgres://pooluser:poolpass@pooled.example.com:5432/testdb"
 
@@ -113,6 +137,10 @@ testDatabaseConnectionPool() {
 
 testDatabaseConnectionPoolWithoutDatabaseUrl() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_CONNECTION_POOL_URL="postgres://pooluser:poolpass@pooled.example.com:5432/testdb"
 
     # shellcheck disable=SC1090
@@ -130,6 +158,10 @@ testDatabaseConnectionPoolWithoutDatabaseUrl() {
 
 testSpringDataSourceSupport() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb"
 
     # shellcheck disable=SC1090
@@ -147,6 +179,10 @@ testSpringDataSourceSupport() {
 
 testSpringDataSourceSupportExplicitlyDisabled() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb"
     export DISABLE_SPRING_DATASOURCE_URL="true"
 
@@ -167,6 +203,10 @@ testSpringDataSourceSupportImplicitlyDisabled() {
   local originalSpringDatasourceUrl="jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamondSpring&password=hunter2&sslmode=require"
 
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb"
     export SPRING_DATASOURCE_URL="$originalSpringDatasourceUrl"
 
@@ -185,6 +225,10 @@ testSpringDataSourceSupportImplicitlyDisabled() {
 
 testCustomDatabaseUrlWithoutPasswordAndPath() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     # We want to test that the script does not fail hard when executed in a stricter
     # environment such as heroku/java's bin/compile step.
     set -e
@@ -202,6 +246,10 @@ testCustomDatabaseUrlWithoutPasswordAndPath() {
 
 testCustomDatabaseUrlWithFragmentAndQueryParameters() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432/testdb?foo=bar&e=mc^2#fragment"
 
     # shellcheck disable=SC1090
@@ -215,6 +263,10 @@ testCustomDatabaseUrlWithFragmentAndQueryParameters() {
 
 testCustomDatabaseUrlWithoutPath() {
   (
+    # Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+    # is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+    unset CI
+
     export DATABASE_URL="postgres://AzureDiamond:hunter2@db.example.com:5432"
 
     # shellcheck disable=SC1090

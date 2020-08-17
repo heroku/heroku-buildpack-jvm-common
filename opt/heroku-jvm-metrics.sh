@@ -7,7 +7,7 @@ fi
 
 # heroku-metrics-agent.jar is added in bin/compile
 if [[ -f ${HOME}/.heroku/bin/heroku-metrics-agent.jar ]] && [[ -z "${DISABLE_HEROKU_METRICS_AGENT:-}" ]]; then
-  if [[ -f build.sbt ]] || # Scala
+  if [[ -f build.sbt ]] ||                 # Scala
     [[ -d target/resolution-cache ]]; then # Scala (sbt-heroku)
     export JAVA_OPTS="-javaagent:${HOME}/.heroku/bin/heroku-metrics-agent.jar ${JAVA_OPTS:-}"
   else
