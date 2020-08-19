@@ -17,7 +17,7 @@ testDefaultDatabaseEnvVar() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?password=hunter2&sslmode=require&user=AzureDiamond" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
   )
@@ -33,7 +33,7 @@ testSSLModeDisabledOnCI() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamond&password=hunter2" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?password=hunter2&user=AzureDiamond" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
   )
@@ -55,11 +55,11 @@ testColorDatabaseEnvVar() {
 
     assertEquals "" "$JDBC_DATABASE_URL"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/fire-pokemon?user=red&password=charmander&sslmode=require" "$HEROKU_POSTGRESQL_RED_JDBC_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/fire-pokemon?password=charmander&sslmode=require&user=red" "$HEROKU_POSTGRESQL_RED_JDBC_URL"
     assertEquals "red" "$HEROKU_POSTGRESQL_RED_JDBC_USERNAME"
     assertEquals "charmander" "$HEROKU_POSTGRESQL_RED_JDBC_PASSWORD"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/water-pokemon?user=blue&password=squirtle&sslmode=require" "$HEROKU_POSTGRESQL_BLUE_JDBC_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/water-pokemon?password=squirtle&sslmode=require&user=blue" "$HEROKU_POSTGRESQL_BLUE_JDBC_URL"
     assertEquals "blue" "$HEROKU_POSTGRESQL_BLUE_JDBC_USERNAME"
     assertEquals "squirtle" "$HEROKU_POSTGRESQL_BLUE_JDBC_PASSWORD"
   )
@@ -78,7 +78,7 @@ testMySQLDatabaseEnvVar() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/abc123?user=foo&password=bar&reconnect=true" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/abc123?password=bar&reconnect=true&user=foo" "$JDBC_DATABASE_URL"
   )
 }
 
@@ -97,7 +97,7 @@ testThirdPartyDatabaseUrls() {
         # shellcheck disable=SC1090
         source "$JDBC_SCRIPT_LOCATION"
 
-        assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/$item?user=foo&password=bar&reconnect=true" "$JDBC_DATABASE_URL"
+        assertEquals "jdbc:mysql://ec2-0-0-0-0:5432/$item?password=bar&reconnect=true&user=foo" "$JDBC_DATABASE_URL"
         assertEquals "foo" "$JDBC_DATABASE_USERNAME"
         assertEquals "bar" "$JDBC_DATABASE_PASSWORD"
       )
@@ -120,7 +120,7 @@ testThirdPartyDatabaseUrlsPriority() {
       # shellcheck disable=SC1090
       source "$JDBC_SCRIPT_LOCATION"
 
-      assertEquals "jdbc:postgresql://db.example.com:5432/regular-database?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+      assertEquals "jdbc:postgresql://db.example.com:5432/regular-database?password=hunter2&sslmode=require&user=AzureDiamond" "$JDBC_DATABASE_URL"
       assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
       assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
     )
@@ -141,11 +141,11 @@ testDatabaseConnectionPool() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://pooled.example.com:5432/testdb?user=pooluser&password=poolpass&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://pooled.example.com:5432/testdb?password=poolpass&sslmode=require&user=pooluser" "$JDBC_DATABASE_URL"
     assertEquals "pooluser" "$JDBC_DATABASE_USERNAME"
     assertEquals "poolpass" "$JDBC_DATABASE_PASSWORD"
 
-    assertEquals "jdbc:postgresql://pooled.example.com:5432/testdb?user=pooluser&password=poolpass&sslmode=require" "$DATABASE_CONNECTION_POOL_JDBC_URL"
+    assertEquals "jdbc:postgresql://pooled.example.com:5432/testdb?password=poolpass&sslmode=require&user=pooluser" "$DATABASE_CONNECTION_POOL_JDBC_URL"
     assertEquals "pooluser" "$DATABASE_CONNECTION_POOL_JDBC_USERNAME"
     assertEquals "poolpass" "$DATABASE_CONNECTION_POOL_JDBC_PASSWORD"
   )
@@ -187,7 +187,7 @@ testSpringDataSourceSupport() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?password=hunter2&sslmode=require&user=AzureDiamond" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
 
@@ -211,7 +211,7 @@ testSpringDataSourceSupportExplicitlyDisabled() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?password=hunter2&sslmode=require&user=AzureDiamond" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
 
@@ -237,7 +237,7 @@ testSpringDataSourceSupportImplicitlyDisabled() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?password=hunter2&sslmode=require&user=AzureDiamond" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
 
@@ -283,7 +283,7 @@ testCustomDatabaseUrlWithFragmentAndQueryParameters() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?foo=bar&user=AzureDiamond&password=hunter2&sslmode=require&e=mc^2#fragment" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432/testdb?e=mc^2&foo=bar&password=hunter2&sslmode=require&user=AzureDiamond#fragment" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
   )
@@ -302,7 +302,7 @@ testCustomDatabaseUrlWithoutPath() {
     # shellcheck disable=SC1090
     source "$JDBC_SCRIPT_LOCATION"
 
-    assertEquals "jdbc:postgresql://db.example.com:5432?user=AzureDiamond&password=hunter2&sslmode=require" "$JDBC_DATABASE_URL"
+    assertEquals "jdbc:postgresql://db.example.com:5432?password=hunter2&sslmode=require&user=AzureDiamond" "$JDBC_DATABASE_URL"
     assertEquals "AzureDiamond" "$JDBC_DATABASE_USERNAME"
     assertEquals "hunter2" "$JDBC_DATABASE_PASSWORD"
   )
