@@ -71,7 +71,9 @@ set_jdbc_url() {
 
     # Fold all query parameters from the associative array into a query string.
     local modified_query
-    for query_parameter_key in "${!query_parameters[@]}"; do
+
+    local -r sorted_query_parameter_keys=$(echo -n "${!query_parameters[@]}" | tr " " "\n" | sort | tr "\n" " ")
+    for query_parameter_key in $sorted_query_parameter_keys; do
       local key_value_pair="${query_parameter_key}=${query_parameters[$query_parameter_key]}"
 
       if [[ -z $modified_query ]]; then
