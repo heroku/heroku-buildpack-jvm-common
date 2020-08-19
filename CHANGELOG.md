@@ -2,6 +2,8 @@
 
 ## Main
 
+* JDBC_DATABASE_URL query parameters are now alphabetically ordered.
+
 ## v105
 
 * Upgrade default JDKs to 14.0.2, 13.0.4, 11.0.8, 8u262 and 7u272
