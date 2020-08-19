@@ -2,6 +2,8 @@
 
 ## Main
 
+## v106
+
 * JDBC_DATABASE_URL query parameters are now alphabetically ordered.
 * Fix export_env_dir when no environment variables are present. (#148)
 
