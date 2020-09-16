@@ -16,6 +16,8 @@ DEFAULT_JDK_11_VERSION="11.0.8"
 DEFAULT_JDK_12_VERSION="12.0.2"
 DEFAULT_JDK_13_VERSION="13.0.4"
 DEFAULT_JDK_14_VERSION="14.0.2"
+DEFAULT_JDK_15_VERSION="15.0.0"
+
 DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-18"}"
 JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
 
@@ -56,6 +58,8 @@ get_full_jdk_version() {
     echo "$DEFAULT_JDK_13_VERSION"
   elif [ "${jdkVersion}" = "14" ]; then
     echo "$DEFAULT_JDK_14_VERSION"
+  elif [ "${jdkVersion}" = "15" ]; then
+    echo "$DEFAULT_JDK_15_VERSION"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
     local minorJdkVersion
     minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
@@ -76,7 +80,7 @@ get_jdk_url() {
   jdkVersion="$(get_full_jdk_version "${shortJdkVersion}")"
 
   local jdkUrl
-  if [ "$(expr "${jdkVersion}" : '^1[0-4]')" != 0 ]; then
+  if [ "$(expr "${jdkVersion}" : '^1[0-5]')" != 0 ]; then
     jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
     jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
