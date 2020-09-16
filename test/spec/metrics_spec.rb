@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe "JVM Metrics" do
-  ["1.7", "1.8", "11", "14"].each do |jdk_version|
+  ["1.7", "1.8", "11", "14", "15"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         Hatchet::Runner.new(

@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe "Java" do
 
-  ["1.7", "1.8", "8", "1.9", "9", "9.0.0", "10", "11", "12", "13", "14",
+  ["1.7", "1.8", "8", "11", "13", "14", "15",
     "zulu-1.8.0_144", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
@@ -56,7 +56,7 @@ describe "Java" do
     end
   end
 
-  ["1.7", "1.8", "openjdk-1.8.0_162", "10", "11", "12", "13", "14",
+  ["1.7", "1.8", "openjdk-1.8.0_162", "11", "13", "14", "15",
     "zulu-1.8.0_144", "openjdk-9.0.4"].each do |jdk_version|
     context "jdk-overlay on #{jdk_version}" do
       it "should deploy" do
@@ -96,7 +96,7 @@ describe "Java" do
     end
   end
 
-  ["1.8", "10", "11", "12", "13", "14"].each do |jdk_version|
+  ["1.8", "11", "13", "14", "15"].each do |jdk_version|
     context "korvan on jdk-#{jdk_version}" do
       it "runs commands" do
         Hatchet::Runner.new(
