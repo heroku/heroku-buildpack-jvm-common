@@ -1,6 +1,50 @@
 # JVM Common Buildpack Changelog
 
-## Master
+## Main
+
+## v107
+
+* Add support for JDK 15
+
+## v106
+
+* JDBC_DATABASE_URL query parameters are now alphabetically ordered.
+* Fix export_env_dir when no environment variables are present. (#148)
+
+## v105
+
+* Upgrade default JDKs to 14.0.2, 13.0.4, 11.0.8, 8u262 and 7u272
+
+## v104
+
+* Add support for BP_JVM_VERSION
+
+## v103
+
+Upgrade default JDK 13 to 13.0.3
+
+## v102
+
+* Upgrade default JDKs to 14.0.1, 11.0.7, 8u252 and 7u262
+
+## v101
+
+* Fix CNB packaging
+
+## v100
+
+* Fix DATABASE_CONNECTION_POOL_URL handling
+* JDBC URL transformation no longer crashes silently on unexpected URLs
+
+## v99
+
+* Add support for JDK 14
+
+## v98
+
+* Improve CI and testing setup
+
+## v97
 
 * Enable -XX:+UseContainerSupport on JDK versions > 11
 

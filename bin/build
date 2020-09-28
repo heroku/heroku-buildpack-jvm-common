@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
 appDir="$(pwd)"
-bpDir="$(cd $(dirname $0)/..; pwd)" # absolute path
+bpDir="$(
+  cd "$(dirname "$0")/.."
+  pwd
+)" # absolute path
 layersDir="${1:?}"
 
+# shellcheck source=lib/v3/common.sh
 source "${bpDir}/lib/v3/common.sh"
+# shellcheck source=lib/v3/buildpack.sh
 source "${bpDir}/lib/v3/buildpack.sh"
+# shellcheck source=lib/jvm.sh
 source "${bpDir}/lib/jvm.sh"
 
 status "Installing Java"
@@ -26,13 +32,14 @@ jdkUrl="$(get_jdk_url "${jdkVersion}")"
 
 jdkCacheId="$(get_jdk_cache_id "${jdkUrl}")"
 
-jdkMetadata=$(cat <<EOF
+jdkMetadata=$(
+  cat <<EOF
 version = "${jdkVersion}"
 cache_id = "${jdkCacheId}"
 EOF
 )
 
-if bp_layer_has_key? "${layersDir}/jdk" ".metadata.cache_id" "${jdkCacheId}"; then
+if bp_layer_has_key "${layersDir}/jdk" ".metadata.cache_id" "${jdkCacheId}"; then
   info "JDK ${jdkVersion} installed from cache"
   info "JRE ${jdkVersion} installed from cache"
 else

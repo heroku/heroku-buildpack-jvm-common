@@ -2,9 +2,9 @@
 
 export BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
-testDetect()
-{
-  local buildPlan="$(mktemp)"
+testDetect() {
+  local buildPlan
+  buildPlan="$(mktemp)"
   detect "${PLATFORM_DIR}" "${buildPlan}"
 
   assertAppDetected "JVM"
@@ -12,10 +12,10 @@ testDetect()
   assertFileContains "version = \"${DEFAULT_JDK_1_8_VERSION}\"" "${buildPlan}"
 }
 
-testDetect_jdk11()
-{
-  echo "java.runtime.version=11" > ${BUILD_DIR}/system.properties
-  local buildPlan="$(mktemp)"
+testDetect_jdk11() {
+  echo "java.runtime.version=11" >"${BUILD_DIR}/system.properties"
+  local buildPlan
+  buildPlan="$(mktemp)"
   detect "${PLATFORM_DIR}" "${buildPlan}"
 
   assertAppDetected "JVM"
@@ -23,10 +23,10 @@ testDetect_jdk11()
   assertFileContains "version = \"${DEFAULT_JDK_11_VERSION}\"" "${buildPlan}"
 }
 
-testDetect_jdk11_0_4()
-{
-  echo "java.runtime.version=11.0.4" > ${BUILD_DIR}/system.properties
-  local buildPlan="$(mktemp)"
+testDetect_jdk11_0_4() {
+  echo "java.runtime.version=11.0.4" >"${BUILD_DIR}/system.properties"
+  local buildPlan
+  buildPlan="$(mktemp)"
   detect "${PLATFORM_DIR}" "${buildPlan}"
 
   assertAppDetected "JVM"
@@ -53,7 +53,7 @@ test_build() {
 }
 
 test_build_jdk_7() {
-  echo "java.runtime.version=1.7.0_222" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=1.7.0_222" >"${BUILD_DIR}/system.properties"
   build
   assertCapturedSuccess
   assertCaptured "JDK 1.7.0_222 installed"
@@ -64,7 +64,7 @@ test_build_jdk_7() {
 }
 
 test_build_jdk_11() {
-  echo "java.runtime.version=11" > ${BUILD_DIR}/system.properties
+  echo "java.runtime.version=11" >"${BUILD_DIR}/system.properties"
   build
   assertCapturedSuccess
   assertCaptured "JDK 11 installed"
@@ -82,7 +82,8 @@ test_install_jdk_valid() {
 
 test_install_jdk_invalid() {
   rm -f ~/.gnupg/pubring.kbx
-  local key="$(mktemp)"
+  local key
+  key="$(mktemp)"
   curl -sf -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
   export HEROKU_GPG_VALIDATION=1
   capture install_jdk "https://lang-jvm.s3.amazonaws.com/jdk/heroku-18/openjdk11.0.4.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
@@ -91,11 +92,15 @@ test_install_jdk_invalid() {
 }
 
 # the modules to be tested
+# shellcheck source=/lib/v3/common.sh
 source "${BUILDPACK_HOME}/lib/v3/common.sh"
+# shellcheck source=/lib/jvm.sh
 source "${BUILDPACK_HOME}/lib/jvm.sh"
 
 # testing utils
+# shellcheck source=/test/utils
 source "${BUILDPACK_HOME}/test/utils"
 
 # import the testing framework
-source "${BUILDPACK_HOME}/test/shunit2"
+# shellcheck source=/test/vendor/shunit2
+source "${BUILDPACK_HOME}/test/vendor/shunit2"

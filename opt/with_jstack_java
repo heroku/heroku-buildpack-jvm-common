@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2173,SC2145,SC2004,SC2006,SC2086,SC2064
 
 export JAVA_HOME=${SCALINGO_JAVA_HOME}
 eval "$JAVA_HOME/bin/java $@ &"
@@ -8,8 +9,7 @@ trap "kill -3 $pid; kill $pid" SIGTERM
 trap "kill -9 $pid; exit" SIGKILL
 
 sleep 10
-while kill -0 $pid
-do
+while kill -0 $pid; do
   if [ -z "$JSTACK_INTERVAL" ]; then
     sleep 10
   else
