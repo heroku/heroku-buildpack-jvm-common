@@ -11,7 +11,7 @@ build an application. It is used by the
 [Scala](https://github.com/Scalingo/scala-buildpack), and
 [Clojure](https://github.com/Scalingo/clojure-buildpack) buildpacks.
 
-# Usage from a Buildpack
+## Usage from a Buildpack
 
 This is how the buildpack is used from another buildpack:
 
@@ -25,23 +25,21 @@ source /tmp/jvm-common/bin/java
 install_java_with_overlay ${BUILD_DIR}
 ```
 
-# Standalone Usage
+## Standalone Usage
 
 You may install the JVM buildpack into your app by running:
 
 ```
-$ scalingo env-set BUILDPACK_NAME=java
-```
-
-If you want to use the edge version (the code in this repo), run this instead:
-
-```
-$ scalingo env-set BUILDPACK_NAME=https://github.com/Scalingo/buildpack-jvm-common
+$ scalingo env-set BUILDPACK_URL=https://github.com/Scalingo/buildpack-jvm-common
 ```
 
 Then it may be used by itself, or with another buildpack using [multiple
 buildpacks](https://doc.scalingo.com/platform/deployment/buildpacks/multi#top-of-page).
 
-# License
+## License
 
 Licensed under the MIT License. See LICENSE file.
+
+## Credits
+
+This buildpack is maintained by Heroku: [upstream](https://github.com/heroku/heroku-buildpack-jvm-common)
