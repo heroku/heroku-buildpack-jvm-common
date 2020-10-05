@@ -6,7 +6,8 @@ calculate_java_memory_opts() {
   container_size=$(echo $CONTAINER_SIZE)
   case $container_size in
   S)
-    echo "$opts -Xmx160m -Xss512k -XX:CICompilerCount=1"
+    # XX:XICompilerCount=2 is the minimum value
+    echo "$opts -Xmx160m -Xss512k -XX:CICompilerCount=2"
     ;;
   L)
     echo "$opts -Xmx671m -XX:CICompilerCount=2"
@@ -24,7 +25,7 @@ calculate_java_memory_opts() {
     echo "$opts -Xmx12g -XX:CICompilerCount=4"
     ;;
   *) # M Container and default if buildpack is used elsewhere
-    echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=1"
+    echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
     ;;
   esac
 }
