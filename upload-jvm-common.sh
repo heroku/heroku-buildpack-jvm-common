@@ -56,7 +56,7 @@ fi
 echo "---> Archive created"
 
 which s3cmd > /dev/null || echo "s3cmd is not available in your PATH" >&2 || echo "Archive not uploaded to S3" >&2 || exit -1
-s3_bucket="/buildpacks-repository"
+s3_bucket="buildpacks-repository"
 s3cmd_cmd="s3cmd --access_key=$S3_ACCESS_KEY --secret_key=$S3_SECRET_KEY"
 if [[ -z "$S3_ACCESS_KEY" ]] || [[ -z "$S3_SECRET_KEY" ]]; then
   s3cmd_cmd="s3cmd --config ${HOME}/.s3cfg"
