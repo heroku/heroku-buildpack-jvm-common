@@ -7,5 +7,6 @@
     "kissaten/java-servlets-sample",
     "kissaten/webapp-runner-sample",
     "kissaten/korvan"
-  ]
+  ],
+  "github": ["heroku/java-getting-started"]
 }
