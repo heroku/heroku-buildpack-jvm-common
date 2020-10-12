@@ -1,5 +1,3 @@
-ENV['HATCHET_BUILDPACK_BASE'] = 'https://github.com/heroku/heroku-buildpack-jvm-common.git'
-
 require 'rspec/core'
 require 'hatchet'
 require 'fileutils'

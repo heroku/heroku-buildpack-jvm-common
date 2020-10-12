@@ -5,7 +5,7 @@ describe "A Java application" do
   it "works with the getting started guide" do
     Hatchet::Runner.new("java-getting-started", buildpacks: ["https://github.com/heroku/heroku-buildpack-java"]).tap do |app|
       app.deploy do
-      # deploy works
+        #deploy works
       end
     end
   end
@@ -38,26 +38,6 @@ describe "A Java application" do
       expect(test_run.output).to include("Downloading from central")
       test_run.run_again
       expect(test_run.output).to_not include("Downloading from central")
-    end
-  end
-
-  it "should not restore cached directories" do
-    Hatchet::Runner.new("java-overlay-test", stack: "heroku-18").deploy do |app, heroku|
-      expect(app.output).to_not include("Loading from cache")
-      app.update_stack("heroku-16")
-      app.commit!
-      app.push!
-      #outputs are the same
-    end
-  end
-
-#Test cache for regular deploys is used on repeated deploys
-  it "should not restore cache if the stack did not change" do
-    Hatchet::Runner.new('java-getting-started', stack: "heroku-16").deploy do |app, heroku|
-      app.update_stack("heroku-16")
-      app.commit!
-      app.push!
-      #outputs are the same
     end
   end
 
