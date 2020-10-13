@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe "Java" do
 
   ["1.7", "1.8", "8", "11", "13", "14", "15",
-    "zulu-1.8.0_144", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |jdk_version|
+    "zulu-1.8.0_265", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         Hatchet::Runner.new(
