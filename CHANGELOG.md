@@ -2,6 +2,10 @@
 
 ## Main
 
+## V108
+
+* Upgrade default JDK to 8u265
+
 ## v107
 
 * Add support for JDK 15
