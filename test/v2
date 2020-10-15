@@ -130,13 +130,13 @@ test_installJavaCI() {
 
 test_installJavaWithVersion() {
   unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture install_java "${BUILD_DIR}" "1.8.0_212"
+  capture install_java "${BUILD_DIR}" "1.8.0_265"
   assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
   assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
   assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
   assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
-  assertEquals "$(cat "${BUILD_DIR}/.jdk/version")" "1.8.0_212"
+  assertEquals "$(cat "${BUILD_DIR}/.jdk/version")" "1.8.0_265"
   assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(command -v java)"
   assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }
@@ -194,17 +194,17 @@ test_invalidJdkURL() {
 }
 
 test_customJdk() {
-  capture install_java "${BUILD_DIR}" "1.8.0_121"
+  capture install_java "${BUILD_DIR}" "1.8.0_265"
   assertCapturedSuccess
 }
 
 test_zuluJdk() {
-  capture install_java "${BUILD_DIR}" "zulu-1.8.0_144"
+  capture install_java "${BUILD_DIR}" "zulu-1.8.0_265"
   assertCapturedSuccess
 }
 
 test_openJdk() {
-  capture install_java "${BUILD_DIR}" "openjdk-1.8.0_144"
+  capture install_java "${BUILD_DIR}" "openjdk-1.8.0_265"
   assertCapturedSuccess
 }
 
@@ -217,7 +217,7 @@ test_skip_version_cache() {
 
 test_install_jdk_valid() {
   export HEROKU_GPG_VALIDATION=1
-  capture install_jdk "${JDK_BASE_URL}/openjdk11.0.4.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}"
+  capture install_jdk "${JDK_BASE_URL}/openjdk11.0.8.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}"
   assertCapturedSuccess
   unset HEROKU_GPG_VALIDATION
 }
@@ -230,29 +230,29 @@ test_install_jdk_invalid() {
 
   curl -sf -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
   export HEROKU_GPG_VALIDATION=1
-  capture install_jdk "${JDK_BASE_URL}/openjdk11.0.4.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
+  capture install_jdk "${JDK_BASE_URL}/openjdk11.0.8.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
   assertCapturedError " !     ERROR: Invalid GPG signature!"
   unset HEROKU_GPG_VALIDATION
 }
 
 test_get_jdk_url_with_default() {
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_232.tar.gz" "$(_get_jdk_url_with_default "1.8.0_232")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_265.tar.gz" "$(_get_jdk_url_with_default "1.8.0_265")"
 
   export JDK_URL_1_8="https://example.com/java8"
-  assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_232")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.7.0_232.tar.gz" "$(_get_jdk_url_with_default "1.7.0_232")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk11.0.5.tar.gz" "$(_get_jdk_url_with_default "11.0.5")"
-  assertEquals "${JDK_BASE_URL:?}/zulu-11.0.5.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.5")"
+  assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_265")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.7.0_272.tar.gz" "$(_get_jdk_url_with_default "1.7.0_272")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk11.0.8.tar.gz" "$(_get_jdk_url_with_default "11.0.8")"
+  assertEquals "${JDK_BASE_URL:?}/zulu-11.0.8.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.8")"
   unset JDK_URL_1_8
 
   export JDK_URL_1_7="https://example.com/java7"
-  assertEquals "${JDK_URL_1_7}" "$(_get_jdk_url_with_default "1.7.0_232")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_232.tar.gz" "$(_get_jdk_url_with_default "1.8.0_232")"
+  assertEquals "${JDK_URL_1_7}" "$(_get_jdk_url_with_default "1.7.0_272")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_265.tar.gz" "$(_get_jdk_url_with_default "1.8.0_265")"
   unset JDK_URL_1_7
 
   export JDK_URL_11="https://example.com/java11"
-  assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.5")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_232.tar.gz" "$(_get_jdk_url_with_default "1.8.0_232")"
+  assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.8")"
+  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_265.tar.gz" "$(_get_jdk_url_with_default "1.8.0_265")"
   unset JDK_URL_11
 }
 
