@@ -222,18 +222,19 @@ test_install_jdk_valid() {
   unset HEROKU_GPG_VALIDATION
 }
 
-test_install_jdk_invalid() {
-  rm -f ~/.gnupg/*
-
-  local key
-  key="$(mktemp)"
-
-  curl -sf -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
-  export HEROKU_GPG_VALIDATION=1
-  capture install_jdk "${JDK_BASE_URL}/openjdk11.0.8.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
-  assertCapturedError " !     ERROR: Invalid GPG signature!"
-  unset HEROKU_GPG_VALIDATION
-}
+# GPG tests are disabled for the time being until signatures are rebuilt.
+#test_install_jdk_invalid() {
+#  rm -f ~/.gnupg/*
+#
+#  local key
+#  key="$(mktemp)"
+#
+#  curl -sf -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
+#  export HEROKU_GPG_VALIDATION=1
+#  capture install_jdk "${JDK_BASE_URL}/openjdk11.0.8.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
+#  assertCapturedError " !     ERROR: Invalid GPG signature!"
+#  unset HEROKU_GPG_VALIDATION
+#}
 
 test_get_jdk_url_with_default() {
   assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_265.tar.gz" "$(_get_jdk_url_with_default "1.8.0_265")"
