@@ -2,7 +2,11 @@
 
 ## Main
 
-## V108
+## v109
+
+* Add support for heroku-20 stack
+
+## v108
 
 * Upgrade default JDK to 8u265
 
