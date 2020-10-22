@@ -4,6 +4,7 @@
 
 * Add support for JVM_BUILDPACK_ASSETS_BASE_URL environment variable (#179)
 * Deprecate support for JDK_BASE_URL environment variable (#179)
+* Upgrade default JDKs to 15.0.1, 13.0.5, 11.0.9, 8u272 and 7u281
 
 ## v109
 
