@@ -6,7 +6,7 @@
 STACK="${STACK:-$CNB_STACK_ID}"
 DEFAULT_JDK_VERSION="1.8"
 # shellcheck disable=SC2034
-DEFAULT_JDK_1_7_VERSION="1.7.0_272"
+DEFAULT_JDK_1_7_VERSION="1.7.0_281"
 # shellcheck disable=SC2034
 DEFAULT_JDK_1_8_VERSION="1.8.0_272"
 # shellcheck disable=SC2034
