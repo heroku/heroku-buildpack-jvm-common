@@ -1,20 +1,27 @@
 #!/usr/bin/env bash
 
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
 # fail fast
 set -e
 
 # parse args
-export BUILD_DIR=$1
+export BUILD_DIR="${1}"
+export CACHE_DIR="${2}"
+export ENV_DIR="${3}"
 
 BIN_DIR=$(
   cd "$(dirname "$0")"
   pwd
 ) # absolute path
 
-# shellcheck source=bin/java
-source "$BIN_DIR/java"
 # shellcheck source=bin/util
 source "$BIN_DIR/util"
+
+export_env_dir "${ENV_DIR}" "JVM_BUILDPACK_ASSETS_BASE_URL"
+
+# shellcheck source=bin/java
+source "$BIN_DIR/java"
 
 # Install JDK
 install_java_with_overlay "${BUILD_DIR}" "${CACHE_DIR}"
