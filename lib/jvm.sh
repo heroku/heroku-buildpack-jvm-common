@@ -18,8 +18,15 @@ DEFAULT_JDK_13_VERSION="13.0.4"
 DEFAULT_JDK_14_VERSION="14.0.2"
 DEFAULT_JDK_15_VERSION="15.0.0"
 
-DEFAULT_JDK_BASE_URL="https://lang-jvm.s3.amazonaws.com/jdk/${STACK:-"heroku-18"}"
-JDK_BASE_URL=${JDK_BASE_URL:-$DEFAULT_JDK_BASE_URL}
+if [[ -n "${JDK_BASE_URL}" ]]; then
+  # Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
+  # override the bucket for testing with staging binaries by using the existing JVM buildpack integration tests that
+  # cover all stacks. We will remove support for it in October 2021.
+  warning_inline "Support for the JDK_BASE_URL environment variable is deprecated and will be removed October 2021!"
+else
+  JVM_BUILDPACK_ASSETS_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL:-"https://lang-jvm.s3.amazonaws.com"}"
+  JDK_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL%/}/jdk/${STACK:-"heroku-18"}"
+fi
 
 get_jdk_version() {
   local appDir="${1:?}"
