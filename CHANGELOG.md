@@ -2,6 +2,9 @@
 
 ## Main
 
+* Deprecate JDK_BASE_URL environment variable (#178)
+* Add support for JVM_BUILDPACK_S3_BUCKET_NAME environment variable (#178)
+
 ## v109
 
 * Add support for heroku-20 stack
