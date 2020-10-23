@@ -15,11 +15,10 @@ EOF
 
 read -r -p "Do you want to continue? [y/N] " continue_response
 case "${continue_response}" in
-  [yY])
-    ;;
-  *)
-    exit 0
-    ;;
+[yY]) ;;
+*)
+  exit 0
+  ;;
 esac
 
 payload='{
