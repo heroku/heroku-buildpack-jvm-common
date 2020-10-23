@@ -2,6 +2,9 @@
 
 ## Main
 
+* Add support for JVM_BUILDPACK_ASSETS_BASE_URL environment variable (#179)
+* Deprecate support for JDK_BASE_URL environment variable (#179)
+
 ## v109
 
 * Add support for heroku-20 stack
