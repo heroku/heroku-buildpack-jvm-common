@@ -22,7 +22,7 @@ name = "JVM"
 [[stacks]]
 id = "heroku-18"
 
-[[stack]]
+[[stacks]]
 id = "heroku-20"
 
 # this is to allow testing of other stack compatibility and is not a guarantee
