@@ -15,7 +15,7 @@ set_jdbc_url() {
     local original_schema="${BASH_REMATCH[1]}"
     local original_user_info="${BASH_REMATCH[2]}"
     local original_host="${BASH_REMATCH[3]}"
-    local orignal_port="${BASH_REMATCH[4]}"
+    local original_port="${BASH_REMATCH[4]}"
     local original_path="${BASH_REMATCH[5]}"
     local original_query="${BASH_REMATCH[6]}"
     local original_fragment="${BASH_REMATCH[7]}"
@@ -86,7 +86,7 @@ set_jdbc_url() {
     # Previous versions of this script only set the environment variables when a username and password was present.
     # We keep this logic to ensure backwards compatability.
     if [[ -n $username && -n $password ]]; then
-      eval "export ${environment_variables_prefix}_URL=\"${modified_schema}://${original_host}${orignal_port}${original_path}${modified_query}${original_fragment}\""
+      eval "export ${environment_variables_prefix}_URL=\"${modified_schema}://${original_host}${original_port}${original_path}${modified_query}${original_fragment}\""
       eval "export ${environment_variables_prefix}_USERNAME=\"${username}\""
       eval "export ${environment_variables_prefix}_PASSWORD=\"${password}\""
     fi
