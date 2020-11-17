@@ -2,6 +2,11 @@
 
 ## Main
 
+## v111
+
+* heroku-20 support for CNB
+* Fix typos
+
 ## v110
 
 * Add support for JVM_BUILDPACK_ASSETS_BASE_URL environment variable (#179)
