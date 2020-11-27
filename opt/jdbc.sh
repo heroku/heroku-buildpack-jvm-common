@@ -76,7 +76,7 @@ set_jdbc_url() {
     for query_parameter_key in $sorted_query_parameter_keys; do
       local key_value_pair="${query_parameter_key}=${query_parameters[$query_parameter_key]}"
 
-      if [[ -z $modified_query ]]; then
+      if [[ -z "${modified_query:-}" ]]; then
         modified_query="?${key_value_pair}"
       else
         modified_query="${modified_query}&${key_value_pair}"
