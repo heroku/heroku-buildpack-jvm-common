@@ -2,6 +2,8 @@
 
 ## Main
 
+* Upgrade default JDKs to 8u275 and 7u285
+
 ## v111
 
 * heroku-20 support for CNB
