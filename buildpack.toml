@@ -1,8 +1,8 @@
-api = "0.2"
+api = "0.4"
 
 [buildpack]
 id = "heroku/jvm"
-version = "0.1"
+version = "0.1.0"
 name = "JVM"
 
   [publish.Ignore]
