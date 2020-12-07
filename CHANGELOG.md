@@ -2,6 +2,8 @@
 
 ## Main
 
+* Upgrade CNB API compatibility version to 0.4
+
 ## v112
 
 * Upgrade default JDKs to 8u275 and 7u285
