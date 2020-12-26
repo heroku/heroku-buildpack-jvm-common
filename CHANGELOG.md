@@ -2,6 +2,8 @@
 
 ## Main
 
+* Install certs and profile scripts for JRE from CNB
+
 ## v113
 
 * Upgrade CNB API compatibility version to 0.4
