@@ -41,7 +41,9 @@ EOF
 
 if bp_layer_has_key "${layersDir}/jdk" ".metadata.cache_id" "${jdkCacheId}"; then
   info "JDK ${jdkVersion} installed from cache"
+  touch "${layersDir}/jdk.toml"
   info "JRE ${jdkVersion} installed from cache"
+  touch "${layersDir}/jre.toml"
 else
   jdkLayerToml="$(bp_layer_metadata_create "false" "true" "true" "${jdkMetadata}")"
   jdkLayer="$(bp_layer_init "${layersDir}" "jdk" "${jdkLayerToml}")"
