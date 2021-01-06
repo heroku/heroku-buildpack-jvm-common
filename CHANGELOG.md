@@ -2,6 +2,8 @@
 
 ## Main
 
+* Upgrade default JDKs to 13.0.5.1 and 11.0.9.1
+
 ## v114
 
 * Install certs and profile scripts for JRE from CNB
