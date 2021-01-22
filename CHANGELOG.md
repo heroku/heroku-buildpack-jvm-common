@@ -1,6 +1,9 @@
 # JVM Common Buildpack Changelog
 
 ## Main
+
+## v116
+
 * Upgrade default JDKs to 15.0.2, 13.0.6, 11.0.10, 8u282 and 7u292
 
 ## v115
