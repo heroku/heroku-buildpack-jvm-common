@@ -20,13 +20,17 @@ RSpec.configure do |config|
   end
 end
 
-def jvm_common_branch
-  return ENV['HATCHET_BUILDPACK_BRANCH'] if ENV['HATCHET_BUILDPACK_BRANCH']
-  return ENV['TRAVIS_PULL_REQUEST_BRANCH'] if ENV['TRAVIS_PULL_REQUEST_BRANCH'] && !ENV['TRAVIS_PULL_REQUEST_BRANCH'].empty?
-  return ENV['TRAVIS_BRANCH'] if ENV['TRAVIS_BRANCH']
-  return ENV['CIRCLE_BRANCH'] if ENV['CIRCLE_BRANCH']
+def new_default_hatchet_runner(*args, **kwargs)
+  kwargs[:stack] ||= ENV["DEFAULT_APP_STACK"]
+  kwargs[:config] ||= {}
 
-  raise 'Could not determine buildpack branch!'
+  ENV.keys.each do |key|
+    if key.start_with?("DEFAULT_APP_CONFIG_")
+      kwargs[:config][key.delete_prefix("DEFAULT_APP_CONFIG_")] ||= ENV[key]
+    end
+  end
+
+  Hatchet::Runner.new(*args, **kwargs)
 end
 
 def add_database(app, heroku)

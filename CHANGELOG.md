@@ -2,6 +2,49 @@
 
 ## Main
 
+## v117
+
+* Zulu Builds of OpenJDK for 15.0.2 are now available
+
+## v116
+
+* Upgrade default JDKs to 15.0.2, 13.0.6, 11.0.10, 8u282 and 7u292
+
+## v115
+
+* Upgrade default JDKs to 13.0.5.1 and 11.0.9.1
+
+## v114
+
+* Install certs and profile scripts for JRE from CNB
+
+## v113
+
+* Upgrade CNB API compatibility version to 0.4
+
+## v112
+
+* Upgrade default JDKs to 8u275 and 7u285
+
+## v111
+
+* heroku-20 support for CNB
+* Fix typos
+
+## v110
+
+* Add support for JVM_BUILDPACK_ASSETS_BASE_URL environment variable (#179)
+* Deprecate support for JDK_BASE_URL environment variable (#179)
+* Upgrade default JDKs to 15.0.1, 13.0.5, 11.0.9, 8u272 and 7u282 (#177)
+
+## v109
+
+* Add support for heroku-20 stack
+
+## v108
+
+* Upgrade default JDK to 8u265
+
 ## v107
 
 * Add support for JDK 15
