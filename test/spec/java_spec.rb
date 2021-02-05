@@ -2,18 +2,10 @@ require_relative 'spec_helper'
 
 describe "Java" do
 
-  ["1.7", "1.8", "8", "11", "13", "14", "15",
-    "zulu-1.8.0_144", "openjdk-1.8.0_162", "openjdk-9.0.4"].each do |jdk_version|
+  ["1.7", "1.8", "8", "11", "13", "14", "15"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
-        Hatchet::Runner.new(
-          "java-servlets-sample",
-          buildpacks: ["https://github.com/heroku/heroku-buildpack-java"],
-          stack:  ENV["HEROKU_TEST_STACK"],
-          config: {
-            "JVM_COMMON_BUILDPACK" => "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}"
-          }
-        ).tap do |app|
+        new_default_hatchet_runner("java-servlets-sample").tap do |app|
           app.before_deploy do
             set_java_version(Dir.pwd, jdk_version)
           end
@@ -36,14 +28,7 @@ describe "Java" do
   context "a system.properties file with no java.runtime.version" do
     it "should deploy" do
       expected_version = "1.8"
-      Hatchet::Runner.new(
-        "java-servlets-sample",
-        buildpacks: ["https://github.com/heroku/heroku-buildpack-java"],
-        stack:  ENV["HEROKU_TEST_STACK"],
-        config: {
-          "JVM_COMMON_BUILDPACK" => "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}"
-        }
-      ).tap do |app|
+      new_default_hatchet_runner("java-servlets-sample").tap do |app|
         app.before_deploy do
           write_sys_props(Dir.pwd, "maven.version=3.3.9")
         end
@@ -56,18 +41,10 @@ describe "Java" do
     end
   end
 
-  ["1.7", "1.8", "openjdk-1.8.0_162", "11", "13", "14", "15",
-    "zulu-1.8.0_144", "openjdk-9.0.4"].each do |jdk_version|
+  ["1.7", "1.8", "8", "11", "13", "14", "15"].each do |jdk_version|
     context "jdk-overlay on #{jdk_version}" do
       it "should deploy" do
-        Hatchet::Runner.new(
-          "java-overlay-test",
-          buildpacks: ["https://github.com/heroku/heroku-buildpack-java"],
-          stack:  ENV["HEROKU_TEST_STACK"],
-          config: {
-            "JVM_COMMON_BUILDPACK" => "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}"
-          }
-        ).tap do |app|
+        new_default_hatchet_runner("java-overlay-test").tap do |app|
           app.before_deploy do
             set_java_version(Dir.pwd, jdk_version)
           end
@@ -96,17 +73,10 @@ describe "Java" do
     end
   end
 
-  ["1.8", "11", "13", "14", "15"].each do |jdk_version|
+  ["1.8", "8", "11", "13", "14", "15"].each do |jdk_version|
     context "korvan on jdk-#{jdk_version}" do
       it "runs commands" do
-        Hatchet::Runner.new(
-          "korvan",
-          buildpacks: ["https://github.com/heroku/heroku-buildpack-java"],
-          stack:  ENV["HEROKU_TEST_STACK"],
-          config: {
-            "JVM_COMMON_BUILDPACK" => "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/#{jvm_common_branch}"
-          }
-        ).tap do |app|
+        new_default_hatchet_runner("korvan").tap do |app|
           app.before_deploy do
             set_java_version(Dir.pwd, jdk_version)
           end

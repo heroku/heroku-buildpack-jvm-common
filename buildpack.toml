@@ -1,8 +1,8 @@
-api = "0.2"
+api = "0.4"
 
 [buildpack]
 id = "heroku/jvm"
-version = "0.1"
+version = "0.1.0"
 name = "JVM"
 
   [publish.Ignore]
@@ -21,6 +21,9 @@ name = "JVM"
 
 [[stacks]]
 id = "heroku-18"
+
+[[stacks]]
+id = "heroku-20"
 
 # this is to allow testing of other stack compatibility and is not a guarantee
 [[stacks]]
