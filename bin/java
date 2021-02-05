@@ -144,7 +144,7 @@ _install_default_proc_warn() {
 
   mkdir -p "${ctxDir}/.profile.d"
   cat <<EOF >"${ctxDir}/.profile.d/default-proc-warning.sh"
-if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
+if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web-1" ]; then
   echo "Create a Procfile to customize the command used to run this process: https://doc.scalingo.com/platform/app/procfile"
 fi
 EOF
