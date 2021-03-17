@@ -90,7 +90,7 @@ get_jdk_url() {
   jdkVersion="$(get_full_jdk_version "${shortJdkVersion}")"
 
   local jdkUrl
-  if [ "$(expr "${jdkVersion}" : '^1[0-5]')" != 0 ]; then
+  if [ "$(expr "${jdkVersion}" : '^1[0-9]')" != 0 ]; then
     jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
     jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
