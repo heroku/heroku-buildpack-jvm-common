@@ -2,6 +2,8 @@
 
 ## Main
 
+* Add support for Java 16
+
 ## v117
 
 * Zulu Builds of OpenJDK for 15.0.2 are now available
