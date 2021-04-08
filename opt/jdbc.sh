@@ -118,6 +118,6 @@ if [[ "${DISABLE_SPRING_DATASOURCE_URL:-}" != "true" ]] &&
   export SPRING_DATASOURCE_PASSWORD="${JDBC_DATABASE_PASSWORD:-}"
 fi
 
-for database_url_variable in $(env | awk -F "=" '{print $1}' | grep "SCALINGO_POSTGRESQL_.*_URL"); do
+for database_url_variable in $(env | awk -F "=" '{print $1}' | grep "SCALINGO_POSTGRESQL_URL"); do
   set_jdbc_url "$(eval echo "\$${database_url_variable}")" "${database_url_variable//_URL/}_JDBC"
 done
