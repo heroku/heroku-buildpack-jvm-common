@@ -2,6 +2,8 @@
 
 ## Main
 
+* Upgrade default JDKs to 16.0.1, 15.0.3, 13.0.7, 11.0.11, 8u292 and 7u302
+
 ## v118
 
 * Add support for Java 16
