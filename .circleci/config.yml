@@ -8,9 +8,6 @@ orbs:
   heroku: circleci/heroku@1.1.1
 
 executors:
-  heroku-16:
-    docker:
-      - image: heroku/heroku:16
   heroku-18:
     docker:
       - image: heroku/heroku:18
@@ -23,7 +20,7 @@ jobs:
     parameters:
       heroku-stack:
         type: enum
-        enum: ["heroku-16", "heroku-18", "heroku-20"]
+        enum: ["heroku-18", "heroku-20"]
       use-staging-bucket:
         type: boolean
         default: false
@@ -86,7 +83,7 @@ jobs:
     parameters:
       heroku-stack:
         type: enum
-        enum: ["heroku-16", "heroku-18", "heroku-20"]
+        enum: ["heroku-18", "heroku-20"]
     environment:
       STACK: << parameters.heroku-stack >>
     executor:
@@ -100,7 +97,7 @@ jobs:
     parameters:
       heroku-stack:
         type: enum
-        enum: ["heroku-16", "heroku-18", "heroku-20"]
+        enum: ["heroku-18", "heroku-20"]
     environment:
       # The unit tests change behaviour to test CNB specifics if this env var is set.
       CNB_STACK_ID: << parameters.heroku-stack >>
@@ -162,7 +159,6 @@ jobs:
               -recreate "${CIRCLE_TAG}" "heroku-jvm-common-cnb-${CIRCLE_TAG}.tgz"
 
 workflows:
-  version: 2.1
   default-ci-workflow:
     jobs:
       - shfmt
@@ -174,7 +170,7 @@ workflows:
             - shellcheck
           matrix:
             parameters:
-              heroku-stack: ["heroku-16", "heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20"]
 
       - unit-tests-cloud-native-buildpack:
           requires:
@@ -182,7 +178,7 @@ workflows:
             - shellcheck
           matrix:
             parameters:
-              heroku-stack: ["heroku-16", "heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20"]
 
       - buildpack-testrunner:
           requires:
@@ -195,7 +191,7 @@ workflows:
             - shellcheck
           matrix:
             parameters:
-              heroku-stack: ["heroku-16", "heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20"]
   hatchet-with-staging-bucket:
     when: << pipeline.parameters.enable-hatchet-with-staging-bucket >>
     jobs:
@@ -203,7 +199,7 @@ workflows:
           matrix:
             parameters:
               use-staging-bucket: [true]
-              heroku-stack: ["heroku-16", "heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20"]
   cnb-release-workflow:
     jobs:
       - publish-cnb-release:
