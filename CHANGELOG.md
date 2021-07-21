@@ -2,6 +2,8 @@
 
 ## Main
 
+## v120
+
 * Remove heroku-16 support
 * Upgrade default JDKs to 15.0.4, 13.0.8, 11.0.12, 8u302 and 7u312
 
