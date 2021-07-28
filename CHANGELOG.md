@@ -2,6 +2,8 @@
 
 ## Main
 
+* Upgrade default JDK for Java 16 to 16.0.2
+
 ## v120
 
 * Remove heroku-16 support
