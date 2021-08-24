@@ -2,6 +2,9 @@
 
 ## Main
 
+## v122
+
+* Add support for Java 17
 * Updated GPG public key
 
 ## v121
