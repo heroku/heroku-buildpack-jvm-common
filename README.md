@@ -15,22 +15,34 @@ build an application. It is used by the
 
 This is how the buildpack is used from another buildpack:
 
-```bash
+```shell
 JVM_BUILDPACK_URL="https://buildpacks-repository.s3.eu-central-1.amazonaws.com/jvm-common.tar.xz"
 mkdir -p /tmp/jvm-common
-curl --silent --location $JVM_BUILDPACK_URL | tar xzm -C /tmp/jvm-common --strip-components=1
+curl --silent --location $JVM_BUILDPACK_URL | tar xJm -C /tmp/jvm-common --strip-components=1
 source /tmp/jvm-common/bin/util
 source /tmp/jvm-common/bin/java
 
 install_java_with_overlay ${BUILD_DIR}
 ```
 
+You can also install only Java without overlay:
+```shell
+JVM_BUILDPACK_URL="https://buildpacks-repository.s3.eu-central-1.amazonaws.com/jvm-common.tar.xz"
+mkdir -p /tmp/jvm-common
+curl --silent --location $JVM_BUILDPACK_URL | tar xJm -C /tmp/jvm-common --strip-components=1
+source /tmp/jvm-common/bin/util
+source /tmp/jvm-common/bin/java
+
+# Java 11 (LTS) for example
+install_java ${BUILD_DIR} 11
+```
+
 ## Standalone Usage
 
 You may install the JVM buildpack into your app by running:
 
-```
-$ scalingo env-set BUILDPACK_URL=https://github.com/Scalingo/buildpack-jvm-common
+```shell
+scalingo env-set BUILDPACK_URL=https://github.com/Scalingo/buildpack-jvm-common
 ```
 
 Then it may be used by itself, or with another buildpack using [multiple
