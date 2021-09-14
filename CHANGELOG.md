@@ -2,6 +2,23 @@
 
 ## Main
 
+## v121
+
+* Upgrade default JDK for Java 16 to 16.0.2
+
+## v120
+
+* Remove heroku-16 support
+* Upgrade default JDKs to 15.0.4, 13.0.8, 11.0.12, 8u302 and 7u312
+
+## v119
+
+* Upgrade default JDKs to 16.0.1, 15.0.3, 13.0.7, 11.0.11, 8u292 and 7u302
+
+## v118
+
+* Add support for Java 16
+
 ## v117
 
 * Zulu Builds of OpenJDK for 15.0.2 are now available
