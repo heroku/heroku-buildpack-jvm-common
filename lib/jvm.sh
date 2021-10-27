@@ -18,7 +18,7 @@ DEFAULT_JDK_13_VERSION="13.0.9"
 DEFAULT_JDK_14_VERSION="14.0.2"
 DEFAULT_JDK_15_VERSION="15.0.5"
 DEFAULT_JDK_16_VERSION="16.0.2"
-DEFAULT_JDK_17_VERSION="17.0.0"
+DEFAULT_JDK_17_VERSION="17.0.1"
 
 if [[ -n "${JDK_BASE_URL}" ]]; then
   # Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
