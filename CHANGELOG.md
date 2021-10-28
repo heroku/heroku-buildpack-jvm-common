@@ -3,6 +3,9 @@
 ## Main
 
 ## v124
+* Upgrade default JDK to 7u322
+
+## v124
 * Upgrade default JDKs to 17.0.1
 
 ## v123
