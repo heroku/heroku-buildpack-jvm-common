@@ -2,11 +2,11 @@
 
 ## Main
 
-## v124
-* Upgrade default JDK to 7u322
+## v125
+* Upgrade default JDK for Java 7 to 7u322
 
 ## v124
-* Upgrade default JDKs to 17.0.1
+* Upgrade default JDK for Java 17 to 17.0.1
 
 ## v123
 * Upgrade default JDKs to 15.0.5, 13.0.9, 11.0.13, and 8u312 
