@@ -2,6 +2,10 @@
 
 ## Main
 
+## v127
+
+* Upgrade default JDK for Java 11 to 11.0.14.1
+
 ## v126
 
 * Upgrade default JDKs to 17.0.2, 15.0.6, 13.0.10, 11.0.14, 8u322 and 7u332
