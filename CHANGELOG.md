@@ -2,6 +2,10 @@
 
 ## Main
 
+## v128
+
+* Add support for Java 18
+
 ## v127
 
 * Upgrade default JDK for Java 11 to 11.0.14.1

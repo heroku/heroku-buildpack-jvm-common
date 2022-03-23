@@ -19,6 +19,7 @@ DEFAULT_JDK_14_VERSION="14.0.2"
 DEFAULT_JDK_15_VERSION="15.0.6"
 DEFAULT_JDK_16_VERSION="16.0.2"
 DEFAULT_JDK_17_VERSION="17.0.2"
+DEFAULT_JDK_18_VERSION="18.0.0"
 
 if [[ -n "${JDK_BASE_URL}" ]]; then
   # Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
@@ -73,6 +74,8 @@ get_full_jdk_version() {
     echo "$DEFAULT_JDK_16_VERSION"
   elif [ "${jdkVersion}" = "17" ]; then
     echo "$DEFAULT_JDK_17_VERSION"
+  elif [ "${jdkVersion}" = "18" ]; then
+    echo "$DEFAULT_JDK_18_VERSION"
   elif [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
     local minorJdkVersion
     minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
