@@ -4,7 +4,7 @@
 
 ## v129
 
-* Upgrade default JDKs to 18.0.1, 17.0.3, 15.0.7, 13.0.11, 11.0.15, 8u332 and 7u342
+* Upgrade default JDKs to 17.0.3, 15.0.7, 13.0.11, 11.0.15, 8u332 and 7u342
 
 ## v128
 
