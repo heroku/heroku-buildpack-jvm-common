@@ -93,27 +93,6 @@ jobs:
       - run: test/v2
       - run: test/jdbc.sh
 
-  unit-tests-cloud-native-buildpack:
-    parameters:
-      heroku-stack:
-        type: enum
-        enum: ["heroku-18", "heroku-20"]
-    environment:
-      # The unit tests change behaviour to test CNB specifics if this env var is set.
-      CNB_STACK_ID: << parameters.heroku-stack >>
-    executor:
-      name: << parameters.heroku-stack >>
-    steps:
-      - checkout
-      - run: test/unit
-      - run: test/jdbc.sh
-      # test/v3 is currently only compatible with the heroku-18 stack.
-      - when:
-          condition:
-              equal: [<< parameters.heroku-stack >>, heroku-18]
-          steps:
-              - run: test/v3
-
   # There is an official circle ci orb for shellcheck. However, in its current version, it is really made to just check
   # files that follow a certain pattern. For this buildpack, we have multiple patterns we need to check so we're
   # implementing the bare-minimum for shellcheck here. This should be replaced with an orb as soon one is available.
@@ -127,7 +106,7 @@ jobs:
       - checkout
       - run:
           name: "Run shellcheck with fixed set of directories"
-          command: shellcheck bin/* lib/jvm.sh lib/v3/* etc/* opt/* test/*.sh
+          command: shellcheck bin/* lib/jvm.sh etc/* opt/* test/*.sh
 
   # At the time of writing, there was no orb for shfmt. This should be replaced with an orb when it becomes available.
   shfmt:
@@ -149,14 +128,6 @@ workflows:
       - shellcheck
 
       - unit-tests-heroku-buildpack:
-          requires:
-            - shfmt
-            - shellcheck
-          matrix:
-            parameters:
-              heroku-stack: ["heroku-18", "heroku-20"]
-
-      - unit-tests-cloud-native-buildpack:
           requires:
             - shfmt
             - shellcheck

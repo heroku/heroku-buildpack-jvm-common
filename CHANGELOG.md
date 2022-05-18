@@ -2,6 +2,10 @@
 
 ## Main
 
+## v131
+
+* Remove Cloud Native Buildpack support. Development of Heroku JVM Cloud Native Buildpacks now takes place in a dedicated repository: https://github.com/heroku/buildpacks-jvm
+
 ## v130
 
 * Upgrade default JDK for Java 18 to 18.0.1
