@@ -15,58 +15,16 @@ get_client() {
   fi
 }
 
-write_build_plan() {
-  local plan=${1:?}
-  local appDir
-  appDir="$(pwd)"
-
-  local bpDir
-  # shellcheck disable=SC2164
-  bpDir="$(
-    cd "$(dirname "$0")/.."
-    pwd
-  )" # absolute path
-
-  # shellcheck source=lib/jvm.sh
-  source "${bpDir}/lib/jvm.sh"
-
-  local jdkVersion
-  jdkVersion="$(get_jdk_version "${appDir}")"
-
-  local fullJdkVersion
-  fullJdkVersion="$(get_full_jdk_version "${jdkVersion}")"
-
-  cat <<TOML >"$plan"
-[[provides]]
-name = "jdk"
-
-[[requires]]
-name = "jdk"
-version = "$fullJdkVersion"
-
-[[provides]]
-name = "jre"
-
-[[requires]]
-name = "jre"
-version = "$fullJdkVersion"
-TOML
-}
-
-if [ -n "${CNB_STACK_ID:-}" ]; then
-  write_build_plan "$2"
-  echo "JVM"
+if [ -f "$1/.heroku-deploy" ]; then
+  get_client "$1/.heroku-deploy"
+elif [ -f "$1/pom.xml" ] && [ -d "$1/target" ]; then
+  echo "heroku-maven-plugin"
+elif [ -d "$1/target/universal/stage" ]; then
+  echo "sbt-heroku"
+elif [ -f "$1/project.clj" ] && [ -d "$1/target" ]; then
+  echo "lein-heroku"
 else
-  if [ -f "$1/.heroku-deploy" ]; then
-    get_client "$1/.heroku-deploy"
-  elif [ -f "$1/pom.xml" ] && [ -d "$1/target" ]; then
-    echo "heroku-maven-plugin"
-  elif [ -d "$1/target/universal/stage" ]; then
-    echo "sbt-heroku"
-  elif [ -f "$1/project.clj" ] && [ -d "$1/target" ]; then
-    echo "lein-heroku"
-  else
-    echo "JVM Common"
-  fi
+  echo "JVM Common"
 fi
+
 exit 0
