@@ -2,9 +2,10 @@
 
 ## Main
 
-* Refactor OpenJDK version resolution code.
-* Drop support for OpenJDK 9 and OpenJDK 12, both versions are not available on any supported stack.
-* Add support for `heroku-22` stack.
+* Refactor OpenJDK version resolution code. ([#237](https://github.com/heroku/heroku-buildpack-jvm-common/pull/237))
+* Drop support for OpenJDK `9` and OpenJDK `12`, both versions are not available on any supported stack. ([#237](https://github.com/heroku/heroku-buildpack-jvm-common/pull/237))
+* Add support for `heroku-22` stack. ([#236](https://github.com/heroku/heroku-buildpack-jvm-common/pull/236))
+* Change default OpenJDK distribution to [Azul Zulu Builds of OpenJDK](https://www.azul.com/downloads/?package=jdk#download-openjdk) on stacks >= `heroku-22`. ([#236](https://github.com/heroku/heroku-buildpack-jvm-common/pull/236))
 
 ## v131
 
