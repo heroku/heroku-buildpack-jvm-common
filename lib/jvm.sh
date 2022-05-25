@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# This script provides common utilities for installing the JDK and JRE. It is used
-# by both the v2 and v3 buildpacks.
-
-STACK="${STACK:-$CNB_STACK_ID}"
 DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_1_7_VERSION="1.7.0_342"
 DEFAULT_JDK_1_8_VERSION="1.8.0_332"
@@ -34,16 +30,6 @@ get_jdk_version() {
       echo "$detectedVersion"
     else
       echo "$DEFAULT_JDK_VERSION"
-    fi
-  elif [ -n "${BP_JVM_VERSION:-}" ]; then
-    if [ "$(expr "$BP_JVM_VERSION" : '^1\?[0-9]\.\*$')" != 0 ]; then
-      # matches values in the 8.*, 11.*, etc and strips the .*
-      echo "${BP_JVM_VERSION//\.\*/}"
-    elif [ "$(expr "$BP_JVM_VERSION" : '^8\.0\.[0-9]\+')" != 0 ]; then
-      # matches values in the form 8.0.252 and converts them to 1.8.0_252
-      echo "1.8.0_${BP_JVM_VERSION//8\.0\./}"
-    else
-      echo "$BP_JVM_VERSION"
     fi
   else
     echo "$DEFAULT_JDK_VERSION"
