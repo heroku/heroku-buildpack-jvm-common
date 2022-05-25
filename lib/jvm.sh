@@ -67,19 +67,6 @@ get_jdk_url() {
   echo "${jdkUrl}"
 }
 
-get_jdk_cache_id() {
-  local url="${1:?}"
-
-  etagHeader="$(curl --head --retry 3 --silent --show-error --location "${url}" | grep ETag)"
-  etag="$(echo "$etagHeader" | sed -e 's/ETag: //g' | sed -e 's/\r//g' | xargs echo)"
-
-  if [ -n "$etag" ]; then
-    echo "$etag"
-  else
-    date -u
-  fi
-}
-
 install_jdk() {
   local url="${1:?}"
   local dir="${2:?}"
