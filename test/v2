@@ -237,24 +237,45 @@ test_install_jdk_invalid() {
 }
 
 test_get_jdk_url_with_default() {
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
+  if [ "${STACK}" == "heroku-18" ] || [ "${STACK}" == "heroku-20" ]; then
+    assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
 
-  export JDK_URL_1_8="https://example.com/java8"
-  assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_332")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.7.0_272.tar.gz" "$(_get_jdk_url_with_default "1.7.0_272")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk11.0.8.tar.gz" "$(_get_jdk_url_with_default "11.0.8")"
-  assertEquals "${JDK_BASE_URL:?}/zulu-11.0.8.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.8")"
-  unset JDK_URL_1_8
+    export JDK_URL_1_8="https://example.com/java8"
+    assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_332")"
+    assertEquals "${JDK_BASE_URL:?}/openjdk1.7.0_272.tar.gz" "$(_get_jdk_url_with_default "1.7.0_272")"
+    assertEquals "${JDK_BASE_URL:?}/openjdk11.0.8.tar.gz" "$(_get_jdk_url_with_default "11.0.8")"
+    assertEquals "${JDK_BASE_URL:?}/zulu-11.0.8.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.8")"
+    unset JDK_URL_1_8
 
-  export JDK_URL_1_7="https://example.com/java7"
-  assertEquals "${JDK_URL_1_7}" "$(_get_jdk_url_with_default "1.7.0_272")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
-  unset JDK_URL_1_7
+    export JDK_URL_1_7="https://example.com/java7"
+    assertEquals "${JDK_URL_1_7}" "$(_get_jdk_url_with_default "1.7.0_272")"
+    assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
+    unset JDK_URL_1_7
 
-  export JDK_URL_11="https://example.com/java11"
-  assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.8")"
-  assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
-  unset JDK_URL_11
+    export JDK_URL_11="https://example.com/java11"
+    assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.8")"
+    assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
+    unset JDK_URL_11
+  else
+    assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
+
+    export JDK_URL_1_8="https://example.com/java8"
+    assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_332")"
+    assertEquals "${JDK_BASE_URL:?}/zulu-1.7.0_272.tar.gz" "$(_get_jdk_url_with_default "1.7.0_272")"
+    assertEquals "${JDK_BASE_URL:?}/zulu-11.0.8.tar.gz" "$(_get_jdk_url_with_default "11.0.8")"
+    assertEquals "${JDK_BASE_URL:?}/openjdk11.0.8.tar.gz" "$(_get_jdk_url_with_default "openjdk-11.0.8")"
+    unset JDK_URL_1_8
+
+    export JDK_URL_1_7="https://example.com/java7"
+    assertEquals "${JDK_URL_1_7}" "$(_get_jdk_url_with_default "1.7.0_272")"
+    assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
+    unset JDK_URL_1_7
+
+    export JDK_URL_11="https://example.com/java11"
+    assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.8")"
+    assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_332.tar.gz" "$(_get_jdk_url_with_default "1.8.0_332")"
+    unset JDK_URL_11
+  fi
 }
 
 # the modules to be tested

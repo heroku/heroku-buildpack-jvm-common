@@ -53,38 +53,14 @@ testCompileWith_openjdk_1_8_0_144() {
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
-testCompileWith_9_0_1() {
-  echo "java.runtime.version=9.0.1" >"${BUILD_DIR}/system.properties"
+testCompileWith_zulu_11_0_15() {
+  echo "java.runtime.version=zulu-11.0.15" >"${BUILD_DIR}/system.properties"
 
   compile
 
   assertCapturedSuccess
 
-  assertCaptured "Installing JDK 9.0.1"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
-}
-
-testCompileWith_zulu_9_0_0() {
-  echo "java.runtime.version=zulu-11.0.4" >"${BUILD_DIR}/system.properties"
-
-  compile
-
-  assertCapturedSuccess
-
-  assertCaptured "Installing Azul Zulu JDK 11.0.4"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
-}
-
-testCompileWith_10() {
-  echo "java.runtime.version=10" >"${BUILD_DIR}/system.properties"
-
-  compile
-
-  assertCapturedSuccess
-
-  assertCaptured "Installing JDK 10"
+  assertCaptured "Installing Azul Zulu JDK 11.0.15"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
