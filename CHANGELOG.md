@@ -4,6 +4,7 @@
 
 * Refactor OpenJDK version resolution code.
 * Drop support for OpenJDK 9 and OpenJDK 12, both versions are not available on any supported stack.
+* Add support for `heroku-22` stack.
 
 ## v131
 
