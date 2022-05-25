@@ -61,7 +61,13 @@ get_jdk_url() {
   case ${jdkVersion} in
   openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
   zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
-  *) jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz" ;;
+  *)
+    if [ "${STACK}" == "heroku-18" ] || [ "${STACK}" == "heroku-20" ]; then
+      jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    else
+      jdkUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
+    fi
+    ;;
   esac
 
   echo "${jdkUrl}"
