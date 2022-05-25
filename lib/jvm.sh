@@ -1,19 +1,10 @@
 #!/usr/bin/env bash
 
-# This script provides common utilities for installing the JDK and JRE. It is used
-# by both the v2 and v3 buildpacks.
-
-STACK="${STACK:-$CNB_STACK_ID}"
 DEFAULT_JDK_VERSION="1.8"
-# shellcheck disable=SC2034
 DEFAULT_JDK_1_7_VERSION="1.7.0_342"
-# shellcheck disable=SC2034
 DEFAULT_JDK_1_8_VERSION="1.8.0_332"
-# shellcheck disable=SC2034
-DEFAULT_JDK_1_9_VERSION="9.0.4"
 DEFAULT_JDK_10_VERSION="10.0.2"
 DEFAULT_JDK_11_VERSION="11.0.15"
-DEFAULT_JDK_12_VERSION="12.0.2"
 DEFAULT_JDK_13_VERSION="13.0.11"
 DEFAULT_JDK_14_VERSION="14.0.2"
 DEFAULT_JDK_15_VERSION="15.0.7"
@@ -40,16 +31,6 @@ get_jdk_version() {
     else
       echo "$DEFAULT_JDK_VERSION"
     fi
-  elif [ -n "${BP_JVM_VERSION:-}" ]; then
-    if [ "$(expr "$BP_JVM_VERSION" : '^1\?[0-9]\.\*$')" != 0 ]; then
-      # matches values in the 8.*, 11.*, etc and strips the .*
-      echo "${BP_JVM_VERSION//\.\*/}"
-    elif [ "$(expr "$BP_JVM_VERSION" : '^8\.0\.[0-9]\+')" != 0 ]; then
-      # matches values in the form 8.0.252 and converts them to 1.8.0_252
-      echo "1.8.0_${BP_JVM_VERSION//8\.0\./}"
-    else
-      echo "$BP_JVM_VERSION"
-    fi
   else
     echo "$DEFAULT_JDK_VERSION"
   fi
@@ -58,72 +39,32 @@ get_jdk_version() {
 get_full_jdk_version() {
   local jdkVersion="${1:?}"
 
-  if [ "${jdkVersion}" = "10" ]; then
-    echo "$DEFAULT_JDK_10_VERSION"
-  elif [ "${jdkVersion}" = "11" ]; then
-    echo "$DEFAULT_JDK_11_VERSION"
-  elif [ "${jdkVersion}" = "12" ]; then
-    echo "$DEFAULT_JDK_12_VERSION"
-  elif [ "${jdkVersion}" = "13" ]; then
-    echo "$DEFAULT_JDK_13_VERSION"
-  elif [ "${jdkVersion}" = "14" ]; then
-    echo "$DEFAULT_JDK_14_VERSION"
-  elif [ "${jdkVersion}" = "15" ]; then
-    echo "$DEFAULT_JDK_15_VERSION"
-  elif [ "${jdkVersion}" = "16" ]; then
-    echo "$DEFAULT_JDK_16_VERSION"
-  elif [ "${jdkVersion}" = "17" ]; then
-    echo "$DEFAULT_JDK_17_VERSION"
-  elif [ "${jdkVersion}" = "18" ]; then
-    echo "$DEFAULT_JDK_18_VERSION"
-  elif [ "$(expr "${jdkVersion}" : '^1.[6-9]$')" != 0 ]; then
-    local minorJdkVersion
-    minorJdkVersion=$(expr "${jdkVersion}" : '1.\([6-9]\)')
-    eval "echo \$DEFAULT_JDK_1_${minorJdkVersion}_VERSION"
-  elif [ "$(expr "${jdkVersion}" : '^[6-9]$')" != 0 ]; then
-    eval "echo \$DEFAULT_JDK_1_${jdkVersion}_VERSION"
-  elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then
-    echo "9-181" # the naming convention for the first JDK 9 release was poor
-  else
-    echo "$jdkVersion"
-  fi
+  case "${jdkVersion}" in
+  "7" | "1.7") echo "${DEFAULT_JDK_1_7_VERSION}" ;;
+  "8" | "1.8") echo "{$DEFAULT_JDK_1_8_VERSION}" ;;
+  "10") echo "${DEFAULT_JDK_10_VERSION}" ;;
+  "11") echo "${DEFAULT_JDK_11_VERSION}" ;;
+  "13") echo "${DEFAULT_JDK_13_VERSION}" ;;
+  "14") echo "${DEFAULT_JDK_14_VERSION}" ;;
+  "15") echo "${DEFAULT_JDK_15_VERSION}" ;;
+  "16") echo "${DEFAULT_JDK_16_VERSION}" ;;
+  "17") echo "${DEFAULT_JDK_17_VERSION}" ;;
+  "18") echo "${DEFAULT_JDK_18_VERSION}" ;;
+  *) echo "${jdkVersion}" ;;
+  esac
 }
 
 get_jdk_url() {
-  local shortJdkVersion=${1:-${DEFAULT_JDK_VERSION}}
-
   local jdkVersion
-  jdkVersion="$(get_full_jdk_version "${shortJdkVersion}")"
+  jdkVersion="$(get_full_jdk_version "${1:-${DEFAULT_JDK_VERSION}}")"
 
-  local jdkUrl
-  if [ "$(expr "${jdkVersion}" : '^1[0-9]')" != 0 ]; then
-    jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
-  elif [ "$(expr "${jdkVersion}" : '^1.[6-9]')" != 0 ]; then
-    jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
-  elif [ "${jdkVersion}" = "9+181" ] || [ "${jdkVersion}" = "9.0.0" ]; then
-    jdkUrl="${JDK_BASE_URL}/openjdk9-181.tar.gz"
-  elif [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; then
-    jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
-  elif [ "$(expr "${jdkVersion}" : '^zulu-')" != 0 ]; then
-    jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz"
-  elif [ "$(expr "${jdkVersion}" : '^openjdk-')" != 0 ]; then
-    jdkUrl="${JDK_BASE_URL}/${jdkVersion//k-/k}.tar.gz"
-  fi
+  case ${jdkVersion} in
+  openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
+  zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
+  *) jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz" ;;
+  esac
 
   echo "${jdkUrl}"
-}
-
-get_jdk_cache_id() {
-  local url="${1:?}"
-
-  etagHeader="$(curl --head --retry 3 --silent --show-error --location "${url}" | grep ETag)"
-  etag="$(echo "$etagHeader" | sed -e 's/ETag: //g' | sed -e 's/\r//g' | xargs echo)"
-
-  if [ -n "$etag" ]; then
-    echo "$etag"
-  else
-    date -u
-  fi
 }
 
 install_jdk() {

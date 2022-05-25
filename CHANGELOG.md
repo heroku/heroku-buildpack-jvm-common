@@ -2,6 +2,9 @@
 
 ## Main
 
+* Refactor OpenJDK version resolution code.
+* Drop support for OpenJDK 9 and OpenJDK 12, both versions are not available on any supported stack.
+
 ## v131
 
 * Remove Cloud Native Buildpack support. Development of Heroku JVM Cloud Native Buildpacks now takes place in a dedicated repository: https://github.com/heroku/buildpacks-jvm
