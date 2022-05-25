@@ -14,13 +14,16 @@ executors:
   heroku-20:
     docker:
       - image: heroku/heroku:20
+  heroku-22:
+    docker:
+      - image: heroku/heroku:22
 
 jobs:
   hatchet:
     parameters:
       heroku-stack:
         type: enum
-        enum: ["heroku-18", "heroku-20"]
+        enum: ["heroku-18", "heroku-20", "heroku-22"]
       use-staging-bucket:
         type: boolean
         default: false
@@ -83,7 +86,7 @@ jobs:
     parameters:
       heroku-stack:
         type: enum
-        enum: ["heroku-18", "heroku-20"]
+        enum: ["heroku-18", "heroku-20", "heroku-22"]
     environment:
       STACK: << parameters.heroku-stack >>
     executor:
@@ -133,7 +136,7 @@ workflows:
             - shellcheck
           matrix:
             parameters:
-              heroku-stack: ["heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20", "heroku-22"]
 
       - buildpack-testrunner:
           requires:
@@ -146,7 +149,7 @@ workflows:
             - shellcheck
           matrix:
             parameters:
-              heroku-stack: ["heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20", "heroku-22"]
   hatchet-with-staging-bucket:
     when: << pipeline.parameters.enable-hatchet-with-staging-bucket >>
     jobs:
@@ -154,4 +157,4 @@ workflows:
           matrix:
             parameters:
               use-staging-bucket: [true]
-              heroku-stack: ["heroku-18", "heroku-20"]
+              heroku-stack: ["heroku-18", "heroku-20", "heroku-22"]
