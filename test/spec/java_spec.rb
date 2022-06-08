@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe "Java" do
 
-  ["1.7", "1.8", "8", "11", "13", "15", "16", "17", "18", "11.0.15", "openjdk-11.0.15", "zulu-11.0.15"].each do |jdk_version|
+  ["1.7", "1.8", "8", "11", "13", "15", "16", "17", "18", "11.0.15", "openjdk-11.0.15", "zulu-11.0.15", "heroku-17", "zulu-17"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-servlets-sample").tap do |app|
@@ -11,11 +11,13 @@ describe "Java" do
           end
           app.deploy do
             if jdk_version.start_with?("zulu")
-              expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+              expect(app.output).to include("Installing Azul Zulu OpenJDK #{jdk_version.gsub('zulu-', '')}")
             elsif jdk_version.start_with?("openjdk")
-              expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+              expect(app.output).to include("Installing Heroku OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+            elsif jdk_version.start_with?("heroku")
+              expect(app.output).to include("Installing Heroku OpenJDK #{jdk_version.gsub('heroku-', '')}")
             else
-              expect(app.output).to include("Installing JDK #{jdk_version}")
+              expect(app.output).to include("Installing OpenJDK #{jdk_version}")
             end
             expect(app.output).to include("BUILD SUCCESS")
             expect(successful_body(app)).to eq("Hello from Java!")
@@ -33,7 +35,7 @@ describe "Java" do
           write_sys_props(Dir.pwd, "maven.version=3.3.9")
         end
         app.deploy do
-          expect(app.output).to include("Installing JDK #{expected_version}")
+          expect(app.output).to include("Installing OpenJDK #{expected_version}")
           expect(app.output).to include("BUILD SUCCESS")
           expect(successful_body(app)).to eq("Hello from Java!")
         end
@@ -50,11 +52,13 @@ describe "Java" do
           end
           app.deploy do
             if jdk_version.start_with?("zulu")
-              expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+              expect(app.output).to include("Installing Azul Zulu OpenJDK #{jdk_version.gsub('zulu-', '')}")
             elsif jdk_version.start_with?("openjdk")
-              expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+              expect(app.output).to include("Installing Heroku OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+            elsif jdk_version.start_with?("heroku")
+              expect(app.output).to include("Installing Heroku OpenJDK #{jdk_version.gsub('heroku-', '')}")
             else
-              expect(app.output).to include("Installing JDK #{jdk_version}")
+              expect(app.output).to include("Installing OpenJDK #{jdk_version}")
             end
             expect(app.output).to include("BUILD SUCCESS")
 
@@ -82,11 +86,13 @@ describe "Java" do
           end
           app.deploy do |app|
             if jdk_version.start_with?("zulu")
-              expect(app.output).to include("Installing Azul Zulu JDK #{jdk_version.gsub('zulu-', '')}")
+              expect(app.output).to include("Installing Azul Zulu OpenJDK #{jdk_version.gsub('zulu-', '')}")
             elsif jdk_version.start_with?("openjdk")
-              expect(app.output).to include("Installing OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+              expect(app.output).to include("Installing Heroku OpenJDK #{jdk_version.gsub('openjdk-', '')}")
+            elsif jdk_version.start_with?("heroku")
+              expect(app.output).to include("Installing Heroku OpenJDK #{jdk_version.gsub('heroku-', '')}")
             else
-              expect(app.output).to include("Installing JDK #{jdk_version}")
+              expect(app.output).to include("Installing OpenJDK #{jdk_version}")
             end
 
             sleep 1

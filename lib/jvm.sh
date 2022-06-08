@@ -37,11 +37,24 @@ get_jdk_version() {
 }
 
 get_full_jdk_version() {
-  local jdkVersion="${1:?}"
+  # The version argument can potentially have a prefix which denotes the
+  # OpenJDK distribution. This function only normalizes the actual version
+  # and keeps the prefix intact.
+  IFS='-' read -r prefix version <<<"${1:?}"
 
-  case "${jdkVersion}" in
+  if [ -z "${version}" ]; then
+    # If the version variable is empty, there is no prefix and the
+    # version was stored in the prefix variable.
+    version="${prefix}"
+  else
+    # When there is a prefix, emit it before emitting the normalized
+    # version to keep it untouched by this function.
+    echo -n "${prefix}-"
+  fi
+
+  case "${version}" in
   "7" | "1.7") echo "${DEFAULT_JDK_1_7_VERSION}" ;;
-  "8" | "1.8") echo "{$DEFAULT_JDK_1_8_VERSION}" ;;
+  "8" | "1.8") echo "${DEFAULT_JDK_1_8_VERSION}" ;;
   "10") echo "${DEFAULT_JDK_10_VERSION}" ;;
   "11") echo "${DEFAULT_JDK_11_VERSION}" ;;
   "13") echo "${DEFAULT_JDK_13_VERSION}" ;;
@@ -50,7 +63,7 @@ get_full_jdk_version() {
   "16") echo "${DEFAULT_JDK_16_VERSION}" ;;
   "17") echo "${DEFAULT_JDK_17_VERSION}" ;;
   "18") echo "${DEFAULT_JDK_18_VERSION}" ;;
-  *) echo "${jdkVersion}" ;;
+  *) echo "${version}" ;;
   esac
 }
 
@@ -59,6 +72,7 @@ get_jdk_url() {
   jdkVersion="$(get_full_jdk_version "${1:-${DEFAULT_JDK_VERSION}}")"
 
   case ${jdkVersion} in
+  heroku-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
   openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
   zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
   *)

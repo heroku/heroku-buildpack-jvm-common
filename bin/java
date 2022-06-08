@@ -22,13 +22,16 @@ install_java_with_overlay() {
 
     _jvm_mcount "version.${jdkVersion}"
     if [[ "$jdkVersion" == *openjdk* ]]; then
-      status_pending "Installing OpenJDK $(_get_openjdk_version "${jdkVersion}")"
+      status_pending "Installing Heroku OpenJDK $(_get_openjdk_version "${jdkVersion}")"
+      _jvm_mcount "vendor.openjdk"
+    elif [[ "$jdkVersion" == *heroku* ]]; then
+      status_pending "Installing Heroku OpenJDK $(_get_heroku_version "${jdkVersion}")"
       _jvm_mcount "vendor.openjdk"
     elif [[ "$jdkVersion" == *zulu* ]]; then
-      status_pending "Installing Azul Zulu JDK $(_get_zulu_version "${jdkVersion}")"
+      status_pending "Installing Azul Zulu OpenJDK $(_get_zulu_version "${jdkVersion}")"
       _jvm_mcount "vendor.zulu"
     else
-      status_pending "Installing JDK ${jdkVersion}"
+      status_pending "Installing OpenJDK ${jdkVersion}"
       _jvm_mcount "vendor.default"
     fi
     install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
@@ -203,6 +206,10 @@ _get_zulu_version() {
 
 _get_openjdk_version() {
   echo "${1//openjdk-/}"
+}
+
+_get_heroku_version() {
+  echo "${1//heroku-/}"
 }
 
 _get_url_status() {
