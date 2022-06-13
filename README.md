@@ -9,7 +9,7 @@ This is how the buildpack is used from another buildpack:
 ```bash
 JVM_BUILDPACK_URL="https://buildpack-registry.s3.us-east-1.amazonaws.com/buildpacks/heroku/jvm.tgz"
 mkdir -p /tmp/jvm-common
-curl --silent --location $JVM_BUILDPACK_URL | tar xzm -C /tmp/jvm-common --strip-components=1
+curl --silent --fail --retry 3 --retry-connrefused --connect-timeout 5 --location $JVM_BUILDPACK_URL | tar xzm -C /tmp/jvm-common --strip-components=1
 source /tmp/jvm-common/bin/util
 source /tmp/jvm-common/bin/java
 

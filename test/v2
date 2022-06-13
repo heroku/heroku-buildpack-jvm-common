@@ -229,7 +229,7 @@ test_install_jdk_invalid() {
   local key
   key="$(mktemp)"
 
-  curl -sf -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
+  curl -sf --retry 3 --retry-connrefused --connect-timeout 5 -o "${key}" -L "https://www.php.net/distributions/php-keyring.gpg"
   export HEROKU_GPG_VALIDATION=1
   capture install_jdk "${JDK_BASE_URL}/openjdk11.0.8.tar.gz" "$(mktemp -d)" "${BUILDPACK_HOME}" "${key}"
   assertCapturedError " !     ERROR: Invalid GPG signature!"
