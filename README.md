@@ -7,7 +7,7 @@ This is the official [Heroku buildpack](https://devcenter.heroku.com/articles/bu
 This is how the buildpack is used from another buildpack:
 
 ```bash
-JVM_BUILDPACK_URL="https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/jvm.tgz"
+JVM_BUILDPACK_URL="https://buildpack-registry.s3.us-east-1.amazonaws.com/buildpacks/heroku/jvm.tgz"
 mkdir -p /tmp/jvm-common
 curl --silent --location $JVM_BUILDPACK_URL | tar xzm -C /tmp/jvm-common --strip-components=1
 source /tmp/jvm-common/bin/util

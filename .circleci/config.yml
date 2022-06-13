@@ -41,7 +41,7 @@ jobs:
       DEFAULT_APP_STACK: << parameters.heroku-stack >>
       # Default config variables for all Heroku apps created by Hatchet, prefixed with 'DEFAULT_APP_CONFIG_'
       DEFAULT_APP_CONFIG_JVM_COMMON_BUILDPACK: "https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/<< pipeline.git.branch >>"
-      DEFAULT_APP_CONFIG_JVM_BUILDPACK_ASSETS_BASE_URL: <<# parameters.use-staging-bucket >>https://lang-jvm-staging2.s3.amazonaws.com/<</ parameters.use-staging-bucket >>
+      DEFAULT_APP_CONFIG_JVM_BUILDPACK_ASSETS_BASE_URL: <<# parameters.use-staging-bucket >>https://lang-jvm-staging2.s3.us-east-1.amazonaws.com/<</ parameters.use-staging-bucket >>
     steps:
       - checkout
       - heroku/install
