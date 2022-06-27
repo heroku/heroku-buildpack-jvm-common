@@ -279,6 +279,9 @@ test_get_jdk_url_with_default() {
 }
 
 # the modules to be tested
+# shellcheck source=bin/util
+source "${BUILDPACK_HOME}/bin/util"
+
 # shellcheck source=bin/java
 source "${BUILDPACK_HOME}/bin/java"
 
