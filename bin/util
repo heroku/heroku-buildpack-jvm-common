@@ -96,3 +96,15 @@ copy_directories() {
     fi
   done
 }
+
+curl_with_defaults() {
+  default_args=()
+
+  # Some company-internal users are building their slugs on CentOS where these newer curl commands aren't
+  # supported yet. This conditional ensures their builds continue to work.
+  if uname -a | grep -q Ubuntu; then
+    default_args+=("--retry-connrefused" "--connect-timeout" "5")
+  fi
+
+  curl "${default_args[@]}" "${@}"
+}
