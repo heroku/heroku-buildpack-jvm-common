@@ -59,7 +59,7 @@ jobs:
 
   buildpack-testrunner:
     docker:
-      - image: circleci/openjdk:8
+      - image: cimg/openjdk:8.0
     environment:
       SHUNIT_HOME: /tmp/shunit2-2.1.6
       # Note the missing STACK environment variable here. This works since there is a default value in the buildpack
@@ -78,6 +78,26 @@ jobs:
       - run:
           name: Clone heroku-buildpack-testrunner
           command: git clone https://github.com/heroku/heroku-buildpack-testrunner.git /tmp/testrunner
+      - run:
+          name: Apply heroku-buildpack-testrunner patches to enforce bash shell
+          command: |
+            cd /tmp/testrunner
+            git apply \<<'EOF'
+            diff --git a/bin/run b/bin/run
+            index 0d5b790..a0ff25c 100755
+            --- a/bin/run
+            +++ b/bin/run
+            @@ -101,7 +101,7 @@ for bp in ${@}; do
+                 suite_start_time="$(date +%s)"
+             
+                 echo "  TEST SUITE: $(basename ${f})"
+            -    ${SHUNIT_HOME?"'SHUNIT_HOME' environment variable must be set"}/src/shunit2 ${f} | indent
+            +    /bin/bash ${SHUNIT_HOME?"'SHUNIT_HOME' environment variable must be set"}/src/shunit2 ${f} | indent
+                 exit_code=$(max ${exit_code} ${PIPESTATUS[0]})
+             
+                 suite_end_time="$(date +%s)"
+
+            EOF
       - run:
           name: Execute buildpack-testrunner
           command: /tmp/testrunner/bin/run .
