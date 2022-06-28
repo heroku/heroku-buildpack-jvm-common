@@ -2,6 +2,10 @@
 
 ## Main
 
+## v135
+
+* Only use `--retry-connrefused` on Ubuntu based stacks. ([#243](https://github.com/heroku/heroku-buildpack-jvm-common/pull/243))
+
 ## v134
 
 * Adjust curl retry and connection timeout handling. ([#241](https://github.com/heroku/heroku-buildpack-jvm-common/pull/241))

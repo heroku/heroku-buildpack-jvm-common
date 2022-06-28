@@ -172,7 +172,7 @@ _install_pgconfig() {
   local extDir="${javaHome}/jre/lib/ext"
 
   if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}" ] && [ "${CI:-}" != "true" ]; then
-    curl --fail --retry 3 --retry-connrefused --connect-timeout 5 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
+    curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
   fi
 }
 
@@ -213,7 +213,7 @@ _get_heroku_version() {
 }
 
 _get_url_status() {
-  curl --retry 3 --retry-connrefused --connect-timeout 5 --silent --head -w "%{http_code}" -L "${1}" -o /dev/null
+  curl_with_defaults --retry 3 --silent --head -w "%{http_code}" -L "${1}" -o /dev/null
 }
 
 _jvm_mcount() {

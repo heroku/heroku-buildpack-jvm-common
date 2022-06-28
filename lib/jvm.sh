@@ -94,12 +94,12 @@ install_jdk() {
   local key="${4:-${bpDir}/.gnupg/lang-jvm.asc}"
   local tarball="/tmp/jdk.tgz"
 
-  curl --fail --retry 3 --retry-connrefused --connect-timeout 5 --silent --show-error --location "${url}" --output "${tarball}"
+  curl_with_defaults --retry 3 --silent --show-error --location "${url}" --output "${tarball}"
 
   if [ "${HEROKU_GPG_VALIDATION:-0}" != "1" ]; then
     _jvm_mcount "gpg.verify.skip"
   else
-    curl --fail --retry 3 --retry-connrefused --connect-timeout 5 --silent --show-error --location "${url}.gpg" --output "${tarball}.gpg"
+    curl_with_defaults --fail --silent --show-error --location "${url}.gpg" --output "${tarball}.gpg"
 
     gpg --no-tty --batch --import "${key}" >/dev/null 2>&1
 
@@ -160,7 +160,7 @@ install_metrics_agent() {
   local agentJar="${installDir}/heroku-metrics-agent.jar"
 
   mkdir -p "${installDir}"
-  curl --fail --retry 3 --retry-connrefused --connect-timeout 5 -s -o "${agentJar}" \
+  curl_with_defaults --retry 3 -s -o "${agentJar}" \
     -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/3.14/heroku-java-metrics-agent-3.14.jar"}"
   if [ -f "${agentJar}" ]; then
     mkdir -p "${profileDir}"
