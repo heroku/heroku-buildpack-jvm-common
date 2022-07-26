@@ -2,6 +2,10 @@
 
 ## Main
 
+## v136
+
+* Upgrade default JDKs to 18.0.2, 17.0.4, 15.0.8, 13.0.12, 11.0.16, 8u342, 7u352
+
 ## v135
 
 * Only use `--retry-connrefused` on Ubuntu based stacks. ([#243](https://github.com/heroku/heroku-buildpack-jvm-common/pull/243))
