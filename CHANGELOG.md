@@ -2,6 +2,11 @@
 
 ## Main
 
+## v138
+
+* Upgrade default Java 18 JDK to `18.0.2.1`. ([#247](https://github.com/heroku/heroku-buildpack-jvm-common/pull/247))
+* Add support for Java 19. ([#247](https://github.com/heroku/heroku-buildpack-jvm-common/pull/247))
+
 ## v137
 
 * Upgrade default JDKs to `8u345`, `11.0.16.1`, `17.0.4.1`. ([#245](https://github.com/heroku/heroku-buildpack-jvm-common/pull/245))
