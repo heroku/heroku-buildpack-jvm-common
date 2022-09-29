@@ -1,0 +1,48 @@
+name: heroku/heroku-buildpack-jvm-common/hatchet-with-staging-bucket
+on:
+  workflow_dispatch:
+    inputs:
+      enable-hatchet-with-staging-bucket:
+        required: true
+env:
+  HEROKU_API_KEY: xxxxxxx
+  HEROKU_API_USER: xxxxxxx
+jobs:
+  hatchet:
+    if: << pipeline.parameters.enable-hatchet-with-staging-bucket >>
+    runs-on: sfdc-hk-ubuntu-latest
+    container:
+      image: ruby:2.7
+    env:
+      HATCHET_APP_LIMIT: xxxxxxx
+      PARALLEL_SPLIT_TEST_PROCESSES: xxxxxxx
+      HATCHET_BUILDPACK_BASE: xxxxxxx
+      HATCHET_BUILDPACK_BRANCH: xxxxxxx
+      DEFAULT_APP_STACK: xxxxxxx
+      DEFAULT_APP_CONFIG_JVM_COMMON_BUILDPACK: xxxxxxx
+      DEFAULT_APP_CONFIG_JVM_BUILDPACK_ASSETS_BASE_URL: xxxxxxx
+    strategy:
+      matrix:
+        heroku-stack:
+        - heroku-18
+        - heroku-20
+        - heroku-22
+        use-staging-bucket:
+        - true
+    steps:
+    - uses: actions/checkout@v2
+    - shell: bash
+      run: |-
+        if [[ $(command -v heroku) == "" ]]; then
+          curl https://cli-assets.heroku.com/install.sh | sh
+        else
+          echo "Heroku is already installed. No operation was performed."
+        fi
+    - name: Install Ruby dependencies
+      run: |-
+        gem install bundler
+        bundle install
+    - name: Hatchet CI setup
+      run: bundle exec hatchet ci:setup
+    - name: Execute rspec w/ parallel_split_test
+      run: bundle exec parallel_split_test test/spec/
