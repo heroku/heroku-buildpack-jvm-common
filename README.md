@@ -1,4 +1,4 @@
-# Heroku Buildpack for the JDK [![CircleCI](https://circleci.com/gh/heroku/heroku-buildpack-jvm-common/tree/main.svg?style=shield)](https://circleci.com/gh/heroku/heroku-buildpack-jvm-common/tree/main)
+# Heroku Buildpack for the JDK [![CI](https://github.com/heroku/heroku-buildpack-jvm-common/actions/workflows/ci.yml/badge.svg)](https://github.com/heroku/heroku-buildpack-jvm-common/actions/workflows/ci.yml)
 
 This is the official [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks) for [OpenJDK](http://openjdk.java.net/). It only installs the JDK, and does not build an application. It is used by the [Java](https://github.com/heroku/heroku-buildpack-java), [Scala](https://github.com/heroku/heroku-buildpack-scala), and [Clojure](https://github.com/heroku/heroku-buildpack-clojure) buildpacks.
 
