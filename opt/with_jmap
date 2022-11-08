@@ -5,4 +5,4 @@ export PATH=$HOME/.heroku/with_jmap/bin:$PATH
 export HEROKU_JAVA_HOME=${JAVA_HOME}
 unset JAVA_HOME
 
-eval "$@"
+"$@"
