@@ -2,7 +2,9 @@
 
 ## Main
 
-* Upgrade [Heroku Java metrics agent](https://github.com/heroku/heroku-java-metrics-agent) to `4.0.0`. ([#000](https://github.com/heroku/heroku-buildpack-jvm-common/pull/000))
+## v140
+
+* Upgrade [Heroku Java metrics agent](https://github.com/heroku/heroku-java-metrics-agent) to `4.0.0`. ([#253](https://github.com/heroku/heroku-buildpack-jvm-common/pull/253))
 
 ## v139
 
