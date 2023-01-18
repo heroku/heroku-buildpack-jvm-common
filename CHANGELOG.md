@@ -2,6 +2,10 @@
 
 ## Main
 
+## v142
+
+* Upgrade default JDKs to 19.0.2, 17.0.6, 15.0.10, 13.0.14, 11.0.18 and 8u362. ([#256](https://github.com/heroku/heroku-buildpack-jvm-common/pull/256))
+
 ## v141
 
 * Upgrade [Heroku Java metrics agent](https://github.com/heroku/heroku-java-metrics-agent) to `4.0.1`. ([#254](https://github.com/heroku/heroku-buildpack-jvm-common/pull/254))
