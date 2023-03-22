@@ -130,8 +130,8 @@ describe "Java" do
             if !jdk_version.match(/^9/) and
               !jdk_version.match(/^openjdk-9/) and
               !jdk_version.match(/^zulu-9/) and
-              !jdk_version.match(/^1[0-9]/) and
-              !jdk_version.match(/^openjdk-1[0-9]/)
+              !jdk_version.match(/^[12][0-9]/) and
+              !jdk_version.match(/^openjdk-[12][0-9]/)
 
               sleep 1
               # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
