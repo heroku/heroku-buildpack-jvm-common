@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe "JVM Metrics" do
-  ["1.7", "1.8", "11", "15", "16", "17", "18", "19"].each do |jdk_version|
+  ["1.7", "1.8", "8", "11", "13", "15", "17", "20"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-servlets-sample", labs: "runtime-heroku-metrics").tap do |app|
