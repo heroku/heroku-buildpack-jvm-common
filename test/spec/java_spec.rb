@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe "Java" do
 
-  ["1.7", "1.8", "8", "11", "13", "15", "16", "17", "18", "19", "11.0.15", "openjdk-11.0.15", "zulu-11.0.15", "heroku-17", "zulu-17"].each do |jdk_version|
+  ["1.8", "8", "11", "13", "15", "17", "20", "11.0.15", "openjdk-11.0.15", "zulu-11.0.15", "heroku-17", "zulu-17"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-servlets-sample").tap do |app|
@@ -43,7 +43,7 @@ describe "Java" do
     end
   end
 
-  ["1.7", "1.8", "8", "11", "13", "15", "16", "17", "18", "19"].each do |jdk_version|
+  ["1.8", "8", "11", "13", "15", "17", "20"].each do |jdk_version|
     context "jdk-overlay on #{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-overlay-test").tap do |app|
@@ -77,7 +77,7 @@ describe "Java" do
     end
   end
 
-  ["1.8", "8", "11", "13", "15", "16", "17", "18", "19"].each do |jdk_version|
+  ["1.8", "8", "11", "13", "15", "17", "20"].each do |jdk_version|
     context "korvan on jdk-#{jdk_version}" do
       it "runs commands" do
         new_default_hatchet_runner("korvan").tap do |app|
@@ -130,8 +130,8 @@ describe "Java" do
             if !jdk_version.match(/^9/) and
               !jdk_version.match(/^openjdk-9/) and
               !jdk_version.match(/^zulu-9/) and
-              !jdk_version.match(/^1[0-9]/) and
-              !jdk_version.match(/^openjdk-1[0-9]/)
+              !jdk_version.match(/^[12][0-9]/) and
+              !jdk_version.match(/^openjdk-[12][0-9]/)
 
               sleep 1
               # Skip exit-code default option, required to execute a process from Procfile instead of a command in bash.
