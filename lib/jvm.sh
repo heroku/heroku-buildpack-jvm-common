@@ -161,6 +161,9 @@ install_jdk_overlay() {
 }
 
 install_metrics_agent() {
+  if [ -n "${DISABLE_HEROKU_METRICS_AGENT}" ]; then
+    return 0
+  fi
   local bpDir=${1:?}
   local installDir="${2:?}"
   local profileDir="${3:?}"
