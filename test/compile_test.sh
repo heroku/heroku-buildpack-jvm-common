@@ -17,38 +17,38 @@ testCompileWithoutSystemProperties() {
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
-testCompileWith_1_8_0_144() {
-  echo "java.runtime.version=1.8.0_144" >"${BUILD_DIR}/system.properties"
+testCompileWith_1_8_0_372() {
+  echo "java.runtime.version=1.8.0_372" >"${BUILD_DIR}/system.properties"
 
   compile
 
   assertCapturedSuccess
 
-  assertCaptured "Installing OpenJDK 1.8.0_144"
+  assertCaptured "Installing OpenJDK 1.8.0_372"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
-testCompileWith_zulu_1_8_0_144() {
-  echo "java.runtime.version=zulu-1.8.0_144" >"${BUILD_DIR}/system.properties"
+testCompileWith_zulu_1_8_0_372() {
+  echo "java.runtime.version=zulu-1.8.0_372" >"${BUILD_DIR}/system.properties"
 
   compile
 
   assertCapturedSuccess
 
-  assertCaptured "Installing Azul Zulu OpenJDK 1.8.0_144"
+  assertCaptured "Installing Azul Zulu OpenJDK 1.8.0_372"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
-testCompileWith_openjdk_1_8_0_144() {
-  echo "java.runtime.version=openjdk-1.8.0_144" >"${BUILD_DIR}/system.properties"
+testCompileWith_openjdk_1_8_0_372() {
+  echo "java.runtime.version=openjdk-1.8.0_372" >"${BUILD_DIR}/system.properties"
 
   compile
 
   assertCapturedSuccess
 
-  assertCaptured "Installing Heroku OpenJDK 1.8.0_144"
+  assertCaptured "Installing Heroku OpenJDK 1.8.0_372"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
