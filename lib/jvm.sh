@@ -24,7 +24,7 @@ if [[ -n "${JDK_BASE_URL}" ]]; then
   warning_inline "Support for the JDK_BASE_URL environment variable is deprecated and will be removed October 2021!"
 else
   JVM_BUILDPACK_ASSETS_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL:-"https://lang-jvm.s3.us-east-1.amazonaws.com"}"
-  JDK_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL%/}/jdk/${STACK:-"heroku-18"}"
+  JDK_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL%/}/jdk/${STACK:-"heroku-22"}"
 fi
 
 get_jdk_version() {
@@ -83,7 +83,7 @@ get_jdk_url() {
   openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
   zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
   *)
-    if [ "${STACK}" == "heroku-18" ] || [ "${STACK}" == "heroku-20" ]; then
+    if [ "${STACK}" == "heroku-20" ]; then
       jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
     else
       jdkUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
