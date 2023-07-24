@@ -2,6 +2,8 @@
 
 ## Main
 
+## v145
+
 * Remove heroku-18 support ([#267](https://github.com/heroku/heroku-buildpack-jvm-common/pull/267))
 * Upgrade default JDKs to 20.0.2, 17.0.8, 11.0.20 and 8u382. ([#269](https://github.com/heroku/heroku-buildpack-jvm-common/pull/269))
 
