@@ -17,7 +17,7 @@ DEFAULT_JDK_16_VERSION="16.0.2"
 DEFAULT_JDK_18_VERSION="18.0.2.1"
 DEFAULT_JDK_19_VERSION="19.0.2"
 
-if [[ -n "${JDK_BASE_URL}" ]]; then
+if [[ -n "${JDK_BASE_URL:-}" ]]; then
   # Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
   # override the bucket for testing with staging binaries by using the existing JVM buildpack integration tests that
   # cover all stacks. We will remove support for it in October 2021.
@@ -28,7 +28,8 @@ else
 fi
 
 get_jdk_version() {
-  local appDir="${1:?}"
+  local appDir
+  appDir="${1:?}"
   if [ -f "${appDir}/system.properties" ]; then
     detectedVersion="$(_get_system_property "${appDir}/system.properties" "java.runtime.version")"
     if [ -n "$detectedVersion" ]; then
@@ -83,10 +84,10 @@ get_jdk_url() {
   openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
   zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
   *)
-    if [ "${STACK}" == "heroku-20" ]; then
-      jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    if [ "${STACK:-}" == "heroku-20" ]; then
+      jdkUrl="${JDK_BASE_URL:-}/openjdk${jdkVersion}.tar.gz"
     else
-      jdkUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
+      jdkUrl="${JDK_BASE_URL:-}/zulu-${jdkVersion}.tar.gz"
     fi
     ;;
   esac
@@ -124,7 +125,8 @@ install_jdk() {
 }
 
 install_certs() {
-  local jdkDir="${1:?}"
+  local jdkDir
+  jdkDir="${1:?}"
   if [ -f "${jdkDir}/jre/lib/security/cacerts" ] && [ -f /etc/ssl/certs/java/cacerts ]; then
     mv "${jdkDir}/jre/lib/security/cacerts" "${jdkDir}/jre/lib/security/cacerts.old"
     ln -s /etc/ssl/certs/java/cacerts "${jdkDir}/jre/lib/security/cacerts"
@@ -135,8 +137,8 @@ install_certs() {
 }
 
 install_profile() {
-  local bpDir="${1:?}"
-  local profileDir="${2:?}"
+  local bpDir; bpDir="${1:?}"
+  local profileDir; profileDir="${2:?}"
 
   mkdir -p "$profileDir"
   cp "${bpDir}/opt/jvmcommon.sh" "${profileDir}"
@@ -145,9 +147,9 @@ install_profile() {
 }
 
 install_jdk_overlay() {
-  local jdkDir="${1:?}"
-  local appDir="${2:?}"
-  local cacertPath="lib/security/cacerts"
+  local jdkDir; jdkDir="${1:?}"
+  local appDir; appDir="${2:?}"
+  local cacertPath; cacertPath="lib/security/cacerts"
   shopt -s dotglob
   if [ -d "${jdkDir}" ] && [ -d "${appDir}/.jdk-overlay" ]; then
     # delete the symlink because a cp will error
@@ -161,10 +163,10 @@ install_jdk_overlay() {
 }
 
 install_metrics_agent() {
-  local bpDir=${1:?}
-  local installDir="${2:?}"
-  local profileDir="${3:?}"
-  local agentJar="${installDir}/heroku-metrics-agent.jar"
+  local bpDir; bpDir=${1:?}
+  local installDir; installDir="${2:?}"
+  local profileDir; profileDir="${3:?}"
+  local agentJar; agentJar="${installDir}/heroku-metrics-agent.jar"
 
   mkdir -p "${installDir}"
   curl_with_defaults --retry 3 -s -o "${agentJar}" \
@@ -189,8 +191,8 @@ install_jre() {
 }
 
 _get_system_property() {
-  local file=${1:?}
-  local key=${2:?}
+  local file; file=${1:?}
+  local key; key=${2:?}
 
   # escape for regex
   local escaped_key
