@@ -137,8 +137,10 @@ install_certs() {
 }
 
 install_profile() {
-  local bpDir; bpDir="${1:?}"
-  local profileDir; profileDir="${2:?}"
+  local bpDir
+  bpDir="${1:?}"
+  local profileDir
+  profileDir="${2:?}"
 
   mkdir -p "$profileDir"
   cp "${bpDir}/opt/jvmcommon.sh" "${profileDir}"
@@ -147,9 +149,12 @@ install_profile() {
 }
 
 install_jdk_overlay() {
-  local jdkDir; jdkDir="${1:?}"
-  local appDir; appDir="${2:?}"
-  local cacertPath; cacertPath="lib/security/cacerts"
+  local jdkDir
+  jdkDir="${1:?}"
+  local appDir
+  appDir="${2:?}"
+  local cacertPath
+  cacertPath="lib/security/cacerts"
   shopt -s dotglob
   if [ -d "${jdkDir}" ] && [ -d "${appDir}/.jdk-overlay" ]; then
     # delete the symlink because a cp will error
@@ -163,10 +168,14 @@ install_jdk_overlay() {
 }
 
 install_metrics_agent() {
-  local bpDir; bpDir=${1:?}
-  local installDir; installDir="${2:?}"
-  local profileDir; profileDir="${3:?}"
-  local agentJar; agentJar="${installDir}/heroku-metrics-agent.jar"
+  local bpDir
+  bpDir=${1:?}
+  local installDir
+  installDir="${2:?}"
+  local profileDir
+  profileDir="${3:?}"
+  local agentJar
+  agentJar="${installDir}/heroku-metrics-agent.jar"
 
   mkdir -p "${installDir}"
   curl_with_defaults --retry 3 -s -o "${agentJar}" \
@@ -191,8 +200,10 @@ install_jre() {
 }
 
 _get_system_property() {
-  local file; file=${1:?}
-  local key; key=${2:?}
+  local file
+  file=${1:?}
+  local key
+  key=${2:?}
 
   # escape for regex
   local escaped_key
