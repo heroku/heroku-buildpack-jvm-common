@@ -28,8 +28,7 @@ else
 fi
 
 get_jdk_version() {
-  local appDir
-  appDir="${1:?}"
+  local appDir="${1:?}"
   if [ -f "${appDir}/system.properties" ]; then
     detectedVersion="$(_get_system_property "${appDir}/system.properties" "java.runtime.version")"
     if [ -n "$detectedVersion" ]; then
@@ -80,9 +79,9 @@ get_jdk_url() {
   jdkVersion="$(get_full_jdk_version "${1:-${DEFAULT_JDK_VERSION}}")"
 
   case ${jdkVersion} in
-  heroku-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
-  openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
-  zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
+  heroku-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
+  openjdk-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
+  zulu-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion}.tar.gz" ;;
   *)
     if [ "${STACK:-}" == "heroku-20" ]; then
       jdkUrl="${JDK_BASE_URL:-}/openjdk${jdkVersion}.tar.gz"
@@ -125,8 +124,7 @@ install_jdk() {
 }
 
 install_certs() {
-  local jdkDir
-  jdkDir="${1:?}"
+  local jdkDir="${1:?}"
   if [ -f "${jdkDir}/jre/lib/security/cacerts" ] && [ -f /etc/ssl/certs/java/cacerts ]; then
     mv "${jdkDir}/jre/lib/security/cacerts" "${jdkDir}/jre/lib/security/cacerts.old"
     ln -s /etc/ssl/certs/java/cacerts "${jdkDir}/jre/lib/security/cacerts"
@@ -137,10 +135,8 @@ install_certs() {
 }
 
 install_profile() {
-  local bpDir
-  bpDir="${1:?}"
-  local profileDir
-  profileDir="${2:?}"
+  local bpDir="${1:?}"
+  local profileDir="${2:?}"
 
   mkdir -p "$profileDir"
   cp "${bpDir}/opt/jvmcommon.sh" "${profileDir}"
@@ -149,12 +145,9 @@ install_profile() {
 }
 
 install_jdk_overlay() {
-  local jdkDir
-  jdkDir="${1:?}"
-  local appDir
-  appDir="${2:?}"
-  local cacertPath
-  cacertPath="lib/security/cacerts"
+  local jdkDir="${1:?}"
+  local appDir="${2:?}"
+  local cacertPath="lib/security/cacerts"
   shopt -s dotglob
   if [ -d "${jdkDir}" ] && [ -d "${appDir}/.jdk-overlay" ]; then
     # delete the symlink because a cp will error
@@ -168,14 +161,10 @@ install_jdk_overlay() {
 }
 
 install_metrics_agent() {
-  local bpDir
-  bpDir=${1:?}
-  local installDir
-  installDir="${2:?}"
-  local profileDir
-  profileDir="${3:?}"
-  local agentJar
-  agentJar="${installDir}/heroku-metrics-agent.jar"
+  local bpDir=${1:?}
+  local installDir="${2:?}"
+  local profileDir="${3:?}"
+  local agentJar="${installDir}/heroku-metrics-agent.jar"
 
   mkdir -p "${installDir}"
   curl_with_defaults --retry 3 -s -o "${agentJar}" \
@@ -200,10 +189,8 @@ install_jre() {
 }
 
 _get_system_property() {
-  local file
-  file=${1:?}
-  local key
-  key=${2:?}
+  local file=${1:?}
+  local key=${2:?}
 
   # escape for regex
   local escaped_key
