@@ -17,13 +17,9 @@ jobs:
       - name: Install shfmt
         run: sudo apt-get install shfmt
       - name: Run shfmt (excluding vendor directory)
-        run: |
-          set -euo pipefail
-          shfmt -f . | grep -v "/vendor/" | xargs shfmt -i 2 -d
+        run: shfmt -f . | grep -v "/vendor/" | xargs shfmt -i 2 -d
       - name: Run ShellCheck
-        run: |
-          set -euo pipefail
-          shellcheck bin/* lib/jvm.sh etc/* opt/* test/*.sh
+        run: shellcheck bin/* lib/jvm.sh etc/* opt/* test/*.sh
 
   hatchet:
     name: "Hatchet (${{ matrix.stack }}, ${{ matrix.assets-base-url == 0 && 'production bucket' || 'staging bucket' }})"
@@ -115,9 +111,5 @@ jobs:
         stack: ["heroku-20", "heroku-22"]
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          set -euo pipefail
-          test/v2
-      - run: |
-          set -euo pipefail
-          test/jdbc.sh
+      - run: test/v2
+      - run: test/jdbc.sh
