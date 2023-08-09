@@ -17,7 +17,7 @@ DEFAULT_JDK_16_VERSION="16.0.2"
 DEFAULT_JDK_18_VERSION="18.0.2.1"
 DEFAULT_JDK_19_VERSION="19.0.2"
 
-if [[ -n "${JDK_BASE_URL}" ]]; then
+if [[ -n "${JDK_BASE_URL:-}" ]]; then
   # Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
   # override the bucket for testing with staging binaries by using the existing JVM buildpack integration tests that
   # cover all stacks. We will remove support for it in October 2021.
@@ -79,14 +79,14 @@ get_jdk_url() {
   jdkVersion="$(get_full_jdk_version "${1:-${DEFAULT_JDK_VERSION}}")"
 
   case ${jdkVersion} in
-  heroku-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
-  openjdk-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
-  zulu-*) jdkUrl="${JDK_BASE_URL}/${jdkVersion}.tar.gz" ;;
+  heroku-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
+  openjdk-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
+  zulu-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion}.tar.gz" ;;
   *)
-    if [ "${STACK}" == "heroku-20" ]; then
-      jdkUrl="${JDK_BASE_URL}/openjdk${jdkVersion}.tar.gz"
+    if [ "${STACK:-}" == "heroku-20" ]; then
+      jdkUrl="${JDK_BASE_URL:-}/openjdk${jdkVersion}.tar.gz"
     else
-      jdkUrl="${JDK_BASE_URL}/zulu-${jdkVersion}.tar.gz"
+      jdkUrl="${JDK_BASE_URL:-}/zulu-${jdkVersion}.tar.gz"
     fi
     ;;
   esac
