@@ -2,6 +2,8 @@
 
 ## Main
 
+## v146
+
 * Upgrade default JDKs to 17.0.8.1 and 11.0.20.1. ([#274](https://github.com/heroku/heroku-buildpack-jvm-common/pull/274))
 
 ## v145
