@@ -5,7 +5,7 @@ DEFAULT_JDK_VERSION="1.8"
 DEFAULT_JDK_1_8_VERSION="1.8.0_382"
 DEFAULT_JDK_11_VERSION="11.0.20.1"
 DEFAULT_JDK_17_VERSION="17.0.8.1"
-DEFAULT_JDK_20_VERSION="20.0.2"
+DEFAULT_JDK_21_VERSION="21.0.0"
 
 # EOL Versions
 DEFAULT_JDK_1_7_VERSION="1.7.0_352"
@@ -16,6 +16,7 @@ DEFAULT_JDK_15_VERSION="15.0.10"
 DEFAULT_JDK_16_VERSION="16.0.2"
 DEFAULT_JDK_18_VERSION="18.0.2.1"
 DEFAULT_JDK_19_VERSION="19.0.2"
+DEFAULT_JDK_20_VERSION="20.0.2"
 
 if [[ -n "${JDK_BASE_URL:-}" ]]; then
   # Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
@@ -70,6 +71,7 @@ get_full_jdk_version() {
   "18") echo "${DEFAULT_JDK_18_VERSION}" ;;
   "19") echo "${DEFAULT_JDK_19_VERSION}" ;;
   "20") echo "${DEFAULT_JDK_20_VERSION}" ;;
+  "21") echo "${DEFAULT_JDK_21_VERSION}" ;;
   *) echo "${version}" ;;
   esac
 }
