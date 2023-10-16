@@ -13,7 +13,7 @@ jobs:
   lint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install shfmt
         run: sudo apt-get install shfmt
       - name: Run shfmt (excluding vendor directory)
@@ -47,7 +47,7 @@ jobs:
       DEFAULT_APP_CONFIG_JVM_COMMON_BUILDPACK: https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/${{ github.head_ref || github.ref_name }}
       DEFAULT_APP_CONFIG_JVM_BUILDPACK_ASSETS_BASE_URL: ${{ matrix.assets-base-url }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Ruby and dependencies
         uses: ruby/setup-ruby@v1
         with:
@@ -67,7 +67,7 @@ jobs:
       # source. I ported this as-is from the Travis config. Given we're trying to get rid of testrunner entirely,
       # it will stay like this. If we, for some reason, decide to keep testrunner, we should look into a fixed STACK env var.
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
         with:
           distribution: zulu
@@ -110,6 +110,6 @@ jobs:
       matrix:
         stack: ["heroku-20", "heroku-22"]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: test/v2
       - run: test/jdbc.sh
