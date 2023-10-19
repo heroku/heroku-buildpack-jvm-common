@@ -2,6 +2,10 @@
 
 ## Main
 
+## v148
+
+* Upgrade default JDKs to 21.0.1, 17.0.9, 11.0.21 and 8u392. ([#280](https://github.com/heroku/heroku-buildpack-jvm-common/pull/280))
+
 ## v147
 
 * Add support for Java 21. ([#276](https://github.com/heroku/heroku-buildpack-jvm-common/pull/276))
