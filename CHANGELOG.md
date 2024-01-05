@@ -2,6 +2,8 @@
 
 ## Main
 
+* JVM runtime options for Dynos that are **not** `Eco`, `Basic`, `Standard-1X`, `Standard-2X`, `Performance-M` or `Performance-L` (or their Private Spaces equivalents) will no longer default to the options for `Eco` Dynos. Instead, JVM ergonomics will be used in conjunction with `-XX:MaxRAMPercentage=80.0` to ensure sensible defaults for such Dynos. ([#282](https://github.com/heroku/heroku-buildpack-jvm-common/pull/282))
+
 ## v148
 
 * Upgrade default JDKs to 21.0.1, 17.0.9, 11.0.21 and 8u392. ([#280](https://github.com/heroku/heroku-buildpack-jvm-common/pull/280))

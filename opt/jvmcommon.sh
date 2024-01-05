@@ -5,6 +5,9 @@ calculate_java_memory_opts() {
 
   limit=$(ulimit -u)
   case $limit in
+  256) # Eco, Basic, 1X: memory.limit_in_bytes=536870912
+    echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
+    ;;
   512) # 2X, private-s: memory.limit_in_bytes=1073741824
     echo "$opts -Xmx671m -XX:CICompilerCount=2"
     ;;
@@ -14,8 +17,12 @@ calculate_java_memory_opts() {
   32768) # perf-l, private-l: memory.limit_in_bytes=15032385536
     echo "$opts -Xmx12g"
     ;;
-  *) # Free, Hobby, 1X: memory.limit_in_bytes=536870912
-    echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
+  *)
+    # Rely on JVM ergonomics for other dyno types, but increase the maximum RAM percentage from 25% to 80%.
+    # This is more consistent with the Heroku defaults for other dyno types. For example, a 32GB dyno would only use
+    # 8GB of heap with the 25% default, but performance-l with 14GB of memory would get 12GB max heap size as
+    # explicitly configured.
+    echo "$opts -XX:MaxRAMPercentage=80.0"
     ;;
   esac
 }
