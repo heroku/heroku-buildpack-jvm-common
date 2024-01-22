@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install shfmt
         run: sudo apt-get install shfmt
-      - name: Run shfmt (excluding vendor directory)
-        run: shfmt -f . | grep -v "/vendor/" | xargs shfmt -i 2 -d
+      - name: Run shfmt (excluding vendor code and fixtures)
+        run: shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt -i 2 -d
       - name: Run ShellCheck
         run: shellcheck bin/* lib/jvm.sh etc/* opt/* test/*.sh
 
