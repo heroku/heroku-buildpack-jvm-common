@@ -1,11 +1,5 @@
 {
   "hatchet": {
     "directory": "test/spec/fixtures"
-  },
-  "java": [
-    "kissaten/java-overlay-test",
-    "kissaten/java-servlets-sample",
-    "kissaten/webapp-runner-sample",
-    "kissaten/korvan"
-  ]
+  }
 }
