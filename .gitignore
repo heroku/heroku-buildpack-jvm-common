@@ -1,6 +1,4 @@
 .idea
 *.swp
-test/spec/fixtures/
-test/spec/fixtures/repos/*
 .DS_Store
 heroku-buildpack-jvm-common.tgz

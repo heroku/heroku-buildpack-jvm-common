@@ -1,9 +1,0 @@
----
-- - test/spec/fixtures/repos/java/java-overlay-test
-  - 5864443d5f888b87b6ef62fe4ccc51e141548001
-- - test/spec/fixtures/repos/java/java-servlets-sample
-  - 39b2609a69905858121755976537706900e582a6
-- - test/spec/fixtures/repos/java/korvan
-  - bc4259da310c2b2f4f4cc77c901450d4459503f5
-- - test/spec/fixtures/repos/java/webapp-runner-sample
-  - 4e86477f01f0d15323ee871a1e223dcc4ce3fdbd
