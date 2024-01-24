@@ -1,49 +1,50 @@
-# JVM Common Buildpack Changelog
+# Changelog
 
-## Main
+## [Unreleased]
 
-## v150
+
+## [v150] - 2024-01-17
 
 * Upgrade default JDKs to 21.0.2, 17.0.10, 11.0.22 and 8u402. ([#284](https://github.com/heroku/heroku-buildpack-jvm-common/pull/284))
 
-## v149
+## [v149] - 2024-01-05
 
 * JVM runtime options for Dynos that are **not** `Eco`, `Basic`, `Standard-1X`, `Standard-2X`, `Performance-M` or `Performance-L` (or their Private Spaces equivalents) will no longer default to the options for `Eco` Dynos. Instead, JVM ergonomics will be used in conjunction with `-XX:MaxRAMPercentage=80.0` to ensure sensible defaults for such Dynos. ([#282](https://github.com/heroku/heroku-buildpack-jvm-common/pull/282))
 
-## v148
+## [v148] - 2023-10-19
 
 * Upgrade default JDKs to 21.0.1, 17.0.9, 11.0.21 and 8u392. ([#280](https://github.com/heroku/heroku-buildpack-jvm-common/pull/280))
 
-## v147
+## [v147] - 2023-09-20
 
 * Add support for Java 21. ([#276](https://github.com/heroku/heroku-buildpack-jvm-common/pull/276))
 
-## v146
+## [v146] - 2023-09-19
 
 * Upgrade default JDKs to 17.0.8.1 and 11.0.20.1. ([#274](https://github.com/heroku/heroku-buildpack-jvm-common/pull/274))
 
-## v145
+## [v145] - 2023-07-24
 
 * Remove heroku-18 support ([#267](https://github.com/heroku/heroku-buildpack-jvm-common/pull/267))
 * Upgrade default JDKs to 20.0.2, 17.0.8, 11.0.20 and 8u382. ([#269](https://github.com/heroku/heroku-buildpack-jvm-common/pull/269))
 
-## v144
+## [v144] - 2023-04-24
 
 * Upgrade default JDKs to 20.0.1, 17.0.7, 11.0.19 and 8u372. ([#265](https://github.com/heroku/heroku-buildpack-jvm-common/pull/265))
 
-## v143
+## [v143] - 2023-03-23
 
 * Add support for Java 20. ([#262](https://github.com/heroku/heroku-buildpack-jvm-common/pull/262))
 
-## v142
+## [v142] - 2023-01-18
 
 * Upgrade default JDKs to 19.0.2, 17.0.6, 15.0.10, 13.0.14, 11.0.18 and 8u362. ([#256](https://github.com/heroku/heroku-buildpack-jvm-common/pull/256))
 
-## v141
+## [v141] - 2022-11-16
 
 * Upgrade [Heroku Java metrics agent](https://github.com/heroku/heroku-java-metrics-agent) to `4.0.1`. ([#254](https://github.com/heroku/heroku-buildpack-jvm-common/pull/254))
 
-## v140
+## [v140] - 2022-11-08
 
 * Upgrade [Heroku Java metrics agent](https://github.com/heroku/heroku-java-metrics-agent) to `4.0.0`. ([#253](https://github.com/heroku/heroku-buildpack-jvm-common/pull/253))
 
@@ -373,3 +374,16 @@ Improved smart defaults.
 
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
+
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v150...HEAD
+[v150]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v149...v150
+[v149]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v148...v149
+[v148]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v147...v148
+[v147]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v146...v147
+[v146]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v145...v146
+[v145]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v144...v145
+[v144]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v143...v144
+[v143]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v142...v143
+[v142]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v141...v142
+[v141]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v140...v141
+[v140]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v139...v140
