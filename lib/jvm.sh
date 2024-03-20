@@ -6,6 +6,7 @@ DEFAULT_JDK_1_8_VERSION="1.8.0_402"
 DEFAULT_JDK_11_VERSION="11.0.22"
 DEFAULT_JDK_17_VERSION="17.0.10"
 DEFAULT_JDK_21_VERSION="21.0.2"
+DEFAULT_JDK_22_VERSION="22.0.0"
 
 # EOL Versions
 DEFAULT_JDK_1_7_VERSION="1.7.0_352"
@@ -72,6 +73,7 @@ get_full_jdk_version() {
   "19") echo "${DEFAULT_JDK_19_VERSION}" ;;
   "20") echo "${DEFAULT_JDK_20_VERSION}" ;;
   "21") echo "${DEFAULT_JDK_21_VERSION}" ;;
+  "22") echo "${DEFAULT_JDK_22_VERSION}" ;;
   *) echo "${version}" ;;
   esac
 }
