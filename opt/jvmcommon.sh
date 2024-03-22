@@ -2,29 +2,34 @@
 
 calculate_java_memory_opts() {
   local opts=${1:-""}
+  local memory_limit_file='/sys/fs/cgroup/memory/memory.limit_in_bytes'
 
-  limit=$(ulimit -u)
-  case $limit in
-  256) # Eco, Basic, 1X: memory.limit_in_bytes=536870912
-    echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
-    ;;
-  512) # 2X, private-s: memory.limit_in_bytes=1073741824
-    echo "$opts -Xmx671m -XX:CICompilerCount=2"
-    ;;
-  16384) # perf-m, private-m: memory.limit_in_bytes=2684354560
-    echo "$opts -Xmx2g"
-    ;;
-  32768) # perf-l, private-l: memory.limit_in_bytes=15032385536
-    echo "$opts -Xmx12g"
-    ;;
-  *)
-    # Rely on JVM ergonomics for other dyno types, but increase the maximum RAM percentage from 25% to 80%.
-    # This is more consistent with the Heroku defaults for other dyno types. For example, a 32GB dyno would only use
-    # 8GB of heap with the 25% default, but performance-l with 14GB of memory would get 12GB max heap size as
-    # explicitly configured.
-    echo "$opts -XX:MaxRAMPercentage=80.0"
-    ;;
-  esac
+  if [[ -f "${memory_limit_file}" ]]; then
+    case $(cat "${memory_limit_file}") in
+    536870912) # Eco, Basic, 1X
+      echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
+      return 0
+      ;;
+    1073741824) # 2X, private-s
+      echo "$opts -Xmx671m -XX:CICompilerCount=2"
+      return 0
+      ;;
+    2684354560) # perf-m, private-m
+      echo "$opts -Xmx2g"
+      return 0
+      ;;
+    15032385536) # perf-l, private-l
+      echo "$opts -Xmx12g"
+      return 0
+      ;;
+    esac
+  fi
+
+  # Rely on JVM ergonomics for other dyno types, but increase the maximum RAM percentage from 25% to 80%.
+  # This is more consistent with the Heroku defaults for other dyno types. For example, a 32GB dyno would only use
+  # 8GB of heap with the 25% default, but performance-l with 14GB of memory would get 12GB max heap size as
+  # explicitly configured.
+  echo "$opts -XX:MaxRAMPercentage=80.0"
 }
 
 if [[ -d $HOME/.jdk ]]; then
