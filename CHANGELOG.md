@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v151] - 2024-03-22
+
 * Add support for Java 22. ([#292](https://github.com/heroku/heroku-buildpack-jvm-common/pull/292))
 * Use `/sys/fs/cgroup/memory/memory.limit_in_bytes` instead of `ulimit -u` for dyno type detection. ([#294](https://github.com/heroku/heroku-buildpack-jvm-common/pull/294))
 
@@ -377,7 +380,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v150...HEAD
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v151...main
+[v151]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v150...v151
 [v150]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v149...v150
 [v149]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v148...v149
 [v148]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v147...v148
