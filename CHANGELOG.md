@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Add support for Java 22. ([#292](https://github.com/heroku/heroku-buildpack-jvm-common/pull/292))
 
 ## [v150] - 2024-01-17
 
