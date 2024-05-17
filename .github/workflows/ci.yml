@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack: ["heroku-20", "heroku-22"]
+        stack: ["heroku-20", "heroku-22", "heroku-24"]
         assets-base-url: ["", "https://lang-jvm-staging2.s3.us-east-1.amazonaws.com/"]
     env:
       HATCHET_APP_LIMIT: 100
@@ -103,12 +103,12 @@ jobs:
     runs-on: ubuntu-22.04
     needs: lint
     container:
-      image: "${{ fromJson('{ \"heroku-20\": \"heroku/heroku:20\", \"heroku-22\": \"heroku/heroku:22\" }')[matrix.stack] }}"
+      image: "${{ fromJson('{ \"heroku-20\": \"heroku/heroku:20\", \"heroku-22\": \"heroku/heroku:22\", \"heroku-24\": \"heroku/heroku:24\" }')[matrix.stack] }}"
       env:
         STACK: ${{ matrix.stack }}
     strategy:
       matrix:
-        stack: ["heroku-20", "heroku-22"]
+        stack: ["heroku-20", "heroku-22", "heroku-24"]
     steps:
       - uses: actions/checkout@v4
       - run: test/v2

@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe "Java" do
 
-  ["1.8", "8", "11", "17", "22", "11.0.15", "openjdk-11.0.15", "zulu-11.0.15", "heroku-17", "zulu-17", "heroku-21", "zulu-21"].each do |jdk_version|
+  ["1.8", "8", "11", "17", "22", "11.0.23", "openjdk-11.0.23", "zulu-11.0.23", "heroku-17", "zulu-17", "heroku-21", "zulu-21"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-servlets-sample").tap do |app|
