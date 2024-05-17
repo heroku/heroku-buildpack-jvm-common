@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Add support for `heroku-24` stack. ([#298](https://github.com/heroku/heroku-buildpack-jvm-common/pull/298))
 
 ## [v152] - 2024-05-01
 
