@@ -104,6 +104,7 @@ jobs:
     needs: lint
     container:
       image: "${{ fromJson('{ \"heroku-20\": \"heroku/heroku:20\", \"heroku-22\": \"heroku/heroku:22\", \"heroku-24\": \"heroku/heroku:24\" }')[matrix.stack] }}"
+      options: --user root
       env:
         STACK: ${{ matrix.stack }}
     strategy:
