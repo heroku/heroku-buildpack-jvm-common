@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v153] - 2024-05-21
+
 * Add support for `heroku-24` stack. ([#298](https://github.com/heroku/heroku-buildpack-jvm-common/pull/298))
 
 ## [v152] - 2024-05-01
@@ -385,7 +388,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v152...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v153...main
+[v153]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v152...v153
 [v152]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v151...v152
 [v151]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v150...v151
 [v150]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v149...v150
