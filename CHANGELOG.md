@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+* The buildpack now warns when no OpenJDK version is explicitly specified. Users are encouraged to specify a version to ensure future builds use the same OpenJDK version. ([#301](https://github.com/heroku/heroku-buildpack-jvm-common/pull/301))
+
 ### Changed
 
 * Default JDK version for the `heroku-24` stack is now always the latest long-term support version, currently `21`. ([#300](https://github.com/heroku/heroku-buildpack-jvm-common/pull/300))
