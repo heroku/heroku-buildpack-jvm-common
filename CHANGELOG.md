@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v154] - 2024-05-29
+
 ### Added
 
 * The buildpack now warns when no OpenJDK version is explicitly specified. Users are encouraged to specify a version to ensure future builds use the same OpenJDK version. ([#301](https://github.com/heroku/heroku-buildpack-jvm-common/pull/301))
@@ -395,7 +398,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v153...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v154...main
+[v154]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v153...v154
 [v153]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v152...v153
 [v152]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v151...v152
 [v151]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v150...v151
