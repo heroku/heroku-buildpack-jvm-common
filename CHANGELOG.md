@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+
+* Default version for the `heroku-24` stack is now always the latest long-term support version, currently `21`. ([#300](https://github.com/heroku/heroku-buildpack-jvm-common/pull/300))
 
 ## [v153] - 2024-05-21
 

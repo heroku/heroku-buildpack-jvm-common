@@ -29,13 +29,17 @@ describe "Java" do
 
   context "a system.properties file with no java.runtime.version" do
     it "should deploy" do
-      expected_version = "1.8"
       new_default_hatchet_runner("java-servlets-sample").tap do |app|
         app.before_deploy do
           write_sys_props(Dir.pwd, "maven.version=3.3.9")
         end
         app.deploy do
-          expect(app.output).to include("Installing OpenJDK #{expected_version}")
+          if app.stack == "heroku-24" then
+            expect(app.output).to include("Installing OpenJDK 21")
+          else
+            expect(app.output).to include("Installing OpenJDK 1.8")
+          end
+
           expect(app.output).to include("BUILD SUCCESS")
           expect(successful_body(app)).to eq("Hello from Java!")
         end
