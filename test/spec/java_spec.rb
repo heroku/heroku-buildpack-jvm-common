@@ -19,6 +19,8 @@ describe "Java" do
             else
               expect(app.output).to include("Installing OpenJDK #{jdk_version}")
             end
+
+            expect(app.output).not_to include("WARNING: No OpenJDK version specified")
             expect(app.output).to include("BUILD SUCCESS")
             expect(successful_body(app)).to eq("Hello from Java!")
           end
@@ -34,6 +36,8 @@ describe "Java" do
           write_sys_props(Dir.pwd, "maven.version=3.3.9")
         end
         app.deploy do
+          expect(app.output).to include("WARNING: No OpenJDK version specified")
+
           if app.stack == "heroku-24" then
             expect(app.output).to include("Installing OpenJDK 21")
           else
@@ -64,6 +68,8 @@ describe "Java" do
             else
               expect(app.output).to include("Installing OpenJDK #{jdk_version}")
             end
+
+            expect(app.output).not_to include("WARNING: No OpenJDK version specified")
             expect(app.output).to include("BUILD SUCCESS")
 
             # Workaround (August 2020):

@@ -39,15 +39,12 @@ fi
 
 get_jdk_version() {
   local appDir="${1:?}"
-  if [ -f "${appDir}/system.properties" ]; then
-    detectedVersion="$(_get_system_property "${appDir}/system.properties" "java.runtime.version")"
-    if [ -n "$detectedVersion" ]; then
-      echo "$detectedVersion"
-    else
-      echo "$DEFAULT_JDK_VERSION"
-    fi
+
+  configuredVersion="$(_get_system_property "${appDir}/system.properties" "java.runtime.version")"
+  if [ -n "${configuredVersion}" ]; then
+    echo "${configuredVersion}"
   else
-    echo "$DEFAULT_JDK_VERSION"
+    echo "${DEFAULT_JDK_VERSION}"
   fi
 }
 
@@ -208,7 +205,10 @@ _get_system_property() {
   local escaped_key
   escaped_key="${key//\./\\.}"
 
-  [ -f "$file" ] &&
-    grep -E "^${escaped_key}[[:space:]=]+" "$file" |
-    sed -E -e "s/$escaped_key([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
+  if [ -f "${file}" ]; then
+    grep -E "^${escaped_key}[[:space:]=]+" "${file}" |
+      sed -E -e "s/${escaped_key}([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
+  else
+    echo ""
+  fi
 }

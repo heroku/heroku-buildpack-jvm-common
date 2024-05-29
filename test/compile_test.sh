@@ -12,6 +12,7 @@ testCompileWithoutSystemProperties() {
 
   assertCapturedSuccess
 
+  assertCaptured "WARNING: No OpenJDK version specified"
   assertCaptured "Installing OpenJDK 21"
   assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
   assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
