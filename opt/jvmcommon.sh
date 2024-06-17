@@ -5,7 +5,15 @@ calculate_java_memory_opts() {
   local memory_limit_file='/sys/fs/cgroup/memory/memory.limit_in_bytes'
 
   if [[ -f "${memory_limit_file}" ]]; then
-    case $(cat "${memory_limit_file}") in
+    local memory_limit
+    memory_limit=$(cat "${memory_limit_file}")
+
+    # The JVM tries to automatically detect the amount of available RAM for its heuristics. However,
+    # the detection has proven to be sometimes inaccurate in certain dyno configurations. MaxRAM is used
+    # by the JVM to derive other flags from it.
+    opts="${opts} -XX:MaxRAM=${memory_limit}"
+
+    case $memory_limit in
     536870912) # Eco, Basic, 1X
       echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
       return 0
