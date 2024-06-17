@@ -5,24 +5,36 @@ calculate_java_memory_opts() {
   local memory_limit_file='/sys/fs/cgroup/memory/memory.limit_in_bytes'
 
   if [[ -f "${memory_limit_file}" ]]; then
-    case $(cat "${memory_limit_file}") in
-    536870912) # Eco, Basic, 1X
-      echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
-      return 0
-      ;;
-    1073741824) # 2X, private-s
-      echo "$opts -Xmx671m -XX:CICompilerCount=2"
-      return 0
-      ;;
-    2684354560) # perf-m, private-m
-      echo "$opts -Xmx2g"
-      return 0
-      ;;
-    15032385536) # perf-l, private-l
-      echo "$opts -Xmx12g"
-      return 0
-      ;;
-    esac
+    local memory_limit
+    memory_limit=$(cat "${memory_limit_file}")
+
+    # Ignore values above 1TiB RAM, since when using cgroups v1 the limits file reports a
+    # bogus value of thousands of TiB RAM when there is no container memory limit set.
+    if ((memory_limit <= 1099511627776)); then
+      # The JVM tries to automatically detect the amount of available RAM for its heuristics. However,
+      # the detection has proven to be sometimes inaccurate in certain dyno configurations. MaxRAM is used
+      # by the JVM to derive other flags from it.
+      opts="${opts} -XX:MaxRAM=${memory_limit}"
+
+      case $memory_limit in
+      536870912) # Eco, Basic, 1X
+        echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
+        return 0
+        ;;
+      1073741824) # 2X, private-s
+        echo "$opts -Xmx671m -XX:CICompilerCount=2"
+        return 0
+        ;;
+      2684354560) # perf-m, private-m
+        echo "$opts -Xmx2g"
+        return 0
+        ;;
+      15032385536) # perf-l, private-l
+        echo "$opts -Xmx12g"
+        return 0
+        ;;
+      esac
+    fi
   fi
 
   # Rely on JVM ergonomics for other dyno types, but increase the maximum RAM percentage from 25% to 80%.
