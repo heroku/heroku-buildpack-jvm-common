@@ -148,7 +148,10 @@ install_profile() {
   local profileDir="${2:?}"
 
   mkdir -p "$profileDir"
-  cp "${bpDir}/opt/jvmcommon.sh" "${profileDir}"
+  # concatenate these together to avoid possible collisions with other buildpacks that use the same cgroup utils under the same name
+  # in case of differences, the last buildpack that ran would "win"
+  # this way, each sourced file gets its own known version of the utils just prior to execution
+  cat "${bpDir}/vendor/cgroups.sh" "${bpDir}/opt/jvmcommon.sh" >"${profileDir}/jvmcommon.sh"
   cp "${bpDir}/opt/jdbc.sh" "${profileDir}"
   cp "${bpDir}/opt/jvm-redis.sh" "${profileDir}"
 }
