@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v155] - 2024-07-17
+
 ### Changed
 
 * The value in `/sys/fs/cgroup/memory/memory.limit_in_bytes` is now explictly passed as `MaxRAM` to the JVM. ([#304](https://github.com/heroku/heroku-buildpack-jvm-common/pull/304))
@@ -402,7 +405,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v154...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v155...main
+[v155]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v154...v155
 [v154]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v153...v154
 [v153]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v152...v153
 [v152]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v151...v152
