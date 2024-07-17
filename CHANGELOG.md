@@ -5,6 +5,7 @@
 ### Changed
 
 * The value in `/sys/fs/cgroup/memory/memory.limit_in_bytes` is now explictly passed as `MaxRAM` to the JVM. ([#304](https://github.com/heroku/heroku-buildpack-jvm-common/pull/304))
+* Upgrade default JDKs to 22.0.2, 21.0.4, 17.0.12, 11.0.24 and 8u422. ([#307](https://github.com/heroku/heroku-buildpack-jvm-common/pull/307))
 
 ## [v154] - 2024-05-29
 
