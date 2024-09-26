@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v156] - 2024-09-26
+
 * Add support for Java 23. ([#311](https://github.com/heroku/heroku-buildpack-jvm-common/pull/311))
 
 ## [v155] - 2024-07-17
@@ -406,7 +409,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v155...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v156...main
+[v156]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v155...v156
 [v155]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v154...v155
 [v154]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v153...v154
 [v153]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v152...v153
