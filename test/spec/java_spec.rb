@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe "Java" do
-  ["1.8", "8", "11", "17", "22", "11.0.23", "openjdk-11.0.23", "zulu-11.0.23", "heroku-17", "zulu-17", "heroku-21", "zulu-21"].each do |jdk_version|
+  ["1.8", "8", "11", "17", "23", "11.0.23", "openjdk-11.0.23", "zulu-11.0.23", "heroku-17", "zulu-17", "heroku-21", "zulu-21"].each do |jdk_version|
     context "a simple java app on jdk-#{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-servlets-sample").tap do |app|
@@ -50,7 +50,7 @@ describe "Java" do
     end
   end
 
-  ["1.8", "8", "11", "17", "21", "22"].each do |jdk_version|
+  ["1.8", "8", "11", "17", "21", "23"].each do |jdk_version|
     context "jdk-overlay on #{jdk_version}" do
       it "should deploy" do
         new_default_hatchet_runner("java-overlay-test").tap do |app|
@@ -86,7 +86,7 @@ describe "Java" do
     end
   end
 
-  ["1.8", "8", "11", "17", "21", "22"].each do |jdk_version|
+  ["1.8", "8", "11", "17", "21", "23"].each do |jdk_version|
     context "korvan on jdk-#{jdk_version}" do
       it "runs commands" do
         new_default_hatchet_runner("korvan").tap do |app|
