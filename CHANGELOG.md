@@ -2,8 +2,13 @@
 
 ## [Unreleased]
 
+### Changed
+
+* Upgrade default JDKs to 23.0.1, 21.0.5, 17.0.13, 11.0.25 and 8u432. ([#315](https://github.com/heroku/heroku-buildpack-jvm-common/pull/315))
 
 ## [v156] - 2024-09-26
+
+### Added
 
 * Add support for Java 23. ([#311](https://github.com/heroku/heroku-buildpack-jvm-common/pull/311))
 
