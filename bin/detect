@@ -1,30 +1,4 @@
 #!/usr/bin/env bash
 
-get_client() {
-  local propFile=$1
-  local propName="client"
-  local propDefault="JVM Common"
-
-  if [ -f "${propFile}" ]; then
-    local propValue
-    propValue=$(sed '/^\#/d' "${propFile}" | grep "${propName}" | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-
-    echo "${propValue:-$propDefault}"
-  else
-    echo "$propDefault"
-  fi
-}
-
-if [ -f "$1/.heroku-deploy" ]; then
-  get_client "$1/.heroku-deploy"
-elif [ -f "$1/pom.xml" ] && [ -d "$1/target" ]; then
-  echo "heroku-maven-plugin"
-elif [ -d "$1/target/universal/stage" ]; then
-  echo "sbt-heroku"
-elif [ -f "$1/project.clj" ] && [ -d "$1/target" ]; then
-  echo "lein-heroku"
-else
-  echo "JVM Common"
-fi
-
+echo "JVM Common"
 exit 0
