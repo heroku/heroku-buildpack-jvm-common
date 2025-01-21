@@ -71,7 +71,6 @@ java.runtime.version = ${DEFAULT_JDK_VERSION}
 		fi
 		install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
 		install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
-		_cache_version "${jdkVersion}" "${cacheDir}"
 		status_done
 	else
 		status "Using provided JDK"
@@ -253,17 +252,4 @@ _get_url_status() {
 
 _jvm_mcount() {
 	if type -t mcount >/dev/null; then mcount "jvm.${1}"; fi
-}
-
-# Caching the JVM version will allow us to pin previous used defaults when
-# upgrading the default JDK. That is, if an app has JDK 8 installed now
-# because it's the default, it will continue to have JDK 8 installed when the
-# default is upgraded to JDK 11.
-_cache_version() {
-	local jdkVersion="${1}"
-	local cacheDir="${2}"
-
-	if [ -d "${cacheDir}" ]; then
-		echo "java.runtime.version=${jdkVersion}" >"${cacheDir}/system.properties"
-	fi
 }
