@@ -114,22 +114,6 @@ install_jdk() {
 
   curl_with_defaults --retry 3 --silent --show-error --location "${url}" --output "${tarball}"
 
-  if [ "${HEROKU_GPG_VALIDATION:-0}" != "1" ]; then
-    _jvm_mcount "gpg.verify.skip"
-  else
-    curl_with_defaults --fail --silent --show-error --location "${url}.gpg" --output "${tarball}.gpg"
-
-    gpg --no-tty --batch --import "${key}" >/dev/null 2>&1
-
-    if gpg --no-tty --batch --verify "${tarball}.gpg" "${tarball}" >/dev/null 2>&1; then
-      _jvm_mcount "gpg.verify.success"
-    else
-      _jvm_mcount "gpg.verify.failed"
-      (echo >&2 " !     ERROR: Invalid GPG signature!")
-      return 1
-    fi
-  fi
-
   tar pxzf "${tarball}" -C "${dir}"
   rm "${tarball}"
 }
