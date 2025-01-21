@@ -53,9 +53,9 @@ else
 fi
 
 if [[ -d "$JAVA_HOME/jre/lib/amd64/server" ]]; then
-	export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
+	export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:${LD_LIBRARY_PATH:-}"
 elif [[ -d "$JAVA_HOME/lib/server" ]]; then
-	export LD_LIBRARY_PATH="$JAVA_HOME/lib/server:$LD_LIBRARY_PATH"
+	export LD_LIBRARY_PATH="$JAVA_HOME/lib/server:${LD_LIBRARY_PATH:-}"
 fi
 
 if [ -f "$JAVA_HOME/release" ] && grep -q '^JAVA_VERSION="1[0-9]' "$JAVA_HOME/release"; then

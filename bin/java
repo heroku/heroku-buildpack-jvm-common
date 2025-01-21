@@ -5,251 +5,253 @@
 # be invoked.
 
 JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
+
 if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then
 	# shellcheck source=lib/jvm.sh
 	source "${JVM_COMMON_DIR}/lib/jvm.sh"
 fi
 
 install_java_with_overlay() {
-	local buildDir="${1}"
-	local cacheDir="${2:-$(mktemp -d)}"
-	if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
-		if [ -z "$(_get_system_property "${buildDir}/system.properties" "java.runtime.version")" ]; then
-			if [ "${STACK}" == "heroku-24" ]; then
-				warning "No OpenJDK version specified
-Your application does not explicitly specify an OpenJDK
-version. The latest long-term support (LTS) version will be
-installed. This currently is OpenJDK ${DEFAULT_JDK_VERSION}.
+	local build_dir="${1}"
 
-This default version will change when a new LTS version is
-released. Your application might fail to build with the new
-version. We recommend explicitly setting the required OpenJDK
-version for your application.
+	# This legacy feature allowed users to provide their own OpenJDK installation.
+	# If one is found, this function will no do anything.
+	if [ -f "${build_dir}/.jdk/bin/java" ]; then
+		_conditional_meta_set "openjdk_version" "provided"
+		_conditional_meta_set "openjdk_distribution" "provided"
 
-To set the OpenJDK version, add or edit the system.properties
-file in the root directory of your application to contain:
-
-java.runtime.version = ${DEFAULT_JDK_VERSION}
-"
-			else
-				warning "No OpenJDK version specified
-Your application does not explicitly specify an OpenJDK
-version. OpenJDK ${DEFAULT_JDK_VERSION} will be installed.
-
-This default version will change at some point. Your
-application might fail to build with the new version. We
-recommend explicitly setting the required OpenJDK version for
-your application.
-
-To set the OpenJDK version, add or edit the system.properties
-file in the root directory of your application to contain:
-
-java.runtime.version = ${DEFAULT_JDK_VERSION}
-"
-			fi
-		fi
-
-		local jdkVersion
-		jdkVersion=$(get_jdk_version "${buildDir}")
-
-		local jdkUrl
-		jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
-
-		_jvm_mcount "version.${jdkVersion}"
-		if [[ "$jdkVersion" == *openjdk* ]]; then
-			status_pending "Installing Heroku OpenJDK $(_get_openjdk_version "${jdkVersion}")"
-			_jvm_mcount "vendor.openjdk"
-		elif [[ "$jdkVersion" == *heroku* ]]; then
-			status_pending "Installing Heroku OpenJDK $(_get_heroku_version "${jdkVersion}")"
-			_jvm_mcount "vendor.openjdk"
-		elif [[ "$jdkVersion" == *zulu* ]]; then
-			status_pending "Installing Azul Zulu OpenJDK $(_get_zulu_version "${jdkVersion}")"
-			_jvm_mcount "vendor.zulu"
-		else
-			status_pending "Installing OpenJDK ${jdkVersion}"
-			_jvm_mcount "vendor.default"
-		fi
-		install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
-		install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
-		status_done
-	else
 		status "Using provided JDK"
-		_jvm_mcount "vendor.provided"
+		exit 0
 	fi
+
+	# Print a warning if no java.runtime.version is set in system.properties to
+	# encourage users to pin their OpenJDK version.
+	if [ -z "$(_get_system_property "${build_dir}/system.properties" "java.runtime.version")" ]; then
+		if [ "${STACK}" == "heroku-24" ]; then
+			warning <<-EOF
+				No OpenJDK version specified
+
+				Your application does not explicitly specify an OpenJDK
+				version. The latest long-term support (LTS) version will be
+				installed. This currently is OpenJDK ${DEFAULT_JDK_VERSION}.
+
+				This default version will change when a new LTS version is
+				released. Your application might fail to build with the new
+				version. We recommend explicitly setting the required OpenJDK
+				version for your application.
+
+				To set the OpenJDK version, add or edit the system.properties
+				file in the root directory of your application to contain:
+
+				java.runtime.version = ${DEFAULT_JDK_VERSION}
+			EOF
+		else
+			warning cat <<-EOF
+				No OpenJDK version specified
+
+				Your application does not explicitly specify an OpenJDK
+				version. OpenJDK ${DEFAULT_JDK_VERSION} will be installed.
+
+				This default version will change at some point. Your
+				application might fail to build with the new version. We
+				recommend explicitly setting the required OpenJDK version for
+				your application.
+
+				To set the OpenJDK version, add or edit the system.properties
+				file in the root directory of your application to contain:
+
+				java.runtime.version = ${DEFAULT_JDK_VERSION}
+			EOF
+		fi
+	fi
+
+	local full_jdk_version
+	full_jdk_version="$(get_full_jdk_version "$(get_jdk_version "${build_dir}")")"
+
+	local openjdk_version
+	openjdk_version="$(_extract_openjdk_version "${full_jdk_version}")"
+
+	local openjdk_distribution
+	openjdk_distribution="$(_extract_openjdk_distribution "${full_jdk_version}")"
+
+	_conditional_meta_set "openjdk_version" "${openjdk_version}"
+	_conditional_meta_set "openjdk_distribution" "${openjdk_distribution}"
+
+	case "${openjdk_distribution}" in
+	heroku | openjdk) status_pending "Installing Heroku OpenJDK ${openjdk_version}" ;;
+	zulu) status_pending "Installing Azul Zulu OpenJDK ${openjdk_version}" ;;
+	*) status_pending "Installing OpenJDK ${openjdk_version}" ;;
+	esac
+
+	install_java "${build_dir}" "${full_jdk_version}"
+	install_jdk_overlay "${build_dir}/.jdk" "${build_dir}"
+
+	status_done
 }
 
 install_java() {
-	local baseDir=${1?"Invalid directory to install java."}
+	local build_dir=${1}
 
-	local jdkVersion="${2:-$DEFAULT_JDK_VERSION}"
-	local jdkUrl=${3:-$(_get_jdk_url_with_default "${jdkVersion}")}
-	local jdkDir="${baseDir}"/.jdk
+	local full_jdk_version="${2:-$DEFAULT_JDK_VERSION}"
+	local jdkUrl=${3:-$(get_jdk_url "${full_jdk_version}")}
+	local jdkDir="${build_dir}/.jdk"
 	local javaExe="${jdkDir}/bin/java"
+
+	start_time=$(nowms)
+
 	mkdir -p "${jdkDir}"
 
-	if [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${jdkVersion}"; then
+	if [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${full_jdk_version}"; then
 		rm -rf "${jdkDir}"
 		mkdir -p "${jdkDir}"
-		validate_jdk_url "${jdkUrl}" "${jdkVersion}"
+		validate_jdk_url "${jdkUrl}" "${full_jdk_version}"
 		install_jdk "${jdkUrl}" "${jdkDir}" "${JVM_COMMON_DIR}"
 		install_certs "${jdkDir}"
-		echo "${jdkVersion}" >"${jdkDir}/version"
+		echo "${full_jdk_version}" >"${jdkDir}/version"
 		if [ ! -f "${javaExe}" ]; then
 			error_return "Unable to retrieve the JDK."
 			return 1
 		fi
 	fi
+
 	export JAVA_HOME=${jdkDir}
 	export PATH="${jdkDir}/bin:${PATH}"
 
-	install_profile "${JVM_COMMON_DIR}" "${baseDir}/.profile.d"
-	_install_tools "${baseDir}"
+	install_profile "${JVM_COMMON_DIR}" "${build_dir}/.profile.d"
+	_install_tools "${build_dir}"
 	_create_export_script "${JAVA_HOME}" "$(pwd)"
 	_install_pgconfig "${JAVA_HOME}"
-	_install_default_proc_warn "${baseDir}"
-	install_metrics_agent "${JVM_COMMON_DIR}" "${baseDir}/.heroku/bin" "${baseDir}/.profile.d"
+	_install_default_proc_warn "${build_dir}"
+	install_metrics_agent "${JVM_COMMON_DIR}" "${build_dir}/.heroku/bin" "${build_dir}/.profile.d"
+
+	_conditional_meta_time "openjdk_install_duration" "${start_time}"
 }
 
 validate_jdk_url() {
 	local jdkUrl=${1}
-	local jdkVersion=${2}
+	local full_jdk_version=${2}
 	if [ "$(_get_url_status "${jdkUrl}")" != "200" ]; then
 		echo ""
-		error_return "Unsupported Java version: $jdkVersion
+		error_return <<-EOF
+			Unsupported Java version: $full_jdk_version
 
-Please check your system.properties file to ensure the java.runtime.version
-is among the list of supported version on the Dev Center:
-https://devcenter.heroku.com/articles/java-support#supported-java-versions
-You can also remove the system.properties from your repo to install
-the default ${DEFAULT_JDK_VERSION} version.
-If you continue to have trouble, you can open a support ticket here:
-https://help.heroku.com
+			Please check your system.properties file to ensure the java.runtime.version
+			is among the list of supported version on the Dev Center:
+			https://devcenter.heroku.com/articles/java-support#supported-java-versions
+			You can also remove the system.properties from your repo to install
+			the default ${DEFAULT_JDK_VERSION} version.
+			If you continue to have trouble, you can open a support ticket here:
+			https://help.heroku.com
 
-Thanks,
-Heroku"
+			Thanks,
+			Heroku
+		EOF
+
 		return 1
 	fi
 }
 
 is_java_version_change() {
 	jdkDir=$1
-	jdkVersion=${2:-${DEFAULT_JDK_VERSION}}
+	full_jdk_version=${2:-${DEFAULT_JDK_VERSION}}
 	if [ ! -d "${jdkDir}" ]; then
 		echo "Invalid JDK directory."
 		return 1
 	fi
-	test -f "${jdkDir}/version" && [ "$(cat "${jdkDir}/version")" != "${jdkVersion}" ]
+	test -f "${jdkDir}/version" && [ "$(cat "${jdkDir}/version")" != "${full_jdk_version}" ]
 }
 
 # Legacy functions for backwards compatability
 detect_java_version() {
-	get_jdk_version "$1"
+	get_jdk_version "${1}"
 }
 
 jdk_overlay() {
-	local buildDir=$1
-	install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
+	install_jdk_overlay "${1}/.jdk" "${1}"
 }
 
 # Internal functions
 
 _install_tools() {
-	local ctxDir=${1:-BUILD_DIR}
-	local curDir=${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}
+	local build_dir=${1:-BUILD_DIR}
 
-	mkdir -p "$ctxDir/.heroku/bin"
-	mkdir -p "$ctxDir/.heroku/with_jmap/bin"
-	cp "$curDir/opt/with_jmap" "$ctxDir/.heroku/bin/with_jmap"
-	cp "$curDir/opt/with_jmap_java" "$ctxDir/.heroku/with_jmap/bin/java"
-	chmod +x "$ctxDir/.heroku/bin/with_jmap"
-	chmod +x "$ctxDir/.heroku/with_jmap/bin/java"
+	mkdir -p "$build_dir/.heroku/bin"
 
-	mkdir -p "$ctxDir/.heroku/with_jstack/bin"
-	cp "$curDir/opt/with_jstack" "$ctxDir/.heroku/bin/with_jstack"
-	cp "$curDir/opt/with_jstack_java" "$ctxDir/.heroku/with_jstack/bin/java"
-	chmod +x "$ctxDir/.heroku/bin/with_jstack"
-	chmod +x "$ctxDir/.heroku/with_jstack/bin/java"
+	TOOLS=(
+		with_jmap
+		with_jstack
+		with_jmap_and_jstack
+	)
 
-	mkdir -p "$ctxDir/.heroku/with_jmap_and_jstack/bin"
-	cp "$curDir/opt/with_jmap_and_jstack" "$ctxDir/.heroku/bin/with_jmap_and_jstack"
-	cp "$curDir/opt/with_jmap_and_jstack_java" "$ctxDir/.heroku/with_jmap_and_jstack/bin/java"
-	chmod +x "$ctxDir/.heroku/bin/with_jmap_and_jstack"
-	chmod +x "$ctxDir/.heroku/with_jmap_and_jstack/bin/java"
+	for tool in "${TOOLS[@]}"; do
+		cp "${JVM_COMMON_DIR}/opt/${tool}" "$build_dir/.heroku/bin/${tool}"
+		chmod +x "$build_dir/.heroku/bin/${tool}"
+
+		if [ -f "${JVM_COMMON_DIR}/opt/${tool}_java" ]; then
+			mkdir -p "$build_dir/.heroku/${tool}/bin"
+			cp "${JVM_COMMON_DIR}/opt/${tool}_java" "$build_dir/.heroku/${tool}/bin/java"
+			chmod +x "$build_dir/.heroku/${tool}/bin/java"
+		fi
+	done
 }
 
 _install_default_proc_warn() {
-	local ctxDir=${1:-BUILD_DIR}
+	local build_dir="${1}"
 
-	mkdir -p "${ctxDir}/.profile.d"
-	cat <<EOF >"${ctxDir}/.profile.d/default-proc-warning.sh"
-if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
-  echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
-fi
-EOF
+	local profile_d_dir="${build_dir}/.profile.d"
+	mkdir -p "${profile_d_dir}"
+
+	cat <<-EOF >"${profile_d_dir}/default-proc-warning.sh"
+		if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
+			echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
+		fi
+	EOF
 }
 
 _create_export_script() {
-	local javaHome=${1:-JAVA_HOME}
-	local ctxDir=${2:-CWD}
+	local java_home=${1}
+	local build_dir=${2}
 
-	if [ -w "${ctxDir}" ]; then
-		cat <<EOF >"${ctxDir}/export"
-export JAVA_HOME=$javaHome
-export PATH=\$JAVA_HOME/bin:\$PATH
-export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\$LD_LIBRARY_PATH"
-EOF
+	if [ -w "${build_dir}" ]; then
+		cat <<-EOF >"${build_dir}/export"
+			export JAVA_HOME=$java_home
+			export PATH=\$JAVA_HOME/bin:\$PATH
+			export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\${LD_LIBRARY_PATH:-}"
+		EOF
 	fi
 }
 
 _install_pgconfig() {
-	local javaHome=${1:-JAVA_HOME}
-	local extDir="${javaHome}/jre/lib/ext"
+	local java_home=${1}
+	local jre_ext_dir="${java_home}/jre/lib/ext"
 
-	if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}" ] && [ "${CI:-}" != "true" ]; then
-		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
+	if [ -d "${jre_ext_dir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}" ] && [ "${CI:-}" != "true" ]; then
+		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${jre_ext_dir}/pgconfig.jar"
 	fi
 }
 
-# This function implements a legacy behavior in which the JDK_URL_1_8 or similar config var
-# could be used to override the URL to the JDK binary for a specific version. It's
-# not supported in the v3 implementation of the buildpack.
-_get_jdk_url_with_default() {
-	local jdkVersion="${1:?}"
-	if [ -n "${JDK_URL_1_7:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.7')" != 0 ] || [ "$(expr "${jdkVersion}" : '^7')" != 0 ]; }; then
-		echo "$JDK_URL_1_7"
-	elif [ -n "${JDK_URL_1_8:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.8')" != 0 ] || [ "$(expr "${jdkVersion}" : '^8')" != 0 ]; }; then
-		echo "$JDK_URL_1_8"
-	elif [ -n "${JDK_URL_1_9:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.9')" != 0 ] || [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; }; then
-		echo "$JDK_URL_1_9"
-	elif [ -n "${JDK_URL_10:-}" ] && [ "$(expr "${jdkVersion}" : '^10')" != 0 ]; then
-		echo "$JDK_URL_10"
-	elif [ -n "${JDK_URL_11:-}" ] && [ "$(expr "${jdkVersion}" : '^11')" != 0 ]; then
-		echo "$JDK_URL_11"
-	elif [ -n "${JDK_URL_12:-}" ] && [ "$(expr "${jdkVersion}" : '^12')" != 0 ]; then
-		echo "$JDK_URL_12"
-	elif [ -n "${JDK_URL_13:-}" ] && [ "$(expr "${jdkVersion}" : '^13')" != 0 ]; then
-		echo "$JDK_URL_13"
-	else
-		get_jdk_url "$jdkVersion"
-	fi
+_extract_openjdk_distribution() {
+	IFS='-' read -r prefix version <<<"${1:?}"
+	echo "${prefix}"
 }
 
-_get_zulu_version() {
-	echo "${1//zulu-/}"
-}
-
-_get_openjdk_version() {
-	echo "${1//openjdk-/}"
-}
-
-_get_heroku_version() {
-	echo "${1//heroku-/}"
+_extract_openjdk_version() {
+	IFS='-' read -r prefix version <<<"${1:?}"
+	echo "${version}"
 }
 
 _get_url_status() {
 	curl_with_defaults --retry 3 --silent --head -w "%{http_code}" -L "${1}" -o /dev/null
 }
 
-_jvm_mcount() {
-	if type -t mcount >/dev/null; then mcount "jvm.${1}"; fi
+# This file will be included by other buildpacks that might not have or might not have set up
+# the metadata file for reporting. To ensure we don't break those buildpacks but still be able to
+# set metadata about OpenJDK, we have wrapper functions that check for a proper setup first.
+
+_conditional_meta_set() {
+	if type -t meta_set >/dev/null; then meta_set "${1}" "${2}"; fi
+}
+
+_conditional_meta_time() {
+	if type -t meta_time >/dev/null; then meta_time "${1}" "${2}"; fi
 }

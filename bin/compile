@@ -10,18 +10,22 @@ export BUILD_DIR="${1}"
 export CACHE_DIR="${2}"
 export ENV_DIR="${3}"
 
-BIN_DIR=$(
-	cd "$(dirname "$0")"
-	pwd
-) # absolute path
+BUILDPACK_DIR=$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd)
 
 # shellcheck source=bin/util
-source "$BIN_DIR/util"
+source "${BUILDPACK_DIR}/bin/util"
+# shellcheck source=lib/metadata.sh
+source "${BUILDPACK_DIR}/lib/metadata.sh"
+# shellcheck source=bin/java
+source "${BUILDPACK_DIR}/bin/java"
+
+# Initialise the buildpack metadata store.
+# This is used to track state across builds (for cache invalidation and messaging when build
+# configuration changes) and also so that `bin/report` can generate the build report.
+meta_init "${CACHE_DIR}" "jvm"
+meta_setup
 
 export_env_dir "${ENV_DIR}" "JVM_BUILDPACK_ASSETS_BASE_URL"
-
-# shellcheck source=bin/java
-source "$BIN_DIR/java"
 
 # Install JDK
 install_java_with_overlay "${BUILD_DIR}" "${CACHE_DIR}"

@@ -15,8 +15,11 @@ error_return() {
 }
 
 warning() {
+	local foo
+	read -r foo
+
 	echo
-	echo " !     WARNING: $*" | indent no_first_line_indent
+	echo " !     WARNING: ${foo}" | indent no_first_line_indent
 	echo
 }
 
@@ -107,4 +110,8 @@ curl_with_defaults() {
 	fi
 
 	curl "${default_args[@]}" "${@}"
+}
+
+nowms() {
+    date +%s%3N
 }

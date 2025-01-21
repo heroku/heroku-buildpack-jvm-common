@@ -59,30 +59,35 @@ get_full_jdk_version() {
 		# If the version variable is empty, there is no prefix and the
 		# version was stored in the prefix variable.
 		version="${prefix}"
-	else
-		# When there is a prefix, emit it before emitting the normalized
-		# version to keep it untouched by this function.
-		echo -n "${prefix}-"
+
+		# When there is no prefix, we set the prefix to the default prefix for the
+		# stack we're currently running on.
+		if [ "${STACK}" == "heroku-20" ]; then
+			prefix="heroku"
+		else
+			prefix="zulu"
+		fi
 	fi
 
 	case "${version}" in
-	"7" | "1.7") echo "${DEFAULT_JDK_1_7_VERSION}" ;;
-	"8" | "1.8") echo "${DEFAULT_JDK_1_8_VERSION}" ;;
-	"10") echo "${DEFAULT_JDK_10_VERSION}" ;;
-	"11") echo "${DEFAULT_JDK_11_VERSION}" ;;
-	"13") echo "${DEFAULT_JDK_13_VERSION}" ;;
-	"14") echo "${DEFAULT_JDK_14_VERSION}" ;;
-	"15") echo "${DEFAULT_JDK_15_VERSION}" ;;
-	"16") echo "${DEFAULT_JDK_16_VERSION}" ;;
-	"17") echo "${DEFAULT_JDK_17_VERSION}" ;;
-	"18") echo "${DEFAULT_JDK_18_VERSION}" ;;
-	"19") echo "${DEFAULT_JDK_19_VERSION}" ;;
-	"20") echo "${DEFAULT_JDK_20_VERSION}" ;;
-	"21") echo "${DEFAULT_JDK_21_VERSION}" ;;
-	"22") echo "${DEFAULT_JDK_22_VERSION}" ;;
-	"23") echo "${DEFAULT_JDK_23_VERSION}" ;;
-	*) echo "${version}" ;;
+	"7" | "1.7") version="${DEFAULT_JDK_1_7_VERSION}" ;;
+	"8" | "1.8") version="${DEFAULT_JDK_1_8_VERSION}" ;;
+	"10") version="${DEFAULT_JDK_10_VERSION}" ;;
+	"11") version="${DEFAULT_JDK_11_VERSION}" ;;
+	"13") version="${DEFAULT_JDK_13_VERSION}" ;;
+	"14") version="${DEFAULT_JDK_14_VERSION}" ;;
+	"15") version="${DEFAULT_JDK_15_VERSION}" ;;
+	"16") version="${DEFAULT_JDK_16_VERSION}" ;;
+	"17") version="${DEFAULT_JDK_17_VERSION}" ;;
+	"18") version="${DEFAULT_JDK_18_VERSION}" ;;
+	"19") version="${DEFAULT_JDK_19_VERSION}" ;;
+	"20") version="${DEFAULT_JDK_20_VERSION}" ;;
+	"21") version="${DEFAULT_JDK_21_VERSION}" ;;
+	"22") version="${DEFAULT_JDK_22_VERSION}" ;;
+	"23") version="${DEFAULT_JDK_23_VERSION}" ;;
 	esac
+
+	echo "${prefix}-${version}"
 }
 
 get_jdk_url() {
