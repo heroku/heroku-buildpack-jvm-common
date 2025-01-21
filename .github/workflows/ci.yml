@@ -11,15 +11,14 @@ permissions:
 
 jobs:
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install shfmt
         run: sudo apt-get install shfmt
-      - name: Run shfmt (excluding vendor code and fixtures)
-        run: shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt -i 2 -d
-      - name: Run ShellCheck
-        run: shellcheck bin/* lib/jvm.sh etc/* opt/* test/*.sh
+      - run: make lint-scripts
+      - run: make check-format
 
   hatchet:
     name: "Hatchet (${{ matrix.stack }}, ${{ matrix.assets-base-url == 0 && 'production bucket' || 'staging bucket' }})"
