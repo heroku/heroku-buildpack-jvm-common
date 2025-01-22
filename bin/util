@@ -1,110 +1,110 @@
 #!/usr/bin/env bash
 
 error() {
-  echo
-  echo " !     ERROR: $*" | indent no_first_line_indent
-  echo
-  exit 1
+	echo
+	echo " !     ERROR: $*" | indent no_first_line_indent
+	echo
+	exit 1
 }
 
 error_return() {
-  echo
-  echo " !     ERROR: $*" | indent no_first_line_indent
-  echo
-  return 1
+	echo
+	echo " !     ERROR: $*" | indent no_first_line_indent
+	echo
+	return 1
 }
 
 warning() {
-  echo
-  echo " !     WARNING: $*" | indent no_first_line_indent
-  echo
+	echo
+	echo " !     WARNING: $*" | indent no_first_line_indent
+	echo
 }
 
 warning_inline() {
-  echo " !     WARNING: $*" | indent no_first_line_indent
+	echo " !     WARNING: $*" | indent no_first_line_indent
 }
 
 status() {
-  echo "-----> $*"
+	echo "-----> $*"
 }
 
 status_pending() {
-  echo -n "-----> $*..."
+	echo -n "-----> $*..."
 }
 
 status_done() {
-  echo " done"
+	echo " done"
 }
 
 notice() {
-  echo
-  echo "NOTICE: $*" | indent
-  echo
+	echo
+	echo "NOTICE: $*" | indent
+	echo
 }
 
 notice_inline() {
-  echo "NOTICE: $*" | indent
+	echo "NOTICE: $*" | indent
 }
 
 # sed -l basically makes sed replace and buffer through stdin to stdout
 # so you get updates while the command runs and dont wait for the end
 # e.g. npm install | indent
 indent() {
-  # if an arg is given it's a flag indicating we shouldn't indent the first line, so use :+ to tell SED accordingly if that parameter is set, otherwise null string for no range selector prefix (it selects from line 2 onwards and then every 1st line, meaning all lines)
-  c="${1:+"2,999"} s/^/       /"
-  case $(uname) in
-  Darwin) sed -l "$c" ;; # mac/bsd sed: -l buffers on line boundaries
-  *) sed -u "$c" ;;      # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
-  esac
+	# if an arg is given it's a flag indicating we shouldn't indent the first line, so use :+ to tell SED accordingly if that parameter is set, otherwise null string for no range selector prefix (it selects from line 2 onwards and then every 1st line, meaning all lines)
+	c="${1:+"2,999"} s/^/       /"
+	case $(uname) in
+	Darwin) sed -l "$c" ;; # mac/bsd sed: -l buffers on line boundaries
+	*) sed -u "$c" ;;      # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
+	esac
 }
 
 export_env_dir() {
-  env_dir=$1
-  whitelist_regex=${2:-''}
-  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH|JAVA_OPTS|JAVA_TOOL_OPTIONS)$'}
-  if [ -d "$env_dir" ]; then
-    for env_var_path in "$env_dir"/*; do
-      if [ -f "$env_var_path" ]; then
-        basename "$env_var_path" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-          export "$(basename "$env_var_path")=$(cat "$env_var_path")"
-      fi
-      :
-    done
-  fi
+	env_dir=$1
+	whitelist_regex=${2:-''}
+	blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH|JAVA_OPTS|JAVA_TOOL_OPTIONS)$'}
+	if [ -d "$env_dir" ]; then
+		for env_var_path in "$env_dir"/*; do
+			if [ -f "$env_var_path" ]; then
+				basename "$env_var_path" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+					export "$(basename "$env_var_path")=$(cat "$env_var_path")"
+			fi
+			:
+		done
+	fi
 }
 
 copy_directories() {
-  dirList=$1
-  sourceDir=$2
-  destDir=$3
+	dirList=$1
+	sourceDir=$2
+	destDir=$3
 
-  if [ ! -d "${sourceDir}" ]; then
-    echo "Invalid source directory to copy from. ${sourceDir}"
-    return 1
-  fi
-  if [ ! -d "${destDir}" ]; then
-    echo "Invalid destination directory to copy to. ${destDir}"
-    return 1
-  fi
+	if [ ! -d "${sourceDir}" ]; then
+		echo "Invalid source directory to copy from. ${sourceDir}"
+		return 1
+	fi
+	if [ ! -d "${destDir}" ]; then
+		echo "Invalid destination directory to copy to. ${destDir}"
+		return 1
+	fi
 
-  for dir in ${dirList}; do
-    rm -rf "${destDir:?}/${dir:?}"
+	for dir in ${dirList}; do
+		rm -rf "${destDir:?}/${dir:?}"
 
-    if [ -d "${sourceDir}/${dir}" ]; then
-      mkdir -p "${destDir}/${dir}"
-      cp -r "${sourceDir}/${dir}/." "${destDir}/${dir}"
-    fi
-  done
+		if [ -d "${sourceDir}/${dir}" ]; then
+			mkdir -p "${destDir}/${dir}"
+			cp -r "${sourceDir}/${dir}/." "${destDir}/${dir}"
+		fi
+	done
 }
 
 curl_with_defaults() {
-  default_args=()
+	default_args=()
 
-  # Some company-internal users are building their slugs on CentOS where these newer curl commands aren't
-  # supported yet. This conditional ensures their builds continue to work.
-  if curl --help all | grep -q -- --retry-connrefused; then
-    default_args+=("--retry-connrefused" "--connect-timeout" "5")
-  fi
+	# Some company-internal users are building their slugs on CentOS where these newer curl commands aren't
+	# supported yet. This conditional ensures their builds continue to work.
+	if curl --help all | grep -q -- --retry-connrefused; then
+		default_args+=("--retry-connrefused" "--connect-timeout" "5")
+	fi
 
-  curl "${default_args[@]}" "${@}"
+	curl "${default_args[@]}" "${@}"
 }

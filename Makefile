@@ -13,10 +13,10 @@ lint-scripts:
 	@git ls-files -z --cached --others --exclude-standard 'bin/*' 'etc/*' 'lib/*' 'opt/*' | xargs -0 shellcheck --check-sourced --color=always
 
 check-format:
-	@shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt -i 2 --diff
+	@shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt --diff
 
 format:
-	@shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt -i 2 --write --list
+	@shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt --write --list
 
 run:
 	@echo "Running buildpack using: STACK=$(STACK) FIXTURE=$(FIXTURE)"
