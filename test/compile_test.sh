@@ -6,74 +6,74 @@
 # Tests
 
 testCompileWithoutSystemProperties() {
-  assertTrue "Precondition" "[ ! -f ${BUILD_DIR}/system.properties ]"
+	assertTrue "Precondition" "[ ! -f ${BUILD_DIR}/system.properties ]"
 
-  compile
+	compile
 
-  assertCapturedSuccess
+	assertCapturedSuccess
 
-  assertCaptured "WARNING: No OpenJDK version specified"
-  assertCaptured "Installing OpenJDK 21"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertCaptured "WARNING: No OpenJDK version specified"
+	assertCaptured "Installing OpenJDK 21"
+	assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
 testCompileWith_1_8_0_412() {
-  echo "java.runtime.version=1.8.0_412" >"${BUILD_DIR}/system.properties"
+	echo "java.runtime.version=1.8.0_412" >"${BUILD_DIR}/system.properties"
 
-  compile
+	compile
 
-  assertCapturedSuccess
+	assertCapturedSuccess
 
-  assertCaptured "Installing OpenJDK 1.8.0_412"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertCaptured "Installing OpenJDK 1.8.0_412"
+	assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
 testCompileWith_zulu_1_8_0_412() {
-  echo "java.runtime.version=zulu-1.8.0_412" >"${BUILD_DIR}/system.properties"
+	echo "java.runtime.version=zulu-1.8.0_412" >"${BUILD_DIR}/system.properties"
 
-  compile
+	compile
 
-  assertCapturedSuccess
+	assertCapturedSuccess
 
-  assertCaptured "Installing Azul Zulu OpenJDK 1.8.0_412"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertCaptured "Installing Azul Zulu OpenJDK 1.8.0_412"
+	assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
 testCompileWith_openjdk_1_8_0_412() {
-  echo "java.runtime.version=openjdk-1.8.0_412" >"${BUILD_DIR}/system.properties"
+	echo "java.runtime.version=openjdk-1.8.0_412" >"${BUILD_DIR}/system.properties"
 
-  compile
+	compile
 
-  assertCapturedSuccess
+	assertCapturedSuccess
 
-  assertCaptured "Installing Heroku OpenJDK 1.8.0_412"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertCaptured "Installing Heroku OpenJDK 1.8.0_412"
+	assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
 testCompileWith_zulu_11_0_15() {
-  echo "java.runtime.version=zulu-11.0.23" >"${BUILD_DIR}/system.properties"
+	echo "java.runtime.version=zulu-11.0.23" >"${BUILD_DIR}/system.properties"
 
-  compile
+	compile
 
-  assertCapturedSuccess
+	assertCapturedSuccess
 
-  assertCaptured "Installing Azul Zulu OpenJDK 11.0.23"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertCaptured "Installing Azul Zulu OpenJDK 11.0.23"
+	assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "Java version file should be present." "[ -f ${BUILD_DIR}/.jdk/version ]"
 }
 
 test_skip_install_if_java_exists() {
-  mkdir -p "${BUILD_DIR}/.jdk/bin"
-  touch "${BUILD_DIR}/.jdk/bin/java"
+	mkdir -p "${BUILD_DIR}/.jdk/bin"
+	touch "${BUILD_DIR}/.jdk/bin/java"
 
-  compile
+	compile
 
-  assertCapturedSuccess
-  assertCaptured "Using provided JDK"
-  assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "Java files should not have been installed." "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/amd64/server/libjvm.so ]"
+	assertCapturedSuccess
+	assertCaptured "Using provided JDK"
+	assertTrue "Java should be present in runtime." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "Java files should not have been installed." "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/amd64/server/libjvm.so ]"
 }

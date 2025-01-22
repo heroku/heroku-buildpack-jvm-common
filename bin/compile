@@ -11,8 +11,8 @@ export CACHE_DIR="${2}"
 export ENV_DIR="${3}"
 
 BIN_DIR=$(
-  cd "$(dirname "$0")"
-  pwd
+	cd "$(dirname "$0")"
+	pwd
 ) # absolute path
 
 # shellcheck source=bin/util

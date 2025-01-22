@@ -3,156 +3,156 @@
 BUILDPACK_HOME="${BUILDPACK_HOME:-$(pwd)}"
 
 testDetect() {
-  detect "${BUILD_DIR}"
+	detect "${BUILD_DIR}"
 
-  assertAppDetected "JVM Common"
+	assertAppDetected "JVM Common"
 }
 
 test_install_metrics_agent() {
-  local install_dir
-  install_dir="$(mktemp -d)"
+	local install_dir
+	install_dir="$(mktemp -d)"
 
-  local profile_dir
-  profile_dir="$(mktemp -d)"
+	local profile_dir
+	profile_dir="$(mktemp -d)"
 
-  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
-  assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
-  assertFileExists "${install_dir}/heroku-metrics-agent.jar"
+	install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+	assertFileExists "${profile_dir}/heroku-jvm-metrics.sh"
+	assertFileExists "${install_dir}/heroku-metrics-agent.jar"
 }
 
 test_install_metrics_agent_fail() {
-  local install_dir
-  install_dir="$(mktemp -d)"
+	local install_dir
+	install_dir="$(mktemp -d)"
 
-  local profile_dir
-  profile_dir="$(mktemp -d)"
+	local profile_dir
+	profile_dir="$(mktemp -d)"
 
-  export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
-  install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
-  assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
-  assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
-  unset HEROKU_METRICS_JAR_URL
+	export HEROKU_METRICS_JAR_URL="https://89erfhuisffuds.com"
+	install_metrics_agent "${BUILDPACK_HOME}" "${install_dir}" "${profile_dir}"
+	assertFileDoesNotExist "${profile_dir}/heroku-jvm-metrics.sh"
+	assertFileDoesNotExist "${install_dir}/heroku-metrics-agent.jar"
+	unset HEROKU_METRICS_JAR_URL
 }
 
 test_installDefaultJava() {
-  unset CI
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture install_java "${BUILD_DIR}"
-  assertCapturedSuccess
-  assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
-  assertEquals "$(find "${BUILD_DIR}" -name jdk.tar.gz | wc -l | sed 's/ //g')" "0" # make sure there's no tarball left in the slug
-  assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
-  assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
-  assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
-  assertEquals "$(cat "${BUILD_DIR}/.jdk/version")" "${DEFAULT_JDK_VERSION}"
+	unset CI
+	unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+	capture install_java "${BUILD_DIR}"
+	assertCapturedSuccess
+	assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
+	assertEquals "$(find "${BUILD_DIR}" -name jdk.tar.gz | wc -l | sed 's/ //g')" "0" # make sure there's no tarball left in the slug
+	assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
+	assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
+	assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertEquals "$(cat "${BUILD_DIR}/.jdk/version")" "${DEFAULT_JDK_VERSION}"
 
-  # shellcheck disable=SC2164
-  cd # unsure why, but this fixes `sh: 0: getcwd() failed: No such file or directory` because $BUILD_DIR get deleted out from under us
+	# shellcheck disable=SC2164
+	cd # unsure why, but this fixes `sh: 0: getcwd() failed: No such file or directory` because $BUILD_DIR get deleted out from under us
 
-  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(command -v java)"
-  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
+	assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(command -v java)"
+	assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }
 
 test_installJavaCI() {
-  export CI="true"
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture install_java "${BUILD_DIR}"
-  assertCapturedSuccess
-  assertTrue "A pgconfig.jar should exist in the JDK" "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
-  unset CI
+	export CI="true"
+	unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+	capture install_java "${BUILD_DIR}"
+	assertCapturedSuccess
+	assertTrue "A pgconfig.jar should exist in the JDK" "[ ! -f ${BUILD_DIR}/.jdk/jre/lib/ext/pgconfig.jar ]"
+	unset CI
 }
 
 test_installJavaWithVersion() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture install_java "${BUILD_DIR}" "1.8.0_412"
-  assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
-  assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
-  assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
-  assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
-  assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
-  assertEquals "$(cat "${BUILD_DIR}/.jdk/version")" "1.8.0_412"
-  assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(command -v java)"
-  assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
+	unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+	capture install_java "${BUILD_DIR}" "1.8.0_412"
+	assertTrue "A .jdk directory should be created when installing java." "[ -d ${BUILD_DIR}/.jdk ]"
+	assertTrue "The java runtime should be present." "[ -f ${BUILD_DIR}/.jdk/bin/java ]"
+	assertEquals "${BUILD_DIR}/.jdk" "${JAVA_HOME}"
+	assertContains "${PATH}" "${BUILD_DIR}/.jdk/bin"
+	assertTrue "A version file should have been created." "[ -f ${BUILD_DIR}/.jdk/version ]"
+	assertEquals "$(cat "${BUILD_DIR}/.jdk/version")" "1.8.0_412"
+	assertEquals "${BUILD_DIR}/.jdk/bin/java" "$(command -v java)"
+	assertTrue "A profile.d file should have been created." "[ -f ${BUILD_DIR}/.profile.d/jvmcommon.sh ]"
 }
 
 test_install_tools() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture _install_tools "${BUILD_DIR}"
-  assertCapturedSuccess
-  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jmap ]"
-  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
-  assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-  assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
-  assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
-  assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
+	unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+	capture _install_tools "${BUILD_DIR}"
+	assertCapturedSuccess
+	assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jmap ]"
+	assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jmap ]"
+	assertTrue "A with_jmap java file should have been created." "[ -f ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
+	assertTrue "The with_jmap java file should be executable." "[ -x ${BUILD_DIR}/.heroku/with_jmap/bin/java ]"
+	assertTrue "A with_jmap file should have been created." "[ -f ${BUILD_DIR}/.heroku/bin/with_jstack ]"
+	assertTrue "The with_jmap file should be executable." "[ -x ${BUILD_DIR}/.heroku/bin/with_jstack ]"
 }
 
 test_create_export_script() {
-  unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
-  capture _create_export_script "/path/to/jdk" "${BUILD_DIR}"
-  assertCapturedSuccess
-  assertTrue "An export file should be created." "[ -f ${BUILD_DIR}/export ]"
-  assertContains "export JAVA_HOME=/path/to/jdk" "$(cat "${BUILD_DIR}/export")"
-  assertContains "export PATH=\$JAVA_HOME/bin:\$PATH" "$(cat "${BUILD_DIR}/export")"
+	unset JAVA_HOME # unsets environment -- shunit doesn't clean environment before each test
+	capture _create_export_script "/path/to/jdk" "${BUILD_DIR}"
+	assertCapturedSuccess
+	assertTrue "An export file should be created." "[ -f ${BUILD_DIR}/export ]"
+	assertContains "export JAVA_HOME=/path/to/jdk" "$(cat "${BUILD_DIR}/export")"
+	assertContains "export PATH=\$JAVA_HOME/bin:\$PATH" "$(cat "${BUILD_DIR}/export")"
 }
 
 test_invalidJdkURL() {
-  capture install_java "${BUILD_DIR}" "1.8.0_11"
-  assertContains "Did not find error message for invalid JDK version" "Unsupported Java version: 1.8.0_11" "$(cat "${STD_OUT}")"
+	capture install_java "${BUILD_DIR}" "1.8.0_11"
+	assertContains "Did not find error message for invalid JDK version" "Unsupported Java version: 1.8.0_11" "$(cat "${STD_OUT}")"
 }
 
 test_customJdk() {
-  capture install_java "${BUILD_DIR}" "1.8.0_412"
-  assertCapturedSuccess
+	capture install_java "${BUILD_DIR}" "1.8.0_412"
+	assertCapturedSuccess
 }
 
 test_zuluJdk() {
-  capture install_java "${BUILD_DIR}" "zulu-1.8.0_412"
-  assertCapturedSuccess
+	capture install_java "${BUILD_DIR}" "zulu-1.8.0_412"
+	assertCapturedSuccess
 }
 
 test_openJdk() {
-  capture install_java "${BUILD_DIR}" "openjdk-1.8.0_412"
-  assertCapturedSuccess
+	capture install_java "${BUILD_DIR}" "openjdk-1.8.0_412"
+	assertCapturedSuccess
 }
 
 test_skip_version_cache() {
-  assertTrue "Fake dir should not exist." "[ ! -d fake_dir ]"
-  capture _cache_version "1.8" "fake_dir"
-  assertCapturedSuccess
-  assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
+	assertTrue "Fake dir should not exist." "[ ! -d fake_dir ]"
+	capture _cache_version "1.8" "fake_dir"
+	assertCapturedSuccess
+	assertTrue "Version should not be cached" "[ ! -f fake_dir/system.properties ]"
 }
 
 test_get_jdk_url_with_default() {
-  if [ "${STACK}" == "heroku-20" ]; then
-    assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
+	if [ "${STACK}" == "heroku-20" ]; then
+		assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
 
-    export JDK_URL_1_8="https://example.com/java8"
-    assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_412")"
-    assertEquals "${JDK_BASE_URL:?}/openjdk11.0.23.tar.gz" "$(_get_jdk_url_with_default "11.0.23")"
-    assertEquals "${JDK_BASE_URL:?}/zulu-11.0.23.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.23")"
-    unset JDK_URL_1_8
+		export JDK_URL_1_8="https://example.com/java8"
+		assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_412")"
+		assertEquals "${JDK_BASE_URL:?}/openjdk11.0.23.tar.gz" "$(_get_jdk_url_with_default "11.0.23")"
+		assertEquals "${JDK_BASE_URL:?}/zulu-11.0.23.tar.gz" "$(_get_jdk_url_with_default "zulu-11.0.23")"
+		unset JDK_URL_1_8
 
-    export JDK_URL_11="https://example.com/java11"
-    assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.23")"
-    assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
-    unset JDK_URL_11
-  else
-    assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
+		export JDK_URL_11="https://example.com/java11"
+		assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.23")"
+		assertEquals "${JDK_BASE_URL:?}/openjdk1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
+		unset JDK_URL_11
+	else
+		assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
 
-    export JDK_URL_1_8="https://example.com/java8"
-    assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_412")"
-    assertEquals "${JDK_BASE_URL:?}/zulu-1.7.0_272.tar.gz" "$(_get_jdk_url_with_default "1.7.0_272")"
-    assertEquals "${JDK_BASE_URL:?}/zulu-11.0.23.tar.gz" "$(_get_jdk_url_with_default "11.0.23")"
-    assertEquals "${JDK_BASE_URL:?}/openjdk11.0.23.tar.gz" "$(_get_jdk_url_with_default "openjdk-11.0.23")"
-    unset JDK_URL_1_8
+		export JDK_URL_1_8="https://example.com/java8"
+		assertEquals "${JDK_URL_1_8}" "$(_get_jdk_url_with_default "1.8.0_412")"
+		assertEquals "${JDK_BASE_URL:?}/zulu-1.7.0_272.tar.gz" "$(_get_jdk_url_with_default "1.7.0_272")"
+		assertEquals "${JDK_BASE_URL:?}/zulu-11.0.23.tar.gz" "$(_get_jdk_url_with_default "11.0.23")"
+		assertEquals "${JDK_BASE_URL:?}/openjdk11.0.23.tar.gz" "$(_get_jdk_url_with_default "openjdk-11.0.23")"
+		unset JDK_URL_1_8
 
-    export JDK_URL_11="https://example.com/java11"
-    assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.23")"
-    assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
-    unset JDK_URL_11
-  fi
+		export JDK_URL_11="https://example.com/java11"
+		assertEquals "${JDK_URL_11}" "$(_get_jdk_url_with_default "11.0.23")"
+		assertEquals "${JDK_BASE_URL:?}/zulu-1.8.0_412.tar.gz" "$(_get_jdk_url_with_default "1.8.0_412")"
+		unset JDK_URL_11
+	fi
 }
 
 # the modules to be tested
