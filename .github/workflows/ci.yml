@@ -15,10 +15,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Ruby and dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: "3.4"
       - name: Install shfmt
         run: sudo apt-get install shfmt
       - run: make lint-scripts
       - run: make check-format
+      - run: make lint-ruby
 
   hatchet:
     name: "Hatchet (${{ matrix.stack }}, ${{ matrix.assets-base-url == 0 && 'production bucket' || 'staging bucket' }})"
@@ -51,7 +57,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          ruby-version: "2.7"
+          ruby-version: "3.3"
       - name: Hatchet setup
         run: bundle exec hatchet ci:setup
       - name: Run Hatchet integration tests
