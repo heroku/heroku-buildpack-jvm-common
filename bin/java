@@ -10,42 +10,49 @@ if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then
 	source "${JVM_COMMON_DIR}/lib/jvm.sh"
 fi
 
+# shellcheck source=lib/output.sh
+source "${JVM_COMMON_DIR}/lib/output.sh"
+
 install_java_with_overlay() {
 	local buildDir="${1}"
 	local cacheDir="${2:-$(mktemp -d)}"
 	if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
 		if [ -z "$(_get_system_property "${buildDir}/system.properties" "java.runtime.version")" ]; then
 			if [ "${STACK}" == "heroku-24" ]; then
-				warning "No OpenJDK version specified
-Your application does not explicitly specify an OpenJDK
-version. The latest long-term support (LTS) version will be
-installed. This currently is OpenJDK ${DEFAULT_JDK_VERSION}.
+				output::warning <<-EOF
+					WARNING: No OpenJDK version specified
 
-This default version will change when a new LTS version is
-released. Your application might fail to build with the new
-version. We recommend explicitly setting the required OpenJDK
-version for your application.
+					Your application does not explicitly specify an OpenJDK
+					version. The latest long-term support (LTS) version will be
+					installed. This currently is OpenJDK ${DEFAULT_JDK_VERSION}.
 
-To set the OpenJDK version, add or edit the system.properties
-file in the root directory of your application to contain:
+					This default version will change when a new LTS version is
+					released. Your application might fail to build with the new
+					version. We recommend explicitly setting the required OpenJDK
+					version for your application.
 
-java.runtime.version = ${DEFAULT_JDK_VERSION}
-"
+					To set the OpenJDK version, add or edit the system.properties
+					file in the root directory of your application to contain:
+
+					java.runtime.version = ${DEFAULT_JDK_VERSION}
+				EOF
 			else
-				warning "No OpenJDK version specified
-Your application does not explicitly specify an OpenJDK
-version. OpenJDK ${DEFAULT_JDK_VERSION} will be installed.
+				output::warning <<-EOF
+					WARNING: No OpenJDK version specified
 
-This default version will change at some point. Your
-application might fail to build with the new version. We
-recommend explicitly setting the required OpenJDK version for
-your application.
+					Your application does not explicitly specify an OpenJDK
+					version. OpenJDK ${DEFAULT_JDK_VERSION} will be installed.
 
-To set the OpenJDK version, add or edit the system.properties
-file in the root directory of your application to contain:
+					This default version will change at some point. Your
+					application might fail to build with the new version. We
+					recommend explicitly setting the required OpenJDK version for
+					your application.
 
-java.runtime.version = ${DEFAULT_JDK_VERSION}
-"
+					To set the OpenJDK version, add or edit the system.properties
+					file in the root directory of your application to contain:
+
+					java.runtime.version = ${DEFAULT_JDK_VERSION}
+				EOF
 			fi
 		fi
 
@@ -57,24 +64,23 @@ java.runtime.version = ${DEFAULT_JDK_VERSION}
 
 		_jvm_mcount "version.${jdkVersion}"
 		if [[ "$jdkVersion" == *openjdk* ]]; then
-			status_pending "Installing Heroku OpenJDK $(_get_openjdk_version "${jdkVersion}")"
+			output::step "Installing Heroku OpenJDK $(_get_openjdk_version "${jdkVersion}")"
 			_jvm_mcount "vendor.openjdk"
 		elif [[ "$jdkVersion" == *heroku* ]]; then
-			status_pending "Installing Heroku OpenJDK $(_get_heroku_version "${jdkVersion}")"
+			output::step "Installing Heroku OpenJDK $(_get_heroku_version "${jdkVersion}")"
 			_jvm_mcount "vendor.openjdk"
 		elif [[ "$jdkVersion" == *zulu* ]]; then
-			status_pending "Installing Azul Zulu OpenJDK $(_get_zulu_version "${jdkVersion}")"
+			output::step "Installing Azul Zulu OpenJDK $(_get_zulu_version "${jdkVersion}")"
 			_jvm_mcount "vendor.zulu"
 		else
-			status_pending "Installing OpenJDK ${jdkVersion}"
+			output::step "Installing OpenJDK ${jdkVersion}"
 			_jvm_mcount "vendor.default"
 		fi
 		install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
 		install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
 		_cache_version "${jdkVersion}" "${cacheDir}"
-		status_done
 	else
-		status "Using provided JDK"
+		output::step "Using provided JDK"
 		_jvm_mcount "vendor.provided"
 	fi
 }
