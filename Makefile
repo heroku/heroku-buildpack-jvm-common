@@ -7,10 +7,13 @@ FIXTURE ?= test/spec/fixtures/repos/java-overlay-test
 # Converts a stack name of `heroku-NN` to its build Docker image tag of `heroku/heroku:NN-build`.
 STACK_IMAGE_TAG := heroku/$(subst -,:,$(STACK))-build
 
-lint: lint-scripts check-format
+lint: lint-scripts check-format lint-ruby
 
 lint-scripts:
 	@git ls-files -z --cached --others --exclude-standard 'bin/*' 'etc/*' 'lib/*' 'opt/*' | xargs -0 shellcheck --check-sourced --color=always
+
+lint-ruby:
+	@bundle exec rubocop
 
 check-format:
 	@shfmt -f . | grep -v "vendor/" | grep -v "test/spec/fixtures/" | xargs shfmt --diff
