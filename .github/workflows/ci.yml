@@ -41,16 +41,9 @@ jobs:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       HEROKU_API_USER: ${{ secrets.HEROKU_API_USER }}
       HEROKU_DISABLE_AUTOUPDATE: 1
-      # We use the Java buildpack for all Hatchet tests and instruct it to use the code of the current branch as the
-      # source for the JVM common buildpack with the 'DEFAULT_APP_CONFIG_JVM_COMMON_BUILDPACK' environment
-      # variable.
-      HATCHET_BUILDPACK_BASE: https://github.com/heroku/heroku-buildpack-java
-      HATCHET_BUILDPACK_BRANCH: main
-      # Default stack for all Heroku apps created by Hatchet
-      DEFAULT_APP_STACK: ${{ matrix.stack }}
-      # Default config variables for all Heroku apps created by Hatchet, prefixed with 'DEFAULT_APP_CONFIG_'
-      DEFAULT_APP_CONFIG_JVM_COMMON_BUILDPACK: https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/${{ github.head_ref || github.ref_name }}
-      DEFAULT_APP_CONFIG_JVM_BUILDPACK_ASSETS_BASE_URL: ${{ matrix.assets-base-url }}
+      HATCHET_BUILDPACK_BASE: https://github.com/heroku/heroku-buildpack-jvm-common
+      HATCHET_DEFAULT_STACK: ${{ matrix.stack }}
+      JVM_COMMON_BUILDPACK_TARBALL: https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/${{ github.head_ref || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - name: Install Ruby and dependencies

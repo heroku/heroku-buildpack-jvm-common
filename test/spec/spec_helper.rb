@@ -7,18 +7,20 @@ require 'rspec/retry'
 require 'date'
 
 ENV['RACK_ENV'] = 'test'
+ENV['HATCHET_BUILDPACK_BASE'] ||= 'https://github.com/heroku/heroku-buildpack-jvm-common.git'
 
 RSpec.configure do |config|
-  config.filter_run focused: true unless ENV['CI']
-  config.run_all_when_everything_filtered = true
-  config.alias_example_to :fit, focused: true
-  config.full_backtrace      = true
-  config.verbose_retry       = true # show retry status in spec process
-  config.default_retry_count = 2 if ENV['CI'] # retry all tests that fail again
-
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
+  # Disables the legacy rspec globals and monkey-patched `should` syntax.
+  config.disable_monkey_patching!
+  # Enable flags like --only-failures and --next-failure.
+  config.example_status_persistence_file_path = '.rspec_status'
+  # Allows limiting a spec run to individual examples or groups by tagging them
+  # with `:focus` metadata via the `fit`, `fcontext` and `fdescribe` aliases.
+  config.filter_run_when_matching :focus
+  # Allows declaring on which stacks a test/group should run by tagging it with `stacks`.
+  config.filter_run_excluding stacks: ->(stacks) { !stacks.include?(ENV.fetch('HATCHET_DEFAULT_STACK')) }
+  # Make rspec-retry output a retry message when its had to retry a test.
+  config.verbose_retry = true
 end
 
 def new_default_hatchet_runner(*, **kwargs)
