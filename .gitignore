@@ -2,3 +2,4 @@
 *.swp
 .DS_Store
 heroku-buildpack-jvm-common.tgz
+.rspec_status
