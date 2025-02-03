@@ -4,6 +4,7 @@ require_relative 'spec_helper'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-20' => {
+    nil => 'OpenJDK Runtime Environment (build 1.8.0_432-heroku-b06)',
     '1.8' => 'OpenJDK Runtime Environment (build 1.8.0_432-heroku-b06)',
     '8' => 'OpenJDK Runtime Environment (build 1.8.0_432-heroku-b06)',
     '11' => 'OpenJDK Runtime Environment (build 11.0.25+9)',
@@ -14,6 +15,7 @@ EXPECTED_JAVA_VERSIONS = {
     'zulu-21' => 'OpenJDK Runtime Environment Zulu21.38+21-CA (build 21.0.5+11-LTS)',
   },
   'heroku-22' => {
+    nil => 'OpenJDK 64-Bit Server VM (Zulu 8.82.0.21-CA-linux64) (build 25.432-b06, mixed mode)',
     '1.8' => 'OpenJDK 64-Bit Server VM (Zulu 8.82.0.21-CA-linux64) (build 25.432-b06, mixed mode)',
     '8' => 'OpenJDK 64-Bit Server VM (Zulu 8.82.0.21-CA-linux64) (build 25.432-b06, mixed mode)',
     '11' => 'OpenJDK Runtime Environment Zulu11.76+21-CA (build 11.0.25+9-LTS)',
@@ -24,6 +26,7 @@ EXPECTED_JAVA_VERSIONS = {
     'zulu-21' => 'OpenJDK Runtime Environment Zulu21.38+21-CA (build 21.0.5+11-LTS)',
   },
   'heroku-24' => {
+    nil => 'OpenJDK Runtime Environment Zulu21.38+21-CA (build 21.0.5+11-LTS)',
     '1.8' => 'OpenJDK 64-Bit Server VM (Zulu 8.82.0.21-CA-linux64) (build 25.432-b06, mixed mode)',
     '8' => 'OpenJDK 64-Bit Server VM (Zulu 8.82.0.21-CA-linux64) (build 25.432-b06, mixed mode)',
     '11' => 'OpenJDK Runtime Environment Zulu11.76+21-CA (build 11.0.25+9-LTS)',
@@ -68,7 +71,7 @@ RSpec.describe 'Java installation' do
 
         it 'installs the correct OpenJDK version, metrics agent, tools and profile.d scripts' do
           app.before_deploy do
-            set_java_version(Dir.pwd, openjdk_selection_string)
+            set_java_version(Dir.pwd, openjdk_selection_string) unless openjdk_selection_string.nil?
           end
 
           app.deploy do |app|
