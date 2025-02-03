@@ -4,7 +4,7 @@ require_relative 'spec_helper'
 
 # Test both the released version of the Gradle buildpack as well as the code on main
 gradle_buildpacks = %w[
-  https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/gradle.tgz
+  heroku/gradle
   https://github.com/heroku/heroku-buildpack-gradle#main
 ]
 

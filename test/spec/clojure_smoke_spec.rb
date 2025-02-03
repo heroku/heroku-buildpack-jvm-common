@@ -4,7 +4,7 @@ require_relative 'spec_helper'
 
 # Test both the released version of the Clojure buildpack as well as the code on main
 clojure_buildpacks = %w[
-  https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/clojure.tgz
+  heroku/clojure
   https://github.com/heroku/heroku-buildpack-clojure#main
 ]
 

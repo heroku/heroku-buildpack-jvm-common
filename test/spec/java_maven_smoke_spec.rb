@@ -4,7 +4,7 @@ require_relative 'spec_helper'
 
 # Test both the released version of the Maven buildpack as well as the code on main
 maven_buildpacks = %w[
-  https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/java.tgz
+  heroku/java
   https://github.com/heroku/heroku-buildpack-java#main
 ]
 
