@@ -43,3 +43,12 @@ def write_sys_props(directory, props)
     `git add system.properties && git commit -m "setting jdk version"`
   end
 end
+
+def clean_output(output)
+  output
+    # Remove trailing whitespace characters added by Git:
+    # https://github.com/heroku/hatchet/issues/162
+    .gsub(/ {8}(?=\R)/, '')
+    # Remove ANSI colour codes used in buildpack output (e.g. error messages).
+    .gsub(/\e\[[0-9;]+m/, '')
+end

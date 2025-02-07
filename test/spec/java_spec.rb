@@ -85,4 +85,67 @@ RSpec.describe 'Java installation' do
       end
     end
   end
+
+  context 'when no OpenJDK version is specified on Heroku-24', stacks: %w[heroku-24] do
+    let(:app) { Hatchet::Runner.new('empty') }
+
+    it 'emits the correct warning' do
+      app.deploy do
+        expect(clean_output(app.output)).to include(<<~OUTPUT)
+          remote: -----> JVM Common app detected
+          remote: 
+          remote:  !     WARNING: No OpenJDK version specified
+          remote:  !     
+          remote:  !     Your application does not explicitly specify an OpenJDK
+          remote:  !     version. The latest long-term support (LTS) version will be
+          remote:  !     installed. This currently is OpenJDK 21.
+          remote:  !     
+          remote:  !     This default version will change when a new LTS version is
+          remote:  !     released. Your application might fail to build with the new
+          remote:  !     version. We recommend explicitly setting the required OpenJDK
+          remote:  !     version for your application.
+          remote:  !     
+          remote:  !     To set the OpenJDK version, add or edit the system.properties
+          remote:  !     file in the root directory of your application to contain:
+          remote:  !     
+          remote:  !     java.runtime.version = 21
+          remote: 
+          remote: -----> Installing OpenJDK 21
+          remote: -----> Discovering process types
+          remote:        Procfile declares types -> (none)
+        OUTPUT
+      end
+    end
+  end
+
+  context 'when no OpenJDK version is specified on Heroku-20/Heroku-22', stacks: %w[heroku-20 heroku-22] do
+    let(:app) { Hatchet::Runner.new('empty') }
+
+    it 'emits the correct warning' do
+      app.deploy do
+        expect(clean_output(app.output)).to include(<<~OUTPUT)
+          remote: -----> JVM Common app detected
+          remote: 
+          remote:  !     WARNING: No OpenJDK version specified
+          remote:  !     
+          remote:  !     Your application does not explicitly specify an OpenJDK
+          remote:  !     version. OpenJDK 1.8 will be installed.
+          remote:  !     
+          remote:  !     This default version will change at some point. Your
+          remote:  !     application might fail to build with the new version. We
+          remote:  !     recommend explicitly setting the required OpenJDK version for
+          remote:  !     your application.
+          remote:  !     
+          remote:  !     To set the OpenJDK version, add or edit the system.properties
+          remote:  !     file in the root directory of your application to contain:
+          remote:  !     
+          remote:  !     java.runtime.version = 1.8
+          remote: 
+          remote: -----> Installing OpenJDK 1.8
+          remote: -----> Discovering process types
+          remote:        Procfile declares types -> (none)
+        OUTPUT
+      end
+    end
+  end
 end
