@@ -102,7 +102,10 @@ install_java() {
 		install_certs "${jdkDir}"
 		echo "${jdkVersion}" >"${jdkDir}/version"
 		if [ ! -f "${javaExe}" ]; then
-			error_return "Unable to retrieve the JDK."
+			output::error <<-EOF
+				Unable to retrieve the JDK.
+			EOF
+
 			return 1
 		fi
 	fi
