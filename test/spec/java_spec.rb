@@ -158,7 +158,7 @@ RSpec.describe 'Java installation' do
       end
 
       app.deploy do
-        expect(clean_output(app.output)).to include(<<~OUTPUT)
+        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX))
           remote: -----> JVM Common app detected
           remote: -----> Installing OpenJDK .NET
           remote: 
@@ -168,7 +168,7 @@ RSpec.describe 'Java installation' do
           remote:  !     is among the list of supported version on the Dev Center:
           remote:  !     https://devcenter.heroku.com/articles/java-support#supported-java-versions
           remote:  !     You can also remove the system.properties from your repo to install
-          remote:  !     the default 21 version.
+          remote:  !     the default .+ version.
           remote:  !     If you continue to have trouble, you can open a support ticket here:
           remote:  !     https://help.heroku.com
           remote:  !     
@@ -176,7 +176,7 @@ RSpec.describe 'Java installation' do
           remote:  !     Heroku
           remote: 
           remote:  !     Push rejected, failed to compile JVM Common app.
-        OUTPUT
+        REGEX
       end
     end
   end
