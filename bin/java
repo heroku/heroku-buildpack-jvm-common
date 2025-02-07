@@ -121,19 +121,21 @@ validate_jdk_url() {
 	local jdkUrl=${1}
 	local jdkVersion=${2}
 	if [ "$(_get_url_status "${jdkUrl}")" != "200" ]; then
-		echo ""
-		error_return "Unsupported Java version: $jdkVersion
+		output::error <<-EOF
+			ERROR: Unsupported Java version: ${jdkVersion}
 
-Please check your system.properties file to ensure the java.runtime.version
-is among the list of supported version on the Dev Center:
-https://devcenter.heroku.com/articles/java-support#supported-java-versions
-You can also remove the system.properties from your repo to install
-the default ${DEFAULT_JDK_VERSION} version.
-If you continue to have trouble, you can open a support ticket here:
-https://help.heroku.com
+			Please check your system.properties file to ensure the java.runtime.version
+			is among the list of supported version on the Dev Center:
+			https://devcenter.heroku.com/articles/java-support#supported-java-versions
+			You can also remove the system.properties from your repo to install
+			the default ${DEFAULT_JDK_VERSION} version.
+			If you continue to have trouble, you can open a support ticket here:
+			https://help.heroku.com
 
-Thanks,
-Heroku"
+			Thanks,
+			Heroku
+		EOF
+
 		return 1
 	fi
 }
