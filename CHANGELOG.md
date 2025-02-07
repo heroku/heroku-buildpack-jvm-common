@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Removed
+
+* Support for deprecated `JDK_BASE_URL`. End users of the buildpack should not need to override the base URL for buildpack assets. In the unlikely case that you do require this feature, use `JVM_BUILDPACK_ASSETS_BASE_URL` to point the buildpack to an alternative base URL instead. ([#331](https://github.com/heroku/heroku-buildpack-jvm-common/pull/331))
 
 ## [v158] - 2025-02-03
 

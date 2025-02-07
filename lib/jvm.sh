@@ -28,15 +28,7 @@ DEFAULT_JDK_19_VERSION="19.0.2"
 DEFAULT_JDK_20_VERSION="20.0.2"
 DEFAULT_JDK_22_VERSION="22.0.2"
 
-if [[ -n "${JDK_BASE_URL:-}" ]]; then
-	# Support for setting JDK_BASE_URL had the issue that it has to contain the stack name. This makes it hard to
-	# override the bucket for testing with staging binaries by using the existing JVM buildpack integration tests that
-	# cover all stacks. We will remove support for it in October 2021.
-	warning_inline "Support for the JDK_BASE_URL environment variable is deprecated and will be removed October 2021!"
-else
-	JVM_BUILDPACK_ASSETS_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL:-"https://lang-jvm.s3.us-east-1.amazonaws.com"}"
-	JDK_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL%/}/jdk/${STACK}"
-fi
+JVM_BUILDPACK_ASSETS_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL:-"https://lang-jvm.s3.us-east-1.amazonaws.com"}"
 
 get_jdk_version() {
 	local appDir="${1:?}"
@@ -89,15 +81,18 @@ get_jdk_url() {
 	local jdkVersion
 	jdkVersion="$(get_full_jdk_version "${1:-${DEFAULT_JDK_VERSION}}")"
 
+	local base_url
+	base_url="${JVM_BUILDPACK_ASSETS_BASE_URL%/}/jdk/${STACK}"
+
 	case ${jdkVersion} in
-	heroku-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
-	openjdk-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
-	zulu-*) jdkUrl="${JDK_BASE_URL:-}/${jdkVersion}.tar.gz" ;;
+	heroku-*) jdkUrl="${base_url}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
+	openjdk-*) jdkUrl="${base_url}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
+	zulu-*) jdkUrl="${base_url}/${jdkVersion}.tar.gz" ;;
 	*)
 		if [ "${STACK}" == "heroku-20" ]; then
-			jdkUrl="${JDK_BASE_URL:-}/openjdk${jdkVersion}.tar.gz"
+			jdkUrl="${base_url}/openjdk${jdkVersion}.tar.gz"
 		else
-			jdkUrl="${JDK_BASE_URL:-}/zulu-${jdkVersion}.tar.gz"
+			jdkUrl="${base_url}/zulu-${jdkVersion}.tar.gz"
 		fi
 		;;
 	esac
