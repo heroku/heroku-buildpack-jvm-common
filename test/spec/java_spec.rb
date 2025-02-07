@@ -148,4 +148,37 @@ RSpec.describe 'Java installation' do
       end
     end
   end
+
+  context 'when an invalid OpenJDK version has been specified' do
+    let(:app) { Hatchet::Runner.new('empty', allow_failure: true) }
+
+    it 'fails the build with the correct error' do
+      app.before_deploy do
+        set_java_version(Dir.pwd, '.NET')
+      end
+
+      app.deploy do
+        expect(clean_output(app.output)).to include(<<~OUTPUT)
+          remote: -----> JVM Common app detected
+          remote: -----> Installing OpenJDK .NET
+          remote: 
+          remote: 
+          remote:  !     ERROR: Unsupported Java version: .NET
+          remote:        
+          remote:        Please check your system.properties file to ensure the java.runtime.version
+          remote:        is among the list of supported version on the Dev Center:
+          remote:        https://devcenter.heroku.com/articles/java-support#supported-java-versions
+          remote:        You can also remove the system.properties from your repo to install
+          remote:        the default 21 version.
+          remote:        If you continue to have trouble, you can open a support ticket here:
+          remote:        https://help.heroku.com
+          remote:        
+          remote:        Thanks,
+          remote:        Heroku
+          remote: 
+          remote:  !     Push rejected, failed to compile JVM Common app.
+        OUTPUT
+      end
+    end
+  end
 end
