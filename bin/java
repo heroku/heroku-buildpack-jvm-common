@@ -5,10 +5,6 @@
 # be invoked.
 
 JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
-if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then
-	# shellcheck source=lib/jvm.sh
-	source "${JVM_COMMON_DIR}/lib/jvm.sh"
-fi
 
 # shellcheck source=lib/output.sh
 source "${JVM_COMMON_DIR}/lib/output.sh"

@@ -12,6 +12,14 @@ JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd ..
 source "${JVM_COMMON_DIR}/bin/util"
 # shellcheck source=bin/java
 source "${JVM_COMMON_DIR}/bin/java"
+# shellcheck source=lib/metadata.sh
+source "${BUILDPACK_DIR}/lib/metadata.sh"
+
+# Initialise the buildpack metadata store.
+# This is used to track state across builds (for cache invalidation and messaging when build
+# configuration changes) and also so that `bin/report` can generate the build report.
+meta_init "${CACHE_DIR}" "jvm"
+meta_setup
 
 export_env_dir "${ENV_DIR}"
 
