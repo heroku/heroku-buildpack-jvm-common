@@ -13,6 +13,8 @@ EXPECTED_JAVA_VERSIONS = {
     '23' => 'OpenJDK Runtime Environment (build 23.0.2+7)',
     'heroku-21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
     'zulu-21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    '21.0.6' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
+    'zulu-21.0.6' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
   },
   'heroku-22' => {
     nil => 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)',
@@ -24,6 +26,8 @@ EXPECTED_JAVA_VERSIONS = {
     '23' => 'OpenJDK Runtime Environment Zulu23.32+11-CA (build 23.0.2+7)',
     'heroku-21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
     'zulu-21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    '21.0.6' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    'heroku-21.0.6' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
   },
   'heroku-24' => {
     nil => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
@@ -35,6 +39,8 @@ EXPECTED_JAVA_VERSIONS = {
     '23' => 'OpenJDK Runtime Environment Zulu23.32+11-CA (build 23.0.2+7)',
     'heroku-21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
     'zulu-21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    '21.0.6' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    'heroku-21.0.6' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
     # Ensure that slightly incorrect version strings work
     '    21 ' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
   },
