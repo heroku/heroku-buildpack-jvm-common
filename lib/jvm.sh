@@ -165,19 +165,6 @@ install_metrics_agent() {
 	fi
 }
 
-install_jre() {
-	local jdkDir="${1:?}"
-	local jreDir="${2:?}"
-
-	if [ -d "${jdkDir}/jre" ]; then
-		rm -rf "${jreDir}"
-		cp -TR "${jdkDir}/jre" "${jreDir}"
-		cp -TR "${jdkDir}/release" "${jreDir}/release"
-	else
-		cp -TR "${jdkDir}" "${jreDir}"
-	fi
-}
-
 _get_system_property() {
 	local file=${1:?}
 	local key=${2:?}
