@@ -10,26 +10,6 @@ else
 	DEFAULT_JDK_VERSION="1.8"
 fi
 
-DEFAULT_JDK_1_8_VERSION="1.8.0_442"
-DEFAULT_JDK_11_VERSION="11.0.26"
-DEFAULT_JDK_17_VERSION="17.0.14"
-DEFAULT_JDK_21_VERSION="21.0.6"
-DEFAULT_JDK_23_VERSION="23.0.2"
-
-# EOL Versions
-DEFAULT_JDK_1_7_VERSION="1.7.0_352"
-DEFAULT_JDK_10_VERSION="10.0.2"
-DEFAULT_JDK_13_VERSION="13.0.14"
-DEFAULT_JDK_14_VERSION="14.0.2"
-DEFAULT_JDK_15_VERSION="15.0.10"
-DEFAULT_JDK_16_VERSION="16.0.2"
-DEFAULT_JDK_18_VERSION="18.0.2.1"
-DEFAULT_JDK_19_VERSION="19.0.2"
-DEFAULT_JDK_20_VERSION="20.0.2"
-DEFAULT_JDK_22_VERSION="22.0.2"
-
-JVM_BUILDPACK_ASSETS_BASE_URL="${JVM_BUILDPACK_ASSETS_BASE_URL:-"https://lang-jvm.s3.us-east-1.amazonaws.com"}"
-
 get_jdk_version() {
 	local appDir="${1:?}"
 
@@ -41,63 +21,25 @@ get_jdk_version() {
 	fi
 }
 
-get_full_jdk_version() {
-	# The version argument can potentially have a prefix which denotes the
-	# OpenJDK distribution. This function only normalizes the actual version
-	# and keeps the prefix intact.
-	IFS='-' read -r prefix version <<<"${1:?}"
+get_jdk_url() {
+	read -d '' -r INVENTORY_QUERY <<-'INVENTORY_QUERY'
+		($raw_version_string | capture("((?<stack>[^-]*?)-)?(?<version>.*$)")) as $parsed_raw_version_string |
+		(.version_aliases[$parsed_raw_version_string.version] // $parsed_raw_version_string.version) as $version |
+		($parsed_raw_version_string.stack // $default_distribution) as $distribution |
+		.artifacts[] | select(.version == $version and .metadata.distribution == $distribution and .arch == "amd64" and .os == "linux" and (.metadata.cedar_stack? == null or .metadata.cedar_stack? == $stack))
+	INVENTORY_QUERY
 
-	if [ -z "${version}" ]; then
-		# If the version variable is empty, there is no prefix and the
-		# version was stored in the prefix variable.
-		version="${prefix}"
-	else
-		# When there is a prefix, emit it before emitting the normalized
-		# version to keep it untouched by this function.
-		echo -n "${prefix}-"
+	local default_distribution="zulu"
+	if [[ "${STACK}" == "heroku-20" ]]; then
+		default_distribution="heroku"
 	fi
 
-	case "${version}" in
-	"7" | "1.7") echo "${DEFAULT_JDK_1_7_VERSION}" ;;
-	"8" | "1.8") echo "${DEFAULT_JDK_1_8_VERSION}" ;;
-	"10") echo "${DEFAULT_JDK_10_VERSION}" ;;
-	"11") echo "${DEFAULT_JDK_11_VERSION}" ;;
-	"13") echo "${DEFAULT_JDK_13_VERSION}" ;;
-	"14") echo "${DEFAULT_JDK_14_VERSION}" ;;
-	"15") echo "${DEFAULT_JDK_15_VERSION}" ;;
-	"16") echo "${DEFAULT_JDK_16_VERSION}" ;;
-	"17") echo "${DEFAULT_JDK_17_VERSION}" ;;
-	"18") echo "${DEFAULT_JDK_18_VERSION}" ;;
-	"19") echo "${DEFAULT_JDK_19_VERSION}" ;;
-	"20") echo "${DEFAULT_JDK_20_VERSION}" ;;
-	"21") echo "${DEFAULT_JDK_21_VERSION}" ;;
-	"22") echo "${DEFAULT_JDK_22_VERSION}" ;;
-	"23") echo "${DEFAULT_JDK_23_VERSION}" ;;
-	*) echo "${version}" ;;
-	esac
-}
-
-get_jdk_url() {
-	local jdkVersion
-	jdkVersion="$(get_full_jdk_version "${1:-${DEFAULT_JDK_VERSION}}")"
-
-	local base_url
-	base_url="${JVM_BUILDPACK_ASSETS_BASE_URL%/}/jdk/${STACK}"
-
-	case ${jdkVersion} in
-	heroku-*) jdkUrl="${base_url}/${jdkVersion//heroku-/openjdk}.tar.gz" ;;
-	openjdk-*) jdkUrl="${base_url}/${jdkVersion//openjdk-/openjdk}.tar.gz" ;;
-	zulu-*) jdkUrl="${base_url}/${jdkVersion}.tar.gz" ;;
-	*)
-		if [ "${STACK}" == "heroku-20" ]; then
-			jdkUrl="${base_url}/openjdk${jdkVersion}.tar.gz"
-		else
-			jdkUrl="${base_url}/zulu-${jdkVersion}.tar.gz"
-		fi
-		;;
-	esac
-
-	echo "${jdkUrl}"
+	jq <"${JVM_COMMON_DIR}/inventory.json" \
+		--arg raw_version_string "${1}" \
+		--arg default_distribution "${default_distribution}" \
+		--arg stack "${STACK}" \
+		"${INVENTORY_QUERY}" |
+		jq -r ".url"
 }
 
 install_jdk() {

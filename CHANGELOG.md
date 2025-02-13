@@ -2,9 +2,13 @@
 
 ## [Unreleased]
 
+### Changed
+
+* New OpenJDK versions now always require a buildpack update. Previously, it was possible to install concrete OpenJDK versions (i.e. `11.0.25`, not `11`) without a buildpack update. The buildpack now utilizes an inventory file that explicitly lists the available versions, supported architectures, checksums and more. If you relied on an older buildpack version but manually updated your `system.properties` files for new OpenJDK versions, you will have to use the previous version (v158) of the buildpack. ([#317](https://github.com/heroku/heroku-buildpack-jvm-common/pull/317))
+
 ### Removed
 
-* Support for deprecated `JDK_BASE_URL`. End users of the buildpack should not need to override the base URL for buildpack assets. In the unlikely case that you do require this feature, use `JVM_BUILDPACK_ASSETS_BASE_URL` to point the buildpack to an alternative base URL instead. ([#331](https://github.com/heroku/heroku-buildpack-jvm-common/pull/331))
+* Support for deprecated `JDK_BASE_URL` and `JVM_BUILDPACK_ASSETS_BASE_URL`. These were used in the testing setup and were never intended to be used by users of this buildpack. Available assets are now recorded in an inventory file. ([#331](https://github.com/heroku/heroku-buildpack-jvm-common/pull/331), [#317](https://github.com/heroku/heroku-buildpack-jvm-common/pull/317))
 
 ## [v158] - 2025-02-03
 

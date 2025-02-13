@@ -27,14 +27,13 @@ jobs:
       - run: make lint-ruby
 
   hatchet:
-    name: "Hatchet (${{ matrix.stack }}, ${{ matrix.assets-base-url == 0 && 'production bucket' || 'staging bucket' }})"
+    name: "Hatchet (${{ matrix.stack }})"
     runs-on: ubuntu-22.04
     needs: lint
     strategy:
       fail-fast: false
       matrix:
         stack: ["heroku-20", "heroku-22", "heroku-24"]
-        assets-base-url: ["", "https://lang-jvm-staging2.s3.us-east-1.amazonaws.com/"]
     env:
       HATCHET_APP_LIMIT: 100
       PARALLEL_SPLIT_TEST_PROCESSES: 8

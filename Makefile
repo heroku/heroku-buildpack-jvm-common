@@ -26,7 +26,7 @@ run:
 	@docker run --rm -v $(PWD):/src:ro --tmpfs /app -e "HOME=/app" -e "STACK=$(STACK)" "$(STACK_IMAGE_TAG)" \
 		bash -euo pipefail -c '\
 			mkdir /tmp/buildpack /tmp/build /tmp/cache /tmp/env; \
-			cp -r /src/{bin,lib,opt} /tmp/buildpack; \
+			cp -r /src/{bin,lib,opt,inventory.json} /tmp/buildpack; \
 			cp -rT /src/$(FIXTURE) /tmp/build; \
 			cd /tmp/buildpack; \
 			unset $$(printenv | cut -d '=' -f 1 | grep -vE "^(HOME|LANG|PATH|STACK)$$"); \
