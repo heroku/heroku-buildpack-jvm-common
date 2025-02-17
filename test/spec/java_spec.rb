@@ -97,13 +97,13 @@ RSpec.describe 'Java installation' do
 
     it 'emits the correct warning' do
       app.deploy do
-        expect(clean_output(app.output)).to include(<<~OUTPUT)
+        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
           remote: 
           remote:  !     WARNING: No OpenJDK version specified
           remote:  !     
           remote:  !     Your application does not explicitly specify an OpenJDK
-          remote:  !     version. The latest long-term support (LTS) version will be
+          remote:  !     version. The latest long-term support \\(LTS\\) version will be
           remote:  !     installed. This currently is OpenJDK 21.
           remote:  !     
           remote:  !     This default version will change when a new LTS version is
@@ -116,10 +116,10 @@ RSpec.describe 'Java installation' do
           remote:  !     
           remote:  !     java.runtime.version = 21
           remote: 
-          remote: -----> Installing OpenJDK 21
+          remote: -----> Installing Azul Zulu OpenJDK 21.0.[0-9]+
           remote: -----> Discovering process types
-          remote:        Procfile declares types -> (none)
-        OUTPUT
+          remote:        Procfile declares types -> \\(none\\)
+        REGEX
       end
     end
   end
@@ -129,7 +129,7 @@ RSpec.describe 'Java installation' do
 
     it 'emits the correct warning' do
       app.deploy do
-        expect(clean_output(app.output)).to include(<<~OUTPUT)
+        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
           remote: 
           remote:  !     WARNING: No OpenJDK version specified
@@ -147,10 +147,10 @@ RSpec.describe 'Java installation' do
           remote:  !     
           remote:  !     java.runtime.version = 1.8
           remote: 
-          remote: -----> Installing OpenJDK 1.8
+          remote: -----> Installing .* OpenJDK 1.8.0_[0-9]+
           remote: -----> Discovering process types
-          remote:        Procfile declares types -> (none)
-        OUTPUT
+          remote:        Procfile declares types -> \\(none\\)
+        REGEX
       end
     end
   end
@@ -164,17 +164,15 @@ RSpec.describe 'Java installation' do
       end
 
       app.deploy do
-        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX))
+        expect(clean_output(app.output)).to include(<<~OUTPUT)
           remote: -----> JVM Common app detected
-          remote: -----> Installing OpenJDK .NET
           remote: 
           remote:  !     ERROR: Unsupported Java version: .NET
           remote:  !     
           remote:  !     Please check your system.properties file to ensure the java.runtime.version
           remote:  !     is among the list of supported version on the Dev Center:
           remote:  !     https://devcenter.heroku.com/articles/java-support#supported-java-versions
-          remote:  !     You can also remove the system.properties from your repo to install
-          remote:  !     the default .+ version.
+          remote:  !     
           remote:  !     If you continue to have trouble, you can open a support ticket here:
           remote:  !     https://help.heroku.com
           remote:  !     
@@ -182,7 +180,7 @@ RSpec.describe 'Java installation' do
           remote:  !     Heroku
           remote: 
           remote:  !     Push rejected, failed to compile JVM Common app.
-        REGEX
+        OUTPUT
       end
     end
   end
