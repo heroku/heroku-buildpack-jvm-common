@@ -1,27 +1,18 @@
 #!/usr/bin/env bash
 
-# bin/compile <build-dir> <cache-dir> <env-dir>
-
-# fail fast
 set -e
 
-# parse args
 export BUILD_DIR="${1}"
 export CACHE_DIR="${2}"
 export ENV_DIR="${3}"
 
-BIN_DIR=$(
-	cd "$(dirname "$0")"
-	pwd
-) # absolute path
+JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
 
 # shellcheck source=bin/util
-source "$BIN_DIR/util"
-
-export_env_dir "${ENV_DIR}" "JVM_BUILDPACK_ASSETS_BASE_URL"
-
+source "${JVM_COMMON_DIR}/bin/util"
 # shellcheck source=bin/java
-source "$BIN_DIR/java"
+source "${JVM_COMMON_DIR}/bin/java"
 
-# Install JDK
+export_env_dir "${ENV_DIR}"
+
 install_java_with_overlay "${BUILD_DIR}" "${CACHE_DIR}"

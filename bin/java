@@ -4,20 +4,32 @@
 # The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
 # be invoked.
 
-JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
-if [ -f "${JVM_COMMON_DIR}/lib/jvm.sh" ]; then
-	# shellcheck source=lib/jvm.sh
-	source "${JVM_COMMON_DIR}/lib/jvm.sh"
+JVM_COMMON_BUILDPACK_DIR="${JVM_COMMON_BUILDPACK_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
+
+# Some users use this buildpack outside of the Heroku platform where STACK might
+# not be set. It should always default to the latest stack.
+STACK="${STACK:-"heroku-24"}"
+
+if [ "${STACK}" == "heroku-24" ]; then
+	# This should always be the latest OpenJDK LTS major version
+	# Next LTS will be OpenJDK 25 with a planned release date of 2025-09-16
+	DEFAULT_JDK_VERSION="21"
+else
+	DEFAULT_JDK_VERSION="1.8"
 fi
 
 # shellcheck source=lib/output.sh
-source "${JVM_COMMON_DIR}/lib/output.sh"
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/output.sh"
+# shellcheck source=lib/inventory.sh
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/inventory.sh"
+# shellcheck source=lib/java_properties.sh
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/java_properties.sh"
 
 install_java_with_overlay() {
 	local buildDir="${1}"
-	local cacheDir="${2:-$(mktemp -d)}"
+
 	if [ ! -f "${buildDir}/.jdk/bin/java" ]; then
-		if [ -z "$(_get_system_property "${buildDir}/system.properties" "java.runtime.version")" ]; then
+		if [ -z "$(java_properties::get "${buildDir}/system.properties" "java.runtime.version")" ]; then
 			if [ "${STACK}" == "heroku-24" ]; then
 				output::warning <<-EOF
 					WARNING: No OpenJDK version specified
@@ -57,7 +69,8 @@ install_java_with_overlay() {
 		fi
 
 		local jdkVersion
-		jdkVersion=$(get_jdk_version "${buildDir}")
+		jdkVersion="$(java_properties::get "${buildDir}/system.properties" "java.runtime.version")"
+		jdkVersion="${jdkVersion:-${DEFAULT_JDK_VERSION}}"
 
 		local jdkUrl
 		jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
@@ -76,9 +89,10 @@ install_java_with_overlay() {
 			output::step "Installing OpenJDK ${jdkVersion}"
 			_jvm_mcount "vendor.default"
 		fi
+
 		install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
 		install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
-		_cache_version "${jdkVersion}" "${cacheDir}"
+
 	else
 		output::step "Using provided JDK"
 		_jvm_mcount "vendor.provided"
@@ -86,20 +100,54 @@ install_java_with_overlay() {
 }
 
 install_java() {
-	local baseDir=${1?"Invalid directory to install java."}
-
-	local jdkVersion="${2:-$DEFAULT_JDK_VERSION}"
+	local build_dir=${1}
+	local jdkVersion="${2}"
 	local jdkUrl=${3:-$(_get_jdk_url_with_default "${jdkVersion}")}
-	local jdkDir="${baseDir}"/.jdk
+
+	local jdkDir="${build_dir}"/.jdk
 	local javaExe="${jdkDir}/bin/java"
 	mkdir -p "${jdkDir}"
 
 	if [ ! -f "${javaExe}" ] || is_java_version_change "${jdkDir}" "${jdkVersion}"; then
 		rm -rf "${jdkDir}"
 		mkdir -p "${jdkDir}"
-		validate_jdk_url "${jdkUrl}" "${jdkVersion}"
-		install_jdk "${jdkUrl}" "${jdkDir}" "${JVM_COMMON_DIR}"
-		install_certs "${jdkDir}"
+
+		if [ "$(curl_with_defaults --retry 3 --silent --head -w "%{http_code}" -L "${jdkUrl}" -o /dev/null)" != "200" ]; then
+			output::error <<-EOF
+				ERROR: Unsupported Java version: ${jdkVersion}
+
+				Please check your system.properties file to ensure the java.runtime.version
+				is among the list of supported version on the Dev Center:
+				https://devcenter.heroku.com/articles/java-support#supported-java-versions
+				You can also remove the system.properties from your repo to install
+				the default ${DEFAULT_JDK_VERSION} version.
+				If you continue to have trouble, you can open a support ticket here:
+				https://help.heroku.com
+
+				Thanks,
+				Heroku
+			EOF
+
+			return 1
+		fi
+
+		# Download and extract OpenJDK distribution
+		local jdk_tarball="/tmp/jdk.tgz"
+		curl_with_defaults --retry 3 --silent --show-error --location "${jdkUrl}" --output "${jdk_tarball}"
+		tar -pxzf "${jdk_tarball}" -C "${jdkDir}"
+		rm "${jdk_tarball}"
+
+		# Link base image Java keystore into the installed OpenJDK distribution, replacing the bundled
+		# certificates. Linking ensures that when the application image is rebased, the certificates are
+		# updated for JVM applications, even though the OpenJDK distribution itself doesn't change.
+		if [ -f "${jdkDir}/jre/lib/security/cacerts" ] && [ -f "/etc/ssl/certs/java/cacerts" ]; then
+			mv "${jdkDir}/jre/lib/security/cacerts" "${jdkDir}/jre/lib/security/cacerts.old"
+			ln -s "/etc/ssl/certs/java/cacerts" "${jdkDir}/jre/lib/security/cacerts"
+		elif [ -f "${jdkDir}/lib/security/cacerts" ] && [ -f "/etc/ssl/certs/java/cacerts" ]; then
+			mv "${jdkDir}/lib/security/cacerts" "${jdkDir}/lib/security/cacerts.old"
+			ln -s "/etc/ssl/certs/java/cacerts" "${jdkDir}/lib/security/cacerts"
+		fi
+
 		echo "${jdkVersion}" >"${jdkDir}/version"
 		if [ ! -f "${javaExe}" ]; then
 			output::error <<-EOF
@@ -109,37 +157,41 @@ install_java() {
 			return 1
 		fi
 	fi
+
 	export JAVA_HOME=${jdkDir}
 	export PATH="${jdkDir}/bin:${PATH}"
 
-	install_profile "${JVM_COMMON_DIR}" "${baseDir}/.profile.d"
-	_install_tools "${baseDir}"
-	_create_export_script "${JAVA_HOME}" "$(pwd)"
-	_install_pgconfig "${JAVA_HOME}"
-	_install_default_proc_warn "${baseDir}"
-	install_metrics_agent "${JVM_COMMON_DIR}" "${baseDir}/.heroku/bin" "${baseDir}/.profile.d"
-}
+	# Download Heroku JVM metrics agent JAR
+	mkdir -p "${build_dir}/.heroku/bin"
+	curl_with_defaults --retry 3 -s -o "${build_dir}/.heroku/bin/heroku-metrics-agent.jar" -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/4.0.1/heroku-java-metrics-agent-4.0.1.jar"}"
 
-validate_jdk_url() {
-	local jdkUrl=${1}
-	local jdkVersion=${2}
-	if [ "$(_get_url_status "${jdkUrl}")" != "200" ]; then
-		output::error <<-EOF
-			ERROR: Unsupported Java version: ${jdkVersion}
+	# Copy profile.d scripts
+	local profile_d_dir="${build_dir}/.profile.d"
+	mkdir -p "${profile_d_dir}"
 
-			Please check your system.properties file to ensure the java.runtime.version
-			is among the list of supported version on the Dev Center:
-			https://devcenter.heroku.com/articles/java-support#supported-java-versions
-			You can also remove the system.properties from your repo to install
-			the default ${DEFAULT_JDK_VERSION} version.
-			If you continue to have trouble, you can open a support ticket here:
-			https://help.heroku.com
+	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jvmcommon.sh" "${profile_d_dir}"
+	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/default-proc-warning.sh" "${profile_d_dir}"
+	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jdbc.sh" "${profile_d_dir}"
+	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jvm-redis.sh" "${profile_d_dir}"
+	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/heroku-jvm-metrics.sh" "${profile_d_dir}"
 
-			Thanks,
-			Heroku
-		EOF
+	# Install tool scripts
+	cp -r "${JVM_COMMON_BUILDPACK_DIR}/opt/tools/"* "${build_dir}/.heroku"
 
-		return 1
+	# Write export script for subsequent buildpacks to ensure they can use the installed OpenJDK.
+	# See: https://devcenter.heroku.com/articles/buildpack-api#composing-multiple-buildpacks
+	cat <<-EOF >"${JVM_COMMON_BUILDPACK_DIR}/export"
+		export JAVA_HOME=${JAVA_HOME}
+		export PATH=\$JAVA_HOME/bin:\$PATH
+		export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\$LD_LIBRARY_PATH"
+	EOF
+
+	# Install an extension into the OpenJDK distribution extension folder should is exist. This will only
+	# be the case for Java 8 as this OpenJDK feature was deprecated in 8u40.
+	# This JAR file sets `sslmode=require` for the postgres drivers.
+	local extDir="${JAVA_HOME}/jre/lib/ext"
+	if [[ -d "${extDir}" ]] && [[ -z "${SKIP_PGCONFIG_INSTALL:-}" ]] && [[ "${CI:-}" != "true" ]]; then
+		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
 	fi
 }
 
@@ -155,70 +207,35 @@ is_java_version_change() {
 
 # Legacy functions for backwards compatability
 detect_java_version() {
-	get_jdk_version "$1"
+	local jdkVersion
+	jdkVersion="$(java_properties::get "${1}/system.properties" "java.runtime.version")"
+	jdkVersion="${jdkVersion:${DEFAULT_JDK_VERSION}}"
+
+	echo "${jdkVersion}"
 }
 
 jdk_overlay() {
-	local buildDir=$1
+	local buildDir="${1}"
 	install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
 }
 
 # Internal functions
 
-_install_tools() {
-	local ctxDir=${1:-BUILD_DIR}
-	local curDir=${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}
+install_jdk_overlay() {
+	local jdkDir="${1:?}"
+	local appDir="${2:?}"
+	local cacertPath="lib/security/cacerts"
+	shopt -s dotglob
 
-	mkdir -p "$ctxDir/.heroku/bin"
-	mkdir -p "$ctxDir/.heroku/with_jmap/bin"
-	cp "$curDir/opt/with_jmap" "$ctxDir/.heroku/bin/with_jmap"
-	cp "$curDir/opt/with_jmap_java" "$ctxDir/.heroku/with_jmap/bin/java"
-	chmod +x "$ctxDir/.heroku/bin/with_jmap"
-	chmod +x "$ctxDir/.heroku/with_jmap/bin/java"
+	if [ -d "${jdkDir}" ] && [ -d "${appDir}/.jdk-overlay" ]; then
+		# delete the symlink because a cp will error
+		if [ -f "${appDir}/.jdk-overlay/jre/${cacertPath}" ] && [ -f "${jdkDir}/jre/${cacertPath}" ]; then
+			rm "${jdkDir}/jre/${cacertPath}"
+		elif [ -f "${appDir}/.jdk-overlay/${cacertPath}" ] && [ -f "${jdkDir}/${cacertPath}" ]; then
+			rm "${jdkDir}/${cacertPath}"
+		fi
 
-	mkdir -p "$ctxDir/.heroku/with_jstack/bin"
-	cp "$curDir/opt/with_jstack" "$ctxDir/.heroku/bin/with_jstack"
-	cp "$curDir/opt/with_jstack_java" "$ctxDir/.heroku/with_jstack/bin/java"
-	chmod +x "$ctxDir/.heroku/bin/with_jstack"
-	chmod +x "$ctxDir/.heroku/with_jstack/bin/java"
-
-	mkdir -p "$ctxDir/.heroku/with_jmap_and_jstack/bin"
-	cp "$curDir/opt/with_jmap_and_jstack" "$ctxDir/.heroku/bin/with_jmap_and_jstack"
-	cp "$curDir/opt/with_jmap_and_jstack_java" "$ctxDir/.heroku/with_jmap_and_jstack/bin/java"
-	chmod +x "$ctxDir/.heroku/bin/with_jmap_and_jstack"
-	chmod +x "$ctxDir/.heroku/with_jmap_and_jstack/bin/java"
-}
-
-_install_default_proc_warn() {
-	local ctxDir=${1:-BUILD_DIR}
-
-	mkdir -p "${ctxDir}/.profile.d"
-	cat <<EOF >"${ctxDir}/.profile.d/default-proc-warning.sh"
-if [ ! -f /app/Procfile ] && [ "\$DYNO" = "web.1" ]; then
-  echo "Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile"
-fi
-EOF
-}
-
-_create_export_script() {
-	local javaHome=${1:-JAVA_HOME}
-	local ctxDir=${2:-CWD}
-
-	if [ -w "${ctxDir}" ]; then
-		cat <<EOF >"${ctxDir}/export"
-export JAVA_HOME=$javaHome
-export PATH=\$JAVA_HOME/bin:\$PATH
-export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\$LD_LIBRARY_PATH"
-EOF
-	fi
-}
-
-_install_pgconfig() {
-	local javaHome=${1:-JAVA_HOME}
-	local extDir="${javaHome}/jre/lib/ext"
-
-	if [ -d "${extDir}" ] && [ -z "${SKIP_PGCONFIG_INSTALL:-}" ] && [ "${CI:-}" != "true" ]; then
-		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
+		cp -r "${appDir}/.jdk-overlay/"* "${jdkDir}"
 	fi
 }
 
@@ -242,7 +259,7 @@ _get_jdk_url_with_default() {
 	elif [ -n "${JDK_URL_13:-}" ] && [ "$(expr "${jdkVersion}" : '^13')" != 0 ]; then
 		echo "$JDK_URL_13"
 	else
-		get_jdk_url "$jdkVersion"
+		inventory::query "${jdkVersion}" "${STACK}" | jq -r ".url"
 	fi
 }
 
@@ -258,23 +275,6 @@ _get_heroku_version() {
 	echo "${1//heroku-/}"
 }
 
-_get_url_status() {
-	curl_with_defaults --retry 3 --silent --head -w "%{http_code}" -L "${1}" -o /dev/null
-}
-
 _jvm_mcount() {
 	if type -t mcount >/dev/null; then mcount "jvm.${1}"; fi
-}
-
-# Caching the JVM version will allow us to pin previous used defaults when
-# upgrading the default JDK. That is, if an app has JDK 8 installed now
-# because it's the default, it will continue to have JDK 8 installed when the
-# default is upgraded to JDK 11.
-_cache_version() {
-	local jdkVersion="${1}"
-	local cacheDir="${2}"
-
-	if [ -d "${cacheDir}" ]; then
-		echo "java.runtime.version=${jdkVersion}" >"${cacheDir}/system.properties"
-	fi
 }
