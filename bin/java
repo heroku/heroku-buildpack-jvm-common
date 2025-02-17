@@ -210,30 +210,6 @@ jdk_overlay() {
 
 # Internal functions
 
-# This function implements a legacy behavior in which the JDK_URL_1_8 or similar config var
-# could be used to override the URL to the JDK binary for a specific version. It's
-# not supported in the v3 implementation of the buildpack.
-_get_jdk_url_with_default() {
-	local jdkVersion="${1:?}"
-	if [ -n "${JDK_URL_1_7:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.7')" != 0 ] || [ "$(expr "${jdkVersion}" : '^7')" != 0 ]; }; then
-		echo "$JDK_URL_1_7"
-	elif [ -n "${JDK_URL_1_8:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.8')" != 0 ] || [ "$(expr "${jdkVersion}" : '^8')" != 0 ]; }; then
-		echo "$JDK_URL_1_8"
-	elif [ -n "${JDK_URL_1_9:-}" ] && { [ "$(expr "${jdkVersion}" : '^1.9')" != 0 ] || [ "$(expr "${jdkVersion}" : '^9')" != 0 ]; }; then
-		echo "$JDK_URL_1_9"
-	elif [ -n "${JDK_URL_10:-}" ] && [ "$(expr "${jdkVersion}" : '^10')" != 0 ]; then
-		echo "$JDK_URL_10"
-	elif [ -n "${JDK_URL_11:-}" ] && [ "$(expr "${jdkVersion}" : '^11')" != 0 ]; then
-		echo "$JDK_URL_11"
-	elif [ -n "${JDK_URL_12:-}" ] && [ "$(expr "${jdkVersion}" : '^12')" != 0 ]; then
-		echo "$JDK_URL_12"
-	elif [ -n "${JDK_URL_13:-}" ] && [ "$(expr "${jdkVersion}" : '^13')" != 0 ]; then
-		echo "$JDK_URL_13"
-	else
-		inventory::query "${jdkVersion}" "${STACK}" | jq -r ".url"
-	fi
-}
-
 # This file will be included by other buildpacks that might not have or might not have set up
 # the metadata file for reporting. To ensure we don't break those buildpacks but still be able to
 # set metadata about OpenJDK, we have wrapper functions that check for a proper setup first.
