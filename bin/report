@@ -60,10 +60,13 @@ kv_pair_string() {
 }
 
 STRING_FIELDS=(
+	openjdk_version
+	openjdk_distribution
 )
 
 # We don't want to quote numeric or boolean fields.
 ALL_OTHER_FIELDS=(
+	openjdk_install_duration
 )
 
 for field in "${STRING_FIELDS[@]}"; do
