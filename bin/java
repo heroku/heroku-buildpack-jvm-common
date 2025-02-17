@@ -71,31 +71,28 @@ install_java_with_overlay() {
 		local jdkVersion
 		jdkVersion="$(java_properties::get "${buildDir}/system.properties" "java.runtime.version")"
 		jdkVersion="${jdkVersion:-${DEFAULT_JDK_VERSION}}"
+		jdkVersion=$(inventory::query "${jdkVersion}" "${STACK}" | jq -r '.version')
 
-		local jdkUrl
-		jdkUrl=$(_get_jdk_url_with_default "${jdkVersion}")
+		local jdkDistribution
+		jdkDistribution=$(inventory::query "${jdkVersion}" "${STACK}" | jq -r '.metadata.distribution')
 
-		_jvm_mcount "version.${jdkVersion}"
-		if [[ "$jdkVersion" == *openjdk* ]]; then
-			output::step "Installing Heroku OpenJDK $(_get_openjdk_version "${jdkVersion}")"
-			_jvm_mcount "vendor.openjdk"
-		elif [[ "$jdkVersion" == *heroku* ]]; then
-			output::step "Installing Heroku OpenJDK $(_get_heroku_version "${jdkVersion}")"
-			_jvm_mcount "vendor.openjdk"
-		elif [[ "$jdkVersion" == *zulu* ]]; then
-			output::step "Installing Azul Zulu OpenJDK $(_get_zulu_version "${jdkVersion}")"
-			_jvm_mcount "vendor.zulu"
-		else
-			output::step "Installing OpenJDK ${jdkVersion}"
-			_jvm_mcount "vendor.default"
-		fi
+		_conditional_meta_set "openjdk_version" "${jdkVersion}"
+		_conditional_meta_set "openjdk_distribution" "${jdkDistribution}"
 
-		install_java "${buildDir}" "${jdkVersion}" "${jdkUrl}"
+		local jdkName
+		case "${jdkDistribution}" in
+		"zulu") jdkName="Azul Zulu OpenJDK" ;;
+		"heroku") jdkName="Heroku OpenJDK" ;;
+		*) jdkName="OpenJDK" ;;
+		esac
+
+		output::step "Installing ${jdkName} ${jdkVersion}"
+
+		install_java "${buildDir}" "${jdkVersion}" "$(_get_jdk_url_with_default "${jdkVersion}")"
 		install_jdk_overlay "${buildDir}/.jdk" "${buildDir}"
 
 	else
 		output::step "Using provided JDK"
-		_jvm_mcount "vendor.provided"
 	fi
 }
 
@@ -263,18 +260,14 @@ _get_jdk_url_with_default() {
 	fi
 }
 
-_get_zulu_version() {
-	echo "${1//zulu-/}"
+# This file will be included by other buildpacks that might not have or might not have set up
+# the metadata file for reporting. To ensure we don't break those buildpacks but still be able to
+# set metadata about OpenJDK, we have wrapper functions that check for a proper setup first.
+
+_conditional_meta_set() {
+	if type -t meta_set >/dev/null; then meta_set "${1}" "${2}"; fi
 }
 
-_get_openjdk_version() {
-	echo "${1//openjdk-/}"
-}
-
-_get_heroku_version() {
-	echo "${1//heroku-/}"
-}
-
-_jvm_mcount() {
-	if type -t mcount >/dev/null; then mcount "jvm.${1}"; fi
+_conditional_meta_time() {
+	if type -t meta_time >/dev/null; then meta_time "${1}" "${2}"; fi
 }
