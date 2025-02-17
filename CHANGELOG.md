@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v159] - 2025-02-17
+
 ### Changed
 
 * New OpenJDK versions now always require a buildpack update. Previously, it was possible to install concrete OpenJDK versions (i.e. `11.0.25`, not `11`) without a buildpack update. The buildpack now utilizes an inventory file that explicitly lists the available versions, supported architectures, checksums and more. If you relied on an older buildpack version but manually updated your `system.properties` files for new OpenJDK versions, you will have to use the previous version (v158) of the buildpack. ([#317](https://github.com/heroku/heroku-buildpack-jvm-common/pull/317))
@@ -430,7 +433,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v158...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v159...main
+[v159]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v158...v159
 [v158]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v157...v158
 [v157]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v156...v157
 [v156]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v155...v156
