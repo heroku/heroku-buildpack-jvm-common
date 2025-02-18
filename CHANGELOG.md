@@ -4,7 +4,7 @@
 
 ### Removed
 
-* Support for `JDK_URL_1_7`, `JDK_URL_1_8`, `JDK_URL_1_9`, `JDK_URL_10`, `JDK_URL_11`, `JDK_URL_12` environment variables to override OpenJDK download locations. (#000)
+* Support for `JDK_URL_1_7`, `JDK_URL_1_8`, `JDK_URL_1_9`, `JDK_URL_10`, `JDK_URL_11`, `JDK_URL_12` environment variables to override OpenJDK download locations. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339)
 
 ## [v159] - 2025-02-17
 
