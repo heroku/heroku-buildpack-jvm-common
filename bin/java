@@ -126,15 +126,15 @@ install_java_with_overlay() {
 	mkdir "${openjdk_install_dir}"
 
 	# Download and extract OpenJDK distribution
-	local start_time
-	start_time=$(nowms)
+	local openjdk_install_start_time
+	openjdk_install_start_time=$(nowms)
 
 	local jdk_tarball="/tmp/jdk.tgz"
 	curl_with_defaults --retry 3 --silent --show-error --location "${openjdk_url}" --output "${jdk_tarball}"
 	tar -pxzf "${jdk_tarball}" -C "${openjdk_install_dir}"
 	rm "${jdk_tarball}"
 
-	_conditional_meta_time "openjdk_install_duration" "${start_time}"
+	_conditional_meta_time "openjdk_install_duration" "${openjdk_install_start_time}"
 
 	# Link base image Java keystore into the installed OpenJDK distribution, replacing the bundled
 	# certificates. Linking ensures that when the application image is rebased, the certificates are
