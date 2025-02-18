@@ -139,12 +139,13 @@ install_java_with_overlay() {
 	# Link base image Java keystore into the installed OpenJDK distribution, replacing the bundled
 	# certificates. Linking ensures that when the application image is rebased, the certificates are
 	# updated for JVM applications, even though the OpenJDK distribution itself doesn't change.
-	if [ -f "${openjdk_install_dir}/jre/lib/security/cacerts" ] && [ -f "/etc/ssl/certs/java/cacerts" ]; then
-		mv "${openjdk_install_dir}/jre/lib/security/cacerts" "${openjdk_install_dir}/jre/lib/security/cacerts.old"
-		ln -s "/etc/ssl/certs/java/cacerts" "${openjdk_install_dir}/jre/lib/security/cacerts"
-	elif [ -f "${openjdk_install_dir}/lib/security/cacerts" ] && [ -f "/etc/ssl/certs/java/cacerts" ]; then
-		mv "${openjdk_install_dir}/lib/security/cacerts" "${openjdk_install_dir}/lib/security/cacerts.old"
-		ln -s "/etc/ssl/certs/java/cacerts" "${openjdk_install_dir}/lib/security/cacerts"
+	if [[ -f "/etc/ssl/certs/java/cacerts" ]]; then
+		for path in "${openjdk_install_dir}/jre/lib/security/cacerts" "${openjdk_install_dir}/lib/security/cacerts"; do
+			if [[ -f "${path}" ]]; then
+				mv "${path}" "${path}.old"
+				ln -s "/etc/ssl/certs/java/cacerts" "${path}"
+			fi
+		done
 	fi
 
 	# Download Heroku JVM metrics agent JAR
