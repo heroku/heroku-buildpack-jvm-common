@@ -180,9 +180,9 @@ install_java_with_overlay() {
 	# Install an extension into the OpenJDK distribution extension folder should is exist. This will only
 	# be the case for Java 8 as this OpenJDK feature was deprecated in 8u40.
 	# This JAR file sets `sslmode=require` for the postgres drivers.
-	local extDir="${openjdk_install_dir}/jre/lib/ext"
-	if [[ -d "${extDir}" ]] && [[ -z "${SKIP_PGCONFIG_INSTALL:-}" ]] && [[ "${CI:-}" != "true" ]]; then
-		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${extDir}/pgconfig.jar"
+	local openjdk_jre_ext_dir="${openjdk_install_dir}/jre/lib/ext"
+	if [[ -d "${openjdk_jre_ext_dir}" ]] && [[ -z "${SKIP_PGCONFIG_INSTALL:-}" ]] && [[ "${CI:-}" != "true" ]]; then
+		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${openjdk_jre_ext_dir}/pgconfig.jar"
 	fi
 
 	# Apply the JDK overlay to the installed OpenJDK
