@@ -27,6 +27,10 @@ install_java_with_overlay() {
 		_conditional_meta_time "openjdk_install_duration" "$(nowms)"
 
 		output::step "Using provided JDK"
+
+		# This will also skip installation of `.profile.d` scripts and other files. This is intentional to preserve
+		# historical behaviour. Since the provided JDK feature will be removed at some later point, there are no plans
+		# to change this behaviour.
 		return 0
 	fi
 
