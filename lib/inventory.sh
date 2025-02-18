@@ -4,6 +4,8 @@ JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd ..
 
 # Query the OpenJDK inventory, returning an JSON object describing the release.
 #
+# Exits with a non-zero exit code if no matching OpenJDK release could be found.
+#
 # Usage:
 # ```
 # inventory::query "zulu-21" "heroku-20" | jq -r ".url"
@@ -25,6 +27,8 @@ inventory::query() {
 	INVENTORY_QUERY
 
 	jq <"${JVM_COMMON_DIR}/inventory.json" \
+		--exit-status \
+		--compact-output \
 		--arg raw_version_string "${raw_version_string}" \
 		--arg default_distribution "${default_distribution}" \
 		--arg stack "${stack}" \

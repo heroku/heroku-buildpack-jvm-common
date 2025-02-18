@@ -2,47 +2,55 @@
 
 require_relative 'spec_helper'
 
+LATEST_HEROKU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (build 1.8.0_442-heroku-b06)'
+LATEST_HEROKU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment (build 21.0.6+7)'
+LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)'
+LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.78+15-CA (build 11.0.26+4-LTS)'
+LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)'
+LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)'
+LATEST_ZULU_OPENJDK_23_STRING = 'OpenJDK Runtime Environment Zulu23.32+11-CA (build 23.0.2+7)'
+
 EXPECTED_JAVA_VERSIONS = {
   'heroku-20' => {
-    nil => 'OpenJDK Runtime Environment (build 1.8.0_442-heroku-b06)',
-    '1.8' => 'OpenJDK Runtime Environment (build 1.8.0_442-heroku-b06)',
-    '8' => 'OpenJDK Runtime Environment (build 1.8.0_442-heroku-b06)',
+    nil => LATEST_HEROKU_OPENJDK_8_STRING,
+    '1.8' => LATEST_HEROKU_OPENJDK_8_STRING,
+    '8' => LATEST_HEROKU_OPENJDK_8_STRING,
     '11' => 'OpenJDK Runtime Environment (build 11.0.26+4)',
     '17' => 'OpenJDK Runtime Environment (build 17.0.14+7)',
-    '21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
+    '21' => LATEST_HEROKU_OPENJDK_21_STRING,
     '23' => 'OpenJDK Runtime Environment (build 23.0.2+7)',
-    'heroku-21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
-    'zulu-21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    '21.0.6' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
-    'zulu-21.0.6' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.6' => LATEST_HEROKU_OPENJDK_21_STRING,
+    'zulu-21.0.6' => LATEST_ZULU_OPENJDK_21_STRING,
   },
   'heroku-22' => {
-    nil => 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)',
-    '1.8' => 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)',
-    '8' => 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)',
-    '11' => 'OpenJDK Runtime Environment Zulu11.78+15-CA (build 11.0.26+4-LTS)',
-    '17' => 'OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)',
-    '21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    '23' => 'OpenJDK Runtime Environment Zulu23.32+11-CA (build 23.0.2+7)',
-    'heroku-21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
-    'zulu-21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    '21.0.6' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    'heroku-21.0.6' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
+    nil => LATEST_ZULU_OPENJDK_8_STRING,
+    '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
+    '8' => LATEST_ZULU_OPENJDK_8_STRING,
+    '11' => LATEST_ZULU_OPENJDK_11_STRING,
+    '17' => LATEST_ZULU_OPENJDK_17_STRING,
+    '21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '23' => LATEST_ZULU_OPENJDK_23_STRING,
+    'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.6' => LATEST_ZULU_OPENJDK_21_STRING,
+    'heroku-21.0.6' => LATEST_HEROKU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
-    nil => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    '1.8' => 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)',
-    '8' => 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)',
-    '11' => 'OpenJDK Runtime Environment Zulu11.78+15-CA (build 11.0.26+4-LTS)',
-    '17' => 'OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)',
-    '21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    '23' => 'OpenJDK Runtime Environment Zulu23.32+11-CA (build 23.0.2+7)',
-    'heroku-21' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
-    'zulu-21' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    '21.0.6' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
-    'heroku-21.0.6' => 'OpenJDK Runtime Environment (build 21.0.6+7)',
+    nil => LATEST_ZULU_OPENJDK_21_STRING,
+    '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
+    '8' => LATEST_ZULU_OPENJDK_8_STRING,
+    '11' => LATEST_ZULU_OPENJDK_11_STRING,
+    '17' => LATEST_ZULU_OPENJDK_17_STRING,
+    '21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '23' => LATEST_ZULU_OPENJDK_23_STRING,
+    'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.6' => LATEST_ZULU_OPENJDK_21_STRING,
+    'heroku-21.0.6' => LATEST_HEROKU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
-    '    21 ' => 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)',
+    '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
 }.freeze
 
@@ -97,13 +105,13 @@ RSpec.describe 'Java installation' do
 
     it 'emits the correct warning' do
       app.deploy do
-        expect(clean_output(app.output)).to include(<<~OUTPUT)
+        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
           remote: 
           remote:  !     WARNING: No OpenJDK version specified
           remote:  !     
           remote:  !     Your application does not explicitly specify an OpenJDK
-          remote:  !     version. The latest long-term support (LTS) version will be
+          remote:  !     version. The latest long-term support \\(LTS\\) version will be
           remote:  !     installed. This currently is OpenJDK 21.
           remote:  !     
           remote:  !     This default version will change when a new LTS version is
@@ -116,10 +124,10 @@ RSpec.describe 'Java installation' do
           remote:  !     
           remote:  !     java.runtime.version = 21
           remote: 
-          remote: -----> Installing OpenJDK 21
+          remote: -----> Installing Azul Zulu OpenJDK 21.0.[0-9]+
           remote: -----> Discovering process types
-          remote:        Procfile declares types -> (none)
-        OUTPUT
+          remote:        Procfile declares types -> \\(none\\)
+        REGEX
       end
     end
   end
@@ -129,7 +137,7 @@ RSpec.describe 'Java installation' do
 
     it 'emits the correct warning' do
       app.deploy do
-        expect(clean_output(app.output)).to include(<<~OUTPUT)
+        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
           remote: 
           remote:  !     WARNING: No OpenJDK version specified
@@ -147,10 +155,10 @@ RSpec.describe 'Java installation' do
           remote:  !     
           remote:  !     java.runtime.version = 1.8
           remote: 
-          remote: -----> Installing OpenJDK 1.8
+          remote: -----> Installing .* OpenJDK 1.8.0_[0-9]+
           remote: -----> Discovering process types
-          remote:        Procfile declares types -> (none)
-        OUTPUT
+          remote:        Procfile declares types -> \\(none\\)
+        REGEX
       end
     end
   end
@@ -164,17 +172,15 @@ RSpec.describe 'Java installation' do
       end
 
       app.deploy do
-        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX))
+        expect(clean_output(app.output)).to include(<<~OUTPUT)
           remote: -----> JVM Common app detected
-          remote: -----> Installing OpenJDK .NET
           remote: 
           remote:  !     ERROR: Unsupported Java version: .NET
           remote:  !     
           remote:  !     Please check your system.properties file to ensure the java.runtime.version
           remote:  !     is among the list of supported version on the Dev Center:
           remote:  !     https://devcenter.heroku.com/articles/java-support#supported-java-versions
-          remote:  !     You can also remove the system.properties from your repo to install
-          remote:  !     the default .+ version.
+          remote:  !     
           remote:  !     If you continue to have trouble, you can open a support ticket here:
           remote:  !     https://help.heroku.com
           remote:  !     
@@ -182,7 +188,7 @@ RSpec.describe 'Java installation' do
           remote:  !     Heroku
           remote: 
           remote:  !     Push rejected, failed to compile JVM Common app.
-        REGEX
+        OUTPUT
       end
     end
   end

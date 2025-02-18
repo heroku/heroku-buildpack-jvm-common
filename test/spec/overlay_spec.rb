@@ -7,9 +7,9 @@ RSpec.describe 'JDK overlay' do
     app = Hatchet::Runner.new('jdk-overlay-java-8')
 
     app.deploy do
-      expect(app.output).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
-        remote: -----> JVM Common app detected        
-        remote: -----> Installing OpenJDK 8        
+      expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
+        remote: -----> JVM Common app detected
+        remote: -----> Installing .* OpenJDK 1.8.0_[0-9]+
       REGEX
 
       expect(app.run('cat .jdk/extra.txt')).to eq("extra.txt contents\n")
@@ -21,9 +21,9 @@ RSpec.describe 'JDK overlay' do
     app = Hatchet::Runner.new('jdk-overlay')
 
     app.deploy do
-      expect(app.output).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
-        remote: -----> JVM Common app detected        
-        remote: -----> Installing OpenJDK 21        
+      expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
+        remote: -----> JVM Common app detected
+        remote: -----> Installing .* OpenJDK 21.0.[0-9]+
       REGEX
 
       expect(app.run('cat .jdk/extra.txt')).to eq("extra.txt contents\n")

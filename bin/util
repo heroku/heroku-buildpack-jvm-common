@@ -111,3 +111,7 @@ curl_with_defaults() {
 
 	curl "${default_args[@]}" "${@}"
 }
+
+nowms() {
+	date +%s%3N
+}
