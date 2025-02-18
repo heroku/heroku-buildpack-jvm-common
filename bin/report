@@ -34,7 +34,7 @@ if [[ -f "${EXPORT_FILE}" ]]; then
 fi
 
 source "${JVM_COMMON_DIR}/lib/metadata.sh"
-meta_init "${CACHE_DIR}" "jvm"
+meta_init "${CACHE_DIR}" "jvm-common"
 
 # Emit the key / value pair unquoted to stdout. Skips if the value is empty.
 # Based on: https://github.com/heroku/heroku-buildpack-nodejs/blob/main/bin/report
