@@ -24,7 +24,6 @@ install_java_with_overlay() {
 	if [ -d "${openjdk_install_dir}" ]; then
 		_conditional_meta_set "openjdk_version" "provided"
 		_conditional_meta_set "openjdk_distribution" "provided"
-		_conditional_meta_time "openjdk_install_duration" "$(nowms)"
 
 		output::step "Using provided JDK"
 
