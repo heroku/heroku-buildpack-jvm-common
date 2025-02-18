@@ -68,7 +68,7 @@ STRING_FIELDS=(
 # We don't want to quote numeric or boolean fields.
 ALL_OTHER_FIELDS=(
 	openjdk_install_duration
-	app_contains_jdk_overlay
+	app_has_jdk_overlay
 )
 
 for field in "${STRING_FIELDS[@]}"; do
