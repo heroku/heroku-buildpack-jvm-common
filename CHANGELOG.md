@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v160] - 2025-02-19
+
 ### Removed
 
 * Support for `JDK_URL_1_7`, `JDK_URL_1_8`, `JDK_URL_1_9`, `JDK_URL_10`, `JDK_URL_11`, `JDK_URL_12` environment variables to override OpenJDK download locations. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339)
@@ -440,7 +443,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v159...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v160...main
+[v160]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v159...v160
 [v159]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v158...v159
 [v158]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v157...v158
 [v157]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v156...v157
