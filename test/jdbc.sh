@@ -82,6 +82,23 @@ testMySQLDatabaseEnvVar() {
 	)
 }
 
+testMariaDBDatabaseEnvVar() {
+	(
+		set -e # Exit subshell after failed command, important to make multi-assert tests work properly
+
+		# Circle CI sets this environment variable. It causes trouble since the JDBC code checks this variable to see if it
+		# is running on Heroku CI and generates different urls in such cases, causing some tests to fail.
+		unset CI
+
+		export DATABASE_URL="mariadb://foo:bar@ec2-0-0-0-0:5432/abc123?reconnect=true"
+
+		# shellcheck disable=SC1090
+		source "$JDBC_SCRIPT_LOCATION"
+
+		assertEquals "jdbc:mariadb://ec2-0-0-0-0:5432/abc123?password=bar&reconnect=true&user=foo" "$JDBC_DATABASE_URL"
+	)
+}
+
 testThirdPartyDatabaseUrls() {
 	(
 		set -e # Exit subshell after failed command, important to make multi-assert tests work properly
