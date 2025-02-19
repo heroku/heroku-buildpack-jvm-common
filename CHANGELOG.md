@@ -16,6 +16,10 @@
 
 * The buildpack output will now explicitly mention the installed OpenJDK version instead of displaying only the major version. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339))
 
+### Added
+
+* Support for `DATABASE_URL` values that use the `mariadb` scheme. ([#341](https://github.com/heroku/heroku-buildpack-jvm-common/pull/341)
+
 ## [v159] - 2025-02-17
 
 ### Changed

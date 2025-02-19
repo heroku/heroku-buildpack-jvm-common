@@ -62,6 +62,9 @@ set_jdbc_url() {
 		"mysql")
 			modified_schema="jdbc:mysql"
 			;;
+		"mariadb")
+			modified_schema="jdbc:mariadb"
+			;;
 		*)
 			# We don't handle database URLs that aren't mysql or postgres.
 			# But we also don't consider this an error and silently exit.
