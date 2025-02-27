@@ -8,6 +8,7 @@ set -euo pipefail
 
 JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
 
+source "${JVM_COMMON_DIR:?}/lib/util.sh"
 source "${JVM_COMMON_DIR:?}/lib/kvstore.sh"
 
 # Variables shared by this whole module
@@ -53,7 +54,7 @@ meta_set() {
 meta_time() {
 	local key="${1}"
 	local start="${2}"
-	local end="${3:-$(nowms)}"
+	local end="${3:-$(util::nowms)}"
 	local time
 	time="$(echo "${start}" "${end}" | awk '{ printf "%.3f", ($2 - $1)/1000 }')"
 	kv_set "${BUILD_DATA_FILE}" "${key}" "${time}"
