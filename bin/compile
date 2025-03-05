@@ -23,4 +23,4 @@ meta_setup
 
 export_env_dir "${ENV_DIR}"
 
-install_java_with_overlay "${BUILD_DIR}" "${CACHE_DIR}"
+install_openjdk "${BUILD_DIR}" "${JVM_COMMON_DIR}"

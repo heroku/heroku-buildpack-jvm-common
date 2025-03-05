@@ -2,16 +2,19 @@
 
 ## [Unreleased]
 
+### Changed
+
+* Deprecated `install_java_with_overlay` function. Buildpacks using this function should now use `install_openjdk` instead. See `README.md` for a usage example. ([#346](https://github.com/heroku/heroku-buildpack-jvm-common/pull/346))
 
 ## [v160] - 2025-02-19
 
 ### Removed
 
-* Support for `JDK_URL_1_7`, `JDK_URL_1_8`, `JDK_URL_1_9`, `JDK_URL_10`, `JDK_URL_11`, `JDK_URL_12` environment variables to override OpenJDK download locations. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339)
+* Support for `JDK_URL_1_7`, `JDK_URL_1_8`, `JDK_URL_1_9`, `JDK_URL_10`, `JDK_URL_11`, `JDK_URL_12` environment variables to override OpenJDK download locations. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339))
 
 ### Changed
 
-* The buildpack output will now explicitly mention the installed OpenJDK version instead of displaying only the major version. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339)
+* The buildpack output will now explicitly mention the installed OpenJDK version instead of displaying only the major version. ([#339](https://github.com/heroku/heroku-buildpack-jvm-common/pull/339))
 
 ## [v159] - 2025-02-17
 
