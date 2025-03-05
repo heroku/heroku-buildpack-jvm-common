@@ -17,8 +17,11 @@ source "${JVM_COMMON_BUILDPACK_DIR}/lib/inventory.sh"
 # shellcheck source=lib/java_properties.sh
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/java_properties.sh"
 
-install_java_with_overlay() {
+install_openjdk() {
 	local build_dir="${1}"
+	# Root directory of the buildpack that invoked this function
+	local host_buildpack_dir="${2}"
+
 	local openjdk_install_dir="${build_dir}/.jdk"
 
 	if [ -d "${openjdk_install_dir}" ]; then
@@ -165,17 +168,20 @@ install_java_with_overlay() {
 	cp -r "${JVM_COMMON_BUILDPACK_DIR}/opt/tools/"* "${build_dir}/.heroku"
 
 	# Write export script for subsequent buildpacks to ensure they can use the installed OpenJDK.
+	# Note that this is not using JVM_COMMON_BUILDPACK_DIR but the directory of the buildpack that
+	# invoked this function to write it to the correct location.
+	#
 	# See: https://devcenter.heroku.com/articles/buildpack-api#composing-multiple-buildpacks
-	cat <<-EOF >"${JVM_COMMON_BUILDPACK_DIR}/export"
+	cat <<-EOF >>"${host_buildpack_dir}/export"
 		export JAVA_HOME=${openjdk_install_dir}
 		export PATH=\$JAVA_HOME/bin:\$PATH
-		export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server:\${LD_LIBRARY_PATH:-}"
+		export LD_LIBRARY_PATH="\$JAVA_HOME/jre/lib/amd64/server\${LD_LIBRARY_PATH:+:}\${LD_LIBRARY_PATH:-}"
 	EOF
 
 	# Source the export script manually here to ensure that other buildpacks that use this buildpack as a library
 	# also have the correct environment variables available.
 	# shellcheck source=/dev/null
-	source "${JVM_COMMON_BUILDPACK_DIR}/export"
+	source "${host_buildpack_dir}/export"
 
 	# Install an extension into the OpenJDK distribution extension folder should is exist. This will only
 	# be the case for Java 8 as this OpenJDK feature was deprecated in 8u40.
@@ -200,6 +206,22 @@ install_java_with_overlay() {
 	else
 		_conditional_meta_set "app_has_jdk_overlay" "false"
 	fi
+}
+
+# Deprecated legacy function to install OpenJDK, we're keeping it around to not break
+# existing buildpacks that use it. If you're implementing a new buildpack, do not use
+# this function.
+install_java_with_overlay() {
+	local build_dir="${1}"
+
+	# The old API expected the cache directory as the second argument.
+	# We're explicitly spelling this out here for documentation purposes,
+	# but it's not used by the new OpenJDK installation function.
+	# shellcheck disable=SC2034
+	local cache_dir="${2}"
+
+	# The old function didn't use an explicit buildpack directory but used the current working directory instead.
+	install_openjdk "${build_dir}" "$(pwd)"
 }
 
 # This file will be included by other buildpacks that might not have or might not have set up
