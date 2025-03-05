@@ -6,6 +6,10 @@
 
 * Deprecated `install_java_with_overlay` function. Buildpacks using this function should now use `install_openjdk` instead. See `README.md` for a usage example. ([#346](https://github.com/heroku/heroku-buildpack-jvm-common/pull/346))
 
+### Added
+
+* Support for `DATABASE_URL` values that use the `mariadb` scheme. ([#341](https://github.com/heroku/heroku-buildpack-jvm-common/pull/341)
+
 ## [v160] - 2025-02-19
 
 ### Removed
