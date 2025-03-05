@@ -10,11 +10,9 @@ JVM_COMMON_BUILDPACK_DIR="${JVM_COMMON_BUILDPACK_DIR:-$(cd "$(dirname "${BASH_SO
 # not be set. It should always default to the latest stack.
 STACK="${STACK:-"heroku-24"}"
 
-# shellcheck source=lib/output.sh
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/util.sh"
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/output.sh"
-# shellcheck source=lib/inventory.sh
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/inventory.sh"
-# shellcheck source=lib/java_properties.sh
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/java_properties.sh"
 
 install_openjdk() {
@@ -129,10 +127,10 @@ install_openjdk() {
 
 	# Download and extract OpenJDK distribution
 	local openjdk_install_start_time
-	openjdk_install_start_time=$(nowms)
+	openjdk_install_start_time=$(util::nowms)
 
 	local jdk_tarball="/tmp/jdk.tgz"
-	curl_with_defaults --retry 3 --silent --show-error --location "${openjdk_url}" --output "${jdk_tarball}"
+	util::curl_with_defaults --retry 3 --silent --show-error --location "${openjdk_url}" --output "${jdk_tarball}"
 	tar -pxzf "${jdk_tarball}" -C "${openjdk_install_dir}"
 	rm "${jdk_tarball}"
 
@@ -152,7 +150,7 @@ install_openjdk() {
 
 	# Download Heroku JVM metrics agent JAR
 	mkdir -p "${build_dir}/.heroku/bin"
-	curl_with_defaults --retry 3 -s -o "${build_dir}/.heroku/bin/heroku-metrics-agent.jar" -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/4.0.1/heroku-java-metrics-agent-4.0.1.jar"}"
+	util::curl_with_defaults --retry 3 -s -o "${build_dir}/.heroku/bin/heroku-metrics-agent.jar" -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/4.0.1/heroku-java-metrics-agent-4.0.1.jar"}"
 
 	# Copy profile.d scripts
 	local profile_d_dir="${build_dir}/.profile.d"
@@ -188,7 +186,7 @@ install_openjdk() {
 	# This JAR file sets `sslmode=require` for the postgres drivers.
 	local openjdk_jre_ext_dir="${openjdk_install_dir}/jre/lib/ext"
 	if [[ -d "${openjdk_jre_ext_dir}" ]] && [[ -z "${SKIP_PGCONFIG_INSTALL:-}" ]] && [[ "${CI:-}" != "true" ]]; then
-		curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${openjdk_jre_ext_dir}/pgconfig.jar"
+		util::curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${openjdk_jre_ext_dir}/pgconfig.jar"
 	fi
 
 	# Apply the JDK overlay to the installed OpenJDK
