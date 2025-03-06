@@ -233,3 +233,6 @@ _conditional_meta_set() {
 _conditional_meta_time() {
 	if type -t meta_time >/dev/null; then meta_time "${1}" "${2}"; fi
 }
+
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/legacy.sh"
+legacy::install_removed_function_handler install_java validate_jdk_url is_java_version_change detect_java_version jdk_overlay

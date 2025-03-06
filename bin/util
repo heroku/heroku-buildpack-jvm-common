@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+JVM_COMMON_BUILDPACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
+
 # While these logging/output functions seem unused, they are used by downstream buildpacks that source this file.
 # Do not delete them before making sure that all known downstream buildpacks do not use these anymore.
 
@@ -60,3 +62,6 @@ indent() {
 	*) sed -u "$c" ;;      # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
 	esac
 }
+
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/legacy.sh"
+legacy::install_removed_function_handler curl_with_defaults copy_directories export_env_dir nowms
