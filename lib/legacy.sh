@@ -8,6 +8,7 @@ source "${JVM_COMMON_BUILDPACK_DIR}/lib/output.sh"
 # by other buildpacks that use this buildpack as a library. To make their experience less painful, we output an error
 # message about this change and exit the shell if one of those functions are being used.
 legacy::install_removed_function_handler() {
+	local removed_function_name
 	for removed_function_name in "${@}"; do
 		# Avoid installing the handler if the downstream code defined their own function of the same name
 		if ! [[ $(type -t "${removed_function_name}") == function ]]; then
@@ -17,7 +18,7 @@ legacy::install_removed_function_handler() {
 }
 
 legacy::removed_handler() {
-	function_name="${1}"
+	local function_name="${1}"
 
 	output::error <<-EOF
 		ERROR: Function ${function_name} no longer exposed
