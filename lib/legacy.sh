@@ -34,7 +34,7 @@ legacy::removed_handler() {
 
 		install_openjdk "\${BUILD_DIR}" "\${BUILDPACK_DIR}"
 
-		should be sufficient to install OpenJDK. Please refer to jvm-commons
+		should be sufficient to install OpenJDK. Please refer to jvm-common's
 		README.md file for a complete usage example:
 
 		https://github.com/heroku/heroku-buildpack-jvm-common
