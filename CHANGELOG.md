@@ -8,7 +8,11 @@
 
 ### Added
 
-* Support for `DATABASE_URL` values that use the `mariadb` scheme. ([#341](https://github.com/heroku/heroku-buildpack-jvm-common/pull/341)
+* Support for `DATABASE_URL` values that use the `mariadb` scheme. ([#341](https://github.com/heroku/heroku-buildpack-jvm-common/pull/341))
+
+### Removed
+
+* `export_env_dir`, `copy_directories`, `curl_with_defaults` and `nowms` functions from `bin/util`. ([#344](https://github.com/heroku/heroku-buildpack-jvm-common/pull/344))
 
 ## [v160] - 2025-02-19
 

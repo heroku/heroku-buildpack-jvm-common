@@ -8,12 +8,9 @@ export ENV_DIR="${3}"
 
 JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
 
-# shellcheck source=bin/util
-source "${JVM_COMMON_DIR}/bin/util"
-# shellcheck source=bin/java
-source "${JVM_COMMON_DIR}/bin/java"
-# shellcheck source=lib/metadata.sh
+source "${JVM_COMMON_DIR}/lib/util.sh"
 source "${JVM_COMMON_DIR}/lib/metadata.sh"
+source "${JVM_COMMON_DIR}/bin/java"
 
 # Initialise the buildpack metadata store.
 # This is used to track state across builds (for cache invalidation and messaging when build
@@ -21,6 +18,6 @@ source "${JVM_COMMON_DIR}/lib/metadata.sh"
 meta_init "${CACHE_DIR}" "jvm-common"
 meta_setup
 
-export_env_dir "${ENV_DIR}"
+util::export_env_dir "${ENV_DIR}"
 
 install_openjdk "${BUILD_DIR}" "${JVM_COMMON_DIR}"
