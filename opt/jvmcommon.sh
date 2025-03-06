@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
 
-calculate_java_memory_opts() {
-	local opts=${1:-""}
+export JAVA_HOME="${HOME}/.jdk"
+export PATH="${HOME}/.heroku/bin:${PATH}"
+export PATH="${JAVA_HOME}/bin:${PATH}"
+
+# Path is OpenJDK version dependent
+for path in "${JAVA_HOME}/lib/server" "${JAVA_HOME}/jre/lib/amd64/server"; do
+	if [[ -d "${path}" ]]; then
+		export LD_LIBRARY_PATH="${path}${LD_LIBRARY_PATH:+":"}${LD_LIBRARY_PATH:-}"
+	fi
+done
+
+jvm_options() {
+	local flags=(
+		# Default to UTF-8 encoding when no charset is specified for methods in the Java standard library.
+		# This makes programs more predictable and has been a default on Heroku for a many years. For OpenJDK >= 18,
+		# setting this is technically no longer necessary as it is the default.
+		# See JEP-400 for details: https://openjdk.org/jeps/400
+		"-Dfile.encoding=UTF-8"
+	)
+
 	local memory_limit_file='/sys/fs/cgroup/memory/memory.limit_in_bytes'
 
 	if [[ -f "${memory_limit_file}" ]]; then
@@ -10,69 +28,38 @@ calculate_java_memory_opts() {
 
 		# Ignore values above 1TiB RAM, since when using cgroups v1 the limits file reports a
 		# bogus value of thousands of TiB RAM when there is no container memory limit set.
-		if ((memory_limit <= 1099511627776)); then
-			# The JVM tries to automatically detect the amount of available RAM for its heuristics. However,
-			# the detection has proven to be sometimes inaccurate in certain dyno configurations. MaxRAM is used
-			# by the JVM to derive other flags from it.
-			opts="${opts} -XX:MaxRAM=${memory_limit}"
-
-			case $memory_limit in
-			536870912) # Eco, Basic, 1X
-				echo "$opts -Xmx300m -Xss512k -XX:CICompilerCount=2"
-				return 0
-				;;
-			1073741824) # 2X, private-s
-				echo "$opts -Xmx671m -XX:CICompilerCount=2"
-				return 0
-				;;
-			2684354560) # perf-m, private-m
-				echo "$opts -Xmx2g"
-				return 0
-				;;
-			15032385536) # perf-l, private-l
-				echo "$opts -Xmx12g"
-				return 0
-				;;
-			esac
+		if ((memory_limit > 1099511627776)); then
+			unset memory_limit
 		fi
 	fi
 
+	if [[ -n "${memory_limit}" ]]; then
+		# The JVM tries to automatically detect the amount of available RAM for its heuristics. However,
+		# the detection has proven to be sometimes inaccurate in certain dyno configurations. MaxRAM is used
+		# by the JVM to derive other flags from it.
+		flags+=("-XX:MaxRAM=${memory_limit}")
+	fi
+
+	case "${memory_limit:-}" in
+	# Eco, Basic, 1X (512MiB)
+	536870912) flags+=("-Xmx300m" "-Xss512k" "-XX:CICompilerCount=2") ;;
+	# 2X, private-s (1GiB)
+	1073741824) flags+=("-Xmx671m" "-XX:CICompilerCount=2") ;;
 	# Rely on JVM ergonomics for other dyno types, but increase the maximum RAM percentage from 25% to 80%.
-	# This is more consistent with the Heroku defaults for other dyno types. For example, a 32GB dyno would only use
-	# 8GB of heap with the 25% default, but performance-l with 14GB of memory would get 12GB max heap size as
-	# explicitly configured.
-	echo "$opts -XX:MaxRAMPercentage=80.0"
+	# This is consistent with the historic Heroku defaults for dyno types not listed above.
+	*) flags+=("-XX:MaxRAMPercentage=80.0") ;;
+	esac
+
+	(
+		IFS=" "
+		echo "${flags[*]}"
+	)
 }
 
-if [[ -d $HOME/.jdk ]]; then
-	export JAVA_HOME="$HOME/.jdk"
-	export PATH="$HOME/.heroku/bin:$JAVA_HOME/bin:$PATH"
-else
-	JAVA_HOME="$(realpath "$(dirname "$(command -v java)")/..")"
-	export JAVA_HOME
-fi
+jvm_options="$(jvm_options)"
+export JAVA_OPTS="${jvm_options}${JAVA_OPTS:+" "}${JAVA_OPTS:-}"
 
-if [[ -d "$JAVA_HOME/jre/lib/amd64/server" ]]; then
-	export LD_LIBRARY_PATH="$JAVA_HOME/jre/lib/amd64/server:$LD_LIBRARY_PATH"
-elif [[ -d "$JAVA_HOME/lib/server" ]]; then
-	export LD_LIBRARY_PATH="$JAVA_HOME/lib/server:$LD_LIBRARY_PATH"
-fi
-
-if [ -f "$JAVA_HOME/release" ] && grep -q '^JAVA_VERSION="1[0-9]' "$JAVA_HOME/release"; then
-	default_java_mem_opts="$(calculate_java_memory_opts "-XX:+UseContainerSupport")"
-else
-	default_java_mem_opts="$(calculate_java_memory_opts | sed 's/^ //')"
-fi
-
-if echo "${JAVA_OPTS:-}" | grep -q "\-Xmx"; then
-	export JAVA_TOOL_OPTIONS=${JAVA_TOOL_OPTIONS:-"-Dfile.encoding=UTF-8"}
-else
-	default_java_opts="${default_java_mem_opts} -Dfile.encoding=UTF-8"
-	export JAVA_OPTS="${default_java_opts} ${JAVA_OPTS:-}"
-	if echo "${DYNO}" | grep -vq '^run\..*$'; then
-		export JAVA_TOOL_OPTIONS="${default_java_opts} ${JAVA_TOOL_OPTIONS:-}"
-	fi
-	if echo "${DYNO}" | grep -q '^web\..*$'; then
-		echo "Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them."
-	fi
+if ! [[ "${DYNO}" =~ ^run\..*$ ]]; then
+	echo "Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them."
+	export JAVA_TOOL_OPTIONS="${jvm_options}${JAVA_TOOL_OPTIONS:+" "}${JAVA_TOOL_OPTIONS:-}"
 fi
