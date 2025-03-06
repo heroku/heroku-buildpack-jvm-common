@@ -8,10 +8,14 @@
 ### Changed
 
 * Deprecated `install_java_with_overlay` function. Buildpacks using this function should now use `install_openjdk` instead. See `README.md` for a usage example. ([#346](https://github.com/heroku/heroku-buildpack-jvm-common/pull/346))
+* `-XX:+UseContainerSupport` is no longer being set in `JAVA_TOOL_OPTIONS`. This flags is set by default since OpenJDK 10 and 8u191. All versions supported by this buildpack do have this default - therefore this change has no effect on the final JVM flags. ([#348](https://github.com/heroku/heroku-buildpack-jvm-common/pull/348))
+* For `Performance-M` and `Performance-L` dynos, the buildpack no longer sets `-Xmx` to configure the maximum heap size. Instead, `-XX:MaxRAMPercentage=80.0` is used which has the same effect. The effective maximum heap size set for those dynos does not change. When users that `-Xmx` explicitly, it will still take precedence.  ([#348](https://github.com/heroku/heroku-buildpack-jvm-common/pull/348))
+* Previously, when an app had `-Xmx` in its `JAVA_OPTS` configuration variables, all Heroku default JVM options were not set. This was inconsistent with `JAVA_TOOL_OPTIONS` which didn't have that mechanism. For consistency, all Heroku JVM defaults will now be always applied. Since the buildpack adds its defaults before the ones explicitly set by the user, they can be overridden. In practice, this only affects `Eco`, `Basic`, `Standard-1X` and `Standard-2X` Dynos which are the only sizes that have more default flags than just `-Xmx`. All Dynos of the aforementioned sizes also have `-XX:CICompilerCount=2` set. `Eco`, `Basic` and `Standard-1X` also set `-Xss512k`. If your app relied on those not being set, you will have to explicitly configure them now. However, we believe these settings are good defaults for apps running on Dynos with little RAM and you should not override them unnecessarily. ([#348](https://github.com/heroku/heroku-buildpack-jvm-common/pull/348))
 
 ### Added
 
 * Support for `DATABASE_URL` values that use the `mariadb` scheme. ([#341](https://github.com/heroku/heroku-buildpack-jvm-common/pull/341))
+* The already existing notice about default JVM flags is now always printed when the defaults are applied. Previously, this notice was only printed for `web` process types. The notice looks like this: `Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.`. ([#348](https://github.com/heroku/heroku-buildpack-jvm-common/pull/348))
 
 ### Removed
 
