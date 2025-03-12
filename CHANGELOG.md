@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v161] - 2025-03-12
+
 ### Changed
 
 * Deprecated `install_java_with_overlay` function. Buildpacks using this function should now use `install_openjdk` instead. See `README.md` for a usage example. ([#346](https://github.com/heroku/heroku-buildpack-jvm-common/pull/346))
@@ -454,7 +457,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v160...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v161...main
+[v161]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v160...v161
 [v160]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v159...v160
 [v159]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v158...v159
 [v158]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v157...v158
