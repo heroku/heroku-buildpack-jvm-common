@@ -23,7 +23,7 @@ RSpec.describe 'Usage from Heroku\'s Maven buildpack' do
         end
 
         app.deploy do |app|
-          expect(successful_body(app)).to include('MaxRAM')
+          expect(successful_body(app)).to eq('{}')
         end
       end
     end
