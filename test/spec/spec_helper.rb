@@ -25,9 +25,9 @@ end
 
 def successful_body(app, options = {})
   retry_limit = options[:retry_limit] || 50
-  path = options[:path] ? "/#{options[:path]}" : ''
-  Excon.get("#{app.platform_api.app.info(app.name).fetch('web_url')}#{path}", idempotent: true, expects: 200,
-                                                                              retry_limit: retry_limit).body
+  puts "#{app.platform_api.app.info(app.name).fetch('web_url')}#{options[:path]}"
+  Excon.get("#{app.platform_api.app.info(app.name).fetch('web_url')}#{options[:path]}", idempotent: true, expects: 200,
+                                                                                        retry_limit: retry_limit).body
 end
 
 def set_java_version(directory, version)
