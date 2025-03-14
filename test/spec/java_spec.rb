@@ -72,6 +72,14 @@ FILE_MD5_HASHES = {
   '.heroku/bin/with_jstack' => '31eb167b16d3dcc2450983964aa57ee7',
 }.freeze
 
+PATH_EXPECTATIONS = {
+  'java' => '/app/.jdk/bin/java',
+  'javac' => '/app/.jdk/bin/javac',
+  'with_jmap' => '/app/.heroku/bin/with_jmap',
+  'with_jmap_and_jstack' => '/app/.heroku/bin/with_jmap_and_jstack',
+  'with_jstack' => '/app/.heroku/bin/with_jstack',
+}.freeze
+
 RSpec.describe 'Java installation' do
   EXPECTED_JAVA_VERSIONS.each do |stack, expected_java_versions|
     expected_java_versions.each do |openjdk_selection_string, java_version|
@@ -90,6 +98,10 @@ RSpec.describe 'Java installation' do
 
           app.deploy do |app|
             expect(app.run('java -version')).to include(java_version)
+
+            PATH_EXPECTATIONS.each do |name, path|
+              expect(app.run("which #{name}")).to eq("#{path}\n")
+            end
 
             FILE_MD5_HASHES.each do |file_path, md5_hash|
               expect(app.run("md5sum #{file_path}")).to start_with md5_hash
