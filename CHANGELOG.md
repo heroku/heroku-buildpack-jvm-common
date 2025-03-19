@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v162] - 2025-03-19
+
 ### Changed
 
 * `-XX:+UseContainerSupport` is no longer being set in `JAVA_TOOL_OPTIONS`. This flag is set by default since OpenJDK `10` and `8u191`. All versions supported by this buildpack do have this default - therefore this change has no effect on the final JVM flags. ([#348](https://github.com/heroku/heroku-buildpack-jvm-common/pull/348))
@@ -467,7 +470,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v161...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v162...main
+[v162]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v161...v162
 [v161]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v160...v161
 [v160]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v159...v160
 [v159]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v158...v159
