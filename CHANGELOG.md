@@ -11,6 +11,7 @@
 ### Added
 
 * The already existing notice about default JVM flags is now always printed when the defaults are applied. Previously, this notice was only printed for `web` process types. The notice looks like this: `Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.`. ([#348](https://github.com/heroku/heroku-buildpack-jvm-common/pull/348))
+* Support for Java 24. ([#353](https://github.com/heroku/heroku-buildpack-jvm-common/pull/353))
 
 ## [v161] - 2025-03-12
 

@@ -16,7 +16,8 @@
     "20": "20.0.2",
     "21": "21.0.6",
     "22": "22.0.2",
-    "23": "23.0.2"
+    "23": "23.0.2",
+    "24": "24.0.0"
   },
   "artifacts": [
     {
@@ -4923,6 +4924,72 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stack": "heroku-24"
+      }
+    },
+    {
+      "version": "24.0.0",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/zulu-24.0.0.tar.gz",
+      "checksum": "sha256:21a533d3f9feded94f00da2b73323b68bdd2a4b7a585b8f26162ad4c4e288a09",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stack": "heroku-24"
+      }
+    },
+    {
+      "version": "24.0.0",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-22/zulu-24.0.0.tar.gz",
+      "checksum": "sha256:102586e7964a6b701e7c8118853e023553b93f3aedeba58b627772b7e7860a56",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stack": "heroku-22"
+      }
+    },
+    {
+      "version": "24.0.0",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-20/zulu-24.0.0.tar.gz",
+      "checksum": "sha256:e306d8b9f2e50bbc1af6cba79e4e74b52566295b3514d07fb8aa1e77180c5c70",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stack": "heroku-20"
+      }
+    },
+    {
+      "version": "24.0.0",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/openjdk24.0.0.tar.gz",
+      "checksum": "sha256:13c54ba1adaff61e997585a231b726c12f6f95077841f4e4159e59b951f9d79b",
+      "metadata": {
+        "distribution": "heroku",
+        "cedar_stack": "heroku-24"
+      }
+    },
+    {
+      "version": "24.0.0",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-22/openjdk24.0.0.tar.gz",
+      "checksum": "sha256:b90b71155f41d04096e2ad90c53a8fc266fea92cfe2032fade35a16aaa55833d",
+      "metadata": {
+        "distribution": "heroku",
+        "cedar_stack": "heroku-22"
+      }
+    },
+    {
+      "version": "24.0.0",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-20/openjdk24.0.0.tar.gz",
+      "checksum": "sha256:dd3cd0eb343fee9d30e4bc46d6a55b1677e275fb7697e68a003eda02701e7736",
+      "metadata": {
+        "distribution": "heroku",
+        "cedar_stack": "heroku-20"
       }
     }
   ]
