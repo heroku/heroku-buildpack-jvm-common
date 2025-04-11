@@ -28,7 +28,7 @@
       "checksum": "sha256:dfec95dece636147795a5bb478a40f58bc9b8db196d3b0f50152b88c5d17de8c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -39,7 +39,7 @@
       "checksum": "sha256:0c9d0ce55a72c5f3e2ab5b0e151193f8d283dbcd7caf3d4e0b0066c90355a96c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -50,7 +50,7 @@
       "checksum": "sha256:5e6c154e947f25312e9d05a7a2a1cd27e15e76169fa8cac941d3a00549dc7b3f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -61,7 +61,7 @@
       "checksum": "sha256:fa2228383f1845b26cef26ddec0f31fa877ae5efd7093ede3101031b8982eea2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -72,7 +72,7 @@
       "checksum": "sha256:e5dede930977eba2cd7ea35db46cd573c28050020d36dec4d44d62b93d72ae4a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -83,7 +83,7 @@
       "checksum": "sha256:56df483a7e593eb6ee65ce0ba58bf140d437dac18d13fc8d4cb52e8ea36cb888",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -94,7 +94,7 @@
       "checksum": "sha256:eb3acf76abbe8b88c00b7e23800456d12b509166375c160bb63632704c33f60a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -105,7 +105,7 @@
       "checksum": "sha256:cc82572c86446e46e81b65f6f7735b37c8e1a963bc999ce59f462053dbf18b52",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -116,7 +116,7 @@
       "checksum": "sha256:5c216fedf632af27d455b8b783ced09349970fa772d7f480caf8d0d87360c13e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -127,7 +127,7 @@
       "checksum": "sha256:9453f1dbb79fdb6d4237838680a3540f1ec56b0b12ac57f5e7aa4abbf59ef216",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -138,7 +138,7 @@
       "checksum": "sha256:a03c44465c9b520f5b14cbbd4d3562fac18ef3ac6011f7f4b39cca32d3cb7725",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -149,7 +149,7 @@
       "checksum": "sha256:6cd36c4fc9a50a2ce621550cd8202b023f050a6d535e0137fe3924854e5235ec",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -160,7 +160,7 @@
       "checksum": "sha256:8931fb1345bda413272281e09dfab2ac0c48189cfa337fa8d84254a7eecd3795",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -171,7 +171,7 @@
       "checksum": "sha256:ad751fd58d61886fa9ea70310728d51d5108156b93cd9282170572a269a4047c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -182,7 +182,7 @@
       "checksum": "sha256:b4b4d395544eeb0e6b6b811da33809522d23f29cc867726bb166914c8c46f04b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -193,7 +193,7 @@
       "checksum": "sha256:e6a150ceaa27a7c9b56712be7db6f151c6bfb1e9ab6852ac4aa65632b4aa1ef2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -204,7 +204,7 @@
       "checksum": "sha256:47e6c8175c62cf08f7e5fd45ed652e619a8b23dcf21d1a62cbde859b4ec4be8c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -215,7 +215,7 @@
       "checksum": "sha256:aa99f024f29377683dcbf849b1d459cd999287149b227e0aec0c218bf2226d65",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -226,7 +226,7 @@
       "checksum": "sha256:4d0ca4c3b201768a664f7b69a5b0237a94fcca8ebdb19fb0f2fe4a23b5235488",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -237,7 +237,7 @@
       "checksum": "sha256:d1ac58471dd68dbdd8aed4451094f1ace1442191510430f015ec29b303522e6c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -248,7 +248,7 @@
       "checksum": "sha256:25529fcac678ea5ee12044098f1a88c89564f05f2ed80b74b224ad280c6b2959",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -259,7 +259,7 @@
       "checksum": "sha256:49e002c325676044dfeae8d1a0116b73a2f7c06ee492c0cfc62b0ec6d6cbff03",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -270,7 +270,7 @@
       "checksum": "sha256:af2e8b84a62c0fea642c61cbd0690ec616c7845dd7682e19d7d1395f649f2ef7",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -281,7 +281,7 @@
       "checksum": "sha256:616b2bf958d49be39c1863179af1cc81cf51eecdb3f3f0aa7233b6cacc824531",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -292,7 +292,7 @@
       "checksum": "sha256:aaa5a0a7dd5bb05a017f0062983e3ce3a9e4e1d592b131c99ac2730fe404d7ea",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -303,7 +303,7 @@
       "checksum": "sha256:4add50fac3460f9ea7dd4925576ad7d7415417b4da9a9cbb49e518aa7fe25584",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -314,7 +314,7 @@
       "checksum": "sha256:60e8e3b4359262f7c8dc52cfa9d4fdaaaa5896ced3b383a63adc2f62e45a108c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -325,7 +325,7 @@
       "checksum": "sha256:cf0a1761febac3b222e397cfdfc0f01f9990684c89be32c71a1a2d603300d12f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -336,7 +336,7 @@
       "checksum": "sha256:acdfd2862dd815aeb2c6a86938813f09d18fa02a1f64a048b6c9a1f25ebdc1dc",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -347,7 +347,7 @@
       "checksum": "sha256:db5dfc53ba3bab9fa2bd02cfb56dd6fe2dd2e3074ed6e247b90ce228184f6f73",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -358,7 +358,7 @@
       "checksum": "sha256:dcf1ba93884c1180d507aa2b24ca6bdbf37b016370a09fa93b8cd6851391edc4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -369,7 +369,7 @@
       "checksum": "sha256:e2b4d993a394f548e5145bba2bacd747200e0c62652d957a5408726c8d8b451a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -380,7 +380,7 @@
       "checksum": "sha256:29acfa3363d4659340da460da3fd18b9d26f32ed57496b4406d02507c0a078d8",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -391,7 +391,7 @@
       "checksum": "sha256:3e905167088028b588c63091b921e7ceb604c5e303b3450475f3556b58674b0d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -402,7 +402,7 @@
       "checksum": "sha256:dede8d4975b7b153b3391f9738aac93b26420935ef2d2890035d4bff701b6a33",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -413,7 +413,7 @@
       "checksum": "sha256:64a6096947b074c333d2ea8824adb9f750fb360b5ac8c670ed9bd6951dbf58d4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -424,7 +424,7 @@
       "checksum": "sha256:d9fbb043aa560c78e656ef55e66eb704421840c515a2789a6160c84716315816",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -435,7 +435,7 @@
       "checksum": "sha256:004d9cf2b136e00b8646d2e6ddc00f6a02b7137295b623db8c875f0961241046",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -446,7 +446,7 @@
       "checksum": "sha256:bd1634a0a3e71fdbef3afe18d852dc8da20f4aace6bcd1495dba56e356ba3fc7",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -457,7 +457,7 @@
       "checksum": "sha256:272411bb1240721de6414c5af862abc913dc4c7896aa0700698e7c9ce4970296",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -468,7 +468,7 @@
       "checksum": "sha256:bf5e4fcdc1cf15571e62e4b10a816bfb74e113d415d7affae3cd9fa45de821b0",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -479,7 +479,7 @@
       "checksum": "sha256:fd4044cd36ecb3b8f7ade1cdacd5b9486c6e58b976bf551dc01124311b05b503",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -490,7 +490,7 @@
       "checksum": "sha256:69004d1b96e3452084066d099645a79a8dcc4791258c6555af3387bd263fe95f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -501,7 +501,7 @@
       "checksum": "sha256:aeb46c9a282da3b58b1470464be7cf770d02dd1983e541f70c7e92bd43d83685",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -512,7 +512,7 @@
       "checksum": "sha256:2eaba7e4fb35856855cc3889fdcd621ba5895c9b6da6b987b6f629b12aa8e2b3",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -523,7 +523,7 @@
       "checksum": "sha256:930720fca5a173d7ca973b26b61b502aa6baf3ee5331e6da0cd7299a01abe420",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -534,7 +534,7 @@
       "checksum": "sha256:8f52b360df573e639623366a9e1c0384275a66387ff209aa24b3ae0917806cf0",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -545,7 +545,7 @@
       "checksum": "sha256:80e84a785cf7c5832c74b947429e0f9897a34215d542b8817cef3b109ccabd3e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -556,7 +556,7 @@
       "checksum": "sha256:ab1abd294aeccba71e0e6890d8cbe32abea4c205b77c145382964ff8edc2b6b9",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -567,7 +567,7 @@
       "checksum": "sha256:46015f65bb5797d586e8e4c7433fd6b92aee7f7db9d0752eae75d900e4d257a1",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -578,7 +578,7 @@
       "checksum": "sha256:667f48dcb81e07d4bbdf4a20b63e2cb3b545838bd02e38a2072c5e01f2349e43",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -589,7 +589,7 @@
       "checksum": "sha256:6ae0a8663d197c495b687bcc3ca53151f3476f3d5b725955fd788c7506c337f4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -600,7 +600,7 @@
       "checksum": "sha256:1cf829d1775b9fe96a63877aabaa0a15e8d1db36e755e49ce4578feab873ade5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -611,7 +611,7 @@
       "checksum": "sha256:aa2785b5e0e5cddbb23d5246bab72a54029fdba209f4f385ad2e83ad5d34d711",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -622,7 +622,7 @@
       "checksum": "sha256:719b0d58e5dfe922975e5be1df61a437869b344f6b87133032c7cd8faeb8d89b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -633,7 +633,7 @@
       "checksum": "sha256:6203f98803d943ed55862041f7cedc7b129a80b9b71f76a46232175cc09b6fe2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -644,7 +644,7 @@
       "checksum": "sha256:b5e0a9b6e4334e8a624429fa39751e58202096f0407cc450d7ed5374aaadbf65",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -655,7 +655,7 @@
       "checksum": "sha256:ef23a27816e732c8dea4ba8b246e96255c0ec4f54da548125dba5a3171f27232",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -666,7 +666,7 @@
       "checksum": "sha256:a856546c133cd06dca967a8f0c81a87143fc1a7f5c9784814382021d67838010",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -677,7 +677,7 @@
       "checksum": "sha256:a88607b3b9c382dcd344cf36c21da93deeb27a86ee01eee71e9a09d83a1b1bb5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -688,7 +688,7 @@
       "checksum": "sha256:0fc71dc1b5023e733b4001d66e39d4797d53f2f7c784b1b47ea0bd48f29ef54b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -699,7 +699,7 @@
       "checksum": "sha256:e1b669aa318239222bb00341e8a65e9b2b3690de9703fd2c7fd15768bfdbe634",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -710,7 +710,7 @@
       "checksum": "sha256:44bc29355da3aea2b4191b79251a9718393986b0e2c529075d72f5f4a0c301ae",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -721,7 +721,7 @@
       "checksum": "sha256:1afbd7026199e051aed727d0da9e73d2aec066fd8323686c624baf8d773fbea1",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -732,7 +732,7 @@
       "checksum": "sha256:dab7393d20c2f320615fcfa169bbc95f14116e4ace6db1947b5e90bbe817982c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -743,7 +743,7 @@
       "checksum": "sha256:4857ac9421706d370b334d15cbb4e7c91ff9d34b94b266f11351a72f0d1975ee",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -754,7 +754,7 @@
       "checksum": "sha256:3dcce4cc5cac1bc29641d8728d4bf971fd642f0b9c626f87f8ca6a970c464129",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -765,7 +765,7 @@
       "checksum": "sha256:8a1dc087b97bba95bcb01778b06aa3bd69bbba920e48520b4117f278653a8a37",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -776,7 +776,7 @@
       "checksum": "sha256:4c964a7a4dddfd80b17fb4d1486a9f438c3e71c5f1144a8b66caf90bdb90d3dc",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -787,7 +787,7 @@
       "checksum": "sha256:91590163dc877dc6ebb69f4614ed84de14f22232555221b77e5acb87d3356caf",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -798,7 +798,7 @@
       "checksum": "sha256:99c4cf840aa9230f62b83c853de84a829e117cc5e2c0f0947b90384220a21727",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -809,7 +809,7 @@
       "checksum": "sha256:f8b96ddc3dc1538d4de80ce627fb59411afe4419bbeaf9b2ed12dd8ddce6e310",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -820,7 +820,7 @@
       "checksum": "sha256:adf0c90576812c222c06bfc84804bfc1b9fc8d3630944eaccf8ee748ee99eef5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -831,7 +831,7 @@
       "checksum": "sha256:90b94b9b4ceaa81b5f29efa7507a3f318ef3ad2d1ac28e30eae04d29405c4412",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -842,7 +842,7 @@
       "checksum": "sha256:5ee3bf5c46f367d21877307f8b581322679117462b37351645681ecb4b27b201",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -853,7 +853,7 @@
       "checksum": "sha256:5cad28ae49f22108e5852ed0a3fdb51d94b26e48f76503e81336c5ef55bf8c71",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -864,7 +864,7 @@
       "checksum": "sha256:0303ca7f6e0859cd979547322b058f083b1689ecbe2042231466d03ac423b2ca",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -875,7 +875,7 @@
       "checksum": "sha256:b5aa3349fc549f613764a5a16442689857a09badc8e32de07e18cb2e95d86634",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -886,7 +886,7 @@
       "checksum": "sha256:5628523650337cdbd2a320bf1303e8e92a2ba16f39b5092b5b9ddabc38447812",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -897,7 +897,7 @@
       "checksum": "sha256:6a6593ab258ecd656b103649f988008d71d4509ff781c2d7b1257102f603fd60",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -908,7 +908,7 @@
       "checksum": "sha256:a1aea27af44434a14dbf9c1f7c306bb1c63d498fd4d21f1047b4d484bd5c91c6",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -919,7 +919,7 @@
       "checksum": "sha256:e098ffc7b9d1dee7565021ab1e650b13569344ad679abce4b8af78c660f697cb",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -930,7 +930,7 @@
       "checksum": "sha256:63a277221540402e44842cd3b1d806d61b96b33caea905dbc5cd7ad3465153c0",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -941,7 +941,7 @@
       "checksum": "sha256:0eaaf771f48bce5f580932c9e323d69b6740ee8a0e2577511323defa8fb285d1",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -952,7 +952,7 @@
       "checksum": "sha256:70323e2b5ae43324672d5e74f45b903bb2269ee9f5bd569b61092749ac748c08",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -963,7 +963,7 @@
       "checksum": "sha256:318454c0781c00f5b4c5d4553bbee5a39a769c85ac99351ea203ff213233b477",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -974,7 +974,7 @@
       "checksum": "sha256:fe6474b855bd457a2b8ff88c3e676317836d2a990e91004860b78f4925a6ebbb",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -985,7 +985,7 @@
       "checksum": "sha256:6dc1a54ea87d0fee919a7fa33473950b4c2e59ba37c4f1b2aeeb8c532529a566",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -996,7 +996,7 @@
       "checksum": "sha256:e4002a80c905afc2986eb0ca0c689cfa66aa1f21db1eb67fdb3c7ce3c7a8fc65",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1007,7 +1007,7 @@
       "checksum": "sha256:39d21dff978c1055307d16ce01fbed52f9006f12aa5956f3e4e1d04999ae19bf",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1018,7 +1018,7 @@
       "checksum": "sha256:1bd7a7db8c9495a94ba2e043862379bec3c2780d7e005ada281c319c51161b8d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1029,7 +1029,7 @@
       "checksum": "sha256:d10620ee16dcf9517c46219a1fffb076d339727b7fb3127cbf3f79ae72787b6b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1040,7 +1040,7 @@
       "checksum": "sha256:4082bb0fe9c22818a33b203f10888cc3c0e3638488cbc09b681206902115bb3b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1051,7 +1051,7 @@
       "checksum": "sha256:fcd7c8f8d594f27c2676083f307f31149633d90adaad894cc211a5a1ccff138a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1062,7 +1062,7 @@
       "checksum": "sha256:0216660deabd113c45fd696c5b8b1d4cf264ac5285b7c7bb7edb843b6d85bae5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1073,7 +1073,7 @@
       "checksum": "sha256:c559b7b5946f07875b1de3a5ec2ee81e7f0d77ab9c9eb1050975b775f1d6ab35",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1084,7 +1084,7 @@
       "checksum": "sha256:ada6fb92729224b58591db74579882a30f9b50bf9f5e526e86c5b9e73eee66ec",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1095,7 +1095,7 @@
       "checksum": "sha256:b70d4cee316eaad0719f1e76d8d904a4bb9a410ed41eb6e8721508cabe3e5ab1",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1106,7 +1106,7 @@
       "checksum": "sha256:cb999e561db851ed9472855301539a292adfc8969c2fa791511cb1ac70cfc6b9",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1117,7 +1117,7 @@
       "checksum": "sha256:e675c9b2123227fcaa2211483fe66d5eb598b3a840f8541617337ff568f4ee1f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1128,7 +1128,7 @@
       "checksum": "sha256:aa54b2b14bdd41d1a237fdc47f887cf2a663995251ef7b8e7d9845e70f5ce685",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1139,7 +1139,7 @@
       "checksum": "sha256:40d98de2b19728add15d1d112c22e569ff3ac04028fabbca91b357c88e34a173",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1150,7 +1150,7 @@
       "checksum": "sha256:496460867815b0a4d4962510eb0a0b61561ea0826adf34e0ebef7b61f84881e5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1161,7 +1161,7 @@
       "checksum": "sha256:e8e18ffd38fcfa84f3fe9ce12aa3324f87f817135ce1b9320492b86a69c1757a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1172,7 +1172,7 @@
       "checksum": "sha256:af7062952f177a666451922953a2d7900caede3a64fc4b1a14d9098d110d48c4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1183,7 +1183,7 @@
       "checksum": "sha256:b5219839456343f8bb73dbec916c3737c2840101b6865a79d17b7b615084f086",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1194,7 +1194,7 @@
       "checksum": "sha256:40c1b38e97ea2af7700a536bb4ba626af73d85c51e5bd5e58e1a4e2d718ba9ae",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1205,7 +1205,7 @@
       "checksum": "sha256:c9b60a8797f96cf90b18262c32b6a5abb3eb4cacc9f86484956f7aeca1f7853d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1216,7 +1216,7 @@
       "checksum": "sha256:1bc333413ca9f06b8e99b4c6c961bfe76b6763b20cf62a073a6ab1fb2cd2e7a0",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1227,7 +1227,7 @@
       "checksum": "sha256:19ce596403904580a5ab4e581d4d5524c2702110bf0fa69630d779f7deeda078",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1238,7 +1238,7 @@
       "checksum": "sha256:c34827e67e9cf8c41acb0ca0ad58f0cb04542a79fd203bd5fdfca9da055e8720",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1249,7 +1249,7 @@
       "checksum": "sha256:cc913e0e185643eb30ff2e8b05648118fc40c111cc9dbae7234ea66117397b36",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1260,7 +1260,7 @@
       "checksum": "sha256:06f1e68ccee6e581ae4cde1053783f75d175c543d8cbae4057d8c7a3a0d27081",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1271,7 +1271,7 @@
       "checksum": "sha256:cd362d9b1edee036f68791e89f3feee24a2e9a5bcf02a2495245052652746e7a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1282,7 +1282,7 @@
       "checksum": "sha256:ce1a9b8db0b8c46f4bdb1214064770a6f7ec1b01121700a186764b11d1d6e73d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1293,7 +1293,7 @@
       "checksum": "sha256:85fdcb204742d8988b254a23f1751992085ca42ba425162823d113d204c25c98",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1304,7 +1304,7 @@
       "checksum": "sha256:c2c7e73145d635485d23bcf0f0a85e17915bc84f38f6daf2b9a92e43428f9322",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1315,7 +1315,7 @@
       "checksum": "sha256:c1a2e79d465a4b2817228b38879c9ba12c03b5e3acba134923af6649b690ff29",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1326,7 +1326,7 @@
       "checksum": "sha256:5f546288e9631644261aaf36d045269ac99e41c2af2e3c7c4a1b78a692f26e50",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1337,7 +1337,7 @@
       "checksum": "sha256:5692dd98e0f1be2f7af05c16ba35345561c12c7474e7c82b9d3b934de7158504",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1348,7 +1348,7 @@
       "checksum": "sha256:589b66b143d52afc322caec0867419b9f41a87f8d6bac16a792a8467e0470dcf",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1359,7 +1359,7 @@
       "checksum": "sha256:a8546d5af4426961d10d6db0303aee645e231778d9dc435f1f21358dfa16ce41",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1370,7 +1370,7 @@
       "checksum": "sha256:b3e18d2ca33bbc12e70c08cbdc4cca52fd727f8aa4315c4c5b927ef7035bcfd8",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1381,7 +1381,7 @@
       "checksum": "sha256:69fb3a074786cb03fd3fac2d0ee7a031c13dad1e1e5e2500523bbe86456cd9b0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1392,7 +1392,7 @@
       "checksum": "sha256:a28e9d74518bd996f9ccc0ba7f802febabb7aafdedf32fa126c6d560f49813ab",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1403,7 +1403,7 @@
       "checksum": "sha256:40bfde6e90d70606f263187c5af1a36d35ed8aa902e959d1dad1863890fb96d5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1414,7 +1414,7 @@
       "checksum": "sha256:8eeb8727e1c9e8f069e50ee53763df13fbadc35db1a9ff7f31df3ee3868f3c7c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1425,7 +1425,7 @@
       "checksum": "sha256:88e7e9950e194c11273385137b3747c0eb5adfe33d646d9df95edec5db04d921",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1436,7 +1436,7 @@
       "checksum": "sha256:eb3acf76abbe8b88c00b7e23800456d12b509166375c160bb63632704c33f60a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1447,7 +1447,7 @@
       "checksum": "sha256:5bcaed13296d67adca39ef3aa506fff38378e030eaad24b60e277b851b2745e3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1458,7 +1458,7 @@
       "checksum": "sha256:5c216fedf632af27d455b8b783ced09349970fa772d7f480caf8d0d87360c13e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1469,7 +1469,7 @@
       "checksum": "sha256:51705d3f750b491252f01ff83c35fafe2a1c14154963b926e26e1cde0683fe76",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1480,7 +1480,7 @@
       "checksum": "sha256:7cafe7cc263ba63115fb801049efb9bfae762c46f252a451ba05734224cb42da",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1491,7 +1491,7 @@
       "checksum": "sha256:4cdd552c6740eb1bd641c1ed3686bdc2d8c3ec3a77cbf5557673ab7fa91c4aa5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1502,7 +1502,7 @@
       "checksum": "sha256:e456962656055aca1f9fdd9e03913ade8408c77a3fe0acf76e242bb56a56617d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1513,7 +1513,7 @@
       "checksum": "sha256:0f17f811529032750cff1b59a866e13c8f86f36cdb0c8c24c2a15956c1672976",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1524,7 +1524,7 @@
       "checksum": "sha256:2d65396eb74649227e12fc2b15a89e76d665e6f1e4211cbafe89517ae8b57ed8",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1535,7 +1535,7 @@
       "checksum": "sha256:7142637f7732e9fc42cc65cd2e7de17bda8832d04b4c103bef5382059e816c9a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1546,7 +1546,7 @@
       "checksum": "sha256:c8ff2193b1c132a00423835d7275006d867bfb66974c6ad948b82b36d2ca5d74",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1557,7 +1557,7 @@
       "checksum": "sha256:159fd0859faa07ff84760568163905a4be195a4ac2949a078909680e73223516",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1568,7 +1568,7 @@
       "checksum": "sha256:d309ba0d222f48d399eba16c8d1f761a7324673e8b31db76f9dd0af9d7abfed7",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1579,7 +1579,7 @@
       "checksum": "sha256:94dbc96059e376fa07387d4b6d76816ba2e35963cd6388ac8fb1d9c2b8765315",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1590,7 +1590,7 @@
       "checksum": "sha256:79a7eba651cfe61e59a820ae16b827fc5f7279c9ab62d497ee7fc89c7370d430",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1601,7 +1601,7 @@
       "checksum": "sha256:1c7fd35976b8ca51fc5acad9f8bba345c68ae4df136537a9021e1b0e34b74b7b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1612,7 +1612,7 @@
       "checksum": "sha256:1cc27f96dec316cbfd302bff40569bfb734520716f38461b652e435c5f5a4007",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1623,7 +1623,7 @@
       "checksum": "sha256:6b1e023ffe3a5822ab4ec5f65c7b429f59177c121e2b2726292ae89013d03158",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1634,7 +1634,7 @@
       "checksum": "sha256:fc58f581ca1a570a534e87865fefc069c9dc98f01f3c60e671ccddcdcbd563b6",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1645,7 +1645,7 @@
       "checksum": "sha256:f58ed8e63832102bc0d80985d607121c8a3bd886a69cf57babcdd4b5b212a8cd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1656,7 +1656,7 @@
       "checksum": "sha256:1012864bb62561f2c88006866b0de1c4b230591574b591f6d2a142d02a84a0a4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1667,7 +1667,7 @@
       "checksum": "sha256:739a1707b8fe24798ae8793667263b2d283d61b7958a576808b38a34fbd79ef1",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1678,7 +1678,7 @@
       "checksum": "sha256:c9dd703d269e5f06b25e861c88497f04a23967daa88295b6256a09ed6552f28c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1689,7 +1689,7 @@
       "checksum": "sha256:ee53979f4124bafdf5397b1034ebd849e83fa8f5f2a46dfd8d2ccca2937f1f23",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1700,7 +1700,7 @@
       "checksum": "sha256:93f3c964acde282869fd476963aab6409c57bd0dcc499261bfd9246d82faf44c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1711,7 +1711,7 @@
       "checksum": "sha256:00348b30b1c6c4000f90c9cfcba44e01f1700997d3b2f4399f3eeccd44fd5296",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1722,7 +1722,7 @@
       "checksum": "sha256:c5fff0dd8fba50926bf0da86a3a063bc810e943d3fedb617636cf30263ae325d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1733,7 +1733,7 @@
       "checksum": "sha256:296bbf05bf17c093e708676ced12da8742d8f99ba75ed74c3b43dae6bbd1bdaf",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1744,7 +1744,7 @@
       "checksum": "sha256:272bd98209eb0b730664379df0473504e09e2a0071563a654a1d8d7f4b02c307",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1755,7 +1755,7 @@
       "checksum": "sha256:47f4b3531ae627c8c0c3f8dcaf6c83fbffee1f220573b0f198e5f5f9bb49b60c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1766,7 +1766,7 @@
       "checksum": "sha256:1021a9f2b1777c1c79e9983e77848c2671d596126aa30bfabf95a6d3d8802f26",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1777,7 +1777,7 @@
       "checksum": "sha256:81ae61cd77e4f83c994e13b39f90a4fce71b71679f8082af3f3fa145e3c39b17",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1788,7 +1788,7 @@
       "checksum": "sha256:7b455ce7c0d88578d3cf83a92e987ff2363ea0df56d3e4307c61b72ece5923cd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1799,7 +1799,7 @@
       "checksum": "sha256:61a7ef76a2f07c99fecfe97412203a721292fc1bb09d3dd5b8f0db993bb9b6b6",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1810,7 +1810,7 @@
       "checksum": "sha256:51b891435c8509b72d11824ca9cf1cb58c0842f916fd5889deae93c8739ee71d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1821,7 +1821,7 @@
       "checksum": "sha256:54954e8469833800c775acfabfaad8baf6742b46b1970b03b49682fe82e41839",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1832,7 +1832,7 @@
       "checksum": "sha256:adb4c99591d8889f2e3db96e9a15568d07e37c3a4cbcc7f819af49b1a48f0858",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1843,7 +1843,7 @@
       "checksum": "sha256:b50189fa2ff44019848b1e8501e716c8c9c1a2a36a596db510841edc2cda3557",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1854,7 +1854,7 @@
       "checksum": "sha256:88444c4d059772ce83980c6945d38079d313b510b415485a903fd3faa5476071",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1865,7 +1865,7 @@
       "checksum": "sha256:fce5efe3327ffbc4a4e29286e363a0c3d01de47836615de69e0cb09637a46ac4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1876,7 +1876,7 @@
       "checksum": "sha256:b8278982c689cab951ef4daf60a6690f0aef671bbd13ead4f467e2d27e8af034",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1887,7 +1887,7 @@
       "checksum": "sha256:7ab8f4ff3f1c675d8ca9a904f5d3657afcb59b6d852c4c1b2c5988a2854896cd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1898,7 +1898,7 @@
       "checksum": "sha256:322689b8fad93239991d888dc234a0d3a7ac03c5074ce938878e436d40d58694",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1909,7 +1909,7 @@
       "checksum": "sha256:90189decb061ce3efe6f35b4dd8cc538972ed788c4af7f67df038510c2ce0d69",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1920,7 +1920,7 @@
       "checksum": "sha256:4ae041b4ac8f18c3e835eb889805cf1f1e059bac8a26ac97e698b20805f9abe6",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1931,7 +1931,7 @@
       "checksum": "sha256:5039690d573f9080f7f794bd28b1674b1d5670bb74c2196277bfe2c059a6d125",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1942,7 +1942,7 @@
       "checksum": "sha256:e225a197de3cda9772d9554959be072175f90030f0606e9fc06b7df33fa10b23",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1953,7 +1953,7 @@
       "checksum": "sha256:3f87aa06d052a9a0bbad64497da22699c3b8b3065be81c01b563cc4352d46ccd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1964,7 +1964,7 @@
       "checksum": "sha256:bba014a944f0c2d38b960457e1b2c1d52b214008c66f8c9eb6afc0c16c598515",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1975,7 +1975,7 @@
       "checksum": "sha256:f444cd8063518afd71bccbb2e4576f7b14cc4cd50738202fd8d8dc5a58009766",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1986,7 +1986,7 @@
       "checksum": "sha256:c7312782631c6f8f0dd15acdb61df5e79c08eeb9d5b9f7dd74c2c22972c34d0c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -1997,7 +1997,7 @@
       "checksum": "sha256:27b211b46ea8f8a7162c31653c972dcfcf901d85c3c0f9ed3b5504397a37ac54",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2008,7 +2008,7 @@
       "checksum": "sha256:5a5d7e146bf0f22ab2d8f0db43d0c2c99b885ba76a77384a9d2b95c97f7cf668",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2019,7 +2019,7 @@
       "checksum": "sha256:cb3bb58836511851e023450ccddbd3ad1407cbb9f4e9ae975adee610322bfb8f",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2030,7 +2030,7 @@
       "checksum": "sha256:b654912e4baf37e18419cb8500e55ed791d27bde780cbce554fdf301a477c28d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2041,7 +2041,7 @@
       "checksum": "sha256:a944901c120d7bcbdf980d31f9952fca58453b59850fb4814756a606585d8539",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2052,7 +2052,7 @@
       "checksum": "sha256:73d8faade4e341686a55aeda3f6c53a157158cd053c595abcc31e9ea2f779d9e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2063,7 +2063,7 @@
       "checksum": "sha256:f83d6a97ae189de1752209f072c40c2991c0cdf8e930d5bdd81988054f7034e0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2074,7 +2074,7 @@
       "checksum": "sha256:224bc549bfd7a16665076d7c02ba26369386e23dfb0c8c8945b27ebbe1a54531",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2085,7 +2085,7 @@
       "checksum": "sha256:8fd7d32181eff8442ae55023afddddc34dbb0a1dcd34b7a3aa6b96fa87626736",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2096,7 +2096,7 @@
       "checksum": "sha256:59279e7b0e200126758a8ac67d6408e17aeb4cce0dacbbbba823a0089866e612",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2107,7 +2107,7 @@
       "checksum": "sha256:33d85f98eb9a3dd271ad7a291083df1150bb3b6979f354f3fee3cf7993887d35",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2118,7 +2118,7 @@
       "checksum": "sha256:c4ebe707c715b9b294dc1c31e5734b2903c4fe0be7b2948fe4cd12be2773d331",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2129,7 +2129,7 @@
       "checksum": "sha256:ebb2fb584500681d5be157fc10e64e1247b013390ef4177f06bf50df4f16f8a1",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2140,7 +2140,7 @@
       "checksum": "sha256:30cfb0bffe62f1cd13339c1a8acec161a89dbfe39fbbd8f123121fe646f00eae",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2151,7 +2151,7 @@
       "checksum": "sha256:ba7b47165ff2a90847788c88fc6393aea94d61d61304ceb7569d17a9237e5a56",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2162,7 +2162,7 @@
       "checksum": "sha256:7ccdddaeaa8789a63b9c7bd1f20a8b7829a3289ef08a4b5b93800f66531164e4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2173,7 +2173,7 @@
       "checksum": "sha256:dcae1c0f4454db53ef901e0d878a519c2aedb7e3cae17e9aa121b154b2949639",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2184,7 +2184,7 @@
       "checksum": "sha256:89041ee545bfd3750b5b22ac375af310376cbc5bf42c999a3be9932b5a583051",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2195,7 +2195,7 @@
       "checksum": "sha256:f1758f5a5493d17b2f7e7fa7033cf51aa31144dbbd813103a7adcced1b46c13b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2206,7 +2206,7 @@
       "checksum": "sha256:b5fa33d5fe10b86b398de4842ca4976791bd80c4dff0d32ba0c3362e34baddc3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2217,7 +2217,7 @@
       "checksum": "sha256:b87ab65ee976141f986eaefac19ac6f62310ebf766bc32a0c1f8ac317827504e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2228,7 +2228,7 @@
       "checksum": "sha256:f0931286e5619b33125bde70f0ecbb4929bfe891f1c4cf3a4a3c5f8590196cbe",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2239,7 +2239,7 @@
       "checksum": "sha256:84b2a9f6441671fe5a002831c29e1a6a5634ca3bccdae16745b6b46e200232d2",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2250,7 +2250,7 @@
       "checksum": "sha256:3ce57da10bd5e78969b56fc0e1af96f5bb1acbafae66cfb1e6ec064fe309289a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2261,7 +2261,7 @@
       "checksum": "sha256:4161907c707830d6aec5d30df1cefbe5299bf9b4d102c06972b69ab16d3dc9a3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2272,7 +2272,7 @@
       "checksum": "sha256:f7917715465cbea766ffaf32cc0958eb0b1776ef9a89406800476d5c14a7931d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2283,7 +2283,7 @@
       "checksum": "sha256:474a59b57d194cf1e1189f51f14325b3be46001cf41b4246cee68a7cef29ddeb",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2294,7 +2294,7 @@
       "checksum": "sha256:1cc19b1ec1d7175a7cf8da4d8537d599d4073c8d92e290b6d0f582690785b2c3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2305,7 +2305,7 @@
       "checksum": "sha256:4aadcd01f32a62ba628edc19f6046217b8513b975014dde5156d70529fe298c1",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2316,7 +2316,7 @@
       "checksum": "sha256:d20c5856f27c541013c1cee07f6de5ef73eb2adf33559dc0f860dbf45a4431d0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2327,7 +2327,7 @@
       "checksum": "sha256:06d8b8e06825ff3282fa90db6bdb37f8c71663a4ac76f92cf17831e5e4e0d1e5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2338,7 +2338,7 @@
       "checksum": "sha256:5bd0116374e5b5f58debfc7d98e6d3e99e8738cb44ca822ae086bcc307ed8703",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2349,7 +2349,7 @@
       "checksum": "sha256:a1547e86d37a07d175c1766b425c60fb348c3029c56942e828aa3acfe255ec23",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2360,7 +2360,7 @@
       "checksum": "sha256:996a6723607471112d490220da39477266fabe89085c0de8401beee62fb5e222",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2371,7 +2371,7 @@
       "checksum": "sha256:197b8f6c5041008a9b83605182dbaa431664ad4238f075c1f891453b8d3f3794",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2382,7 +2382,7 @@
       "checksum": "sha256:afb2d54e764910e610cf9904844a5d13fd0df069ca4c171a9ef6e233092e4fe3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2393,7 +2393,7 @@
       "checksum": "sha256:54ea552c9b1deb4599d71cff08ea8ed04fe172cf55cbd9fafa6025173c10a6c4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2404,7 +2404,7 @@
       "checksum": "sha256:76528807648e4c74bf27ff0f1defb1d2d450c27c5f081c199608ac1273d55be0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2415,7 +2415,7 @@
       "checksum": "sha256:86e5bb1d034d3ba81faead309bf2edc7fc462488b5bed3f9f3ec0a936fedfb6a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2426,7 +2426,7 @@
       "checksum": "sha256:9137c73a7867aef42e910b13579f10fa43e8533dbb59d503b9cc7bb4ab20bcf4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2437,7 +2437,7 @@
       "checksum": "sha256:a2ca0a34e43c412ccc6d088ba981fafa084326ad65b07e9cd640876bc4e519f5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2448,7 +2448,7 @@
       "checksum": "sha256:b33265180aba85c00e309e9bebfa6fcf0801da8ade60bbc80ded4964a27abdf9",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2459,7 +2459,7 @@
       "checksum": "sha256:e066918a4d4b80ba14e8ece5c844784193cd586efbe88504a236844f12da6f18",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2470,7 +2470,7 @@
       "checksum": "sha256:e60d64b1adc31008614e79ace93abc271b7817e9fb0eacc5296c61a44074241c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2481,7 +2481,7 @@
       "checksum": "sha256:d9978e3459a72f087c4541d41295b32615456f7d9b11567434a2c3cb690f36eb",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2492,7 +2492,7 @@
       "checksum": "sha256:237d3dcf404553a8181a57e85b9d88cef38aed045fc7539f442814e58331c4a6",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2503,7 +2503,7 @@
       "checksum": "sha256:43b45971b7649168bc5977dab08f13ff09756866292a2741beb7e2c659309c6b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2514,7 +2514,7 @@
       "checksum": "sha256:b76763a0922dff860a0431446bb5f29bb707b6a57a92b7a84246f89091aac1f2",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2525,7 +2525,7 @@
       "checksum": "sha256:aa289db49fa07167b04979e19f910afb8d9479ba4068001283bf2cd9623448c6",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2536,7 +2536,7 @@
       "checksum": "sha256:571cc47dc3c976a8b820bd652f2084face30ac6ce73c2b0159a4ba1ab462da38",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2547,7 +2547,7 @@
       "checksum": "sha256:76296ebce7edc3d796d4eb83b87ed99eb6ea0c3d8041419b96c18fba28d011dd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2558,7 +2558,7 @@
       "checksum": "sha256:8b3c6bb9dab4608dd3a464d75342747e8eec9fc80b2aab459f92f6d3a6bb32fb",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2569,7 +2569,7 @@
       "checksum": "sha256:057674a3aff2110a5e11187ecb57ed1342efa89fab63587b20cd3785e374b9b8",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2580,7 +2580,7 @@
       "checksum": "sha256:6f1bbb0348000b3d74eb31fc73926134c9bb760e9bcfa5d11b7573cecee7fa79",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2591,7 +2591,7 @@
       "checksum": "sha256:30856b0b7245384a19b1302290876f1b5df17b470e612167cb5893761bf4d064",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2602,7 +2602,7 @@
       "checksum": "sha256:3e88ed145f0dfdf693ac93ffc9f6763dfaad09445ee150d61b0174cb05bd9d82",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2613,7 +2613,7 @@
       "checksum": "sha256:44a1a5883f1c67a59e5dafcef0538c09e09ac849dfb24e1088f9529080c1fd43",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2624,7 +2624,7 @@
       "checksum": "sha256:1b1fbb068d862a1b5a285d5260b7734770405e6bf5fd285a91f53fd19a79184b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2635,7 +2635,7 @@
       "checksum": "sha256:175d5d042be4e150c0e516485e17788093e649c0964623c8a99d39eaca881c9e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2646,7 +2646,7 @@
       "checksum": "sha256:494329dd4a094022e7a447545a2ddd54607b38513dd786b3b3e3b449fd502020",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2657,7 +2657,7 @@
       "checksum": "sha256:ffd45a026dd839a6b14c1d7ceee32b481a6b14201c19d0a677744dd2fb0ee328",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     },
     {
@@ -2668,7 +2668,7 @@
       "checksum": "sha256:c3bebb4c0695f9e05a6772d6e79d122f3bcb15e4dbf6fa19a8371da5b4a620c5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2679,7 +2679,7 @@
       "checksum": "sha256:d9d24b6ca2ea8298e52fde39e113dff597faa9dea7bbf68e7140096484ca9f90",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2690,7 +2690,7 @@
       "checksum": "sha256:00942493fe71eb82fbcddde0d0e928b352832f967685296686b97540638f0080",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2701,7 +2701,7 @@
       "checksum": "sha256:8527fe0a81e73a120a660dd2fa1a0ffe9b460fe0c3839c9f607ae84e029638b2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2712,7 +2712,7 @@
       "checksum": "sha256:ed045fe73792ac0b4e13c47531cddcf81d3df036f0554d1d9706c7053a76bc0e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2723,7 +2723,7 @@
       "checksum": "sha256:157c7b2c2d001afc6e4aefca66bf7d0ae3c85f743947ceaf5b83d503c6841e0e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2734,7 +2734,7 @@
       "checksum": "sha256:fdbe347cf995ea386ba9f7c9f6dbbf8198c43a0ab2a98d5eff34eb679e07415d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2745,7 +2745,7 @@
       "checksum": "sha256:145f51ebd70fba0d154e6dbfcaad41e11c5f2e2c52be6067d61a671ad09ab2b5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2756,7 +2756,7 @@
       "checksum": "sha256:e046203cc2c55312082ba9c109fbb4047f2bf14afcdff783fd3a6be058e968ae",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2767,7 +2767,7 @@
       "checksum": "sha256:94e476b015a01a90dd326490812f509e23af1c7d76a9b52cbcc9a1515f00e201",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2778,7 +2778,7 @@
       "checksum": "sha256:8082dd11538fbe18ad428b1bc3a18f574ae71baa5f9b651bbebbab4bbe509bff",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2789,7 +2789,7 @@
       "checksum": "sha256:2bd29e70542a73f62b0966b09b010876bfe13f83a3ee896e51fd8f62b621d738",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2800,7 +2800,7 @@
       "checksum": "sha256:d6f421d578d023860ac4edcf03af586fe88340fee841424db37708ba9f23b466",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2811,7 +2811,7 @@
       "checksum": "sha256:a5798666b1413c63785e0168aa71475b2323eab9244157b3afb5985f616327af",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2822,7 +2822,7 @@
       "checksum": "sha256:f13be503d39205a5363c79eca3503824a8feff5cbc234cd71542b143aeba53e1",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2833,7 +2833,7 @@
       "checksum": "sha256:bac2655fd1e2e7f7b48d94e37fcbdf4c0ad79814ad032ffa33b5b5ae6e3ad436",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2844,7 +2844,7 @@
       "checksum": "sha256:b6592ca4ce9b1b03675e7425fd109c81b330d7975e8d2d943af075f73a480ee8",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2855,7 +2855,7 @@
       "checksum": "sha256:e592b788b3122cb4d8afe17785c60347b9107b12de59e231c0fc58ab2bd85e82",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2866,7 +2866,7 @@
       "checksum": "sha256:ae5fe7bc9db73b5f722e821b6dde6c2ff7b2c58e5957b00f326eb371ed7f5d57",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2877,7 +2877,7 @@
       "checksum": "sha256:c97f265b760c8d4ca6fd3cd28ca149e54e697cfd3a91c85d8065d39e85c7ba33",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2888,7 +2888,7 @@
       "checksum": "sha256:2bb9d5eebb28337b6828bdcb67c084f06cc14d89682d2a74944ac3ff30d49fdc",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2899,7 +2899,7 @@
       "checksum": "sha256:5cf97fc1adfd8c0a773971c66e25e3ed689e9ff5cbc257e73fffebe1a5b55e01",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2910,7 +2910,7 @@
       "checksum": "sha256:6bd7f253111b49abbb37d8593c53f50af122b2e30941deb36d664f9f0f8ddcce",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2921,7 +2921,7 @@
       "checksum": "sha256:ae71b0d769431aaddfd7c6dca9d1cf2aaa129865a047152c7917ef66447ffd5d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2932,7 +2932,7 @@
       "checksum": "sha256:b6a9abd5fd846c8b30cec482c7ee472a4cb427f49334ef0765277d85c722d350",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2943,7 +2943,7 @@
       "checksum": "sha256:f64ebffacb88a52bde7b7e4dc9d3f5c13b77692973ee514fa3188b8f6799ddbb",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2954,7 +2954,7 @@
       "checksum": "sha256:9149610f4fd95f21d8c8bee6515c5c6c051979e49fe820023206d820fb04c389",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2965,7 +2965,7 @@
       "checksum": "sha256:a4ad55b21a5308f0c7a7881decf33185a6cf6beec5e93c47b43d114be953dac5",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2976,7 +2976,7 @@
       "checksum": "sha256:8e8a9564f20fcc42b3b6dca78d29e6141d788af27de9dd0043e4e57b3e774450",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2987,7 +2987,7 @@
       "checksum": "sha256:a9b20a68ed5cc504b5b31e0d78d7354d396277e644e6ac5760c44cfae81c1a21",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -2998,7 +2998,7 @@
       "checksum": "sha256:2bde0a33b0fd315a160d08ce7df9db80427911fd00a33e525c8c4188c6c66196",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3009,7 +3009,7 @@
       "checksum": "sha256:172b7f8bf15faa1dcea1d503a9c80fcd9ad551672cefe10c7f067ffb6596ad95",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3020,7 +3020,7 @@
       "checksum": "sha256:3b178fd88fe298514cd1966d63b9161ca8d840f12bc04fc52cbf5d2005f771c0",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3031,7 +3031,7 @@
       "checksum": "sha256:82a7435df77e057aec3d853a62b9b61b19daf5523e90f1027dd7efe2c51a3d20",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3042,7 +3042,7 @@
       "checksum": "sha256:bf2c68c9f8d5386d798ba2c21b025569562920adc65bc9204f0f6fcc495e0f8e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3053,7 +3053,7 @@
       "checksum": "sha256:3cc5cac9405b234830ce80e3cb98eb016ac7c4983554b6110f0534b853b30c87",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3064,7 +3064,7 @@
       "checksum": "sha256:13c1496fddbc5989d842215f31ddb7460f3169f0c977d607f3baf6b4098297e4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3075,7 +3075,7 @@
       "checksum": "sha256:3e35ddcd2ceca021ed7af0c7ebac9475fb9dd667e85ac1fa89b113fc304687d6",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3086,7 +3086,7 @@
       "checksum": "sha256:007d14a570f63cf14e11aaee2fa2d47f22b3b6577b52d953d863f1cede62a7b2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3097,7 +3097,7 @@
       "checksum": "sha256:b9f76df74711b3aae093a080a5865387813b6b005d9055dcd24b471cc75ee777",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3108,7 +3108,7 @@
       "checksum": "sha256:50e48b726fec047cda2caff5a7ff19284b4e1844571e16b84b0293673036cf99",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3119,7 +3119,7 @@
       "checksum": "sha256:c8c4d9544bd66c14c5030385aab4a5a0110b024ed5ad1bacc4f3680c5a46d2a4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3130,7 +3130,7 @@
       "checksum": "sha256:53a806549219c0fb256bfe6f50d8834969e5bdd39140e308eb854037d279f995",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3141,7 +3141,7 @@
       "checksum": "sha256:28d39b0d2ae3b6eeb24e7cc118b806a462295e60e9a85c21fb5f3bdc6d46222c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3152,7 +3152,7 @@
       "checksum": "sha256:ea43602aabaa736bfba5d92fa358224831ed19d7dd9ce4dc69d6771ff558c502",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3163,7 +3163,7 @@
       "checksum": "sha256:e15ca63872e2f19d6e88861aadf0d4bec418651a6eaf82b47dc538c5e3ebf33a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3174,7 +3174,7 @@
       "checksum": "sha256:f7a0bcff5dc2bf50518ce72adb51bd2275e80c68176ee086f94268c217c4b1cd",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3185,7 +3185,7 @@
       "checksum": "sha256:468402e33901d415d8284392bf888f6e80eda366b34d6f12e571181512ccbab6",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3196,7 +3196,7 @@
       "checksum": "sha256:0f0bdf451279987fc7dcc6510c5c01cfe85cfe02fba625084bfd11fb74806392",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3207,7 +3207,7 @@
       "checksum": "sha256:ba7d1df15976d2612eaa993ffd4b815d03e5d151ba02ff044906b261b1346eb2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3218,7 +3218,7 @@
       "checksum": "sha256:c5a303a97b401996e77e76fa4943d51afa8e92627e5b36068c278a5e1050d51e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3229,7 +3229,7 @@
       "checksum": "sha256:028aea30612b610e30f98602615f669467de011af4805bf78b3ff1c403335f9f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3240,7 +3240,7 @@
       "checksum": "sha256:7706e9fb529dabb99fe01acac41c29747966ddaec0259ffd2faeb4caff234469",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3251,7 +3251,7 @@
       "checksum": "sha256:52c9f112cce58b13cf9c19da75698d1408100a8e3d4c676d0d0dac7c9cf80c9d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3262,7 +3262,7 @@
       "checksum": "sha256:699d63dab8a1406bc2fe56ab534a067f13c2c70995b2aae9754c2ef07f091379",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3273,7 +3273,7 @@
       "checksum": "sha256:69d675dc5860782bf5334c173296339641e1b904d340b09cf47049e01426d58a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3284,7 +3284,7 @@
       "checksum": "sha256:04486d918659ba4eeab8018cecfc5bad06c53a3cb16ea14169fbeb9bfb5b9b85",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3295,7 +3295,7 @@
       "checksum": "sha256:e2431be1ad2b497a6237faa12b93f7d913dc2ecd5fdc06a61bb2444d8807152c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3306,7 +3306,7 @@
       "checksum": "sha256:99ee24e1b2f6436343a72ab8294ea5b63ac053864e3d9a5737ebed682001e7db",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3317,7 +3317,7 @@
       "checksum": "sha256:482a8cbb66bf74d39093cf1de0ff2f928311257cd806585e8396a06f6e4244a3",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3328,7 +3328,7 @@
       "checksum": "sha256:61f722f70d53c80b98bbd41ce2688d6a1dc7f4bfc8d7b404dbd6e1a0be40f960",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3339,7 +3339,7 @@
       "checksum": "sha256:8ec6c962437ce02f902773a5358498a632d639321b30c2b21dfbd4351ef7f37f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3350,7 +3350,7 @@
       "checksum": "sha256:3a7ae0b80374a02fb2c7ed014c43ea8f89379eec7824f3ae4770d3c724240313",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3361,7 +3361,7 @@
       "checksum": "sha256:f09693a51dde1a91c4399c689662fe200126a9d5b2f4b04328110afbee0b3202",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3372,7 +3372,7 @@
       "checksum": "sha256:9ad3d4bce380fff2f3f8dcb6b72fe057bb5b91b2ac624180b922bf1dfd2adb5e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3383,7 +3383,7 @@
       "checksum": "sha256:53cb99150f26a38398cbc1b74636e692cf9b471a5242565b749fcc8c50bf9646",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3394,7 +3394,7 @@
       "checksum": "sha256:52ea1ac09375c9942966280dcbbeb7927806bc4849052468bfaa8ced8acbbce9",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3405,7 +3405,7 @@
       "checksum": "sha256:e766df49c1e4aa8b0cea76f76086b0b6cf30673b5d291204d08023b5ce8afc1c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3416,7 +3416,7 @@
       "checksum": "sha256:2bda79dcb6984155be8bf644f127e59b1ad4552aff0ce370daea3117ba30577d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3427,7 +3427,7 @@
       "checksum": "sha256:8242f8a025137cd9b9e0cf0ddc41ce69d14fafced8e75b7fd17edc31b9f8eae9",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3438,7 +3438,7 @@
       "checksum": "sha256:23e9895343e8c7e06e573ef260148bcefe58b51c49c5f015f0473972eb0cbe42",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3449,7 +3449,7 @@
       "checksum": "sha256:803fc19ad094a2ece9c6a82dda423c715f76339e59733750ca901a577c33b7ee",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3460,7 +3460,7 @@
       "checksum": "sha256:d1eb57a5c16b9b467def87970aee73f3272d8bb97813859803e79d588c5d3b4c",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3471,7 +3471,7 @@
       "checksum": "sha256:e87d37d6038bbf2a4e835ac86a637e4e0b31066485456aaddd71e20c6ab175db",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3482,7 +3482,7 @@
       "checksum": "sha256:1f1acbafc1efcfe8d9d1c64a1db8ff8becbf6da84409a49c1d50a6a9b0881a75",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3493,7 +3493,7 @@
       "checksum": "sha256:03a4c846406bf89d7a0b4e2fbdf748aea6157db20742fd66b8241e54aed4737d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3504,7 +3504,7 @@
       "checksum": "sha256:99011d57788794c328d35458865d726b3e11d674901034de72f395137495a428",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3515,7 +3515,7 @@
       "checksum": "sha256:8d581bf70efe634cb5d6aa551f878cad6ae507dc190220852d04f3019fa4d93a",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3526,7 +3526,7 @@
       "checksum": "sha256:870fbcf9def26f4490d312dcaba8895b346d0c9790877ceb78e391b4c63779bd",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3537,7 +3537,7 @@
       "checksum": "sha256:3781453ca6a569589f900d86c6a03c58e6af766b523c57681eb190bae9392abf",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3548,7 +3548,7 @@
       "checksum": "sha256:9145b2d5aa90edf8a4265f6056d67e95525919a49149b59b7b9f0be47e6f2e8f",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3559,7 +3559,7 @@
       "checksum": "sha256:7bddba40ad188adb3845c540afb7490e81101bd3a289ce6534f0a60e05ecd3dc",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3570,7 +3570,7 @@
       "checksum": "sha256:d4967f8ada58a816bb4aa340fc9bfa5cc60d8c6a5844fd3a07c7ca515056e7e6",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3581,7 +3581,7 @@
       "checksum": "sha256:66d4b14308bf5466964ccf1208fe523c5a4191262d0ddddfea03c8a69be0c39d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3592,7 +3592,7 @@
       "checksum": "sha256:9816bd0a4503fb0675141244204e3185dcaef998b1ac632959f1a587e06d51fd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3603,7 +3603,7 @@
       "checksum": "sha256:aac15f546a867f08234d235761d6573756296195f12b77c66978a86b3d37ddb9",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3614,7 +3614,7 @@
       "checksum": "sha256:e53b6c24c1e5adb9eb532f3cf820717c6c158482c3386952a65912dc3e4362eb",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3625,7 +3625,7 @@
       "checksum": "sha256:c7669ccb368857ad935cf7b1508d22dc0845a0cfec42bac52613e9e781ebe5ee",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3636,7 +3636,7 @@
       "checksum": "sha256:a14341537f7d0e159d4c351cff21efbe1019627df7eb6bdd28319c16d58d033b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3647,7 +3647,7 @@
       "checksum": "sha256:38873287a31c328865b9d0691539603a50f428adbe9021c435c20bfaeda0a503",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3658,7 +3658,7 @@
       "checksum": "sha256:ea9d6079e68c1a2c950e08de44cddfe25c60b3a2bbbdd5bd7f3643b42dc07c21",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3669,7 +3669,7 @@
       "checksum": "sha256:1012864bb62561f2c88006866b0de1c4b230591574b591f6d2a142d02a84a0a4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3680,7 +3680,7 @@
       "checksum": "sha256:11e2bc6e3ae4489a3be540ad4d5b653b7fe2340616c49c663106f8dda3d6bb9a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3691,7 +3691,7 @@
       "checksum": "sha256:e926cacede7f090084d56401b5585deb811a5c028d740d4b506f0d81fad97142",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3702,7 +3702,7 @@
       "checksum": "sha256:6b5363c4b08e5a9990f06b91f1eb489f301a5c473348a83160a20233703dc68b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3713,7 +3713,7 @@
       "checksum": "sha256:57b0f63d68eb5537a33b05e4ba476f82bc42e2b4a40ad2c2bc27907cde118cab",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3724,7 +3724,7 @@
       "checksum": "sha256:493ba9b3ece1a9e3419e4dfcfd02a7804b35a3e3fd248c7010d54ac325b77e55",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3735,7 +3735,7 @@
       "checksum": "sha256:3e55c37d0e8db5a21782e243161207ca02e436d3158ea219ff89da33e9a684e4",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3746,7 +3746,7 @@
       "checksum": "sha256:90f97efcf3a90238fc0d966607f77658a61ea8b5b3e9ac0033dc5a88164b453b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3757,7 +3757,7 @@
       "checksum": "sha256:fa314b3a100775e605b34eaa7f68fbd7d782b0b39fdece9b863a639986dee9f0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3768,7 +3768,7 @@
       "checksum": "sha256:c9ac7ac4ddef585422a9047a2bc53f7309d5b8f4fa89cc12a380a4c0885da4fd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3779,7 +3779,7 @@
       "checksum": "sha256:b463f93f10e489f03d7e5d84ee56d6be2e7afc7ae7f45f653b8a990c47a31a28",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3790,7 +3790,7 @@
       "checksum": "sha256:4ff9a4009ecf649016b86fffc5077e0d60ac1e0866fb1e2d95a9f805925b2dee",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3801,7 +3801,7 @@
       "checksum": "sha256:88444c4d059772ce83980c6945d38079d313b510b415485a903fd3faa5476071",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3812,7 +3812,7 @@
       "checksum": "sha256:cf61b9309b5ba90518ecefe52b33322f798528b25e8e47f2f253a2e2744f3d62",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3823,7 +3823,7 @@
       "checksum": "sha256:27f3011d7e6156fd4385e03de711c23252500e03439f86c257ec67e91737ac1b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3834,7 +3834,7 @@
       "checksum": "sha256:e3de495fd505aed7f42c38e907779a3af6059b10e30015809be991fe517a373a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3845,7 +3845,7 @@
       "checksum": "sha256:e4416cc2856be6423d882178e7176426127d01a19ac7641412aa3a6ae3cc3653",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3856,7 +3856,7 @@
       "checksum": "sha256:fd9472cf16cea00a322261e8a7b1164a5c47f01e48f228f390cd2aaba1dbe23d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3867,7 +3867,7 @@
       "checksum": "sha256:f2dc3f5393017efbb7dd79974c576388a145b5dbcf0d1d40b7cca71e8cbfde58",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3878,7 +3878,7 @@
       "checksum": "sha256:53cef2bbacd26d0c883a5fbf47bfb7605841ecf7e78866df4cc0cb0d77bf9226",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3889,7 +3889,7 @@
       "checksum": "sha256:f936841498d7ec3298fc5df2261ce567892da5d4a2201e7fc445e586c1ac29e9",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3900,7 +3900,7 @@
       "checksum": "sha256:1930a6c260132ad283172b9976f86a518d9424f3727ccbdad9ddff38d270d24c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3911,7 +3911,7 @@
       "checksum": "sha256:56b43f99bd5452b5de2265309d0a76df8b3b99c566fe8b1e35aa1f50954595d1",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3922,7 +3922,7 @@
       "checksum": "sha256:9b3245664a3ddc065764a9f2ae932da010c72df593a7533ad91a76e28ba9c74e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3933,7 +3933,7 @@
       "checksum": "sha256:2e52abfa2ce42d1ec624b4a22a75c3be1b423ba0a74fbc7c5e46410152dc248f",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3944,7 +3944,7 @@
       "checksum": "sha256:073ba87ab11081011fbc69e18e9a058e221a7c52c22d4582c0ddccbda8fc4dc5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3955,7 +3955,7 @@
       "checksum": "sha256:b5757c60d00bba90c35597e3d16a191c95cff9b70dbf9f9c5a81a48a665a5cac",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3966,7 +3966,7 @@
       "checksum": "sha256:571faf61ed43e981d125422920a687122b58606f2a0d1c33e3055a1d7518b68e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3977,7 +3977,7 @@
       "checksum": "sha256:6c300b0c92e6c2bec874eb68b06a5e996964b19715186714dca093c6c2a3d722",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3988,7 +3988,7 @@
       "checksum": "sha256:4d378130948ca863203bed13518c4a8808521ece338691eaa268c41aef7a865c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -3999,7 +3999,7 @@
       "checksum": "sha256:c54d7a9fddaadeec4804c3474c90725d0a3ed40e20c4e83596670f51a07a1fc5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4010,7 +4010,7 @@
       "checksum": "sha256:c9bf7791599a01855d3d17fa32a0f8b68b51945e862573e2dc66a0c03d3ee8d0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4021,7 +4021,7 @@
       "checksum": "sha256:4aadcd01f32a62ba628edc19f6046217b8513b975014dde5156d70529fe298c1",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4032,7 +4032,7 @@
       "checksum": "sha256:74bd92d8d51d8bc03a127554e54e3c729fa74460aa97791438591f048f22ad0f",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4043,7 +4043,7 @@
       "checksum": "sha256:9b5dc1ab95dc5154fcccc45c31d583b911eeff2b79eaf89369d320a996698f11",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4054,7 +4054,7 @@
       "checksum": "sha256:d1f119ba0bd50d02cf7061652e8e51cb8f111c67f14710818b9d6f1de51dfeeb",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4065,7 +4065,7 @@
       "checksum": "sha256:01ea96d39d8f8c9ddef4f14bc443633ab6f26c0722ede91cd100bbd5965c03f7",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4076,7 +4076,7 @@
       "checksum": "sha256:058f3048e02349ccc6a56cceab2a2bf0d494c02aeb1dd6a616b2e85ed5ea772d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4087,7 +4087,7 @@
       "checksum": "sha256:5202f0f47b8dce26b6a488401ebf0c16326768b2f00d4c493377bd5323c6154c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4098,7 +4098,7 @@
       "checksum": "sha256:eb02d3bdc6cbbe4362deeb141a7d2d4dee47a876650e3dc0d0f3b9699f00fcbb",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4109,7 +4109,7 @@
       "checksum": "sha256:29f079d0fa2b872667e1951d53dd3b156bf61ece3ad9a69bf79ffcef5f3d0d4c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4120,7 +4120,7 @@
       "checksum": "sha256:76528807648e4c74bf27ff0f1defb1d2d450c27c5f081c199608ac1273d55be0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4131,7 +4131,7 @@
       "checksum": "sha256:88e9027bf3438803b50bbcc3b6f2e13c2100d4345e8b15e22968ee82c94fd9d3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4142,7 +4142,7 @@
       "checksum": "sha256:0e98b87023595b1590c2ca56c918dc6e92fa69196566d28404bf64870419816b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4153,7 +4153,7 @@
       "checksum": "sha256:823a31df0665a0a6ba51a1d4449997e5607d0a7f03ec8498d2b7655acd578b73",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4164,7 +4164,7 @@
       "checksum": "sha256:b33265180aba85c00e309e9bebfa6fcf0801da8ade60bbc80ded4964a27abdf9",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4175,7 +4175,7 @@
       "checksum": "sha256:f489fe622c4063bc1c8c248e93d0c75fa8e20c138e046c085baf6c6cc9c81404",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4186,7 +4186,7 @@
       "checksum": "sha256:e8dd687fa5f023b548e98ff7e2b59bf3f03f6ae41830d52284eda5b0ac3715ad",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4197,7 +4197,7 @@
       "checksum": "sha256:4de102bc60b13d426d649693acfbdf1eca746641879aca80031a85019e3518c9",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4208,7 +4208,7 @@
       "checksum": "sha256:15b15c93dba4a2fe52cd4b51e6d3cba0c748f91ba1d203d249f0186a89434248",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4219,7 +4219,7 @@
       "checksum": "sha256:008a00c63c2b5107352a106e198bad338b46176207b71f9d494943572cf90417",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4230,7 +4230,7 @@
       "checksum": "sha256:1048899b62776ef56d03a822c7552a69f16022b03d204444b5b20152cf923306",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4241,7 +4241,7 @@
       "checksum": "sha256:abcd464a9786b8f955f57a1ab2fada2b0e72f21d264f0dffcd3d9449f937b2ac",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4252,7 +4252,7 @@
       "checksum": "sha256:20f9350b38b2aefd0eb22bc6cad1c5fa2f36fb628586ee5eb80a7aca872309cd",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4263,7 +4263,7 @@
       "checksum": "sha256:23f728195df77a82f16b4e2db877c2a1d33d315b52ffd2330015525457d35fea",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4274,7 +4274,7 @@
       "checksum": "sha256:4a9a612dd531f137bd2085ac379b7a385a25473491c1c5d74c3d4484631fe8ae",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4285,7 +4285,7 @@
       "checksum": "sha256:3a58485f5922548e0f8a4d14e48aed65bfcb4f57327bac10d4e00a17b8b6894e",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4296,7 +4296,7 @@
       "checksum": "sha256:39845421c7b055d1087107ee316e48085de33f2d1b16387644e1d524699ac2ed",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4307,7 +4307,7 @@
       "checksum": "sha256:2a88e835fddf5007627275320493fce27ae2a3e1bba82cbe415106121af6e37b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4318,7 +4318,7 @@
       "checksum": "sha256:3e88ed145f0dfdf693ac93ffc9f6763dfaad09445ee150d61b0174cb05bd9d82",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4329,7 +4329,7 @@
       "checksum": "sha256:669d33f6c752600e973dad645c8e8d9cab2cb12d3639ef01a42d3d553b1c043b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4340,7 +4340,7 @@
       "checksum": "sha256:5fe2580bf73a298dcd2620fb2ff79d0cfd0d1a57329baa805e3d39ad4b76327d",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4351,7 +4351,7 @@
       "checksum": "sha256:e21b4950591b404fa7584cb6ac54ad16e69b014b5bbc92941d9786c8f8c0f79c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4362,7 +4362,7 @@
       "checksum": "sha256:708915b2875e28008f98b81f8203cd03856add52b44dfb3098a6b712993bac5a",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4373,7 +4373,7 @@
       "checksum": "sha256:bc62e812c53246e624548b05932213a5e93a7a762835a209dc386c88750ece88",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4384,7 +4384,7 @@
       "checksum": "sha256:ced455f68bb0c99c11f3fcc04f6521d233652d523eb395920af72f56b069baad",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4395,7 +4395,7 @@
       "checksum": "sha256:e07e3bb2904ab7852243696f0b8b65e5d0f926b3bb92add9f4bad9bc265260c4",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4406,7 +4406,7 @@
       "checksum": "sha256:d8bf7e3dcfd85014d698c1fc2bbeecb62121fe4786eea2e600c3f8847cb4cd7e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4417,7 +4417,7 @@
       "checksum": "sha256:d321b472d9f626379074fe30e5fb6283484f53890e8b0379a9bfaf230bc94c46",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4428,7 +4428,7 @@
       "checksum": "sha256:4d0bd1af0ae84082e8b17b480eee30b7a6bb80235d613cad2bcec0bddb205be8",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4439,7 +4439,7 @@
       "checksum": "sha256:ba89893c030cc50e405cfb1b6676569a122f062b198b59f269d329b3ba0822a2",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4450,7 +4450,7 @@
       "checksum": "sha256:74fbcafb87633fa65e6cdf2a924311788971cf0edb5c3e3763ebe0120f908327",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4461,7 +4461,7 @@
       "checksum": "sha256:496ce2ce8136cac053075f9ee8fed3213a7f50bfccc9c279855e1f9960d23b9b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4472,7 +4472,7 @@
       "checksum": "sha256:f3af61fa50a896b61846644a5a5334575c40678e7aa798c4c95cbed43c0084de",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4483,7 +4483,7 @@
       "checksum": "sha256:ea67f7423628697f705189c28ad1d1aca458b7ab5f401656edbdf6023b170182",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4494,7 +4494,7 @@
       "checksum": "sha256:f976e10a72a71dc2d3e27354c96fbd84187f67e6e166bf2d2dcd4c3352f2a382",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4505,7 +4505,7 @@
       "checksum": "sha256:6141090864fb1d33600120727835f91a0d17e7b8e462b67a20cc33da20ba8ba3",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4516,7 +4516,7 @@
       "checksum": "sha256:3c6d73cc9f930630cb901a249cf682fbd6db4768e8d90f1810ba8cb454fbb319",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4527,7 +4527,7 @@
       "checksum": "sha256:da476c6ce7bf9c91ddbe1c858819ca47bb99d0d2cbb7845734994a2978e8d8e8",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4538,7 +4538,7 @@
       "checksum": "sha256:f4202f9d61e0d8e3a2e5d9852e2ccd05a0115f2b3b9bf4e1adf6a02149e54981",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4549,7 +4549,7 @@
       "checksum": "sha256:eb68f9e30cc2fbb40c42cea1ce90522b07fbe2576e0e88e2c31b2d25f4769362",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4560,7 +4560,7 @@
       "checksum": "sha256:a5c11a8c5f9c435ec76292b992a01e04e6d7083414e526982bcae2a04007395f",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4571,7 +4571,7 @@
       "checksum": "sha256:310cfe29f58629b6d5168fced339433c36216da9615d7ab5f4e60ff691011006",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4582,7 +4582,7 @@
       "checksum": "sha256:8e1cb3364b8b84ff850f979967ee4f6a530b974a3a96ba65d39dc519c98da4ca",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4593,7 +4593,7 @@
       "checksum": "sha256:24e8ee9f4d387cf0213578a515dd8b27cabf5dac4e2aec242dda2a0e07121f8e",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4604,7 +4604,7 @@
       "checksum": "sha256:6f2cec966e08ba26b915f80ef372e3b8f9c8aafaa5edd94382e395bae91f46ea",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4615,7 +4615,7 @@
       "checksum": "sha256:8c2734309c4bb2dbba7e0b2bce111cd3f4766886f8e4ee6ebf21433bcd3ddf74",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4626,7 +4626,7 @@
       "checksum": "sha256:847af3b8832f0d756abf48b51a696acfaf1c6e1ed00226fe4582496edaab8cd3",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4637,7 +4637,7 @@
       "checksum": "sha256:6b5363c4b08e5a9990f06b91f1eb489f301a5c473348a83160a20233703dc68b",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4647,7 +4647,8 @@
       "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/zulu-1.8.0_442.tar.gz",
       "checksum": "sha256:33b585360b742e2774ec1d67d5422602d743c5078ac115b85aa82e4d9c1011d1",
       "metadata": {
-        "distribution": "zulu"
+        "distribution": "zulu",
+        "cedar_stacks": ["heroku-20", "heroku-22", "heroku-24"]
       }
     },
     {
@@ -4658,7 +4659,7 @@
       "checksum": "sha256:98a8d13df2ac7b9b62710f9d012d2a09313e23b4632d46c6d9a06e5f9c4f7723",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4669,7 +4670,7 @@
       "checksum": "sha256:e4416cc2856be6423d882178e7176426127d01a19ac7641412aa3a6ae3cc3653",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4680,7 +4681,7 @@
       "checksum": "sha256:2d33e70065d928c37fc86b668a7c8e8778d49a3a425ec4ad24cde287796dd8d5",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4690,7 +4691,8 @@
       "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/zulu-11.0.26.tar.gz",
       "checksum": "sha256:ca6734b5659430f800270603a4730fb4d25f83da7c2198b4653984655216c800",
       "metadata": {
-        "distribution": "zulu"
+        "distribution": "zulu",
+        "cedar_stacks": ["heroku-20", "heroku-22", "heroku-24"]
       }
     },
     {
@@ -4701,7 +4703,7 @@
       "checksum": "sha256:8ca064e7e25c7ef6c8288b8af4ae0931730d096218bb0d698ba4ee18495e3a21",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4712,7 +4714,7 @@
       "checksum": "sha256:3992dd6998436f75f2f18b6f57bdd605068fef220f0a46cb72492b4e0df0a01c",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4723,7 +4725,7 @@
       "checksum": "sha256:4aadcd01f32a62ba628edc19f6046217b8513b975014dde5156d70529fe298c1",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4733,7 +4735,8 @@
       "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/zulu-17.0.14.tar.gz",
       "checksum": "sha256:bfac91cce5c1fd3aa208dc2fa2a2af953c211882e7da8a8a31d6d01ef9c3607e",
       "metadata": {
-        "distribution": "zulu"
+        "distribution": "zulu",
+        "cedar_stacks": ["heroku-20", "heroku-22", "heroku-24"]
       }
     },
     {
@@ -4744,7 +4747,7 @@
       "checksum": "sha256:5451f5ded10a9fbe840d1f23a96161ddc06c239adc7c941e06a1e30b5cece844",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4755,7 +4758,7 @@
       "checksum": "sha256:39845421c7b055d1087107ee316e48085de33f2d1b16387644e1d524699ac2ed",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4766,7 +4769,7 @@
       "checksum": "sha256:204afc2d70e6ed866b3b7247720ad643204d67d90030695cdbfcec306f8254a0",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4776,7 +4779,8 @@
       "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/zulu-21.0.6.tar.gz",
       "checksum": "sha256:940dd5ca2f3c1e8e6143bae389a383121145d9a981847b18671604aaa1cb6d43",
       "metadata": {
-        "distribution": "zulu"
+        "distribution": "zulu",
+        "cedar_stacks": ["heroku-20", "heroku-22", "heroku-24"]
       }
     },
     {
@@ -4787,7 +4791,7 @@
       "checksum": "sha256:6faccbd53169da4b1aaf2c66d873a3cbbfb0b54a3267b0dd4b01474baf6bdc48",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4798,7 +4802,7 @@
       "checksum": "sha256:9298919c8dd6f77eec7732752e784e346185574dd51661eb0e7cd7a8ca8ebf30",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4809,7 +4813,7 @@
       "checksum": "sha256:3e285ca06206e5a252fd62688362ca28bfd8fa94f8d06c35503a04445a40414f",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4820,7 +4824,7 @@
       "checksum": "sha256:f54c7c76b888c7f7dc3a33984ec2926050eb6f72fa8fdc1f63f1ed12ef1769a8",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4831,7 +4835,7 @@
       "checksum": "sha256:bc62e812c53246e624548b05932213a5e93a7a762835a209dc386c88750ece88",
       "metadata": {
         "distribution": "zulu",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4841,7 +4845,8 @@
       "url": "https://lang-jvm.s3.us-east-1.amazonaws.com/jdk/heroku-24/zulu-24.0.0.tar.gz",
       "checksum": "sha256:21a533d3f9feded94f00da2b73323b68bdd2a4b7a585b8f26162ad4c4e288a09",
       "metadata": {
-        "distribution": "zulu"
+        "distribution": "zulu",
+        "cedar_stacks": ["heroku-20", "heroku-22", "heroku-24"]
       }
     },
     {
@@ -4852,7 +4857,7 @@
       "checksum": "sha256:13c54ba1adaff61e997585a231b726c12f6f95077841f4e4159e59b951f9d79b",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-24"
+        "cedar_stacks": ["heroku-24"]
       }
     },
     {
@@ -4863,7 +4868,7 @@
       "checksum": "sha256:b90b71155f41d04096e2ad90c53a8fc266fea92cfe2032fade35a16aaa55833d",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-22"
+        "cedar_stacks": ["heroku-22"]
       }
     },
     {
@@ -4874,7 +4879,7 @@
       "checksum": "sha256:dd3cd0eb343fee9d30e4bc46d6a55b1677e275fb7697e68a003eda02701e7736",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stack": "heroku-20"
+        "cedar_stacks": ["heroku-20"]
       }
     }
   ]

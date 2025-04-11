@@ -23,7 +23,7 @@ inventory::query() {
 		($raw_version_string | capture("((?<stack>[^-]*?)-)?(?<version>.*$)")) as $parsed_raw_version_string |
 		(.version_aliases[$parsed_raw_version_string.version] // $parsed_raw_version_string.version) as $version |
 		($parsed_raw_version_string.stack // $default_distribution) as $distribution |
-		.artifacts[] | select(.version == $version and .metadata.distribution == $distribution and .arch == "amd64" and .os == "linux" and (.metadata.cedar_stack? == null or .metadata.cedar_stack? == $stack))
+		.artifacts[] | select(.version == $version and .metadata.distribution == $distribution and .arch == "amd64" and .os == "linux" and ((.metadata.cedar_stacks // []) | index($stack) != null))
 	INVENTORY_QUERY
 
 	jq <"${JVM_COMMON_DIR}/inventory.json" \
