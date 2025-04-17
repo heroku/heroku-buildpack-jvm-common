@@ -8,7 +8,7 @@ LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linu
 LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.78+15-CA (build 11.0.26+4-LTS)'
 LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)'
 LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)'
-LATEST_ZULU_OPENJDK_24_STRING = 'OpenJDK Runtime Environment Zulu24.28+87-CRaC-CA (build 24+36)'
+LATEST_ZULU_OPENJDK_24_STRING = 'OpenJDK Runtime Environment Zulu24.28+83-CA (build 24+36)'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-20' => {
