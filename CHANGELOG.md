@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+
+* OpenJDK distributions are now downloaded from `heroku-buildpacks-jvm.s3.us-east-1.amazonaws.com` instead of `lang-jvm.s3.us-east-1.amazonaws.com`. For users of the Heroku platform, this change has no significance. When users use this buildpack outside of the Heroku platform, firewalls might need reconfiguration to allow the OpenJDK downloads from the new location. ([#359](https://github.com/heroku/heroku-buildpack-jvm-common/pull/359))
 
 ## [v162] - 2025-03-19
 
