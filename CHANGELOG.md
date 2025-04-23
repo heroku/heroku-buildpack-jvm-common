@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v163] - 2025-04-23
+
 ### Changed
 
 * OpenJDK distributions are now downloaded from `heroku-buildpacks-jvm.s3.us-east-1.amazonaws.com` instead of `lang-jvm.s3.us-east-1.amazonaws.com`. For users of the Heroku platform, this change has no significance. When users use this buildpack outside of the Heroku platform, firewalls might need reconfiguration to allow the OpenJDK downloads from the new location. ([#359](https://github.com/heroku/heroku-buildpack-jvm-common/pull/359))
@@ -473,7 +476,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v162...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v163...main
+[v163]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v162...v163
 [v162]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v161...v162
 [v161]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v160...v161
 [v160]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v159...v160
