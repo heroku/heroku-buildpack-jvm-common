@@ -2,27 +2,27 @@
 
 require_relative 'spec_helper'
 
-LATEST_HEROKU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (build 1.8.0_442-heroku-b06)'
-LATEST_HEROKU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment (build 21.0.6+7)'
-LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK 64-Bit Server VM (Zulu 8.84.0.15-CA-linux64) (build 25.442-b06, mixed mode)'
-LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.78+15-CA (build 11.0.26+4-LTS)'
-LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)'
-LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)'
-LATEST_ZULU_OPENJDK_24_STRING = 'OpenJDK Runtime Environment Zulu24.28+83-CA (build 24+36)'
+LATEST_HEROKU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (build 1.8.0_452-heroku-b09)'
+LATEST_HEROKU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment (build 21.0.7+6)'
+LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK 64-Bit Server VM (Zulu 8.86.0.25-CA-linux64) (build 25.452-b09, mixed mode)'
+LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.80+21-CA (build 11.0.27+6-LTS)'
+LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.58+21-CA (build 17.0.15+6-LTS)'
+LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.42+19-CA (build 21.0.7+6-LTS)'
+LATEST_ZULU_OPENJDK_24_STRING = 'OpenJDK Runtime Environment Zulu24.30+11-CA (build 24.0.1+9)'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-20' => {
     nil => LATEST_HEROKU_OPENJDK_8_STRING,
     '1.8' => LATEST_HEROKU_OPENJDK_8_STRING,
     '8' => LATEST_HEROKU_OPENJDK_8_STRING,
-    '11' => 'OpenJDK Runtime Environment (build 11.0.26+4)',
-    '17' => 'OpenJDK Runtime Environment (build 17.0.14+7)',
+    '11' => 'OpenJDK Runtime Environment (build 11.0.27+6)',
+    '17' => 'OpenJDK Runtime Environment (build 17.0.15+6)',
     '21' => LATEST_HEROKU_OPENJDK_21_STRING,
-    '24' => 'OpenJDK Runtime Environment (build 24+36)',
+    '24' => 'OpenJDK Runtime Environment (build 24.0.1+9)',
     'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.6' => LATEST_HEROKU_OPENJDK_21_STRING,
-    'zulu-21.0.6' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.7' => LATEST_HEROKU_OPENJDK_21_STRING,
+    'zulu-21.0.7' => LATEST_ZULU_OPENJDK_21_STRING,
   },
   'heroku-22' => {
     nil => LATEST_ZULU_OPENJDK_8_STRING,
@@ -34,8 +34,8 @@ EXPECTED_JAVA_VERSIONS = {
     '24' => LATEST_ZULU_OPENJDK_24_STRING,
     'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.6' => LATEST_ZULU_OPENJDK_21_STRING,
-    'heroku-21.0.6' => LATEST_HEROKU_OPENJDK_21_STRING,
+    '21.0.7' => LATEST_ZULU_OPENJDK_21_STRING,
+    'heroku-21.0.7' => LATEST_HEROKU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
     nil => LATEST_ZULU_OPENJDK_21_STRING,
@@ -47,8 +47,8 @@ EXPECTED_JAVA_VERSIONS = {
     '24' => LATEST_ZULU_OPENJDK_24_STRING,
     'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.6' => LATEST_ZULU_OPENJDK_21_STRING,
-    'heroku-21.0.6' => LATEST_HEROKU_OPENJDK_21_STRING,
+    '21.0.7' => LATEST_ZULU_OPENJDK_21_STRING,
+    'heroku-21.0.7' => LATEST_HEROKU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
