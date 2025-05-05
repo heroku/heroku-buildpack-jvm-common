@@ -8,16 +8,12 @@ JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd ..
 #
 # Usage:
 # ```
-# inventory::query "zulu-21" "heroku-20" | jq -r ".url"
+# inventory::query "zulu-21" "heroku-24" | jq -r ".url"
 # ```
 inventory::query() {
 	local raw_version_string="${1}"
 	local stack="${2}"
-
 	local default_distribution="zulu"
-	if [[ "${stack}" == "heroku-20" ]]; then
-		default_distribution="heroku"
-	fi
 
 	read -d '' -r INVENTORY_QUERY <<-'INVENTORY_QUERY'
 		($raw_version_string | capture("((?<stack>[^-]*?)-)?(?<version>.*$)")) as $parsed_raw_version_string |
