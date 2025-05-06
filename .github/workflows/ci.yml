@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stack: ["heroku-20", "heroku-22", "heroku-24"]
+        stack: ["heroku-22", "heroku-24"]
     env:
       HATCHET_APP_LIMIT: 100
       PARALLEL_SPLIT_TEST_PROCESSES: 8
@@ -60,13 +60,13 @@ jobs:
     runs-on: ubuntu-22.04
     needs: lint
     container:
-      image: "${{ fromJson('{ \"heroku-20\": \"heroku/heroku:20\", \"heroku-22\": \"heroku/heroku:22\", \"heroku-24\": \"heroku/heroku:24\" }')[matrix.stack] }}"
+      image: "${{ fromJson('{ \"heroku-22\": \"heroku/heroku:22\", \"heroku-24\": \"heroku/heroku:24\" }')[matrix.stack] }}"
       options: --user root
       env:
         STACK: ${{ matrix.stack }}
     strategy:
       matrix:
-        stack: ["heroku-20", "heroku-22", "heroku-24"]
+        stack: ["heroku-22", "heroku-24"]
     steps:
       - uses: actions/checkout@v4
       - run: test/jdbc.sh

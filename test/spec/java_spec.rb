@@ -11,19 +11,6 @@ LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.42+19-CA (bu
 LATEST_ZULU_OPENJDK_24_STRING = 'OpenJDK Runtime Environment Zulu24.30+11-CA (build 24.0.1+9)'
 
 EXPECTED_JAVA_VERSIONS = {
-  'heroku-20' => {
-    nil => LATEST_HEROKU_OPENJDK_8_STRING,
-    '1.8' => LATEST_HEROKU_OPENJDK_8_STRING,
-    '8' => LATEST_HEROKU_OPENJDK_8_STRING,
-    '11' => 'OpenJDK Runtime Environment (build 11.0.27+6)',
-    '17' => 'OpenJDK Runtime Environment (build 17.0.15+6)',
-    '21' => LATEST_HEROKU_OPENJDK_21_STRING,
-    '24' => 'OpenJDK Runtime Environment (build 24.0.1+9)',
-    'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
-    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.7' => LATEST_HEROKU_OPENJDK_21_STRING,
-    'zulu-21.0.7' => LATEST_ZULU_OPENJDK_21_STRING,
-  },
   'heroku-22' => {
     nil => LATEST_ZULU_OPENJDK_8_STRING,
     '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
@@ -144,7 +131,7 @@ RSpec.describe 'Java installation' do
     end
   end
 
-  context 'when no OpenJDK version is specified on Heroku-20/Heroku-22', stacks: %w[heroku-20 heroku-22] do
+  context 'when no OpenJDK version is specified on Heroku-22', stacks: %w[heroku-22] do
     let(:app) { Hatchet::Runner.new('empty') }
 
     it 'emits the correct warning' do
