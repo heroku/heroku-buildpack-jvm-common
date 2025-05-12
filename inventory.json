@@ -2544,17 +2544,6 @@
       }
     },
     {
-      "version": "21.0.7",
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://heroku-buildpacks-jvm.s3.us-east-1.amazonaws.com/openjdk/heroku/amd64/heroku-24/21.0.7.tar.gz",
-      "checksum": "sha256:163f79b010c58b55ad8862fe151cbbd6d4de5b4a202456a334580072934c6e16",
-      "metadata": {
-        "distribution": "heroku",
-        "cedar_stacks": ["heroku-24"]
-      }
-    },
-    {
       "version": "24.0.1",
       "os": "linux",
       "arch": "amd64",
