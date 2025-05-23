@@ -2,8 +2,8 @@
   "version_aliases": {
     "1.7": "1.7.0_352",
     "7": "1.7.0_352",
-    "1.8": "1.8.0_442",
-    "8": "1.8.0_442",
+    "1.8": "1.8.0_452",
+    "8": "1.8.0_452",
     "11": "11.0.27",
     "13": "13.0.14",
     "15": "15.0.10",
@@ -1571,8 +1571,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -1742,8 +1742,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -1756,8 +1756,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -1770,8 +1770,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2295,8 +2295,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2309,8 +2309,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2337,8 +2337,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2378,8 +2378,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2392,8 +2392,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2420,8 +2420,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2434,8 +2434,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2525,7 +2525,9 @@
       "checksum": "sha256:163f79b010c58b55ad8862fe151cbbd6d4de5b4a202456a334580072934c6e16",
       "metadata": {
         "distribution": "heroku",
-        "cedar_stacks": ["heroku-24"]
+        "cedar_stacks": [
+          "heroku-24"
+        ]
       }
     },
     {
@@ -2564,8 +2566,8 @@
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
-          "heroku-24",
-          "heroku-22"
+          "heroku-22",
+          "heroku-24"
         ]
       }
     },
@@ -2589,6 +2591,46 @@
       "arch": "amd64",
       "url": "https://heroku-buildpacks-jvm.s3.us-east-1.amazonaws.com/openjdk/zulu/amd64/24.0.1.tar.gz",
       "checksum": "sha256:82199bdfbb7950c1d49fcd46122574b10cbf8353060d5e90b14a60787e55c429",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24"
+        ]
+      }
+    },
+    {
+      "version": "1.8.0_452",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm-staging2.s3.us-east-1.amazonaws.com/openjdk/heroku/amd64/heroku-22/1.8.0_452.tar.gz",
+      "checksum": "sha256:695b63e411a7493006697f418aa07e902b5ec66b0b406827a119c7e8c68c40c6",
+      "metadata": {
+        "distribution": "heroku",
+        "cedar_stacks": [
+          "heroku-22"
+        ]
+      }
+    },
+    {
+      "version": "1.8.0_452",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm-staging2.s3.us-east-1.amazonaws.com/openjdk/heroku/amd64/heroku-24/1.8.0_452.tar.gz",
+      "checksum": "sha256:d8af8894accafea61d1d6aea298daa515087c3dbe52d16a18e3ef32ba7f98a31",
+      "metadata": {
+        "distribution": "heroku",
+        "cedar_stacks": [
+          "heroku-24"
+        ]
+      }
+    },
+    {
+      "version": "1.8.0_452",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://lang-jvm-staging2.s3.us-east-1.amazonaws.com/openjdk/zulu/amd64/1.8.0_452.tar.gz",
+      "checksum": "sha256:11b4b7a149b7cd757f711701e06ea1c5f3155dc24d456b6104e53c4254b19883",
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
