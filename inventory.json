@@ -12,7 +12,7 @@
     "18": "18.0.2.1",
     "19": "19.0.2",
     "20": "20.0.2",
-    "21": "21.0.7",
+    "21": "21.0.6",
     "22": "22.0.2",
     "23": "23.0.2",
     "24": "24.0.1",
@@ -2595,34 +2595,6 @@
         "cedar_stacks": [
           "heroku-24",
           "heroku-22"
-        ]
-      }
-    },
-    {
-      "version": "21.0.7",
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://heroku-buildpacks-jvm.s3.us-east-1.amazonaws.com/openjdk/zulu/amd64/21.0.7.tar.gz",
-      "checksum": "sha256:fa79f1578c5a1e26687344c97431c5f1a0389a1f4b3263ecc50df07186be7257",
-      "metadata": {
-        "distribution": "zulu",
-        "cedar_stacks": [
-          "heroku-22",
-          "heroku-24"
-        ]
-      }
-    },
-    {
-      "version": "24.0.1",
-      "os": "linux",
-      "arch": "amd64",
-      "url": "https://heroku-buildpacks-jvm.s3.us-east-1.amazonaws.com/openjdk/zulu/amd64/24.0.1.tar.gz",
-      "checksum": "sha256:82199bdfbb7950c1d49fcd46122574b10cbf8353060d5e90b14a60787e55c429",
-      "metadata": {
-        "distribution": "zulu",
-        "cedar_stacks": [
-          "heroku-22",
-          "heroku-24"
         ]
       }
     }
