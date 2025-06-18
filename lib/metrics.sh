@@ -35,7 +35,7 @@ metrics::set_raw() {
 	local value="${2}"
 
 	local new_data_file_contents
-	new_data_file_contents=$(jq <"${METRICS_DATA_FILE}" --arg key "${key}" --argjson value "${value}" '. + { $key: $value }')
+	new_data_file_contents=$(jq <"${METRICS_DATA_FILE}" --arg key "${key}" --argjson value "${value}" '. + { ($key): ($value) }')
 
 	echo "${new_data_file_contents}" >"${METRICS_DATA_FILE}"
 }
