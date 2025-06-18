@@ -4,7 +4,7 @@
 # The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
 # be invoked.
 
-JVM_COMMON_BUILDPACK_DIR="${JVM_COMMON_BUILDPACK_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
+JVM_COMMON_BUILDPACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
 
 # Some users use this buildpack outside of the Heroku platform where STACK might
 # not be set. It should always default to the latest stack.
@@ -23,8 +23,8 @@ install_openjdk() {
 	local openjdk_install_dir="${build_dir}/.jdk"
 
 	if [ -d "${openjdk_install_dir}" ]; then
-		_conditional_meta_set "openjdk_version" "provided"
-		_conditional_meta_set "openjdk_distribution" "provided"
+		metrics::conditional_set_string "openjdk_version" "provided"
+		metrics::conditional_set_string "openjdk_distribution" "provided"
 
 		output::step "Using provided JDK"
 
@@ -36,7 +36,7 @@ install_openjdk() {
 
 	local openjdk_version_selector
 	openjdk_version_selector="$(java_properties::get "${build_dir}/system.properties" "java.runtime.version")"
-	_conditional_meta_set "openjdk_version_selector" "${openjdk_version_selector}"
+	metrics::conditional_set_string "openjdk_version_selector" "${openjdk_version_selector}"
 
 	if [ -z "${openjdk_version_selector}" ]; then
 		if [ "${STACK}" == "heroku-24" ]; then
@@ -117,8 +117,8 @@ install_openjdk() {
 	local openjdk_url
 	openjdk_url=$(jq -r '.url' <<<"${openjdk_json}")
 
-	_conditional_meta_set "openjdk_version" "${openjdk_version}"
-	_conditional_meta_set "openjdk_distribution" "${openjdk_distribution}"
+	metrics::conditional_set_string "openjdk_version" "${openjdk_version}" || true
+	metrics::conditional_set_string "openjdk_distribution" "${openjdk_distribution}"
 
 	output::step "Installing ${openjdk_distribution_name} ${openjdk_version}"
 
@@ -134,7 +134,7 @@ install_openjdk() {
 	tar -pxzf "${jdk_tarball}" -C "${openjdk_install_dir}"
 	rm "${jdk_tarball}"
 
-	_conditional_meta_time "openjdk_install_duration" "${openjdk_install_start_time}"
+	metrics::conditional_set_time "openjdk_install_duration" "${openjdk_install_start_time}"
 
 	# Link base image Java keystore into the installed OpenJDK distribution, replacing the bundled
 	# certificates. Linking ensures that when the application image is rebased, the certificates are
@@ -191,7 +191,7 @@ install_openjdk() {
 
 	# Apply the JDK overlay to the installed OpenJDK
 	if [[ -d "${build_dir}/.jdk-overlay/" ]]; then
-		_conditional_meta_set "app_has_jdk_overlay" "true"
+		metrics::conditional_set_raw "app_has_jdk_overlay" "true"
 
 		# Some symlinks need to be removed before the final cp command so that it doesn't fail.
 		for path in jre/lib/security/cacerts lib/security/cacerts; do
@@ -202,7 +202,7 @@ install_openjdk() {
 
 		cp -r "${build_dir}/.jdk-overlay/"* "${openjdk_install_dir}"
 	else
-		_conditional_meta_set "app_has_jdk_overlay" "false"
+		metrics::conditional_set_raw "app_has_jdk_overlay" "false"
 	fi
 }
 
@@ -226,13 +226,16 @@ install_java_with_overlay() {
 # the metadata file for reporting. To ensure we don't break those buildpacks but still be able to
 # set metadata about OpenJDK, we have wrapper functions that check for a proper setup first.
 
-_conditional_meta_set() {
-	if type -t meta_set >/dev/null; then meta_set "${1}" "${2}"; fi
+_install_conditional_function_wrapper() {
+	local wrapper_function_name="${1}"
+	local target_function_name="${2}"
+
+	eval "${wrapper_function_name}() { if type -t ${target_function_name} >/dev/null; then ${target_function_name} \"\$@\"; fi }"
 }
 
-_conditional_meta_time() {
-	if type -t meta_time >/dev/null; then meta_time "${1}" "${2}"; fi
-}
+_install_conditional_function_wrapper metrics::conditional_set_raw metrics::set_raw
+_install_conditional_function_wrapper metrics::conditional_set_string metrics::set_string
+_install_conditional_function_wrapper metrics::conditional_set_time metrics::set_time
 
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/legacy.sh"
 legacy::install_removed_function_handler install_java validate_jdk_url is_java_version_change detect_java_version jdk_overlay
