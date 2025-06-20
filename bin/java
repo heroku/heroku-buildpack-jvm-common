@@ -226,6 +226,13 @@ install_java_with_overlay() {
 # the metadata file for reporting. To ensure we don't break those buildpacks but still be able to
 # set metadata about OpenJDK, we have wrapper functions that check for a proper setup first.
 
+# Creates a conditional function wrapper that only calls the target function if it exists.
+# This ensures that metrics functions don't fail when metrics are not set up.
+#
+# Usage:
+# ```
+# _install_conditional_function_wrapper metrics::conditional_set_raw metrics::set_raw
+# ```
 _install_conditional_function_wrapper() {
 	local wrapper_function_name="${1}"
 	local target_function_name="${2}"
