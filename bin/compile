@@ -6,18 +6,15 @@ export BUILD_DIR="${1}"
 export CACHE_DIR="${2}"
 export ENV_DIR="${3}"
 
-JVM_COMMON_DIR="${JVM_COMMON_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)}"
+JVM_COMMON_BUILDPACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
 
-source "${JVM_COMMON_DIR}/lib/util.sh"
-source "${JVM_COMMON_DIR}/lib/metadata.sh"
-source "${JVM_COMMON_DIR}/bin/java"
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/util.sh"
+source "${JVM_COMMON_BUILDPACK_DIR}/lib/metrics.sh"
+source "${JVM_COMMON_BUILDPACK_DIR}/bin/java"
 
-# Initialise the buildpack metadata store.
-# This is used to track state across builds (for cache invalidation and messaging when build
-# configuration changes) and also so that `bin/report` can generate the build report.
-meta_init "${CACHE_DIR}" "jvm-common"
-meta_setup
+metrics::init "${CACHE_DIR}" "jvm-common"
+metrics::setup
 
 util::export_env_dir "${ENV_DIR}"
 
-install_openjdk "${BUILD_DIR}" "${JVM_COMMON_DIR}"
+install_openjdk "${BUILD_DIR}" "${JVM_COMMON_BUILDPACK_DIR}"
