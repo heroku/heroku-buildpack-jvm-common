@@ -134,7 +134,7 @@ install_openjdk() {
 	tar -pxzf "${jdk_tarball}" -C "${openjdk_install_dir}"
 	rm "${jdk_tarball}"
 
-	metrics::conditional_set_time "openjdk_install_duration" "${openjdk_install_start_time}"
+	metrics::conditional_set_duration "openjdk_install_duration" "${openjdk_install_start_time}"
 
 	# Link base image Java keystore into the installed OpenJDK distribution, replacing the bundled
 	# certificates. Linking ensures that when the application image is rebased, the certificates are
@@ -242,7 +242,7 @@ _install_conditional_function_wrapper() {
 
 _install_conditional_function_wrapper metrics::conditional_set_raw metrics::set_raw
 _install_conditional_function_wrapper metrics::conditional_set_string metrics::set_string
-_install_conditional_function_wrapper metrics::conditional_set_time metrics::set_time
+_install_conditional_function_wrapper metrics::conditional_set_duration metrics::set_duration
 
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/legacy.sh"
 legacy::install_removed_function_handler install_java validate_jdk_url is_java_version_change detect_java_version jdk_overlay

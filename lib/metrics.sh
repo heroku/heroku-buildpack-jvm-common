@@ -89,9 +89,9 @@ metrics::set_string() {
 # ```
 # start_time=$(util::nowms)
 # # ... some operation ...
-# metrics::set_time "compile_duration" "${start_time}"
+# metrics::set_duration "compile_duration" "${start_time}"
 # ```
-metrics::set_time() {
+metrics::set_duration() {
 	local key="${1}"
 	local start="${2}"
 	local end="${3:-$(util::nowms)}"
