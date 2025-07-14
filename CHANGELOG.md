@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v165] - 2025-07-14
+
 * Remove heroku-20 support ([#365](https://github.com/heroku/heroku-buildpack-jvm-common/pull/365))
 
 ## [v164] - 2025-04-25
@@ -481,7 +484,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v164...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v165...main
+[v165]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v164...v165
 [v164]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v163...v164
 [v163]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v162...v163
 [v162]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v161...v162
