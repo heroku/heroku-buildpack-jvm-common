@@ -59,7 +59,10 @@ jvm_options() {
 jvm_options="$(jvm_options)"
 export JAVA_OPTS="${jvm_options}${JAVA_OPTS:+" "}${JAVA_OPTS:-}"
 
+# Only display log output for web dynos to prevent breaking one-off dyno scripting and MCP server use-cases.
+if [[ "${DYNO:-}" == web.* ]]; then
+	echo "Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them." >&2
+fi
 if ! [[ "${DYNO}" =~ ^run\..*$ ]]; then
-	echo "Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them."
 	export JAVA_TOOL_OPTIONS="${jvm_options}${JAVA_TOOL_OPTIONS:+" "}${JAVA_TOOL_OPTIONS:-}"
 fi
