@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Redirect JAVA_TOOL_OPTIONS logging to stderr to fix MCP server compatibility. ([#379](https://github.com/heroku/heroku-buildpack-jvm-common/pull/379))
 
 ## [v166] - 2025-07-16
 
