@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v167] - 2025-07-31
+
 * Redirect JAVA_TOOL_OPTIONS logging to stderr to fix MCP server compatibility. ([#379](https://github.com/heroku/heroku-buildpack-jvm-common/pull/379))
 
 ## [v166] - 2025-07-16
@@ -489,7 +492,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v166...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v167...main
+[v167]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v166...v167
 [v166]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v165...v166
 [v165]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v164...v165
 [v164]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v163...v164
