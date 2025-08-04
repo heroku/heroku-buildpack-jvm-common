@@ -45,7 +45,7 @@ EXPECTED_JAVA_VERSIONS = {
 # to validate they were properly installed. However, This is not a
 # replacement for testing their functionality in dedicated tests!
 FILE_MD5_HASHES = {
-  '.profile.d/jvmcommon.sh' => 'f9b1d2b06dfa5f745edc834df4619ed7',
+  '.profile.d/jvmcommon.sh' => '3a0ba7b9d8e613c856c85bd749f7ddd1',
   '.profile.d/default-proc-warning.sh' => 'bb7cd4e1747e2a0c0e9a7137e84d3cf5',
   '.profile.d/heroku-jvm-metrics.sh' => '9f48b384bc3d9161e45e15906793b191',
   '.profile.d/jdbc.sh' => '7a2abf4a9aaec0b98e3681fbc2d4d215',
