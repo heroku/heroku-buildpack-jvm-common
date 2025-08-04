@@ -60,8 +60,11 @@ jvm_options="$(jvm_options)"
 export JAVA_OPTS="${jvm_options}${JAVA_OPTS:+" "}${JAVA_OPTS:-}"
 
 if ! [[ "${DYNO}" =~ ^run\..*$ ]]; then
-	# Redirecting to stderr to avoid polluting the application's stdout stream. This is especially important for
-	# MCP servers using the stdio transport: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
-	echo "Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them." >&2
+	# Avoid logging this message on MCP servers to prevent polluting the application's output.
+	# This is especially important for MCP servers using the stdio transport: 
+	# https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
+	if ! [[ "${DYNO}" =~ ^mcp.*$ ]]; then
+		echo "Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them." >&2
+	fi
 	export JAVA_TOOL_OPTIONS="${jvm_options}${JAVA_TOOL_OPTIONS:+" "}${JAVA_TOOL_OPTIONS:-}"
 fi
