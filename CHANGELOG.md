@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v168] - 2025-08-04
+
 * Do not log JAVA_TOOL_OPTIONS messages on MCP servers. ([#382](https://github.com/heroku/heroku-buildpack-jvm-common/pull/382))
 
 ## [v167] - 2025-07-31
@@ -493,7 +496,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v167...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v168...main
+[v168]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v167...v168
 [v167]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v166...v167
 [v166]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v165...v166
 [v165]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v164...v165
