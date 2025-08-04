@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Do not log JAVA_TOOL_OPTIONS messages on MCP servers. ([#382](https://github.com/heroku/heroku-buildpack-jvm-common/pull/382))
 
 ## [v167] - 2025-07-31
 
