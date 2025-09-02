@@ -5,6 +5,7 @@
 
 ## [v169] - 2025-09-02
 
+* Fix `java_properties::get` function when used with `set -euo pipefail`. ([#386](https://github.com/heroku/heroku-buildpack-jvm-common/pull/386))
 
 ## [v168] - 2025-08-04
 
