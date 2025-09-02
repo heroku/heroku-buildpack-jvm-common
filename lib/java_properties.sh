@@ -2,7 +2,9 @@
 
 # This is technically redundant, since all consumers of this lib will have enabled these,
 # however, it helps Shellcheck realise the options under which these functions will run.
-set -euo pipefail
+# Temporarily commented out since not all downstream buildpacks that are sourcing the files of
+# this buildpack work with these settings yet.
+# set -euo pipefail
 
 # Reads the value of a key from a Java properties file
 #
@@ -18,7 +20,7 @@ function java_properties::get() {
 
 	# Allow grep to fail (via `true`) for handling the case where the file or key is not found.
 	local grep_result
-	grep_result=$(grep -E "^${escaped_key}[[:space:]=]+" "${file}" || true)
+	grep_result=$(grep -E "^${escaped_key}[[:space:]=]+" "${file}" 2>/dev/null || true)
 
 	echo "${grep_result}" | sed -E -e "s/${escaped_key}([\ \t]*=[\ \t]*|[\ \t]+)([_A-Za-z0-9\.-]*).*/\2/g"
 }
