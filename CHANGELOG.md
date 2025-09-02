@@ -3,6 +3,10 @@
 ## [Unreleased]
 
 
+## [v169] - 2025-09-02
+
+* Fix `java_properties::get` function when used with `set -euo pipefail`. ([#386](https://github.com/heroku/heroku-buildpack-jvm-common/pull/386))
+
 ## [v168] - 2025-08-04
 
 * Do not log JAVA_TOOL_OPTIONS messages on MCP servers. ([#382](https://github.com/heroku/heroku-buildpack-jvm-common/pull/382))
@@ -496,7 +500,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v168...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v169...main
+[v169]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v168...v169
 [v168]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v167...v168
 [v167]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v166...v167
 [v166]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v165...v166
