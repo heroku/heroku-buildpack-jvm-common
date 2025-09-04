@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v170] - 2025-09-04
+
 * Fix `jdbc.sh` script when used with `set -euo pipefail`. ([#390](https://github.com/heroku/heroku-buildpack-jvm-common/pull/390))
 
 ## [v169] - 2025-09-02
@@ -501,7 +504,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v169...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v170...main
+[v170]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v169...v170
 [v169]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v168...v169
 [v168]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v167...v168
 [v167]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v166...v167
