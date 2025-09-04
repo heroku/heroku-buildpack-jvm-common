@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Fix `jdbc.sh` script when used with `set -euo pipefail`. ([#390](https://github.com/heroku/heroku-buildpack-jvm-common/pull/390))
 
 ## [v169] - 2025-09-02
 

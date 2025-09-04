@@ -10,7 +10,7 @@ set_jdbc_url() {
 		# We dont consider a non matching string an error and silently exit
 		return 0
 	else
-		# NOTE: These variables also contain delimiters for easier re-concatentation later.
+		# NOTE: These variables also contain delimiters for easier re-concatenation later.
 		# (i.e. :1234 instead of 1234 for port or user:pass@ instead of user:pass for user info.)
 		local original_schema="${BASH_REMATCH[1]}"
 		local original_user_info="${BASH_REMATCH[2]}"
@@ -34,8 +34,8 @@ set_jdbc_url() {
 		done
 
 		# Populate username and password variables for later use. We also add those to the array of query parameters.
-		local username
-		local password
+		local username=""
+		local password=""
 		if [[ $original_user_info =~ ^(.+?):(.+?)@$ ]]; then
 			username="${BASH_REMATCH[1]}"
 			password="${BASH_REMATCH[2]}"
@@ -73,7 +73,7 @@ set_jdbc_url() {
 		esac
 
 		# Fold all query parameters from the associative array into a query string.
-		local modified_query
+		local modified_query=""
 
 		local -r sorted_query_parameter_keys=$(echo -n "${!query_parameters[@]}" | tr " " "\n" | sort | tr "\n" " ")
 		for query_parameter_key in $sorted_query_parameter_keys; do
@@ -121,6 +121,6 @@ if [[ "${DISABLE_SPRING_DATASOURCE_URL:-}" != "true" ]] &&
 	export SPRING_DATASOURCE_PASSWORD="${JDBC_DATABASE_PASSWORD:-}"
 fi
 
-for database_url_variable in $(env | awk -F "=" '{print $1}' | grep "HEROKU_POSTGRESQL_.*_URL"); do
+for database_url_variable in $(env | awk -F "=" '{print $1}' | grep "HEROKU_POSTGRESQL_.*_URL" || true); do
 	set_jdbc_url "$(eval echo "\$${database_url_variable}")" "${database_url_variable//_URL/}_JDBC"
 done
