@@ -45,7 +45,7 @@ install_openjdk() {
 			openjdk_version_selector="21"
 
 			output::warning <<-EOF
-				WARNING: No OpenJDK version specified
+				Warning: No OpenJDK version specified
 
 				Your application does not explicitly specify an OpenJDK
 				version. The latest long-term support (LTS) version will be
@@ -65,7 +65,7 @@ install_openjdk() {
 			openjdk_version_selector="1.8"
 
 			output::warning <<-EOF
-				WARNING: No OpenJDK version specified
+				Warning: No OpenJDK version specified
 
 				Your application does not explicitly specify an OpenJDK
 				version. OpenJDK ${openjdk_version_selector} will be installed.
@@ -85,7 +85,7 @@ install_openjdk() {
 
 	if ! openjdk_json=$(inventory::query "${openjdk_version_selector}" "${STACK}"); then
 		output::error <<-EOF
-			ERROR: Unsupported Java version: ${openjdk_version_selector}
+			Error: Unsupported Java version: ${openjdk_version_selector}
 
 			Please check your system.properties file to ensure the java.runtime.version
 			is among the list of supported version on the Dev Center:

@@ -107,7 +107,7 @@ RSpec.describe 'Java installation' do
         expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
           remote: 
-          remote:  !     WARNING: No OpenJDK version specified
+          remote:  !     Warning: No OpenJDK version specified
           remote:  !     
           remote:  !     Your application does not explicitly specify an OpenJDK
           remote:  !     version. The latest long-term support \\(LTS\\) version will be
@@ -139,7 +139,7 @@ RSpec.describe 'Java installation' do
         expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
           remote: 
-          remote:  !     WARNING: No OpenJDK version specified
+          remote:  !     Warning: No OpenJDK version specified
           remote:  !     
           remote:  !     Your application does not explicitly specify an OpenJDK
           remote:  !     version. OpenJDK 1.8 will be installed.
@@ -174,7 +174,7 @@ RSpec.describe 'Java installation' do
         expect(clean_output(app.output)).to include(<<~OUTPUT)
           remote: -----> JVM Common app detected
           remote: 
-          remote:  !     ERROR: Unsupported Java version: .NET
+          remote:  !     Error: Unsupported Java version: .NET
           remote:  !     
           remote:  !     Please check your system.properties file to ensure the java.runtime.version
           remote:  !     is among the list of supported version on the Dev Center:

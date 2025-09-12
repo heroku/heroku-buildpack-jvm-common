@@ -21,7 +21,7 @@ legacy::removed_handler() {
 	local function_name="${1}"
 
 	output::error <<-EOF
-		ERROR: Function ${function_name} no longer exposed
+		Error: Function ${function_name} no longer exposed
 
 		The buildpack you're using is likely employing Heroku's jvm-common
 		buildpack to install OpenJDK.
