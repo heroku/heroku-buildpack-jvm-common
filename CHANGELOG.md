@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-* Add version selection hint to unsupported Java version error message.
+* Add version selection hint to unsupported Java version error message. ([#392](https://github.com/heroku/heroku-buildpack-jvm-common/pull/392))
 
 ## [v170] - 2025-09-04
 
