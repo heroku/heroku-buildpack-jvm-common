@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Add version selection hint to unsupported Java version error message.
 
 ## [v170] - 2025-09-04
 

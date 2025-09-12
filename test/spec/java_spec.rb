@@ -180,6 +180,10 @@ RSpec.describe 'Java installation' do
           remote:  !     is among the list of supported version on the Dev Center:
           remote:  !     https://devcenter.heroku.com/articles/java-support#supported-java-versions
           remote:  !     
+          remote:  !     To select a version based on the major version, specify only the major
+          remote:  !     version itself (e.g., "21" or "17"). Any other string will be treated
+          remote:  !     as a full version and must match exactly.
+          remote:  !     
           remote:  !     If you continue to have trouble, you can open a support ticket here:
           remote:  !     https://help.heroku.com
           remote:  !     
