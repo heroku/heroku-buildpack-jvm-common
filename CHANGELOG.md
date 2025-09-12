@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v171] - 2025-09-12
+
 * Add version selection hint to unsupported Java version error message. ([#392](https://github.com/heroku/heroku-buildpack-jvm-common/pull/392))
 
 ## [v170] - 2025-09-04
@@ -505,7 +508,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v170...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v171...main
+[v171]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v170...v171
 [v170]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v169...v170
 [v169]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v168...v169
 [v168]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v167...v168
