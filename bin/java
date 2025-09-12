@@ -91,6 +91,10 @@ install_openjdk() {
 			is among the list of supported version on the Dev Center:
 			https://devcenter.heroku.com/articles/java-support#supported-java-versions
 
+			To select a version based on the major version, specify only the major
+			version itself (e.g., "21" or "17"). Any other string will be treated
+			as a full version and must match exactly.
+
 			If you continue to have trouble, you can open a support ticket here:
 			https://help.heroku.com
 
