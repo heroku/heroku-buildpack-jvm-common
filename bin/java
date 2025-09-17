@@ -41,8 +41,8 @@ install_openjdk() {
 	if [ -z "${openjdk_version_selector}" ]; then
 		if [ "${STACK}" == "heroku-24" ]; then
 			# This should always be the latest OpenJDK LTS major version
-			# Next LTS will be OpenJDK 25 with a planned release date of 2025-09-16
-			openjdk_version_selector="21"
+			# Next LTS will be OpenJDK 29 (~September 2027, no scheduled release date yet)
+			openjdk_version_selector="25"
 
 			output::warning <<-EOF
 				Warning: No OpenJDK version specified
