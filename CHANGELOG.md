@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v172] - 2025-09-17
+
 ### Added
 
 * Support for OpenJDK 25. ([#395](https://github.com/heroku/heroku-buildpack-jvm-common/pull/395))
@@ -515,7 +518,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v171...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v172...main
+[v172]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v171...v172
 [v171]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v170...v171
 [v170]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v169...v170
 [v169]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v168...v169
