@@ -6,6 +6,10 @@
 
 * Support for OpenJDK 25. ([#395](https://github.com/heroku/heroku-buildpack-jvm-common/pull/395))
 
+## Changed
+
+* Default OpenJDK major version on `heroku-24` changed from `21` to `25`. This only applies if no version is specified in `system.properties`. ([#396](https://github.com/heroku/heroku-buildpack-jvm-common/pull/396))
+
 ## [v171] - 2025-09-12
 
 * Add version selection hint to unsupported Java version error message. ([#392](https://github.com/heroku/heroku-buildpack-jvm-common/pull/392))

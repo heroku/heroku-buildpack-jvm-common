@@ -25,7 +25,7 @@ EXPECTED_JAVA_VERSIONS = {
     'heroku-21.0.8' => LATEST_HEROKU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
-    nil => LATEST_ZULU_OPENJDK_21_STRING,
+    nil => LATEST_ZULU_OPENJDK_25_STRING,
     '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
     '8' => LATEST_ZULU_OPENJDK_8_STRING,
     '11' => LATEST_ZULU_OPENJDK_11_STRING,
@@ -111,7 +111,7 @@ RSpec.describe 'Java installation' do
           remote:  !     
           remote:  !     Your application does not explicitly specify an OpenJDK
           remote:  !     version. The latest long-term support \\(LTS\\) version will be
-          remote:  !     installed. This currently is OpenJDK 21.
+          remote:  !     installed. This currently is OpenJDK 25.
           remote:  !     
           remote:  !     This default version will change when a new LTS version is
           remote:  !     released. Your application might fail to build with the new
@@ -121,9 +121,9 @@ RSpec.describe 'Java installation' do
           remote:  !     To set the OpenJDK version, add or edit the system.properties
           remote:  !     file in the root directory of your application to contain:
           remote:  !     
-          remote:  !     java.runtime.version = 21
+          remote:  !     java.runtime.version = 25
           remote: 
-          remote: -----> Installing Azul Zulu OpenJDK 21.0.[0-9]+
+          remote: -----> Installing Azul Zulu OpenJDK 25
           remote: -----> Discovering process types
           remote:        Procfile declares types -> \\(none\\)
         REGEX
