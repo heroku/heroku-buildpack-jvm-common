@@ -163,7 +163,7 @@ install_openjdk() {
 	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jvmcommon.sh" "${profile_d_dir}"
 	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/default-proc-warning.sh" "${profile_d_dir}"
 	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jdbc.sh" "${profile_d_dir}"
-	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jvm-redis.sh" "${profile_d_dir}"
+	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/jvm-spring-configuration.sh" "${profile_d_dir}"
 	cp "${JVM_COMMON_BUILDPACK_DIR}/opt/heroku-jvm-metrics.sh" "${profile_d_dir}"
 
 	# Install tool scripts
