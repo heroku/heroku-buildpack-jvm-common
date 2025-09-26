@@ -2,13 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+
+* Additional internal metrics. ([#000]())
 
 ## [v173] - 2025-09-19
 
 ### Added
 
 * Support for automatic Spring AI configuration mapping from Heroku Managed Inference and Agents (MIA) environment variables. ([#398](https://github.com/heroku/heroku-buildpack-jvm-common/pull/398))
-
 
 ## [v172] - 2025-09-17
 
