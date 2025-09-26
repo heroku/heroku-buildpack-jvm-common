@@ -102,6 +102,7 @@ install_openjdk() {
 			Heroku
 		EOF
 
+		metrics::conditional_set_string "failure_reason" "unsupported_openjdk_version"
 		return 1
 	fi
 
