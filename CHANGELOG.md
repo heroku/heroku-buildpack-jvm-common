@@ -4,7 +4,7 @@
 
 ### Added
 
-* Additional internal metrics. ([#000]())
+* Additional internal metrics. ([#400](https://github.com/heroku/heroku-buildpack-jvm-common/pull/400))
 
 ## [v173] - 2025-09-19
 
