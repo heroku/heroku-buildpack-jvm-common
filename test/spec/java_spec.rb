@@ -2,13 +2,13 @@
 
 require_relative 'spec_helper'
 
-LATEST_HEROKU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (build 1.8.0_462-heroku-b08)'
-LATEST_HEROKU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment (build 21.0.8+9)'
-LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.88.0.19-CA-linux64) (build 1.8.0_462-b08)'
-LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.82+19-CA (build 11.0.28+6-LTS)'
-LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.60+17-CA (build 17.0.16+8-LTS)'
-LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.44+17-CA (build 21.0.8+9-LTS)'
-LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.28+85-CA (build 25+36-LTS)'
+LATEST_HEROKU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (build 1.8.0_472-heroku-b08)'
+LATEST_HEROKU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment (build 21.0.9+10)'
+LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.90.0.19-CA-linux64) (build 1.8.0_472-b08)'
+LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.84+17-CA (build 11.0.29+7-LTS)'
+LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.62+17-CA (build 17.0.17+10-LTS)'
+LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.46+19-CA (build 21.0.9+10-LTS)'
+LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.30+17-CA (build 25.0.1+8-LTS)'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-22' => {
@@ -34,8 +34,8 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.8' => LATEST_ZULU_OPENJDK_21_STRING,
-    'heroku-21.0.8' => LATEST_HEROKU_OPENJDK_21_STRING,
+    '21.0.9' => LATEST_ZULU_OPENJDK_21_STRING,
+    'heroku-21.0.9' => LATEST_HEROKU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
