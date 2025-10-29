@@ -1,8 +1,27 @@
 #!/usr/bin/env bash
 
-# This script is a utility for v2 buildpacks that manually download this buildpack to use as a library
-# The `bin/java` script is meant to be sourced so that functions like `install_java_with_overlay` can
-# be invoked.
+# This script is a utility for buildpacks that manually download this buildpack to use it as a library.
+# The `bin/java` script is meant to be sourced so that functions like `install_openjdk` can be invoked.
+#
+# New implementations should source this script in a sub-shell to avoid polluting the calling buildpack's
+# environment with helper functions and variables. If you source this in a sub-shell, you must manually
+# source the host buildpack's `export` script in the parent shell afterwards. The `install_openjdk` function
+# will write to this file to set environment variables like `JAVA_HOME` and update existing variables like
+# `PATH`, but those changes are only available to the host buildpack if you source the file after the
+# sub-shell completes.
+#
+# Example:
+# ```
+# ( source bin/java && install_openjdk "${BUILD_DIR}" "${HOST_BUILDPACK_DIR}" )
+# source "${HOST_BUILDPACK_DIR}/export"
+# ```
+#
+# Direct sourcing without a sub-shell is still supported for legacy buildpacks, but not recommended
+# for new implementations.
+#
+# IMPORTANT: When making changes to this file, ensure that it continues to work correctly when sourced
+# in a sub-shell. Test both the sub-shell pattern (recommended) and direct sourcing (legacy) to avoid
+# breaking existing buildpacks.
 
 JVM_COMMON_BUILDPACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
 
@@ -182,7 +201,8 @@ install_openjdk() {
 	EOF
 
 	# Source the export script manually here to ensure that other buildpacks that use this buildpack as a library
-	# also have the correct environment variables available.
+	# also have the correct environment variables available. If this function is run in a sub-shell as recommended,
+	# the host buildpack has to source this file in the parent shell after calling this function.
 	# shellcheck source=/dev/null
 	source "${host_buildpack_dir}/export"
 
@@ -249,5 +269,8 @@ _install_conditional_function_wrapper metrics::conditional_set_raw metrics::set_
 _install_conditional_function_wrapper metrics::conditional_set_string metrics::set_string
 _install_conditional_function_wrapper metrics::conditional_set_duration metrics::set_duration
 
+# Install handlers for removed functions that were never part of the public API but were used by some
+# legacy buildpacks that sourced this file. These handlers provide helpful error messages for buildpacks
+# that still attempt to call these functions.
 source "${JVM_COMMON_BUILDPACK_DIR}/lib/legacy.sh"
 legacy::install_removed_function_handler install_java validate_jdk_url is_java_version_change detect_java_version jdk_overlay
