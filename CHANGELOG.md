@@ -4,7 +4,7 @@
 
 ### Changed
 
-* Improve documentation in `bin/java` with usage examples, sub-shell best practices, and important notes for maintainers. ([#000](https://github.com/heroku/heroku-buildpack-jvm-common/pull/000))
+* Improve documentation in `bin/java` with usage examples, sub-shell best practices, and important notes for maintainers. ([#407](https://github.com/heroku/heroku-buildpack-jvm-common/pull/407))
 
 ## [v175] - 2025-10-22
 
