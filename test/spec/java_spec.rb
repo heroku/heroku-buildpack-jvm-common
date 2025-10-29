@@ -106,23 +106,23 @@ RSpec.describe 'Java installation' do
       app.deploy do
         expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
-          remote: 
+          remote:
           remote:  !     Warning: No OpenJDK version specified
-          remote:  !     
+          remote:  !
           remote:  !     Your application does not explicitly specify an OpenJDK
           remote:  !     version. The latest long-term support \\(LTS\\) version will be
           remote:  !     installed. This currently is OpenJDK 25.
-          remote:  !     
+          remote:  !
           remote:  !     This default version will change when a new LTS version is
           remote:  !     released. Your application might fail to build with the new
           remote:  !     version. We recommend explicitly setting the required OpenJDK
           remote:  !     version for your application.
-          remote:  !     
+          remote:  !
           remote:  !     To set the OpenJDK version, add or edit the system.properties
           remote:  !     file in the root directory of your application to contain:
-          remote:  !     
+          remote:  !
           remote:  !     java.runtime.version = 25
-          remote: 
+          remote:
           remote: -----> Installing Azul Zulu OpenJDK 25.0.[0-9]+
           remote: -----> Discovering process types
           remote:        Procfile declares types -> \\(none\\)
@@ -138,22 +138,22 @@ RSpec.describe 'Java installation' do
       app.deploy do
         expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
           remote: -----> JVM Common app detected
-          remote: 
+          remote:
           remote:  !     Warning: No OpenJDK version specified
-          remote:  !     
+          remote:  !
           remote:  !     Your application does not explicitly specify an OpenJDK
           remote:  !     version. OpenJDK 1.8 will be installed.
-          remote:  !     
+          remote:  !
           remote:  !     This default version will change at some point. Your
           remote:  !     application might fail to build with the new version. We
           remote:  !     recommend explicitly setting the required OpenJDK version for
           remote:  !     your application.
-          remote:  !     
+          remote:  !
           remote:  !     To set the OpenJDK version, add or edit the system.properties
           remote:  !     file in the root directory of your application to contain:
-          remote:  !     
+          remote:  !
           remote:  !     java.runtime.version = 1.8
-          remote: 
+          remote:
           remote: -----> Installing .* OpenJDK 1.8.0_[0-9]+
           remote: -----> Discovering process types
           remote:        Procfile declares types -> \\(none\\)
@@ -173,23 +173,23 @@ RSpec.describe 'Java installation' do
       app.deploy do
         expect(clean_output(app.output)).to include(<<~OUTPUT)
           remote: -----> JVM Common app detected
-          remote: 
+          remote:
           remote:  !     Error: Unsupported Java version: .NET
-          remote:  !     
+          remote:  !
           remote:  !     Please check your system.properties file to ensure the java.runtime.version
           remote:  !     is among the list of supported version on the Dev Center:
           remote:  !     https://devcenter.heroku.com/articles/java-support#supported-java-versions
-          remote:  !     
+          remote:  !
           remote:  !     To select a version based on the major version, specify only the major
           remote:  !     version itself (e.g., "21" or "17"). Any other string will be treated
           remote:  !     as a full version and must match exactly.
-          remote:  !     
+          remote:  !
           remote:  !     If you continue to have trouble, you can open a support ticket here:
           remote:  !     https://help.heroku.com
-          remote:  !     
+          remote:  !
           remote:  !     Thanks,
           remote:  !     Heroku
-          remote: 
+          remote:
           remote:  !     Push rejected, failed to compile JVM Common app.
         OUTPUT
       end
