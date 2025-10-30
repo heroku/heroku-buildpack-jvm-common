@@ -6,6 +6,10 @@
 
 * Improve documentation in `bin/java` with usage examples, sub-shell best practices, and important notes for maintainers. ([#407](https://github.com/heroku/heroku-buildpack-jvm-common/pull/407))
 
+### Fixed
+
+* Fix "file not found" errors when sourcing the export file in sub-shells with provided JDKs. ([#000](https://github.com/heroku/heroku-buildpack-jvm-common/pull/000))
+
 ## [v175] - 2025-10-22
 
 ### Changed
