@@ -8,7 +8,7 @@
 
 ### Fixed
 
-* Fix "file not found" errors when sourcing the export file in sub-shells with provided JDKs. ([#000](https://github.com/heroku/heroku-buildpack-jvm-common/pull/000))
+* Fix "file not found" errors when sourcing the export file in sub-shells with provided JDKs. ([#408](https://github.com/heroku/heroku-buildpack-jvm-common/pull/408))
 
 ## [v175] - 2025-10-22
 
