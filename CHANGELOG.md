@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v176] - 2025-10-30
+
 ### Changed
 
 * Improve documentation in `bin/java` with usage examples, sub-shell best practices, and important notes for maintainers. ([#407](https://github.com/heroku/heroku-buildpack-jvm-common/pull/407))
@@ -543,7 +546,8 @@ Improved smart defaults.
 * Increased default heap settings for Performance-L dynos
 * Added experimental support for JDBC_DATABASE_URL
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v175...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v176...main
+[v176]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v175...v176
 [v175]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v174...v175
 [v174]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v173...v174
 [v173]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v172...v173
