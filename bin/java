@@ -47,6 +47,11 @@ install_openjdk() {
 
 		output::step "Using provided JDK"
 
+		# The documentation for this function instructs users to source this file when run in a sub-shell.
+		# However, since we're exiting the function early (see below) it will never be written and might cause
+		# "file not found" errors downstream. To make sure the file can always be safely sourced, we `touch` it here.
+		touch "${host_buildpack_dir}/export"
+
 		# This will also skip installation of `.profile.d` scripts and other files. This is intentional to preserve
 		# historical behaviour. Since the provided JDK feature will be removed at some later point, there are no plans
 		# to change this behaviour.
