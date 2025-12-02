@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install Ruby and dependencies
         uses: ruby/setup-ruby@v1
         with:
@@ -44,7 +44,7 @@ jobs:
       HATCHET_DEFAULT_STACK: ${{ matrix.stack }}
       JVM_COMMON_BUILDPACK_TARBALL: https://api.github.com/repos/heroku/heroku-buildpack-jvm-common/tarball/${{ github.head_ref || github.ref_name }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Install Ruby and dependencies
         uses: ruby/setup-ruby@v1
         with:
@@ -68,14 +68,14 @@ jobs:
       matrix:
         stack: ["heroku-22", "heroku-24"]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: test/jdbc.sh
 
   container-test:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       # These test both the local development `make run` workflow and that `bin/report` completes successfully
       # for both passing and failing builds (since `bin/report` can't easily be tested via Hatchet tests).
       - name: Run buildpack using default app fixture
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Determine if inventory.json changed
         uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47.0.0
         id: changed-files
