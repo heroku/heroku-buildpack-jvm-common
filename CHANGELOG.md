@@ -55,11 +55,11 @@
 
 ## [v168] - 2025-08-04
 
-* Do not log JAVA_TOOL_OPTIONS messages on MCP servers. ([#382](https://github.com/heroku/heroku-buildpack-jvm-common/pull/382))
+* Do not log `JAVA_TOOL_OPTIONS` messages on MCP servers. ([#382](https://github.com/heroku/heroku-buildpack-jvm-common/pull/382))
 
 ## [v167] - 2025-07-31
 
-* Redirect JAVA_TOOL_OPTIONS logging to stderr to fix MCP server compatibility. ([#379](https://github.com/heroku/heroku-buildpack-jvm-common/pull/379))
+* Redirect `JAVA_TOOL_OPTIONS` logging to `stderr` to fix MCP server compatibility. ([#379](https://github.com/heroku/heroku-buildpack-jvm-common/pull/379))
 
 ## [v166] - 2025-07-16
 
@@ -67,7 +67,7 @@
 
 ## [v165] - 2025-07-14
 
-* Remove heroku-20 support ([#365](https://github.com/heroku/heroku-buildpack-jvm-common/pull/365))
+* Remove `heroku-20` support. ([#365](https://github.com/heroku/heroku-buildpack-jvm-common/pull/365))
 
 ## [v164] - 2025-04-25
 
@@ -130,13 +130,13 @@
 
 ### Changed
 
-* Upgrade default JDKs to 23.0.2, 21.0.6, 17.0.14, 11.0.26 and 8u442. ([#329](https://github.com/heroku/heroku-buildpack-jvm-common/pull/329))
+* Upgrade default JDKs to `23.0.2`, `21.0.6`, `17.0.14`, `11.0.26` and `8u442`. ([#329](https://github.com/heroku/heroku-buildpack-jvm-common/pull/329))
 
 ## [v157] - 2024-10-22
 
 ### Changed
 
-* Upgrade default JDKs to 23.0.1, 21.0.5, 17.0.13, 11.0.25 and 8u432. ([#315](https://github.com/heroku/heroku-buildpack-jvm-common/pull/315))
+* Upgrade default JDKs to `23.0.1`, `21.0.5`, `17.0.13`, `11.0.25` and `8u432`. ([#315](https://github.com/heroku/heroku-buildpack-jvm-common/pull/315))
 
 ## [v156] - 2024-09-26
 
@@ -149,7 +149,7 @@
 ### Changed
 
 * The value in `/sys/fs/cgroup/memory/memory.limit_in_bytes` is now explictly passed as `MaxRAM` to the JVM. ([#304](https://github.com/heroku/heroku-buildpack-jvm-common/pull/304))
-* Upgrade default JDKs to 22.0.2, 21.0.4, 17.0.12, 11.0.24 and 8u422. ([#307](https://github.com/heroku/heroku-buildpack-jvm-common/pull/307))
+* Upgrade default JDKs to `22.0.2`, `21.0.4`, `17.0.12`, `11.0.24` and `8u422`. ([#307](https://github.com/heroku/heroku-buildpack-jvm-common/pull/307))
 
 ## [v154] - 2024-05-29
 
@@ -167,7 +167,7 @@
 
 ## [v152] - 2024-05-01
 
-* Upgrade default JDKs to 22.0.1, 21.0.3, 17.0.11, 11.0.23 and 8u412. ([#296](https://github.com/heroku/heroku-buildpack-jvm-common/pull/296))
+* Upgrade default JDKs to `22.0.1`, `21.0.3`, `17.0.11`, `11.0.23` and `8u412`. ([#296](https://github.com/heroku/heroku-buildpack-jvm-common/pull/296))
 
 ## [v151] - 2024-03-22
 
@@ -176,7 +176,7 @@
 
 ## [v150] - 2024-01-17
 
-* Upgrade default JDKs to 21.0.2, 17.0.10, 11.0.22 and 8u402. ([#284](https://github.com/heroku/heroku-buildpack-jvm-common/pull/284))
+* Upgrade default JDKs to `21.0.2`, `17.0.10`, `11.0.22` and `8u402`. ([#284](https://github.com/heroku/heroku-buildpack-jvm-common/pull/284))
 
 ## [v149] - 2024-01-05
 
@@ -184,7 +184,7 @@
 
 ## [v148] - 2023-10-19
 
-* Upgrade default JDKs to 21.0.1, 17.0.9, 11.0.21 and 8u392. ([#280](https://github.com/heroku/heroku-buildpack-jvm-common/pull/280))
+* Upgrade default JDKs to `21.0.1`, `17.0.9`, `11.0.21` and `8u392`. ([#280](https://github.com/heroku/heroku-buildpack-jvm-common/pull/280))
 
 ## [v147] - 2023-09-20
 
@@ -192,16 +192,16 @@
 
 ## [v146] - 2023-09-19
 
-* Upgrade default JDKs to 17.0.8.1 and 11.0.20.1. ([#274](https://github.com/heroku/heroku-buildpack-jvm-common/pull/274))
+* Upgrade default JDKs to `17.0.8.1` and `11.0.20.1`. ([#274](https://github.com/heroku/heroku-buildpack-jvm-common/pull/274))
 
 ## [v145] - 2023-07-24
 
-* Remove heroku-18 support ([#267](https://github.com/heroku/heroku-buildpack-jvm-common/pull/267))
-* Upgrade default JDKs to 20.0.2, 17.0.8, 11.0.20 and 8u382. ([#269](https://github.com/heroku/heroku-buildpack-jvm-common/pull/269))
+* Remove `heroku-18` support. ([#267](https://github.com/heroku/heroku-buildpack-jvm-common/pull/267))
+* Upgrade default JDKs to `20.0.2`, `17.0.8`, `11.0.20` and `8u382`. ([#269](https://github.com/heroku/heroku-buildpack-jvm-common/pull/269))
 
 ## [v144] - 2023-04-24
 
-* Upgrade default JDKs to 20.0.1, 17.0.7, 11.0.19 and 8u372. ([#265](https://github.com/heroku/heroku-buildpack-jvm-common/pull/265))
+* Upgrade default JDKs to `20.0.1`, `17.0.7`, `11.0.19` and `8u372`. ([#265](https://github.com/heroku/heroku-buildpack-jvm-common/pull/265))
 
 ## [v143] - 2023-03-23
 
@@ -209,7 +209,7 @@
 
 ## [v142] - 2023-01-18
 
-* Upgrade default JDKs to 19.0.2, 17.0.6, 15.0.10, 13.0.14, 11.0.18 and 8u362. ([#256](https://github.com/heroku/heroku-buildpack-jvm-common/pull/256))
+* Upgrade default JDKs to `19.0.2`, `17.0.6`, `15.0.10`, `13.0.14`, `11.0.18` and `8u362`. ([#256](https://github.com/heroku/heroku-buildpack-jvm-common/pull/256))
 
 ## [v141] - 2022-11-16
 
@@ -219,332 +219,333 @@
 
 * Upgrade [Heroku Java metrics agent](https://github.com/heroku/heroku-java-metrics-agent) to `4.0.0`. ([#253](https://github.com/heroku/heroku-buildpack-jvm-common/pull/253))
 
-## v139
+## v139 - 2022-10-19
 
-* Upgrade default JDKs to 19.0.1, 17.0.5, 15.0.9, 13.0.13, 11.0.17 and 8u352. ([#250](https://github.com/heroku/heroku-buildpack-jvm-common/pull/250))
+* Upgrade default JDKs to `19.0.1`, `17.0.5`, `15.0.9`, `13.0.13`, `11.0.17` and `8u352`. ([#250](https://github.com/heroku/heroku-buildpack-jvm-common/pull/250))
 
-## v138
+## v138 - 2022-09-26
 
 * Upgrade default Java 18 JDK to `18.0.2.1`. ([#247](https://github.com/heroku/heroku-buildpack-jvm-common/pull/247))
 * Add support for Java 19. ([#247](https://github.com/heroku/heroku-buildpack-jvm-common/pull/247))
 
-## v137
+## v137 - 2022-08-29
 
 * Upgrade default JDKs to `8u345`, `11.0.16.1`, `17.0.4.1`. ([#245](https://github.com/heroku/heroku-buildpack-jvm-common/pull/245))
 
-## v136
+## v136 - 2022-07-26
 
-* Upgrade default JDKs to 18.0.2, 17.0.4, 15.0.8, 13.0.12, 11.0.16, 8u342, 7u352
+* Upgrade default JDKs to `18.0.2`, `17.0.4`, `15.0.8`, `13.0.12`, `11.0.16`, `8u342`, `7u352`.
 
-## v135
+## v135 - 2022-06-28
 
 * Only use `--retry-connrefused` on Ubuntu based stacks. ([#243](https://github.com/heroku/heroku-buildpack-jvm-common/pull/243))
 
-## v134
+## v134 - 2022-06-14
 
-* Adjust curl retry and connection timeout handling. ([#241](https://github.com/heroku/heroku-buildpack-jvm-common/pull/241))
+* Adjust `curl` retry and connection timeout handling. ([#241](https://github.com/heroku/heroku-buildpack-jvm-common/pull/241))
 * Switch to the recommended regional S3 domain instead of the global one. ([#240](https://github.com/heroku/heroku-buildpack-jvm-common/pull/240))
 
-## v133
+## v133 - 2022-06-08
 
-* Allow OpenJDK distribution prefixes to be used in conjunction with major versions. Previously, a specific patch version was required when using a distribution prefix. ([#239](https://github.com/heroku/heroku-buildpack-jvm-common/pull/239)) 
+* Allow OpenJDK distribution prefixes to be used in conjunction with major versions. Previously, a specific patch version was required when using a distribution prefix. ([#239](https://github.com/heroku/heroku-buildpack-jvm-common/pull/239))
 
-## v132
+## v132 - 2022-06-07
 
 * Refactor OpenJDK version resolution code. ([#237](https://github.com/heroku/heroku-buildpack-jvm-common/pull/237))
 * Drop support for OpenJDK `9` and OpenJDK `12`, both versions are not available on any supported stack. ([#237](https://github.com/heroku/heroku-buildpack-jvm-common/pull/237))
 * Add support for `heroku-22` stack. ([#236](https://github.com/heroku/heroku-buildpack-jvm-common/pull/236))
 * Change default OpenJDK distribution to [Azul Zulu Builds of OpenJDK](https://www.azul.com/downloads/?package=jdk#download-openjdk) on stacks >= `heroku-22`. ([#236](https://github.com/heroku/heroku-buildpack-jvm-common/pull/236))
 
-## v131
+## v131 - 2022-05-18
 
-* Remove Cloud Native Buildpack support. Development of Heroku JVM Cloud Native Buildpacks now takes place in a dedicated repository: https://github.com/heroku/buildpacks-jvm
+* Remove Cloud Native Buildpack support. Development of Heroku JVM Cloud Native Buildpacks now takes place in a dedicated repository: https://github.com/heroku/buildpacks-jvm.
 
-## v130
+## v130 - 2022-04-24
 
-* Upgrade default JDK for Java 18 to 18.0.1
+* Upgrade default JDK for Java 18 to `18.0.1`.
 
-## v129
+## v129 - 2022-04-21
 
-* Upgrade default JDKs to 17.0.3, 15.0.7, 13.0.11, 11.0.15, 8u332 and 7u342
+* Upgrade default JDKs to `17.0.3`, `15.0.7`, `13.0.11`, `11.0.15`, `8u332` and `7u342`.
 
-## v128
+## v128 - 2022-03-23
 
-* Add support for Java 18
+* Add support for Java 18.
 
-## v127
+## v127 - 2022-03-02
 
-* Upgrade default JDK for Java 11 to 11.0.14.1
+* Upgrade default JDK for Java 11 to `11.0.14.1`.
 
-## v126
+## v126 - 2022-01-24
 
-* Upgrade default JDKs to 17.0.2, 15.0.6, 13.0.10, 11.0.14, 8u322 and 7u332
+* Upgrade default JDKs to `17.0.2`, `15.0.6`, `13.0.10`, `11.0.14`, `8u322` and `7u332`.
 
-## v125
-* Upgrade default JDK for Java 7 to 7u322
+## v125 - 2021-10-28
 
-## v124
-* Upgrade default JDK for Java 17 to 17.0.1
+* Upgrade default JDK for Java 7 to `7u322`.
 
-## v123
-* Upgrade default JDKs to 15.0.5, 13.0.9, 11.0.13, and 8u312 
+## v124 - 2021-10-27
 
-## v122
+* Upgrade default JDK for Java 17 to `17.0.1`.
 
-* Add support for Java 17
-* Updated GPG public key
+## v123 - 2021-10-19
 
-## v121
+* Upgrade default JDKs to `15.0.5`, `13.0.9`, `11.0.13`, and `8u312`.
 
-* Upgrade default JDK for Java 16 to 16.0.2
+## v122 - 2021-09-15
 
-## v120
+* Add support for Java 17.
+* Update GPG public key.
 
-* Remove heroku-16 support
-* Upgrade default JDKs to 15.0.4, 13.0.8, 11.0.12, 8u302 and 7u312
+## v121 - 2021-07-28
 
-## v119
+* Upgrade default JDK for Java 16 to `16.0.2`.
 
-* Upgrade default JDKs to 16.0.1, 15.0.3, 13.0.7, 11.0.11, 8u292 and 7u302
+## v120 - 2021-07-21
 
-## v118
+* Remove `heroku-16` support.
+* Upgrade default JDKs to `15.0.4`, `13.0.8`, `11.0.12`, `8u302` and `7u312`.
 
-* Add support for Java 16
+## v119 - 2021-04-29
 
-## v117
+* Upgrade default JDKs to `16.0.1`, `15.0.3`, `13.0.7`, `11.0.11`, `8u292` and `7u302`.
 
-* Zulu Builds of OpenJDK for 15.0.2 are now available
+## v118 - 2021-03-17
 
-## v116
+* Add support for Java 16.
 
-* Upgrade default JDKs to 15.0.2, 13.0.6, 11.0.10, 8u282 and 7u292
+## v117 - 2021-02-01
 
-## v115
+* Zulu Builds of OpenJDK for `15.0.2` are now available.
 
-* Upgrade default JDKs to 13.0.5.1 and 11.0.9.1
+## v116 - 2021-01-22
 
-## v114
+* Upgrade default JDKs to `15.0.2`, `13.0.6`, `11.0.10`, `8u282` and `7u292`.
 
-* Install certs and profile scripts for JRE from CNB
+## v115 - 2021-01-06
 
-## v113
+* Upgrade default JDKs to `13.0.5.1` and `11.0.9.1`.
 
-* Upgrade CNB API compatibility version to 0.4
+## v114 - 2021-01-05
 
-## v112
+* Install certs and profile scripts for JRE from CNB.
 
-* Upgrade default JDKs to 8u275 and 7u285
+## v113 - 2020-12-07
 
-## v111
+* Upgrade CNB API compatibility version to `0.4`.
 
-* heroku-20 support for CNB
-* Fix typos
+## v112 - 2020-12-01
 
-## v110
+* Upgrade default JDKs to `8u275` and `7u285`.
 
-* Add support for JVM_BUILDPACK_ASSETS_BASE_URL environment variable (#179)
-* Deprecate support for JDK_BASE_URL environment variable (#179)
-* Upgrade default JDKs to 15.0.1, 13.0.5, 11.0.9, 8u272 and 7u282 (#177)
+## v111 - 2020-11-17
 
-## v109
+* Add `heroku-20` support for CNB.
+* Fix typos.
 
-* Add support for heroku-20 stack
+## v110 - 2020-10-26
 
-## v108
+* Add support for `JVM_BUILDPACK_ASSETS_BASE_URL` environment variable. ([#179](https://github.com/heroku/heroku-buildpack-jvm-common/pull/179))
+* Deprecate support for `JDK_BASE_URL` environment variable. ([#179](https://github.com/heroku/heroku-buildpack-jvm-common/pull/179))
+* Upgrade default JDKs to `15.0.1`, `13.0.5`, `11.0.9`, `8u272` and `7u282`. ([#177](https://github.com/heroku/heroku-buildpack-jvm-common/pull/177))
 
-* Upgrade default JDK to 8u265
+## v109 - 2020-10-15
 
-## v107
+* Add support for `heroku-20` stack.
 
-* Add support for JDK 15
+## v108 - 2020-10-13
 
-## v106
+* Upgrade default JDK to `8u265`.
 
-* JDBC_DATABASE_URL query parameters are now alphabetically ordered.
-* Fix export_env_dir when no environment variables are present. (#148)
+## v107 - 2020-09-16
 
-## v105
+* Add support for JDK 15.
 
-* Upgrade default JDKs to 14.0.2, 13.0.4, 11.0.8, 8u262 and 7u272
+## v106 - 2020-08-19
 
-## v104
+* `JDBC_DATABASE_URL` query parameters are now alphabetically ordered.
+* Fix `export_env_dir` when no environment variables are present. ([#148](https://github.com/heroku/heroku-buildpack-jvm-common/pull/148))
 
-* Add support for BP_JVM_VERSION
+## v105 - 2020-07-20
 
-## v103
+* Upgrade default JDKs to `14.0.2`, `13.0.4`, `11.0.8`, `8u262` and `7u272`.
 
-Upgrade default JDK 13 to 13.0.3
+## v104 - 2020-05-18
 
-## v102
+* Add support for `BP_JVM_VERSION`.
 
-* Upgrade default JDKs to 14.0.1, 11.0.7, 8u252 and 7u262
+## v103 - 2020-04-24
 
-## v101
+* Upgrade default JDK 13 to `13.0.3`.
 
-* Fix CNB packaging
+## v102 - 2020-04-24
 
-## v100
+* Upgrade default JDKs to `14.0.1`, `11.0.7`, `8u252` and `7u262`.
 
-* Fix DATABASE_CONNECTION_POOL_URL handling
-* JDBC URL transformation no longer crashes silently on unexpected URLs
+## v101 - 2020-04-07
 
-## v99
+* Fix CNB packaging.
 
-* Add support for JDK 14
+## v100 - 2020-03-23
 
-## v98
+* Fix `DATABASE_CONNECTION_POOL_URL` handling.
+* JDBC URL transformation no longer crashes silently on unexpected URLs.
 
-* Improve CI and testing setup
+## v99 - 2020-03-17
 
-## v97
+* Add support for JDK 14.
 
-* Enable -XX:+UseContainerSupport on JDK versions > 11
+## v98 - 2020-03-11
 
-## v96
+* Improve CI and testing setup.
 
-* Upgrade default JDKs to 13.0.2, 11.0.6, 8u242, and 7u252
+## v97 - 2020-02-10
 
-## v95
+* Enable `-XX:+UseContainerSupport` on JDK versions > `11`.
 
-* CNB: Fixed a bug that was cause JRE 11 to be installed incorrectly
-* SPRING_REDIS_URL is now automatically set if REDIS_URL is available
-* Fix backwards compatibility for users of this buildpack as a library
-* CNB: Fix JRE/JDK caching
+## v96 - 2020-02-06
 
-## v92
+* Upgrade default JDKs to `13.0.2`, `11.0.6`, `8u242`, and `7u252`.
 
-* Add support for Cloud Native Buildpack API
-* GPG verify JDK binaries before installing
-* Update heroku-java-metrics-agent to 3.14
+## v95 - 2020-02-04
 
-## v91
+* CNB: Fix a bug that was cause JRE 11 to be installed incorrectly.
+* `SPRING_REDIS_URL` is now automatically set if `REDIS_URL` is available.
+* Fix backwards compatibility for users of this buildpack as a library.
+* CNB: Fix JRE/JDK caching.
 
-* Upgrade default JDKs to 13.0.1, 11.0.5, 8u232, and 7u242
+## v92 - 2019-12-16
 
-## v90
+* Add support for Cloud Native Buildpack API.
+* GPG verify JDK binaries before installing.
+* Update `heroku-java-metrics-agent` to `3.14`.
 
-* Add support for JDK 13
+## v91 - 2019-09-17
 
-## v84
+* Upgrade default JDKs to `13.0.1`, `11.0.5`, `8u232`, and `7u242`.
 
-* Update default JDK 7, 8, 11, and 12
-* Prevent pgconfig jar from installing in CI
+## v90 - 2019-07-18
 
-## v83
+* Add support for JDK 13.
 
-* Disable postgres sslmode when running in CI
+## v84 - 2019-04-17
 
-## v82
+* Update default JDK 7, 8, 11, and 12.
+* Prevent `pgconfig` jar from installing in CI.
 
-* Update heroku-java-metrics-agent to 3.11
+## v83 - 2019-04-09
 
-## v80
+* Disable postgres `sslmode` when running in CI.
 
-* Changed default JDK 7 to 7u201
-* Changed default JDK 11 to 11.0.2
-* Changed default JDK 8 to 8u201
-* Remove Xms from default JAVA_TOOL_OPTIONS
+## v82 - 2019-03-27
 
-## 73
+* Update `heroku-java-metrics-agent` to `3.11`.
 
-* Update metrics agent to version 3.9
+## v80 - 2019-02-19
 
-## v72
+* Change default JDK 7 to `7u201`.
+* Change default JDK 11 to `11.0.2`.
+* Change default JDK 8 to `8u201`.
+* Remove `-Xms` from default `JAVA_TOOL_OPTIONS`.
 
-* Changed default JDK 11 to GA
-* Improved default JVM options in JAVA_OPTS and JAVA_TOOL_OPTIONS
+## v73 - 2018-11-30
 
-## v71
+* Update metrics agent to version `3.9`.
 
-* Upgrade default JDK 11 to RC build 28
+## v72 - 2018-10-04
 
-## v70
+* Change default JDK 11 to GA.
+* Improve default JVM options in `JAVA_OPTS` and `JAVA_TOOL_OPTIONS`.
 
-* Upgrade default JDK 10 to 10.0.2
+## v71 - 2018-09-10
 
-## v69
+* Upgrade default JDK 11 to RC build 28.
 
-* Improve detection for clojure
-* Add support for JDBC pgbouncer pool connection
+## v70 - 2018-08-21
 
-## v68
+* Upgrade default JDK 10 to `10.0.2`.
 
-* Upgrade default JDK to 8u181
+## v69 - 2018-08-20
 
-## v67
+* Improve detection for Clojure.
+* Add support for JDBC `pgbouncer` pool connection.
 
-* Added support for JDK 11 EA
-* Improve logging when using a provided JDK
+## v68 - 2018-08-13
 
-## v66
+* Upgrade default JDK to `8u181`.
 
-* Upgrade default JDK 7 to 7u181
+## v67 - 2018-08-01
 
-## v65
+* Add support for JDK 11 EA.
+* Improve logging when using a provided JDK.
 
-* Renamed the files used to attach Heroku JVM Metrics
+## v66 - 2018-07-09
 
-## v64
+* Upgrade default JDK 7 to `7u181`.
 
-* Upgrade default JDKs to 8u171 and 10.0.1
+## v65 - 2018-05-29
 
-## v63
+* Rename the files used to attach Heroku JVM Metrics.
 
-* Added JDK 10 GA
+## v64 - 2018-05-16
 
-## v62
+* Upgrade default JDKs to `8u171` and `10.0.1`.
 
-* Added JDK 10 early access
+## v63 - 2018-03-21
 
-## v61
+* Add JDK 10 GA.
 
-* Upgrade heroku-java-metrics-agent to 3.7
-* Upgrade default JDK 8 to 8u161
-* Upgrade default JDK 9 to 9.0.4
-* Improved tests and CI support
+## v62 - 2018-02-28
 
-## v60
+* Add JDK 10 early access.
 
-* Added LD_LIBRARY_PATH to export and profile.d scripts
-* Install heroku-java-metrics-agent with all apps
-* Convert .profile.d script to work with Dash and Bash
+## v61 - 2018-01-17
 
-## v41
+* Upgrade `heroku-java-metrics-agent` to `3.7`.
+* Upgrade default JDK 8 to `8u161`.
+* Upgrade default JDK 9 to `9.0.4`.
+* Improve tests and CI support.
 
-* Upgrade default JDK 7 to 7u101
+## v60 - 2018-01-04
 
-## v40
+* Add `LD_LIBRARY_PATH` to export and `profile.d` scripts.
+* Install `heroku-java-metrics-agent` with all apps.
+* Convert `.profile.d` script to work with Dash and Bash.
 
-* Upgrade default JDK 8 to 8u92
-* Added a guard for cacerts symlink
+## v41 - 2016-05-24
 
-## v39
+* Upgrade default JDK 7 to `7u101`.
 
-* Upgrade default JDK 8 to 8u77
+## v40 - 2016-05-23
 
-## v38
+* Upgrade default JDK 8 to `8u92`.
+* Add a guard for `cacerts` symlink.
 
-* Upgrade default JDK 8 to 8u74
+## v39 - 2016-05-18
 
-## v31
+* Upgrade default JDK 8 to `8u77`.
 
-* Upgrade default JDK 8 to 8u66
+## v38 - 2016-03-11
 
-## v30
+* Upgrade default JDK 8 to `8u74`.
 
-* Added support for JDK update versions in system.properties
-* Added with_jmap_and_jstack script
+## v31 - 2015-10-21
 
-## v29
+* Upgrade default JDK 8 to `8u66`.
 
-* Added support for MySQL in JDBC_DATABASE_URL
+## v30 - 2015-10-19
 
-## v26
+* Add support for JDK update versions in `system.properties`.
+* Add `with_jmap_and_jstack` script.
 
-Improved smart defaults.
+## v29 - 2015-09-24
 
-* Increased default heap settings for Performance-L dynos
-* Added experimental support for JDBC_DATABASE_URL
+* Add support for MySQL in `JDBC_DATABASE_URL`.
+
+## v26 - 2015-08-26
+
+* Increase default heap settings for Performance-L dynos.
+* Add experimental support for `JDBC_DATABASE_URL`.
 
 [unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v176...main
 [v176]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v175...v176
@@ -584,3 +585,77 @@ Improved smart defaults.
 [v142]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v141...v142
 [v141]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v140...v141
 [v140]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v139...v140
+[v139]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v138...v139
+[v138]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v137...v138
+[v137]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v136...v137
+[v136]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v135...v136
+[v135]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v134...v135
+[v134]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v133...v134
+[v133]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v132...v133
+[v132]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v131...v132
+[v131]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v130...v131
+[v130]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v129...v130
+[v129]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v128...v129
+[v128]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v127...v128
+[v127]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v126...v127
+[v126]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v125...v126
+[v125]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v124...v125
+[v124]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v123...v124
+[v123]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v122...v123
+[v122]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v121...v122
+[v121]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v120...v121
+[v120]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v119...v120
+[v119]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v118...v119
+[v118]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v117...v118
+[v117]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v116...v117
+[v116]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v115...v116
+[v115]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v114...v115
+[v114]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v113...v114
+[v113]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v112...v113
+[v112]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v111...v112
+[v111]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v110...v111
+[v110]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v109...v110
+[v109]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v108...v109
+[v108]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v107...v108
+[v107]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v106...v107
+[v106]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v105...v106
+[v105]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v104...v105
+[v104]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v103...v104
+[v103]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v102...v103
+[v102]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v101...v102
+[v101]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v100...v101
+[v100]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v99...v100
+[v99]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v98...v99
+[v98]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v97...v98
+[v97]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v96...v97
+[v96]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v95...v96
+[v95]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v92...v95
+[v92]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v91...v92
+[v91]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v90...v91
+[v90]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v84...v90
+[v84]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v83...v84
+[v83]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v82...v83
+[v82]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v80...v82
+[v80]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v73...v80
+[v73]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v72...v73
+[v72]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v71...v72
+[v71]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v70...v71
+[v70]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v69...v70
+[v69]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v68...v69
+[v68]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v67...v68
+[v67]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v66...v67
+[v66]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v65...v66
+[v65]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v64...v65
+[v64]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v63...v64
+[v63]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v62...v63
+[v62]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v61...v62
+[v61]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v60...v61
+[v60]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v41...v60
+[v41]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v40...v41
+[v40]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v39...v40
+[v39]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v38...v39
+[v38]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v31...v38
+[v31]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v30...v31
+[v30]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v29...v30
+[v29]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v26...v29
+[v26]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v1.0...v26
