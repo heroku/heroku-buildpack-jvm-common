@@ -31,7 +31,7 @@ This buildpack can be used as a library by other buildpacks to install OpenJDK. 
 # Determine the root directory of your own (host) buildpack
 HOST_BUILDPACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
 
-JVM_BUILDPACK_URL="https://buildpack-registry.s3.us-east-1.amazonaws.com/buildpacks/heroku/jvm.tgz"
+JVM_BUILDPACK_URL="https://buildpack-registry.s3.dualstack.us-east-1.amazonaws.com/buildpacks/heroku/jvm.tgz"
 
 mkdir -p /tmp/jvm-common
 curl --silent --fail --retry 3 --retry-connrefused --connect-timeout 5 --location "${JVM_BUILDPACK_URL}" | tar xzm -C /tmp/jvm-common --strip-components=1

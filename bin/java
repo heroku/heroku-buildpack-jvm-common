@@ -216,7 +216,7 @@ install_openjdk() {
 	# This JAR file sets `sslmode=require` for the postgres drivers.
 	local openjdk_jre_ext_dir="${openjdk_install_dir}/jre/lib/ext"
 	if [[ -d "${openjdk_jre_ext_dir}" ]] && [[ -z "${SKIP_PGCONFIG_INSTALL:-}" ]] && [[ "${CI:-}" != "true" ]]; then
-		util::curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.us-east-1.amazonaws.com/pgconfig.jar" -o "${openjdk_jre_ext_dir}/pgconfig.jar"
+		util::curl_with_defaults --retry 3 -s -L "https://lang-jvm.s3.dualstack.us-east-1.amazonaws.com/pgconfig.jar" -o "${openjdk_jre_ext_dir}/pgconfig.jar"
 	fi
 
 	# Apply the JDK overlay to the installed OpenJDK
