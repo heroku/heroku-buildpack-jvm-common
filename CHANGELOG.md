@@ -5,7 +5,9 @@
 
 ## [v178] - 2026-02-24
 
-- Changed the S3 URLs used for downloads to use AWS' dual-stack (IPv6 compatible) endpoint. ([#419](https://github.com/heroku/heroku-buildpack-jvm-common/pull/419))
+### Changed
+
+* Changed the S3 URLs used for downloads to use AWS' dual-stack (IPv6 compatible) endpoint. ([#419](https://github.com/heroku/heroku-buildpack-jvm-common/pull/419))
 
 ## [v177] - 2026-01-21
 
