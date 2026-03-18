@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+
+* Support for OpenJDK 26. ([#424](https://github.com/heroku/heroku-buildpack-jvm-common/pull/424))
 
 ## [v178] - 2026-02-24
 
