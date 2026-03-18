@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v179] - 2026-03-18
+
 ### Added
 
 * Support for OpenJDK 26. ([#424](https://github.com/heroku/heroku-buildpack-jvm-common/pull/424))
@@ -562,7 +565,8 @@
 * Increase default heap settings for Performance-L dynos.
 * Add experimental support for `JDBC_DATABASE_URL`.
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v178...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v179...main
+[v179]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v178...v179
 [v178]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v177...v178
 [v177]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v176...v177
 [v176]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v175...v176
