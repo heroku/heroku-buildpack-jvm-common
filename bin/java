@@ -63,7 +63,26 @@ install_openjdk() {
 	metrics::conditional_set_string "openjdk_version_selector" "${openjdk_version_selector}"
 
 	if [ -z "${openjdk_version_selector}" ]; then
-		if [ "${STACK}" == "heroku-24" ]; then
+		if [ "${STACK}" == "heroku-22" ]; then
+			openjdk_version_selector="1.8"
+
+			output::warning <<-EOF
+				Warning: No OpenJDK version specified
+
+				Your application does not explicitly specify an OpenJDK
+				version. OpenJDK ${openjdk_version_selector} will be installed.
+
+				This default version will change at some point. Your
+				application might fail to build with the new version. We
+				recommend explicitly setting the required OpenJDK version for
+				your application.
+
+				To set the OpenJDK version, add or edit the system.properties
+				file in the root directory of your application to contain:
+
+				java.runtime.version = ${openjdk_version_selector}
+			EOF
+		else
 			# This should always be the latest OpenJDK LTS major version
 			# Next LTS will be OpenJDK 29 (~September 2027, no scheduled release date yet)
 			openjdk_version_selector="25"
@@ -79,25 +98,6 @@ install_openjdk() {
 				released. Your application might fail to build with the new
 				version. We recommend explicitly setting the required OpenJDK
 				version for your application.
-
-				To set the OpenJDK version, add or edit the system.properties
-				file in the root directory of your application to contain:
-
-				java.runtime.version = ${openjdk_version_selector}
-			EOF
-		else
-			openjdk_version_selector="1.8"
-
-			output::warning <<-EOF
-				Warning: No OpenJDK version specified
-
-				Your application does not explicitly specify an OpenJDK
-				version. OpenJDK ${openjdk_version_selector} will be installed.
-
-				This default version will change at some point. Your
-				application might fail to build with the new version. We
-				recommend explicitly setting the required OpenJDK version for
-				your application.
 
 				To set the OpenJDK version, add or edit the system.properties
 				file in the root directory of your application to contain:

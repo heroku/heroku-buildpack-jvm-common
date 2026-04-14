@@ -60,13 +60,13 @@ jobs:
     runs-on: ubuntu-22.04
     needs: lint
     container:
-      image: "${{ fromJson('{ \"heroku-22\": \"heroku/heroku:22\", \"heroku-24\": \"heroku/heroku:24\" }')[matrix.stack] }}"
+      image: "${{ fromJson('{ \"heroku-22\": \"heroku/heroku:22\", \"heroku-24\": \"heroku/heroku:24\", \"heroku-26\": \"heroku/heroku:26\" }')[matrix.stack] }}"
       options: --user root
       env:
         STACK: ${{ matrix.stack }}
     strategy:
       matrix:
-        stack: ["heroku-22", "heroku-24"]
+        stack: ["heroku-22", "heroku-24", "heroku-26"]
     steps:
       - uses: actions/checkout@v6
       - run: test/jdbc.sh

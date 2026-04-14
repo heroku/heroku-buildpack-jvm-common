@@ -44,6 +44,18 @@ EXPECTED_JAVA_VERSIONS = {
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
+  'heroku-26' => {
+    nil => LATEST_ZULU_OPENJDK_25_STRING,
+    '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
+    '8' => LATEST_ZULU_OPENJDK_8_STRING,
+    '11' => LATEST_ZULU_OPENJDK_11_STRING,
+    '17' => LATEST_ZULU_OPENJDK_17_STRING,
+    '21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '25' => LATEST_ZULU_OPENJDK_25_STRING,
+    '26' => LATEST_ZULU_OPENJDK_26_STRING,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.10' => LATEST_ZULU_OPENJDK_21_STRING,
+  },
 }.freeze
 
 # These installed files rarely change so we can check their MD5 hashes
@@ -105,6 +117,38 @@ RSpec.describe 'Java installation' do
   end
 
   context 'when no OpenJDK version is specified on Heroku-24', stacks: %w[heroku-24] do
+    let(:app) { Hatchet::Runner.new('empty') }
+
+    it 'emits the correct warning' do
+      app.deploy do
+        expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
+          remote: -----> JVM Common app detected
+          remote:
+          remote:  !     Warning: No OpenJDK version specified
+          remote:  !
+          remote:  !     Your application does not explicitly specify an OpenJDK
+          remote:  !     version. The latest long-term support \\(LTS\\) version will be
+          remote:  !     installed. This currently is OpenJDK 25.
+          remote:  !
+          remote:  !     This default version will change when a new LTS version is
+          remote:  !     released. Your application might fail to build with the new
+          remote:  !     version. We recommend explicitly setting the required OpenJDK
+          remote:  !     version for your application.
+          remote:  !
+          remote:  !     To set the OpenJDK version, add or edit the system.properties
+          remote:  !     file in the root directory of your application to contain:
+          remote:  !
+          remote:  !     java.runtime.version = 25
+          remote:
+          remote: -----> Installing Azul Zulu OpenJDK 25.0.[0-9]+
+          remote: -----> Discovering process types
+          remote:        Procfile declares types -> \\(none\\)
+        REGEX
+      end
+    end
+  end
+
+  context 'when no OpenJDK version is specified on Heroku-26', stacks: %w[heroku-26] do
     let(:app) { Hatchet::Runner.new('empty') }
 
     it 'emits the correct warning' do
