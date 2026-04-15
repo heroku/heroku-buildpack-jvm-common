@@ -3223,7 +3223,8 @@
         "distribution": "zulu",
         "cedar_stacks": [
           "heroku-22",
-          "heroku-24"
+          "heroku-24",
+          "heroku-26"
         ]
       }
     },
@@ -3237,7 +3238,8 @@
         "distribution": "zulu",
         "cedar_stacks": [
           "heroku-22",
-          "heroku-24"
+          "heroku-24",
+          "heroku-26"
         ]
       }
     },
@@ -3251,7 +3253,8 @@
         "distribution": "zulu",
         "cedar_stacks": [
           "heroku-22",
-          "heroku-24"
+          "heroku-24",
+          "heroku-26"
         ]
       }
     },
@@ -3265,7 +3268,8 @@
         "distribution": "zulu",
         "cedar_stacks": [
           "heroku-22",
-          "heroku-24"
+          "heroku-24",
+          "heroku-26"
         ]
       }
     },
@@ -3279,7 +3283,8 @@
         "distribution": "zulu",
         "cedar_stacks": [
           "heroku-22",
-          "heroku-24"
+          "heroku-24",
+          "heroku-26"
         ]
       }
     },
@@ -3319,7 +3324,8 @@
         "distribution": "zulu",
         "cedar_stacks": [
           "heroku-22",
-          "heroku-24"
+          "heroku-24",
+          "heroku-26"
         ]
       }
     }

@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+
+* Support for the `heroku-26` stack. ([#432](https://github.com/heroku/heroku-buildpack-jvm-common/pull/432))
 
 ## [v179] - 2026-03-18
 
