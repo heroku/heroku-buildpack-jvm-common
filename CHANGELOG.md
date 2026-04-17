@@ -6,6 +6,10 @@
 
 * Support for the `heroku-26` stack. ([#432](https://github.com/heroku/heroku-buildpack-jvm-common/pull/432))
 
+### Removed
+
+* Heroku OpenJDK distribution. Existing `heroku-*` version selectors will now show a migration guide to switch to the default Azul Zulu distribution. ([#434](https://github.com/heroku/heroku-buildpack-jvm-common/pull/434))
+
 ## [v179] - 2026-03-18
 
 ### Added
