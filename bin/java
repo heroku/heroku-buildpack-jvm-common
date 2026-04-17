@@ -109,12 +109,14 @@ install_openjdk() {
 
 	if ! openjdk_json=$(inventory::query "${openjdk_version_selector}" "${STACK}"); then
 		local openjdk_version_without_distribution="${openjdk_version_selector#*-}"
+		local openjdk_requested_distribution="${openjdk_version_selector%%-*}"
 
-		# If the version string contains a distribution prefix (e.g. "heroku-21") and the
-		# version alone resolves, the distribution is the problem. Otherwise it's the version.
-		if [[ "${openjdk_version_without_distribution}" != "${openjdk_version_selector}" ]] && inventory::query "${openjdk_version_without_distribution}" "${STACK}" >/dev/null 2>&1; then
-			local openjdk_requested_distribution="${openjdk_version_selector%%-*}"
-
+		# Check if the version without the distribution prefix is valid to determine
+		# whether the distribution or the version itself is the problem.
+		if inventory::query "${openjdk_version_without_distribution}" "${STACK}" >/dev/null 2>&1; then
+			# Temporary error for the Heroku OpenJDK distribution that was discontinued in
+			# April 2026. This gives affected users specific migration instructions rather
+			# than a generic error. Can be removed once we no longer expect users to hit this.
 			if [[ "${openjdk_requested_distribution}" == "heroku" ]]; then
 				output::error <<-EOF
 					Error: Heroku OpenJDK distribution has been discontinued
@@ -141,35 +143,36 @@ install_openjdk() {
 					Error: Unsupported Java distribution: ${openjdk_requested_distribution}
 
 					The '${openjdk_requested_distribution}' distribution is not available for
-					Java ${openjdk_version_without_distribution} on ${STACK}.
-
-					Please check your system.properties file to ensure the java.runtime.version
-					is among the list of supported version on the Dev Center:
-					https://devcenter.heroku.com/articles/java-support#supported-java-versions
+					Java ${openjdk_version_without_distribution}. To use the
+					default distribution, remove the "${openjdk_requested_distribution}-"
+					prefix from java.runtime.version in your system.properties file.
 
 					If you continue to have trouble, you can open a support ticket here:
 					https://help.heroku.com
 				EOF
 			fi
-		else
-			output::error <<-EOF
-				Error: Unsupported Java version: ${openjdk_version_selector}
 
-				Please check your system.properties file to ensure the java.runtime.version
-				is among the list of supported version on the Dev Center:
-				https://devcenter.heroku.com/articles/java-support#supported-java-versions
-
-				To select a version based on the major version, specify only the major
-				version itself (e.g., "21" or "17"). Any other string will be treated
-				as a full version and must match exactly.
-
-				If you continue to have trouble, you can open a support ticket here:
-				https://help.heroku.com
-
-				Thanks,
-				Heroku
-			EOF
+			metrics::conditional_set_string "failure_reason" "unsupported_openjdk_distribution"
+			return 1
 		fi
+
+		output::error <<-EOF
+			Error: Unsupported Java version: ${openjdk_version_selector}
+
+			Please check your system.properties file to ensure the java.runtime.version
+			is among the list of supported version on the Dev Center:
+			https://devcenter.heroku.com/articles/java-support#supported-java-versions
+
+			To select a version based on the major version, specify only the major
+			version itself (e.g., "21" or "17"). Any other string will be treated
+			as a full version and must match exactly.
+
+			If you continue to have trouble, you can open a support ticket here:
+			https://help.heroku.com
+
+			Thanks,
+			Heroku
+		EOF
 
 		metrics::conditional_set_string "failure_reason" "unsupported_openjdk_version"
 		return 1
