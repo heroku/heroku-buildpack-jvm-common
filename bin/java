@@ -110,6 +110,8 @@ install_openjdk() {
 	if ! openjdk_json=$(inventory::query "${openjdk_version_selector}" "${STACK}"); then
 		local openjdk_version_without_distribution="${openjdk_version_selector#*-}"
 
+		# If the version string contains a distribution prefix (e.g. "heroku-21") and the
+		# version alone resolves, the distribution is the problem. Otherwise it's the version.
 		if [[ "${openjdk_version_without_distribution}" != "${openjdk_version_selector}" ]] && inventory::query "${openjdk_version_without_distribution}" "${STACK}" >/dev/null 2>&1; then
 			local openjdk_requested_distribution="${openjdk_version_selector%%-*}"
 
