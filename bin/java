@@ -108,23 +108,66 @@ install_openjdk() {
 	fi
 
 	if ! openjdk_json=$(inventory::query "${openjdk_version_selector}" "${STACK}"); then
-		output::error <<-EOF
-			Error: Unsupported Java version: ${openjdk_version_selector}
+		local openjdk_version_without_distribution="${openjdk_version_selector#*-}"
 
-			Please check your system.properties file to ensure the java.runtime.version
-			is among the list of supported version on the Dev Center:
-			https://devcenter.heroku.com/articles/java-support#supported-java-versions
+		if [[ "${openjdk_version_without_distribution}" != "${openjdk_version_selector}" ]] && inventory::query "${openjdk_version_without_distribution}" "${STACK}" >/dev/null 2>&1; then
+			local openjdk_requested_distribution="${openjdk_version_selector%%-*}"
 
-			To select a version based on the major version, specify only the major
-			version itself (e.g., "21" or "17"). Any other string will be treated
-			as a full version and must match exactly.
+			if [[ "${openjdk_requested_distribution}" == "heroku" ]]; then
+				output::error <<-EOF
+					Error: Heroku OpenJDK distribution has been discontinued
 
-			If you continue to have trouble, you can open a support ticket here:
-			https://help.heroku.com
+					The Heroku OpenJDK distribution is no longer available. Your
+					application requested '${openjdk_version_selector}' in system.properties.
 
-			Thanks,
-			Heroku
-		EOF
+					The default Azul Zulu OpenJDK distribution is a drop-in
+					replacement that is tested against the Java Technology
+					Compatibility Kit (TCK), ensuring full compatibility with the
+					Java specification. It is also available for local development
+					at https://www.azul.com/downloads/.
+
+					To fix this, update the java.runtime.version in your
+					system.properties file to:
+
+					java.runtime.version = ${openjdk_version_without_distribution}
+
+					For more information, see:
+					https://devcenter.heroku.com/changelog-items/3648
+				EOF
+			else
+				output::error <<-EOF
+					Error: Unsupported Java distribution: ${openjdk_requested_distribution}
+
+					The '${openjdk_requested_distribution}' distribution is not available for
+					Java ${openjdk_version_without_distribution} on ${STACK}.
+
+					Please check your system.properties file to ensure the java.runtime.version
+					is among the list of supported version on the Dev Center:
+					https://devcenter.heroku.com/articles/java-support#supported-java-versions
+
+					If you continue to have trouble, you can open a support ticket here:
+					https://help.heroku.com
+				EOF
+			fi
+		else
+			output::error <<-EOF
+				Error: Unsupported Java version: ${openjdk_version_selector}
+
+				Please check your system.properties file to ensure the java.runtime.version
+				is among the list of supported version on the Dev Center:
+				https://devcenter.heroku.com/articles/java-support#supported-java-versions
+
+				To select a version based on the major version, specify only the major
+				version itself (e.g., "21" or "17"). Any other string will be treated
+				as a full version and must match exactly.
+
+				If you continue to have trouble, you can open a support ticket here:
+				https://help.heroku.com
+
+				Thanks,
+				Heroku
+			EOF
+		fi
 
 		metrics::conditional_set_string "failure_reason" "unsupported_openjdk_version"
 		return 1
@@ -139,7 +182,6 @@ install_openjdk() {
 	local openjdk_distribution_name
 	case "${openjdk_distribution}" in
 	"zulu") openjdk_distribution_name="Azul Zulu OpenJDK" ;;
-	"heroku") openjdk_distribution_name="Heroku OpenJDK" ;;
 	*) openjdk_distribution_name="OpenJDK" ;;
 	esac
 

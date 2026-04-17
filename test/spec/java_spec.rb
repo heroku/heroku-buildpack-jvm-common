@@ -2,10 +2,6 @@
 
 require_relative 'spec_helper'
 
-LATEST_HEROKU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (build 1.8.0_482-heroku-b08)'
-LATEST_HEROKU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment (build 21.0.10+7)'
-LATEST_HEROKU_OPENJDK_26_STRING = 'OpenJDK Runtime Environment (build 26+35)'
-
 LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.92.0.19-CA-linux64) (build 1.8.0_482-b08)'
 LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.86+19-CA (build 11.0.30+7-LTS)'
 LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.64+15-CA (build 17.0.18+8-LTS)'
@@ -23,10 +19,8 @@ EXPECTED_JAVA_VERSIONS = {
     '21' => LATEST_ZULU_OPENJDK_21_STRING,
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
-    'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
     '21.0.10' => LATEST_ZULU_OPENJDK_21_STRING,
-    'heroku-21.0.10' => LATEST_HEROKU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
     nil => LATEST_ZULU_OPENJDK_25_STRING,
@@ -37,10 +31,8 @@ EXPECTED_JAVA_VERSIONS = {
     '21' => LATEST_ZULU_OPENJDK_21_STRING,
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
-    'heroku-21' => LATEST_HEROKU_OPENJDK_21_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
     '21.0.10' => LATEST_ZULU_OPENJDK_21_STRING,
-    'heroku-21.0.10' => LATEST_HEROKU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
@@ -240,6 +232,41 @@ RSpec.describe 'Java installation' do
           remote:  !     Heroku
           remote:
           remote:  !     Push rejected, failed to compile JVM Common app.
+        OUTPUT
+      end
+    end
+  end
+
+  context 'when the discontinued Heroku OpenJDK distribution is requested' do
+    let(:app) { Hatchet::Runner.new('empty', allow_failure: true) }
+
+    it 'fails the build with the discontinued distribution error' do
+      app.before_deploy do
+        set_java_version(Dir.pwd, 'heroku-21')
+      end
+
+      app.deploy do
+        expect(clean_output(app.output)).to include(<<~OUTPUT)
+          remote:
+          remote:  !     Error: Heroku OpenJDK distribution has been discontinued
+          remote:  !
+          remote:  !     The Heroku OpenJDK distribution is no longer available. Your
+          remote:  !     application requested 'heroku-21' in system.properties.
+          remote:  !
+          remote:  !     The default Azul Zulu OpenJDK distribution is a drop-in
+          remote:  !     replacement that is tested against the Java Technology
+          remote:  !     Compatibility Kit (TCK), ensuring full compatibility with the
+          remote:  !     Java specification. It is also available for local development
+          remote:  !     at https://www.azul.com/downloads/.
+          remote:  !
+          remote:  !     To fix this, update the java.runtime.version in your
+          remote:  !     system.properties file to:
+          remote:  !
+          remote:  !     java.runtime.version = 21
+          remote:  !
+          remote:  !     For more information, see:
+          remote:  !     https://devcenter.heroku.com/changelog-items/3648
+          remote:
         OUTPUT
       end
     end
