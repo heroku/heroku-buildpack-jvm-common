@@ -224,7 +224,6 @@ RSpec.describe 'Java installation' do
           remote:  !     To select a version based on the major version, specify only the major
           remote:  !     version itself (e.g., "21" or "17"). Any other string will be treated
           remote:  !     as a full version and must match exactly.
-          remote:  !
           remote:
           remote:  !     Push rejected, failed to compile JVM Common app.
         OUTPUT
