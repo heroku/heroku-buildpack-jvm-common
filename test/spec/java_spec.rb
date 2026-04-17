@@ -225,11 +225,6 @@ RSpec.describe 'Java installation' do
           remote:  !     version itself (e.g., "21" or "17"). Any other string will be treated
           remote:  !     as a full version and must match exactly.
           remote:  !
-          remote:  !     If you continue to have trouble, you can open a support ticket here:
-          remote:  !     https://help.heroku.com
-          remote:  !
-          remote:  !     Thanks,
-          remote:  !     Heroku
           remote:
           remote:  !     Push rejected, failed to compile JVM Common app.
         OUTPUT

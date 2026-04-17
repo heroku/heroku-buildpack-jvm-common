@@ -146,9 +146,6 @@ install_openjdk() {
 					Java ${openjdk_version_without_distribution}. To use the
 					default distribution, remove the "${openjdk_requested_distribution}-"
 					prefix from java.runtime.version in your system.properties file.
-
-					If you continue to have trouble, you can open a support ticket here:
-					https://help.heroku.com
 				EOF
 			fi
 
@@ -166,12 +163,6 @@ install_openjdk() {
 			To select a version based on the major version, specify only the major
 			version itself (e.g., "21" or "17"). Any other string will be treated
 			as a full version and must match exactly.
-
-			If you continue to have trouble, you can open a support ticket here:
-			https://help.heroku.com
-
-			Thanks,
-			Heroku
 		EOF
 
 		metrics::conditional_set_string "failure_reason" "unsupported_openjdk_version"
