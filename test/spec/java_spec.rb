@@ -2,12 +2,12 @@
 
 require_relative 'spec_helper'
 
-LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.92.0.19-CA-linux64) (build 1.8.0_482-b08)'
-LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.86+19-CA (build 11.0.30+7-LTS)'
-LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.64+15-CA (build 17.0.18+8-LTS)'
-LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.48+15-CA (build 21.0.10+7-LTS)'
-LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.32+17-CA (build 25.0.2+10-LTS)'
-LATEST_ZULU_OPENJDK_26_STRING = 'OpenJDK Runtime Environment Zulu26.28+59-CA (build 26+35)'
+LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.94.0.17-CA-linux64) (build 1.8.0_492-b09)'
+LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.88+17-CA (build 11.0.31+11-LTS)'
+LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.66+19-CA (build 17.0.19+10-LTS)'
+LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.50+19-CA (build 21.0.11+10-LTS)'
+LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.34+17-CA (build 25.0.3+9-LTS)'
+LATEST_ZULU_OPENJDK_26_STRING = 'OpenJDK Runtime Environment Zulu26.30+11-CA (build 26.0.1+8)'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-22' => {
@@ -20,7 +20,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.10' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.11' => LATEST_ZULU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
     nil => LATEST_ZULU_OPENJDK_25_STRING,
@@ -32,7 +32,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.10' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.11' => LATEST_ZULU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
@@ -46,7 +46,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.10' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.11' => LATEST_ZULU_OPENJDK_21_STRING,
   },
 }.freeze
 
