@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v182] - 2026-06-30
+
 ### Fixed
 
 * `SPRING_DATA_REDIS_URL` is now automatically set if `REDIS_URL` is available, in addition to the existing `SPRING_REDIS_URL`. The former is the correct property name for Spring Boot 3.x. ([#443](https://github.com/heroku/heroku-buildpack-jvm-common/pull/443))
@@ -584,7 +587,8 @@
 * Increase default heap settings for Performance-L dynos.
 * Add experimental support for `JDBC_DATABASE_URL`.
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v181...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v182...main
+[v182]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v181...v182
 [v181]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v180...v181
 [v180]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v179...v180
 [v179]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v178...v179
