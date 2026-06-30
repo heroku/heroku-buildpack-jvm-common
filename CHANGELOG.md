@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+
+* `SPRING_DATA_REDIS_URL` is now automatically set if `REDIS_URL` is available, in addition to the existing `SPRING_REDIS_URL`. The former is the correct property name for Spring Boot 3.x. ([#443](https://github.com/heroku/heroku-buildpack-jvm-common/pull/443))
 
 ## [v181] - 2026-04-22
 
