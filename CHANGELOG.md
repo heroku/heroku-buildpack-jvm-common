@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+
+* Upgrade default JDKs to `26.0.2.1`, `25.0.4.1`, `21.0.12.1`, `17.0.20.1`, `11.0.32.1` and `8u504`. ([#454](https://github.com/heroku/heroku-buildpack-jvm-common/pull/454))
 
 ## [v183] - 2026-07-22
 
