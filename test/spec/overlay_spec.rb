@@ -23,7 +23,7 @@ RSpec.describe 'JDK overlay' do
     app.deploy do
       expect(clean_output(app.output)).to match(Regexp.new(<<~REGEX, Regexp::MULTILINE))
         remote: -----> JVM Common app detected
-        remote: -----> Installing .* OpenJDK 21.0.[0-9]+
+        remote: -----> Installing .* OpenJDK 21.0.[0-9.]+
       REGEX
 
       expect(app.run('cat .jdk/extra.txt')).to eq("extra.txt contents\n")

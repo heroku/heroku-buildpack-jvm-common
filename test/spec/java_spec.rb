@@ -20,7 +20,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.12' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.12.1' => LATEST_ZULU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
     nil => LATEST_ZULU_OPENJDK_25_STRING,
@@ -32,7 +32,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.12' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.12.1' => LATEST_ZULU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
@@ -46,7 +46,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '26' => LATEST_ZULU_OPENJDK_26_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.12' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.12.1' => LATEST_ZULU_OPENJDK_21_STRING,
   },
 }.freeze
 
@@ -132,7 +132,7 @@ RSpec.describe 'Java installation' do
           remote:  !
           remote:  !     java.runtime.version = 25
           remote:
-          remote: -----> Installing Azul Zulu OpenJDK 25.0.[0-9]+
+          remote: -----> Installing Azul Zulu OpenJDK 25.0.[0-9.]+
           remote: -----> Discovering process types
           remote:        Procfile declares types -> \\(none\\)
         REGEX
@@ -164,7 +164,7 @@ RSpec.describe 'Java installation' do
           remote:  !
           remote:  !     java.runtime.version = 25
           remote:
-          remote: -----> Installing Azul Zulu OpenJDK 25.0.[0-9]+
+          remote: -----> Installing Azul Zulu OpenJDK 25.0.[0-9.]+
           remote: -----> Discovering process types
           remote:        Procfile declares types -> \\(none\\)
         REGEX
