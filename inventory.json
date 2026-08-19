@@ -2,22 +2,22 @@
   "version_aliases": {
     "1.7": "1.7.0_352",
     "7": "1.7.0_352",
-    "1.8": "1.8.0_502",
-    "8": "1.8.0_502",
-    "11": "11.0.32",
+    "1.8": "1.8.0_504",
+    "8": "1.8.0_504",
+    "11": "11.0.32.1",
     "13": "13.0.14",
     "15": "15.0.10",
     "16": "16.0.2",
-    "17": "17.0.20",
+    "17": "17.0.20.1",
     "18": "18.0.2.1",
     "19": "19.0.2",
     "20": "20.0.2",
-    "21": "21.0.12",
+    "21": "21.0.12.1",
     "22": "22.0.2",
     "23": "23.0.2",
     "24": "24.0.2",
-    "25": "25.0.4",
-    "26": "26.0.2",
+    "25": "25.0.4.1",
+    "26": "26.0.2.1",
     "18.0.0": "18",
     "19.0.0": "19",
     "20.0.0": "20",
@@ -1602,6 +1602,96 @@
       "arch": "amd64",
       "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/26.0.2.tar.gz",
       "checksum": "sha256:4c7751f19fbbd310602affa2f098ce561e227d640f13389c1f0b982bb6b1cbca",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "1.8.0_504",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/1.8.0_504.tar.gz",
+      "checksum": "sha256:10bd7a0bdd78e13a2e5d6264a60397b7f3978c43791f29e5af0760dac47b301f",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "11.0.32.1",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/11.0.32.1.tar.gz",
+      "checksum": "sha256:0d2009e4ae3138de4f63c7bbf3a1f04cd0a8a48fce04a830e41882b9579829f6",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "17.0.20.1",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/17.0.20.1.tar.gz",
+      "checksum": "sha256:ec945a1bf58bafedab0ddf32046520bb01a95774135bc4aa2b296772f8dd0f8e",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "21.0.12.1",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/21.0.12.1.tar.gz",
+      "checksum": "sha256:f56c1565d507b339e3f6d2983416da508c690b5fdc48356256ae1c64c4ebe2ab",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "25.0.4.1",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/25.0.4.1.tar.gz",
+      "checksum": "sha256:2f896e80dca0cc3489baa683722b6fbc7c6ed014a8bd509f2b01857c5ccc2a48",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "26.0.2.1",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/26.0.2.1.tar.gz",
+      "checksum": "sha256:0cc3821b4539b3fa37b2dc3e8c31d72e3ee440f66e5226dd77428c7866053645",
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
