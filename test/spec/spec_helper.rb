@@ -44,6 +44,12 @@ def write_sys_props(directory, props)
   end
 end
 
+def normalize_trailing_newlines(output)
+  # The platform log stream that captures `run` command output occasionally appends
+  # an extra trailing newline, which otherwise intermittently breaks exact output assertions.
+  output.sub(/\n+\z/, "\n")
+end
+
 def clean_output(output)
   output
     # Remove trailing whitespace characters added by Git:

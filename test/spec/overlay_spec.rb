@@ -12,7 +12,7 @@ RSpec.describe 'JDK overlay' do
         remote: -----> Installing .* OpenJDK 1.8.0_[0-9]+
       REGEX
 
-      expect(app.run('cat .jdk/extra.txt')).to eq("extra.txt contents\n")
+      expect(normalize_trailing_newlines(app.run('cat .jdk/extra.txt'))).to eq("extra.txt contents\n")
       expect(app.run('md5sum .jdk/jre/lib/security/cacerts')).to start_with('86700d98c9b3aaf30b40fabcc12c75fe')
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe 'JDK overlay' do
         remote: -----> Installing .* OpenJDK 21.0.[0-9.]+
       REGEX
 
-      expect(app.run('cat .jdk/extra.txt')).to eq("extra.txt contents\n")
+      expect(normalize_trailing_newlines(app.run('cat .jdk/extra.txt'))).to eq("extra.txt contents\n")
       expect(app.run('md5sum .jdk/lib/security/cacerts')).to start_with('86700d98c9b3aaf30b40fabcc12c75fe')
     end
   end
