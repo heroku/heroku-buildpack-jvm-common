@@ -96,7 +96,7 @@ RSpec.describe 'Java installation' do
             expect(app.run('java -version')).to include(java_version)
 
             PATH_EXPECTATIONS.each do |name, path|
-              expect(app.run("which #{name}")).to eq("#{path}\n")
+              expect(normalize_trailing_newlines(app.run("which #{name}"))).to eq("#{path}\n")
             end
 
             FILE_MD5_HASHES.each do |file_path, md5_hash|
