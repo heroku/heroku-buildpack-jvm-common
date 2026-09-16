@@ -18,6 +18,7 @@
     "24": "24.0.2",
     "25": "25.0.4.1",
     "26": "26.0.2.1",
+    "27": "27",
     "18.0.0": "18",
     "19.0.0": "19",
     "20.0.0": "20",
@@ -26,7 +27,8 @@
     "23.0.0": "23",
     "24.0.0": "24",
     "25.0.0": "25",
-    "26.0.0": "26"
+    "26.0.0": "26",
+    "27.0.0": "27"
   },
   "artifacts": [
     {
@@ -1692,6 +1694,21 @@
       "arch": "amd64",
       "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/26.0.2.1.tar.gz",
       "checksum": "sha256:0cc3821b4539b3fa37b2dc3e8c31d72e3ee440f66e5226dd77428c7866053645",
+      "metadata": {
+        "distribution": "zulu",
+        "cedar_stacks": [
+          "heroku-22",
+          "heroku-24",
+          "heroku-26"
+        ]
+      }
+    },
+    {
+      "version": "27",
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://heroku-buildpacks-jvm.s3.dualstack.us-east-1.amazonaws.com/openjdk/zulu/amd64/27.tar.gz",
+      "checksum": "sha256:029bd3e1e03578e9730b1c4737be00236fd3b0de5190ab921135336c9f687f12",
       "metadata": {
         "distribution": "zulu",
         "cedar_stacks": [
