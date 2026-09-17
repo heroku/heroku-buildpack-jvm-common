@@ -217,7 +217,24 @@ install_openjdk() {
 
 	# Download Heroku JVM metrics agent JAR
 	mkdir -p "${build_dir}/.heroku/bin"
-	util::curl_with_defaults --retry 3 -s -o "${build_dir}/.heroku/bin/heroku-metrics-agent.jar" -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/4.0.1/heroku-java-metrics-agent-4.0.1.jar"}"
+	local metrics_agent_jar="${build_dir}/.heroku/bin/heroku-metrics-agent.jar"
+	local metrics_agent_url="${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/4.0.1/heroku-java-metrics-agent-4.0.1.jar"}"
+
+	# Without --fail, an HTTP error such as a 429 from Maven Central is written to the JAR path and the
+	# app's JVM then fails to start with -javaagent. The agent is optional, so a failed download skips it.
+	if ! util::curl_with_defaults --retry 3 --silent --show-error --fail --location "${metrics_agent_url}" --output "${metrics_agent_jar}"; then
+		rm -f "${metrics_agent_jar}"
+
+		output::warning <<-EOF
+			Warning: Unable to download the Heroku JVM metrics agent
+
+			The metrics agent could not be downloaded from:
+			${metrics_agent_url}
+
+			Your application will be deployed without JVM runtime metrics.
+			Deploy again to include the agent.
+		EOF
+	fi
 
 	# Copy profile.d scripts
 	local profile_d_dir="${build_dir}/.profile.d"

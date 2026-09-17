@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+* A failed download of the Heroku JVM metrics agent no longer writes the HTTP error response into the agent JAR, which stopped the app's JVM from starting. The build now warns and skips the agent instead. ([#468](https://github.com/heroku/heroku-buildpack-jvm-common/pull/468))
+
 
 ## [v185] - 2026-09-16
 
