@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+### Changed
+
+* The Heroku JVM metrics agent JAR is now vendored with the buildpack and upgraded to `4.0.4`. ([#469](https://github.com/heroku/heroku-buildpack-jvm-common/pull/469))
+
+### Removed
+
+* Removed support for overriding the Heroku JVM metrics agent JAR via the `HEROKU_METRICS_JAR_URL` environment variable. ([#469](https://github.com/heroku/heroku-buildpack-jvm-common/pull/469))
 
 ## [v185] - 2026-09-16
 
