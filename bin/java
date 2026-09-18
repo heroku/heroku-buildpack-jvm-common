@@ -39,6 +39,24 @@ install_openjdk() {
 	# Root directory of the buildpack that invoked this function
 	local host_buildpack_dir="${2}"
 
+	if [[ -n "${HEROKU_METRICS_JAR_URL:-}" ]]; then
+		output::error <<-EOF
+			Error: HEROKU_METRICS_JAR_URL is no longer supported
+
+			The Heroku JVM metrics agent JAR is now bundled with the
+			buildpack and can no longer be overridden via the
+			HEROKU_METRICS_JAR_URL environment variable.
+
+			To fix this, unset HEROKU_METRICS_JAR_URL from your app's
+			config:
+
+			heroku config:unset HEROKU_METRICS_JAR_URL
+		EOF
+
+		metrics::conditional_set_string "failure_reason" "heroku_metrics_jar_url_set"
+		return 1
+	fi
+
 	local openjdk_install_dir="${build_dir}/.jdk"
 
 	if [ -d "${openjdk_install_dir}" ]; then
@@ -215,9 +233,9 @@ install_openjdk() {
 		done
 	fi
 
-	# Download Heroku JVM metrics agent JAR
+	# Install Heroku JVM metrics agent JAR
 	mkdir -p "${build_dir}/.heroku/bin"
-	util::curl_with_defaults --retry 3 -s -o "${build_dir}/.heroku/bin/heroku-metrics-agent.jar" -L "${HEROKU_METRICS_JAR_URL:-"https://repo1.maven.org/maven2/com/heroku/agent/heroku-java-metrics-agent/4.0.1/heroku-java-metrics-agent-4.0.1.jar"}"
+	cp "${JVM_COMMON_BUILDPACK_DIR}/vendor/heroku-java-metrics-agent.jar" "${build_dir}/.heroku/bin/heroku-metrics-agent.jar"
 
 	# Copy profile.d scripts
 	local profile_d_dir="${build_dir}/.profile.d"
