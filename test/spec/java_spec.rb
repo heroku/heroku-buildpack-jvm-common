@@ -4,10 +4,10 @@ require_relative 'spec_helper'
 
 LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.98.0.107-CA-linux64) (build 1.8.0_512-b08)'
 LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.92+109-CA (build 11.0.33+9-LTS)'
-LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.70+111-CA (build 17.0.21+9-LTS)'
-LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.54+107-CA (build 21.0.13+9-LTS)'
-LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.38+107-CA (build 25.0.5+8-LTS)'
-LATEST_ZULU_OPENJDK_27_STRING = 'OpenJDK Runtime Environment Zulu27.30+107-CA (build 27.0.1+9)'
+LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.70+113-CA (build 17.0.21.0.3+1-LTS)'
+LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.54+109-CA (build 21.0.13.0.3+1-LTS)'
+LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.38+109-CA (build 25.0.5.0.3+1-LTS)'
+LATEST_ZULU_OPENJDK_27_STRING = 'OpenJDK Runtime Environment Zulu27.30+109-CA (build 27.0.1.0.3+1)'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-22' => {
@@ -20,7 +20,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '27' => LATEST_ZULU_OPENJDK_27_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.13' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.13.0.3' => LATEST_ZULU_OPENJDK_21_STRING,
   },
   'heroku-24' => {
     nil => LATEST_ZULU_OPENJDK_25_STRING,
@@ -32,7 +32,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '27' => LATEST_ZULU_OPENJDK_27_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.13' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.13.0.3' => LATEST_ZULU_OPENJDK_21_STRING,
     # Ensure that slightly incorrect version strings work
     '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
   },
@@ -46,7 +46,7 @@ EXPECTED_JAVA_VERSIONS = {
     '25' => LATEST_ZULU_OPENJDK_25_STRING,
     '27' => LATEST_ZULU_OPENJDK_27_STRING,
     'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.13' => LATEST_ZULU_OPENJDK_21_STRING,
+    '21.0.13.0.3' => LATEST_ZULU_OPENJDK_21_STRING,
   },
 }.freeze
 
