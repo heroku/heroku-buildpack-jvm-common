@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v189] - 2026-11-18
+
 ### Changed
 
 * Upgrade default JDKs to `27.0.1.1`, `25.0.5.1`, `21.0.13.1`, `17.0.21.1`, `11.0.33.1` and `8u514`. ([#479](https://github.com/heroku/heroku-buildpack-jvm-common/pull/479))
@@ -630,7 +633,8 @@
 * Increase default heap settings for Performance-L dynos.
 * Add experimental support for `JDBC_DATABASE_URL`.
 
-[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v188...main
+[unreleased]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v189...main
+[v189]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v188...v189
 [v188]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v187...v188
 [v187]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v186...v187
 [v186]: https://github.com/heroku/heroku-buildpack-jvm-common/compare/v185...v186
