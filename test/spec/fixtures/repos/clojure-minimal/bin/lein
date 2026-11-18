@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Leiningen 2.13.1 requires Java 11, while this fixture validates Java 8.
+LEIN_VERSION="2.12.0"
+LEIN_SCRIPT="${TMPDIR:-/tmp}/lein-${LEIN_VERSION}"
+
+if [[ ! -x "${LEIN_SCRIPT}" ]]; then
+  curl --fail --location --retry 3 --output "${LEIN_SCRIPT}" "https://raw.githubusercontent.com/technomancy/leiningen/${LEIN_VERSION}/bin/lein"
+  chmod +x "${LEIN_SCRIPT}"
+fi
+
+exec "${LEIN_SCRIPT}" "$@"
