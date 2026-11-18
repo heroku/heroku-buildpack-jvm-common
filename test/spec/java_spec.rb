@@ -2,51 +2,51 @@
 
 require_relative 'spec_helper'
 
-LATEST_ZULU_OPENJDK_8_STRING = 'OpenJDK Runtime Environment (Zulu 8.98.0.201-CA-linux64) (build 1.8.0_514-b01)'
-LATEST_ZULU_OPENJDK_11_STRING = 'OpenJDK Runtime Environment Zulu11.92+201-CA (build 11.0.33.1+1-LTS)'
-LATEST_ZULU_OPENJDK_17_STRING = 'OpenJDK Runtime Environment Zulu17.70+201-CA (build 17.0.21.1+2-LTS)'
-LATEST_ZULU_OPENJDK_21_STRING = 'OpenJDK Runtime Environment Zulu21.54+201-CA (build 21.0.13.1+2-LTS)'
-LATEST_ZULU_OPENJDK_25_STRING = 'OpenJDK Runtime Environment Zulu25.38+201-CA (build 25.0.5.1+2-LTS)'
-LATEST_ZULU_OPENJDK_27_STRING = 'OpenJDK Runtime Environment Zulu27.30+201-CA (build 27.0.1.1+4)'
+LATEST_ZULU_OPENJDK_8_VERSION = '1.8.0_514'
+LATEST_ZULU_OPENJDK_11_VERSION = '11.0.33.1'
+LATEST_ZULU_OPENJDK_17_VERSION = '17.0.21.1'
+LATEST_ZULU_OPENJDK_21_VERSION = '21.0.13.1'
+LATEST_ZULU_OPENJDK_25_VERSION = '25.0.5.1'
+LATEST_ZULU_OPENJDK_27_VERSION = '27.0.1.1'
 
 EXPECTED_JAVA_VERSIONS = {
   'heroku-22' => {
-    nil => LATEST_ZULU_OPENJDK_8_STRING,
-    '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
-    '8' => LATEST_ZULU_OPENJDK_8_STRING,
-    '11' => LATEST_ZULU_OPENJDK_11_STRING,
-    '17' => LATEST_ZULU_OPENJDK_17_STRING,
-    '21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '25' => LATEST_ZULU_OPENJDK_25_STRING,
-    '27' => LATEST_ZULU_OPENJDK_27_STRING,
-    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.13' => 'OpenJDK Runtime Environment Zulu21.54+107-CA (build 21.0.13+9-LTS)',
+    nil => LATEST_ZULU_OPENJDK_8_VERSION,
+    '1.8' => LATEST_ZULU_OPENJDK_8_VERSION,
+    '8' => LATEST_ZULU_OPENJDK_8_VERSION,
+    '11' => LATEST_ZULU_OPENJDK_11_VERSION,
+    '17' => LATEST_ZULU_OPENJDK_17_VERSION,
+    '21' => LATEST_ZULU_OPENJDK_21_VERSION,
+    '25' => LATEST_ZULU_OPENJDK_25_VERSION,
+    '27' => LATEST_ZULU_OPENJDK_27_VERSION,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_VERSION,
+    '21.0.13' => '21.0.13',
   },
   'heroku-24' => {
-    nil => LATEST_ZULU_OPENJDK_25_STRING,
-    '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
-    '8' => LATEST_ZULU_OPENJDK_8_STRING,
-    '11' => LATEST_ZULU_OPENJDK_11_STRING,
-    '17' => LATEST_ZULU_OPENJDK_17_STRING,
-    '21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '25' => LATEST_ZULU_OPENJDK_25_STRING,
-    '27' => LATEST_ZULU_OPENJDK_27_STRING,
-    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.13' => 'OpenJDK Runtime Environment Zulu21.54+107-CA (build 21.0.13+9-LTS)',
+    nil => LATEST_ZULU_OPENJDK_25_VERSION,
+    '1.8' => LATEST_ZULU_OPENJDK_8_VERSION,
+    '8' => LATEST_ZULU_OPENJDK_8_VERSION,
+    '11' => LATEST_ZULU_OPENJDK_11_VERSION,
+    '17' => LATEST_ZULU_OPENJDK_17_VERSION,
+    '21' => LATEST_ZULU_OPENJDK_21_VERSION,
+    '25' => LATEST_ZULU_OPENJDK_25_VERSION,
+    '27' => LATEST_ZULU_OPENJDK_27_VERSION,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_VERSION,
+    '21.0.13' => '21.0.13',
     # Ensure that slightly incorrect version strings work
-    '    21 ' => LATEST_ZULU_OPENJDK_21_STRING,
+    '    21 ' => LATEST_ZULU_OPENJDK_21_VERSION,
   },
   'heroku-26' => {
-    nil => LATEST_ZULU_OPENJDK_25_STRING,
-    '1.8' => LATEST_ZULU_OPENJDK_8_STRING,
-    '8' => LATEST_ZULU_OPENJDK_8_STRING,
-    '11' => LATEST_ZULU_OPENJDK_11_STRING,
-    '17' => LATEST_ZULU_OPENJDK_17_STRING,
-    '21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '25' => LATEST_ZULU_OPENJDK_25_STRING,
-    '27' => LATEST_ZULU_OPENJDK_27_STRING,
-    'zulu-21' => LATEST_ZULU_OPENJDK_21_STRING,
-    '21.0.13' => 'OpenJDK Runtime Environment Zulu21.54+107-CA (build 21.0.13+9-LTS)',
+    nil => LATEST_ZULU_OPENJDK_25_VERSION,
+    '1.8' => LATEST_ZULU_OPENJDK_8_VERSION,
+    '8' => LATEST_ZULU_OPENJDK_8_VERSION,
+    '11' => LATEST_ZULU_OPENJDK_11_VERSION,
+    '17' => LATEST_ZULU_OPENJDK_17_VERSION,
+    '21' => LATEST_ZULU_OPENJDK_21_VERSION,
+    '25' => LATEST_ZULU_OPENJDK_25_VERSION,
+    '27' => LATEST_ZULU_OPENJDK_27_VERSION,
+    'zulu-21' => LATEST_ZULU_OPENJDK_21_VERSION,
+    '21.0.13' => '21.0.13',
   },
 }.freeze
 
@@ -93,7 +93,7 @@ RSpec.describe 'Java installation' do
           end
 
           app.deploy do |app|
-            expect(app.run('java -version')).to include(java_version)
+            expect(app.run('java -version')).to include(%(openjdk version "#{java_version}"))
 
             PATH_EXPECTATIONS.each do |name, path|
               expect(normalize_trailing_newlines(app.run("which #{name}"))).to eq("#{path}\n")
