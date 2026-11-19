@@ -6,8 +6,6 @@ ruby '>= 3.3', '< 4.1'
 
 group :test, :development do
   gem 'heroku_hatchet'
-  # Work around https://github.com/excon/excon/issues/860
-  gem 'logger'
   gem 'parallel_split_test'
   gem 'rspec-core'
   gem 'rspec-expectations'
